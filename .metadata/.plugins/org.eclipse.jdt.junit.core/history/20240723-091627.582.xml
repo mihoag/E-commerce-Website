@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="UserRepositoryTests.testDeleteUser" project="MyShopBackend" tests="1" started="1" failures="0" errors="1" ignored="0">
+  <testsuite name="com.hcmus.admin.user.UserRepositoryTests" time="0.685" displayname="UserRepositoryTests" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.user.UserRepositoryTests]">
+    <testcase name="testDeleteUser" classname="com.hcmus.admin.user.UserRepositoryTests" time="0.685" displayname="testDeleteUser()" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.user.UserRepositoryTests]/[method:testDeleteUser()]">
+      <error>java.util.NoSuchElementException: No value present&#13;
+	at java.base/java.util.Optional.get(Optional.java:143)&#13;
+	at com.hcmus.admin.user.UserRepositoryTests.testDeleteUser(UserRepositoryTests.java:103)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+&#13;
+</error>
+    </testcase>
+  </testsuite>
+</testrun>
