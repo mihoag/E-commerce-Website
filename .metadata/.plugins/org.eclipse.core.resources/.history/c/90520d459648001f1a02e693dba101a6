@@ -1,0 +1,5 @@
+package com.hcmus.admin.user;
+
+public class RoleRepositoryTests {
+
+}

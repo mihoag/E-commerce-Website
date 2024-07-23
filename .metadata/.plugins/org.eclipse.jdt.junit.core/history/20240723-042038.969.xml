@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="RoleRepositoryTests.testCreateRoles" project="MyShopBackend" tests="1" started="1" failures="1" errors="0" ignored="0">
+  <testsuite name="com.hcmus.admin.user.RoleRepositoryTests" time="0.651" displayname="RoleRepositoryTests" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.user.RoleRepositoryTests]">
+    <testcase name="testCreateRoles" classname="com.hcmus.admin.user.RoleRepositoryTests" time="0.651" displayname="testCreateRoles()" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.user.RoleRepositoryTests]/[method:testCreateRoles()]">
+      <failure>
+        <expected>3</expected>
+        <actual>4</actual>
+        org.opentest4j.AssertionFailedError: &#13;
+expected: 3&#13;
+ but was: 4&#13;
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:67)&#13;
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)&#13;
+	at com.hcmus.admin.user.RoleRepositoryTests.testCreateRoles(RoleRepositoryTests.java:47)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+&#13;
+
+      </failure>
+    </testcase>
+  </testsuite>
+</testrun>
