@@ -1,0 +1,13 @@
+        const sideBar = document.getElementById("");
+        
+        
+        function updateScreenWidth() {
+            const width = window.innerWidth;
+            console.log(width);
+        }
+
+        // Initial screen width
+        updateScreenWidth();
+
+        // Event listener for window resize
+        window.addEventListener('resize', updateScreenWidth);
