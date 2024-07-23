@@ -66,16 +66,59 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                       
+                                        <tr th:each="user : ${listUsers}">
+                                            <td>
+                                                <div class="d-flex px-4 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm" th:text="${user.id}"></h6>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                              <img th:src = "${user.photos}" alt="Example Image" style="width: 100px" class="img-fluid">
+      
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0" th:text="${user.email}"></p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0" th:text="${user.firstName}">
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0" th:text="${user.lastName}">
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0" >[[${user.roles}]]
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
+                                                   data-toggle="tooltip" data-bs-toggle="modal"  th:attr="data-id=${user.id}"
+                                                   data-bs-target="#detailUser">Detail User
+                                                </a>
+                                                &nbsp;
+                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
+                                                   data-toggle="tooltip" data-bs-toggle="modal" th:attr="data-id=${user.id}"
+                                                   data-bs-target="#deleteUser">
+                                                    Delete
+                                                </a>
+                                                &nbsp;
+                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
+                                                    data-toggle="tooltip" data-bs-toggle="modal"  th:attr="data-id=${user.id}"
+                                                    data-bs-target="#editUser">
+                                                    Update
+                                                </a>
+                                            </td>
+                                      
                                         </tr>
                                     </tbody>
                                 </table>
-                                
-                                
-                                <!-- Pagination -->
-                                <nav aria-label="..." style="margin: 2% 0 0 1%;" th:if="${totalPages > 1}">
                                
+                                <!-- Pagination -->
+                                <nav aria-label="..." style="margin: 2% 0 0 1%;">
+                                  
                                 </nav>
                             </div>
                         </div>
