@@ -20,13 +20,13 @@
             <!--Body table student-->
                <main class="main-content border-radius-lg">
                     <div class="card mt-3">
-                     <form class="d-flex" method="POST" >
+                     <form class="d-flex mx-2 my-2" method="POST" >
                       <input class="form-control me-1" type="search" placeholder="Enter the keyword"> 
                       <button class="btn btn-primary"  style="width: 150px;" type="submit">Search</button>
                      </form>
                      <div class= "d-flex" id = "functionButtons">
-                        <button data-bs-toggle="modal" type="button"
-                            class="btn btn-primary mt-3 mx-3" >Create new user</button>
+                        <a th:href="@{/users/new}"
+                            class="btn btn-primary mt-3 mx-3" >Create new user</a>
                         <button type="button"
                              class="btn btn-primary mt-3 mx-3" >Export to CSV</button>
                         <button 
@@ -94,6 +94,12 @@
                                                 </p>
                                             </td>
                                             <td>
+                                               <div class="d-flex flex-column justify-content-center">
+                                                  <i th:if="${user.enabled}" class="fa-solid fa-circle-check"></i>
+                                                  <i th:unless ="${user.enabled} " class="fa-solid fa-ban"></i>
+                                               </div>
+                                            </td>
+                                            <td>
                                                 <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
                                                    data-toggle="tooltip" data-bs-toggle="modal"  th:attr="data-id=${user.id}"
                                                    data-bs-target="#detailUser">Detail User
@@ -131,6 +137,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-    <script type="text/javascript" th:src="@{js/ConfigViewEvent.js}"></script>
+    <script type="text/javascript" th:src="@{/js/ConfigViewEvent.js}"></script>
 </body>
 </html>

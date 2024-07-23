@@ -8,13 +8,20 @@
             {
 				sideBar.classList.add("hidden");
 				navigationDropdown.classList.remove("hidden");
-				functionButtons.classList.add("flex-column");
 				
+				if(functionButtons != null)
+				{
+					functionButtons.classList.add("flex-column");
+				}
 			}
 			else{
 				sideBar.classList.remove("hidden");
 				navigationDropdown.classList.add("hidden");
-				functionButtons.classList.remove("flex-column");
+				
+				if(functionButtons)
+				{
+					functionButtons.classList.remove("flex-column");
+				}
 			}
         }
 

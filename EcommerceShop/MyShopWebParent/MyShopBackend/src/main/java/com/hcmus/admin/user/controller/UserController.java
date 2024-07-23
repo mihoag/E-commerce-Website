@@ -13,18 +13,23 @@ import com.hcmus.admin.user.UserService;
 import com.hcmus.common.entity.User;
 
 @Controller
-@RequestMapping("/users")
 public class UserController {
    
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("")
+	@GetMapping("/users")
 	public String home(Model model)
 	{
 		List<User> listUsers = userService.listAll();
 		model.addAttribute("listUsers", listUsers);
 		model.addAttribute("sideBarFieldName", "user");
 		return "users/user";
+	}
+	
+	@GetMapping("/users/new")
+	public String newUser(Model model)
+	{
+		return "users/user_form";
 	}
 }

@@ -1,0 +1,14 @@
+package com.hcmus.admin.user;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+public class PasswordEncoder {
+   
+   @Test	
+   public void testBcryptEncoder()
+   {
+	   String rawPassword = "123456";
+	   PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+   }
+}

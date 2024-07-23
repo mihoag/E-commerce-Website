@@ -1,0 +1,5 @@
+package com.hcmus.admin.security;
+
+public class WebSecurityConfig {
+
+}
