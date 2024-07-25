@@ -1,0 +1,65 @@
+const messageEmail = document.getElementById("messageEmail");
+const email = document.getElementById("email");
+const formNewUser = document.forms['formNewUser']
+
+function showMessageEmail(message)
+{
+	messageEmail.classList.remove("hidden");
+	messageEmail.innerText = message;
+}
+
+
+async function fetchApiCheckEmail(userEmail)
+{
+      
+}
+
+async function checkEmailUnique(form) {
+			var userEmail = $("#email").val();
+	 
+	 
+	         var params = {email : userEmail};
+	 
+             const url = '/MyshopAdmin/api/users/check_email';          
+             $.post(url, params, async function (response) {
+				  if (response == "OK") {
+			      form.submit();
+		    } else if (response == "Duplicated") {
+			  showMessageEmail("The email is existed"); 
+		    } 
+		    else if(response == "fail")
+		    {
+			   showMessageEmail("Fail to connect to server");	
+			}
+			 }).fail(function () {
+				res =  "fail"
+			 });
+
+	 
+          
+			return false;
+}
+
+
+formNewUser.addEventListener('submit', async function(event) {
+        // Prevent the default form submission
+        event.preventDefault();
+        await checkEmailUnique(event.target);
+});
+
+email.addEventListener('blur',  function(event) {
+        var emailText = event.target.value;
+        const response = fetchApiCheckEmail(emailText);
+        console.log(response);
+        if (response == "OK") {
+			   email.classList.remove("hidden")
+		    } else if (response == "Duplicated") {
+			   showMessageEmail("The email is existed");
+		    } 
+		    else if(response == "fail")
+		    {
+			   showMessageEmail("Fail to connect to server");	
+			}
+});
+
+

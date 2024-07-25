@@ -21,12 +21,15 @@
                         <!-- Table  -->
                         <div class="card-body px-0 pb-2">
                               <!--  form for create new user -->
-                             <form th:action="@{/users/save}" method="post" class="row g-3 mx-4 my-4" enctype="multipart/form-data" th:object="${user}">
+                             <form name = "formNewUser" th:action="@{/users/save}" method="post" class="row g-3 mx-4 my-4" enctype="multipart/form-data" th:object="${user}">
                                <input type="hidden" th:field="*{id}" />
                                <div class="col-md-12">
                                  <label for="inputEmail4" class="form-label">Email</label>
-                                 <input type="email" th:field = "*{email}" class="form-control" placeholder="Enter your email" minlength="8" maxlength="128" required="required"  id="inputEmail4">
+                                 <input type="email" th:field = "*{email}" id="email" class="form-control" placeholder="Enter your email" minlength="8" maxlength="128" required="required" >
+                                 <small id="messageEmail" class="form-text hidden" style="color: red;"></small>
                                </div>
+                    
+                               
                                 <div class="col-6">
                                  <label for="firstname" class="form-label">First name</label>
                                  <input type="text" class="form-control" minlength="2" required="required" th:field="*{firstName}"  maxlength="45" id="firstname" placeholder="Enter your first name">
@@ -83,8 +86,6 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script type="text/javascript" th:src="@{../js/ConfigViewEvent.js}"></script>
-    <script type="text/javascript">
-        
-    </script>
+    <script type="text/javascript" th:src="@{../js/user/ConfigUserFormEvent.js}"></script>
 </body>
 </html>

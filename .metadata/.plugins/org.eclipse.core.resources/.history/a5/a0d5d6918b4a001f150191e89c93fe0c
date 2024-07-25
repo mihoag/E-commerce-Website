@@ -1,0 +1,53 @@
+const messageEmail = document.getElementById("messageEmail");
+const email = document.getElementById("email");
+function showMessageEmail(message)
+{
+	messageEmail.classList.remove("hidden");
+	messageEmail.innerText = message;
+}
+
+
+function fetchApiCheckEmail(userEmail)
+{
+       var params = {email : userEmail};
+	
+       const url = '/MyshopAdmin/api/users/check_email';          
+            $.post(url, params, function (response) {
+				return response;
+			}).fail(function () {
+				return "fail"
+			});	
+}
+
+function checkEmailUnique(form) {
+			var userEmail = $("#email").val();
+	 
+	        const response = fetchApiCheckEmail(userEmail);
+	                
+            if (response == "OK") {
+			   form.submit();
+		    } else if (response == "Duplicated") {
+			   
+		    } 
+		    else if(response == "fail")
+		    {
+			   showMessageEmail("Fail to connect to server");	
+			}
+			return false;
+}
+
+email.addEventListener('input',  function(event) {
+        var emailText = event.target.value;
+        const response = fetchApiCheckEmail(emailText);
+        if (response == "OK") {
+			   email.classList.remove("hidden")
+		    } else if (response == "Duplicated") {
+			   showMessageEmail("The email is existed");
+		    } 
+		    else if(response == "fail")
+		    {
+			   showMessageEmail("Fail to connect to server");	
+			}
+});
+
+

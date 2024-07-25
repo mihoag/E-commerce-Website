@@ -1,0 +1,32 @@
+function checkEmailUnique(form) {
+
+			userEmail = $("#email").val();
+
+			params = {email : userEmail};
+
+           $.ajax({
+            url: '/MyshopAdmin/api/users/check_email',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(params),
+            success: function (result) {
+                if(result == "OK")
+                {
+					 form.submit();
+				} 
+				else if(result == "")
+				{
+					
+				}
+				else
+				{
+					
+				}
+            },
+            error: function (error) {
+               console.log(error);
+            }
+            });
+           
+			return false;
+}

@@ -1,0 +1,57 @@
+const messageEmail = document.getElementById("messageEmail");
+const email = document.getElementById("email");
+const formNewUser = document.forms['formNewUser']
+function showMessageEmail(message)
+{
+	messageEmail.classList.remove("hidden");
+	messageEmail.innerText = message;
+}
+
+
+async function fetchApiCheckEmail(userEmail)
+{
+       var params = {email : userEmail};
+	   var res;
+       const url = '/MyshopAdmin/api/users/check_email';          
+            $.post(url, params, async function (response) {
+				res =  response;
+			}).fail(function () {
+				res =  "fail"
+			});
+      return res;
+}
+
+async function checkEmailUnique(form) {
+			var userEmail = $("#email").val();
+	 
+	        var response = await fetchApiCheckEmail(userEmail);
+	        console.log(response);
+            if (response == "OK") {
+			   form.submit();
+		    } else if (response == "Duplicated") {
+			  showMessageEmail("The email is existed"); 
+		    } 
+		    else if(response == "fail")
+		    {
+			   showMessageEmail("Fail to connect to server");	
+			}
+			return false;
+}
+
+/*
+email.addEventListener('input',  function(event) {
+        var emailText = event.target.value;
+        const response = fetchApiCheckEmail(emailText);
+        console.log(response);
+        if (response == "OK") {
+			   email.classList.remove("hidden")
+		    } else if (response == "Duplicated") {
+			   showMessageEmail("The email is existed");
+		    } 
+		    else if(response == "fail")
+		    {
+			   showMessageEmail("Fail to connect to server");	
+			}
+});
+*/
+

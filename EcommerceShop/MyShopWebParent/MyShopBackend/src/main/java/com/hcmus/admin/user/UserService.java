@@ -51,4 +51,10 @@ public class UserService {
     {
     	userRepo.deleteById(id);
     }
+    
+    public boolean checkUniqueEmail(String email)
+    {
+    	User user = userRepo.getUserByEmail(email);
+    	return user == null;
+    }
 }

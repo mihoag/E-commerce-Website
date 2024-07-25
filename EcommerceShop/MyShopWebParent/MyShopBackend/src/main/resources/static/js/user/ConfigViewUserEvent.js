@@ -50,8 +50,7 @@
         }
         );
         })
-        
-        
+   
      // Event show delete user
      $('#deleteUser').on('show.bs.modal', async function (event) {
         var button = $(event.relatedTarget);
@@ -71,7 +70,5 @@
             	
                window.location.href = "/MyshopAdmin/users/";
                  	      }});
-        })
-    
-           
+        }) 
 });
