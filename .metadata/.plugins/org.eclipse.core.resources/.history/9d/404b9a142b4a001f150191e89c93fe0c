@@ -1,0 +1,39 @@
+ const message = document.getElementById("message");
+ const detailId = document.getElementById("detailId");
+ const detailEmail = document.getElementById("detailEmail");
+ const detailName = document.getElementById("detailName");
+ const detailRole = document.getElementById("detailRole");
+ const detailEnabled = document.getElementById("detailEnabled");
+ 
+ $(document).ready(function() {
+            // Show the toast
+            if(message.innerText != '')
+            {
+			   $('#successToast').toast('show');
+
+              // Set timeout to hide the toast after 3 seconds (3000 milliseconds)
+               setTimeout(function() {
+                 $('#successToast').toast('hide');
+               }, 3000);
+			}
+			
+			
+			
+	    // Show detail Student
+        $('#detailUser').on('show.bs.modal', async function (event) {
+           var button = $(event.relatedTarget);
+           var id = button.data('id')
+
+           $.get(`/api/users/${id}`, function (responseJson) {
+           console.log(responseJson);
+           detailName.innerText = responseJson.name;
+           detailAddress.innerText = responseJson.address;
+           detailDoB.innerText = responseJson.birthday;
+           detailNotes.innerText = responseJson.notes;
+        }).fail(function () {
+            alert("FAIL")
+        }
+        );
+    })
+           
+});
