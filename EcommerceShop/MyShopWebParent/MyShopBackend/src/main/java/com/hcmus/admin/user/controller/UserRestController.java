@@ -1,6 +1,8 @@
 package com.hcmus.admin.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,18 @@ public class UserRestController {
       public User getUserById(@PathVariable("id") int id)
       {
     	  return userService.getUserById(id);
+      }
+      
+      @DeleteMapping("/{id}")
+      public ResponseEntity<?> deleteUserById(@PathVariable("id") int id)
+      {
+    	  try {
+    		userService.deleteUserById(id);
+			return ResponseEntity.ok().build();
+		} catch (Exception e) {
+			// TODO: handle exception
+			return ResponseEntity.notFound().build();
+		}
       }
       
       

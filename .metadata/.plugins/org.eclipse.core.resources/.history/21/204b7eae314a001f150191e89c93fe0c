@@ -1,0 +1,77 @@
+ const message = document.getElementById("message");
+ const detailId = document.getElementById("detailId");
+ const detailEmail = document.getElementById("detailEmail");
+ const detailName = document.getElementById("detailName");
+ const detailRole = document.getElementById("detailRole");
+ const detailEnabled = document.getElementById("detailEnabled");
+ const detailPhoto = document.getElementById("detailPhoto");
+ var idUserDelete;
+ const buttonDelete = document.getElementById("buttonDelete");
+ 
+ function makeRoles(roles)
+ {
+	var str = "";
+	roles.forEach(role => {
+		str += role.name + "   ";
+	});
+	return str;
+ }
+ 
+ $(document).ready(function() {
+            // Show the toast
+            if(message.innerText != '')
+            {
+			   $('#successToast').toast('show');
+
+              // Set timeout to hide the toast after 3 seconds (3000 milliseconds)
+               setTimeout(function() {
+                 $('#successToast').toast('hide');
+               }, 3000);
+			}
+			
+			
+			
+	    // Show detail user
+        $('#detailUser').on('show.bs.modal', async function (event) {
+           var button = $(event.relatedTarget);
+           var id = button.data('id')
+
+           $.get(`/MyshopAdmin/api/users/${id}`, function (responseJson) {
+            
+            detailId.innerText = responseJson.id;
+            detailEmail.innerText = responseJson.email;
+            detailName.innerText = responseJson.last_name + " " + responseJson.first_name;
+            detailPhoto.innerText = responseJson.photos;
+            detailEnabled.innerText = responseJson.enabled;
+            detailRole.innerText =  makeRoles(responseJson.roles);
+            
+        }).fail(function () {
+            alert("FAIL")
+        }
+        );
+        })
+        
+        
+           // Event show delete student
+     $('#deleteUser').on('show.bs.modal', async function (event) {
+        var button = $(event.relatedTarget);
+        idUserDelete = button.data('id');  
+    })
+    
+    buttonDelete.addEventListener("click", function () {
+             $.ajax({
+            url: '/api/users/'+ idStudentDelete,
+            type: 'DELETE',
+            contentType: 'text/html',
+            success: function () {
+            	alert("Xóa học sinh có id = " + idStudentDelete  + " thành công");
+            	window.location.href = "[[@{'/'}]]";
+            },
+            error: function () {
+            	alert("Xóa học sinh có id = " + idStudentDelete  + " thất bại");
+            	window.location.href = "[[@{'/'}]]";
+                 	      }});
+        })
+    
+           
+});

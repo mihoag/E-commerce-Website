@@ -1,0 +1,26 @@
+package com.hcmus.admin.user.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.hcmus.admin.user.UserService;
+import com.hcmus.common.entity.User;
+
+@RestController
+@RequestMapping("/api/users")
+public class UserRestController {
+      @Autowired
+      private UserService userService;
+      
+      
+      @GetMapping("/{id}")
+      public User getUserById(@PathVariable("id") int id)
+      {
+    	  return userService.getUserById(id);
+      }
+      
+      
+}
