@@ -22,6 +22,7 @@ import com.hcmus.admin.user.UserNotFoundException;
 import com.hcmus.admin.user.UserRepository;
 import com.hcmus.admin.user.UserService;
 import com.hcmus.admin.user.export.UserCsvExporter;
+import com.hcmus.admin.user.export.UserExcelExporter;
 import com.hcmus.admin.user.export.UserPdfExporter;
 import com.hcmus.admin.util.FileUploadUtil;
 import com.hcmus.common.entity.Role;
@@ -116,6 +117,12 @@ public class UserController {
 		exporter.export(listUsers, response);
 	}
 	
+	@GetMapping("/export/excel")
+	public void exportToEXCEL(HttpServletResponse response) throws IOException {
+		List<User> listUsers = userService.listAll();
+		UserExcelExporter exporter = new UserExcelExporter();
+		exporter.export(listUsers, response);
+	}
 	
 
 	@GetMapping("/**")
