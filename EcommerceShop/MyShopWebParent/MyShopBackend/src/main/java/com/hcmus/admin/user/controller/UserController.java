@@ -22,6 +22,7 @@ import com.hcmus.admin.user.UserNotFoundException;
 import com.hcmus.admin.user.UserRepository;
 import com.hcmus.admin.user.UserService;
 import com.hcmus.admin.user.export.UserCsvExporter;
+import com.hcmus.admin.user.export.UserPdfExporter;
 import com.hcmus.admin.util.FileUploadUtil;
 import com.hcmus.common.entity.Role;
 import com.hcmus.common.entity.User;
@@ -107,6 +108,14 @@ public class UserController {
 		UserCsvExporter exporter = new UserCsvExporter();
 		exporter.export(listUsers, response);
 	}
+
+	@GetMapping("/export/pdf")
+	public void exportToPDF(HttpServletResponse response) throws IOException {
+		List<User> listUsers = userService.listAll();
+		UserPdfExporter exporter = new UserPdfExporter();
+		exporter.export(listUsers, response);
+	}
+	
 	
 
 	@GetMapping("/**")
