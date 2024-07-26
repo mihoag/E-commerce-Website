@@ -8,15 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hcmus.admin.user.UserNotFoundException;
 import com.hcmus.admin.user.UserRepository;
 import com.hcmus.admin.user.UserService;
+import com.hcmus.admin.util.FileUploadUtil;
 import com.hcmus.common.entity.Role;
 import com.hcmus.common.entity.User;
 
@@ -43,10 +47,20 @@ public class UserController {
 	}
 	
 	@PostMapping("/save")
-	public String saveUser(User user, RedirectAttributes redirect)
+	public String saveUser(User user, RedirectAttributes redirect, @RequestParam("image") MultipartFile multipartFile)
 	{
 		try {
-			User savedUser = userService.saveUser(user);
+			if (!multipartFile.isEmpty()) {
+				String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+				user.setPhotos(fileName);
+				User savedUser = userService.saveUser(user);
+				
+				String uploadDir = "user-photos/" + savedUser.getId();
+			    FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);	
+			} else {
+				if (user.getPhotos().isEmpty()) user.setPhotos(null);
+				userService.saveUser(user);
+			}
 			redirect.addAttribute("message", "Create new user successfully!");
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -58,26 +72,32 @@ public class UserController {
 
 	
 	@GetMapping("/edit/{id}")
-	public String edit(@PathVariable("id") Integer id, Model model) throws UserNotFoundException
+	public String edit(@PathVariable("id") Integer id, Model model, RedirectAttributes redirectAttributes) 
 	{
-		User user = userService.getUserById(id);
-		List<Role> listRoles = userService.listRole();
-		
-		model.addAttribute("user", user);
-		model.addAttribute("listRoles", listRoles);
-		model.addAttribute("title", String.format("Update user ( id : %d )", id));
-		
-		return "users/user_form";
+		try {
+			User user = userService.getUserById(id);
+			List<Role> listRoles = userService.listRole();
+			
+			model.addAttribute("user", user);
+			model.addAttribute("listRoles", listRoles);
+			model.addAttribute("title", String.format("Update user ( id : %d )", id));
+			
+			return "users/user_form";
+		} catch (UserNotFoundException e) {
+			redirectAttributes.addAttribute("message", e.getMessage());
+			return "redirect:/users";
+			// TODO: handle exception
+		}
 	}
 
 	@GetMapping("/user/{id}/enabled/{status}")
 	public String updateUserEnable(@PathVariable("id") int id, @PathVariable("status") boolean status) throws UserNotFoundException
 	{
-	    
 	    userService.updateUserEnable(id, status);
 		return "redirect:/users";
 	}
 	
+
 	@GetMapping("/**")
 	public String home(Model model)
 	{
@@ -86,6 +106,4 @@ public class UserController {
 		model.addAttribute("sideBarFieldName", "user");
 		return "users/user";
 	}
-	
-	
 }

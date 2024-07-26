@@ -1,6 +1,7 @@
 package com.hcmus.common.entity;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 
@@ -13,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "users")
@@ -143,7 +145,30 @@ public class User {
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
+	
+	@Transient
+	public String getPhotosImagePath() {
+		if (id == null || photos == null) return "/images/default-user.png";
+		return "/user-photos/" + this.id + "/" + this.photos;
+	}
+	
+	@Transient
+	public String getFullName() {
+		return firstName + " " + lastName;
+	}
+	
+	public boolean hasRole(String roleName) {
+		Iterator<Role> iterator = roles.iterator();
+		
+		while (iterator.hasNext()) {
+			Role role = iterator.next();
+			if (role.getName().equals(roleName)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 
 	@Override
 	public boolean equals(Object obj) {
