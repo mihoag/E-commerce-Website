@@ -16,23 +16,20 @@ async function fetchApiCheckEmail(userEmail)
 
 async function checkEmailUnique(form) {
 			var userEmail = $("#email").val();
+	        var userId = $("#id").val();
 	 
-	 
-	         var params = {email : userEmail};
+	         var params = {id : userId ,email : userEmail};
 	 
              const url = '/MyshopAdmin/api/users/check_email';          
              $.post(url, params, async function (response) {
 				  if (response == "OK") {
 			      form.submit();
-		    } else if (response == "Duplicated") {
+		     } else if (response == "Duplicated") {
 			  showMessageEmail("The email is existed"); 
-		    } 
+		     } 
 			 }).fail(function () {
 				 showMessageEmail("Fail to connect to server");
-			 });
-
-	 
-          
+			 }); 
 			return false;
 }
 

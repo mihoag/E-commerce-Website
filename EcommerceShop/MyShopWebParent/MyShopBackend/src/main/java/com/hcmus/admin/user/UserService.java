@@ -30,7 +30,24 @@ public class UserService {
     
     public User saveUser(User user)
     {
-    	encodePassword(user);
+    	boolean isUpdatingMode = (user.getId() != null);
+    	if(isUpdatingMode)
+    	{
+    		if(!user.getPassword().isEmpty())
+    		{
+    			Integer id = user.getId();
+        		User userInDb = getUserById(id);
+        		user.setPassword(userInDb.getPassword());
+    		}
+    		else
+    		{
+    		   encodePassword(user);	
+    		}
+    	}
+    	else
+    	{
+    		encodePassword(user);
+    	}
     	return userRepo.save(user);
     }
     
@@ -52,9 +69,28 @@ public class UserService {
     	userRepo.deleteById(id);
     }
     
-    public boolean checkUniqueEmail(String email)
+    public boolean checkUniqueEmail(Integer id, String email)
     {
     	User user = userRepo.getUserByEmail(email);
-    	return user == null;
+    	if(user == null)
+    	{
+    		return true;
+    	}
+    	
+    	boolean isCreatingMode = (id == null);
+    	
+    	if(isCreatingMode)
+    	{
+    		return false;
+    	}
+    	else
+    	{
+    		if(user.getId() != id)
+    		{
+    			return false;
+    		}
+    	}
+    	
+    	return true;
     }
 }

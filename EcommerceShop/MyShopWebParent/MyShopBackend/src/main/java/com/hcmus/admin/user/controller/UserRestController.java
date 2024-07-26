@@ -1,6 +1,7 @@
 package com.hcmus.admin.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,9 +39,9 @@ public class UserRestController {
       }
       
       @PostMapping("/check_email")
-  	  public String checkDuplicateEmail(String email) {
-        System.out.println(email);
-  		return userService.checkUniqueEmail(email) ? "OK" : "Duplicated";
+  	  public String checkDuplicateEmail(@Param("id") Integer id , @Param("email") String email) {
+        System.out.println(id + " " + email);
+  		return userService.checkUniqueEmail(id, email) ? "OK" : "Duplicated";
   	  }
       
       

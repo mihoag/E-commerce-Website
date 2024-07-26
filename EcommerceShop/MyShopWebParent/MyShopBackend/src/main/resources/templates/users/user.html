@@ -105,9 +105,8 @@
                                                     Delete
                                                 </a>
                                                 &nbsp;
-                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                    data-toggle="tooltip" data-bs-toggle="modal"  th:attr="data-id=${user.id}"
-                                                    data-bs-target="#editUser">
+                                                <a class="text-secondary font-weight-bold text-xs"
+                                                 th:href="@{/users/edit/} + ${user.id}">
                                                     Update
                                                 </a>
                                             </td>
