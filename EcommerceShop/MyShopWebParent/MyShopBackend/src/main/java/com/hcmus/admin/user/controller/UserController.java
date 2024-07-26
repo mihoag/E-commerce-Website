@@ -1,5 +1,6 @@
 package com.hcmus.admin.user.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -20,9 +21,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.hcmus.admin.user.UserNotFoundException;
 import com.hcmus.admin.user.UserRepository;
 import com.hcmus.admin.user.UserService;
+import com.hcmus.admin.user.export.UserCsvExporter;
 import com.hcmus.admin.util.FileUploadUtil;
 import com.hcmus.common.entity.Role;
 import com.hcmus.common.entity.User;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/users")
@@ -95,6 +99,13 @@ public class UserController {
 	{
 	    userService.updateUserEnable(id, status);
 		return "redirect:/users";
+	}
+	
+	@GetMapping("/export/csv")
+	public void exportToCSV(HttpServletResponse response) throws IOException {
+		List<User> listUsers = userService.listAll();
+		UserCsvExporter exporter = new UserCsvExporter();
+		exporter.export(listUsers, response);
 	}
 	
 
