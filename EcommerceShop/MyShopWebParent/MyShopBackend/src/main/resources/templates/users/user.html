@@ -89,8 +89,8 @@
                                             </td>
                                             <td>
                                                <div class="d-flex flex-column justify-content-center">
-                                                  <i th:if="${user.enabled}" class="fa-solid fa-circle-check"></i>
-                                                  <i th:unless ="${user.enabled} " class="fa-solid fa-ban"></i>
+                                                  <a th:href="@{'/users/user/' + ${user.id} + '/enabled/false'}" th:if="${user.enabled}"  class="fa-solid fa-circle-check"></a>
+                                                  <a th:href="@{'/users/user/' + ${user.id} + '/enabled/true'}" th:unless ="${user.enabled}" class="fa-solid fa-ban"></a>
                                                </div>
                                             </td>
                                             <td>

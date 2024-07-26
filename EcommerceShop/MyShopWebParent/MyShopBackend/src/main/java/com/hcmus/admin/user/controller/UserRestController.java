@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hcmus.admin.user.UserNotFoundException;
 import com.hcmus.admin.user.UserService;
 import com.hcmus.common.entity.User;
 
@@ -21,7 +22,7 @@ public class UserRestController {
       
       
       @GetMapping("/{id}")
-      public User getUserById(@PathVariable("id") int id)
+      public User getUserById(@PathVariable("id") int id) throws UserNotFoundException
       {
     	  return userService.getUserById(id);
       }
@@ -39,7 +40,7 @@ public class UserRestController {
       }
       
       @PostMapping("/check_email")
-  	  public String checkDuplicateEmail(@Param("id") Integer id , @Param("email") String email) {
+  	  public String checkDuplicateEmail(Integer id ,  String email) {
         System.out.println(id + " " + email);
   		return userService.checkUniqueEmail(id, email) ? "OK" : "Duplicated";
   	  }

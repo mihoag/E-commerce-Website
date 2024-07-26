@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import com.hcmus.common.entity.Role;
 import com.hcmus.common.entity.User;
 
+import jakarta.transaction.Transactional;
 
 @Service
+@Transactional
 public class UserService {
     @Autowired
     private UserRepository userRepo;
@@ -28,7 +30,7 @@ public class UserService {
     	return roleRepo.findAll();
     }
     
-    public User saveUser(User user)
+    public User saveUser(User user) throws UserNotFoundException
     {
     	boolean isUpdatingMode = (user.getId() != null);
     	if(isUpdatingMode)
@@ -59,14 +61,25 @@ public class UserService {
     	user.setPassword(encodedPassword);
     }
     
-    public User getUserById(int id)
+    public User getUserById(int id) throws UserNotFoundException
     {
-         return userRepo.findById(id).get();
+    	User user;
+    	 try {
+		    user = userRepo.findById(id).get();
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new UserNotFoundException("User not found with id " + id);
+		}
+         return user;
     }
     
-    public void deleteUserById(int id)
+    public void deleteUserById(int id) throws UserNotFoundException
     {
-    	userRepo.deleteById(id);
+    	try {
+    		userRepo.deleteById(id);
+		} catch (Exception e) {
+		   throw new UserNotFoundException("User not found with id " + id);
+		}
     }
     
     public boolean checkUniqueEmail(Integer id, String email)
@@ -92,5 +105,17 @@ public class UserService {
     	}
     	
     	return true;
+    }
+    
+    public void updateUserEnable(Integer id, boolean enable)
+    {	
+    	System.out.println(id + " " + enable);
+    	
+    	try {
+			userRepo.updateEnabledStatus(id, enable);
+		} catch (Exception e) {
+			// TODO: handle exception
+		    e.printStackTrace();
+		}
     }
 }

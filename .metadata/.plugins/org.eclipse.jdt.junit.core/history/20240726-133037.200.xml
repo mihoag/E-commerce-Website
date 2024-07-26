@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="UserRepositoryTests.testEnableUser" project="MyShopBackend" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.hcmus.admin.user.UserRepositoryTests" time="0.757" displayname="UserRepositoryTests" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.user.UserRepositoryTests]">
+    <testcase name="testEnableUser" classname="com.hcmus.admin.user.UserRepositoryTests" time="0.757" displayname="testEnableUser()" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.user.UserRepositoryTests]/[method:testEnableUser()]"/>
+  </testsuite>
+</testrun>

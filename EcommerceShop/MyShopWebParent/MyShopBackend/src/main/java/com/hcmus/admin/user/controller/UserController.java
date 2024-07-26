@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hcmus.admin.user.UserNotFoundException;
 import com.hcmus.admin.user.UserRepository;
 import com.hcmus.admin.user.UserService;
 import com.hcmus.common.entity.Role;
@@ -53,9 +55,10 @@ public class UserController {
 		}
 		return "redirect:/users";
 	}
+
 	
 	@GetMapping("/edit/{id}")
-	public String edit(@PathVariable("id") int id, Model model)
+	public String edit(@PathVariable("id") Integer id, Model model) throws UserNotFoundException
 	{
 		User user = userService.getUserById(id);
 		List<Role> listRoles = userService.listRole();
@@ -67,6 +70,14 @@ public class UserController {
 		return "users/user_form";
 	}
 
+	@GetMapping("/user/{id}/enabled/{status}")
+	public String updateUserEnable(@PathVariable("id") int id, @PathVariable("status") boolean status) throws UserNotFoundException
+	{
+	    
+	    userService.updateUserEnable(id, status);
+		return "redirect:/users";
+	}
+	
 	@GetMapping("/**")
 	public String home(Model model)
 	{
@@ -75,4 +86,6 @@ public class UserController {
 		model.addAttribute("sideBarFieldName", "user");
 		return "users/user";
 	}
+	
+	
 }

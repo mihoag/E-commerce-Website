@@ -125,12 +125,16 @@ public class UserRepositoryTests {
 		
 	}
 	
+	@Test
 	public void testDisableUser() {
-		
+	    repo.updateEnabledStatus(1, false);
 	}
 	
+	@Test
 	public void testEnableUser() {
+		 repo.updateEnabledStatus(1, true);
 	}
+	
   
    
 }
