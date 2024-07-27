@@ -43,7 +43,5 @@ public class UserRestController {
   	  public String checkDuplicateEmail(Integer id ,  String email) {
         System.out.println(id + " " + email);
   		return userService.checkUniqueEmail(id, email) ? "OK" : "Duplicated";
-  	  }
-      
-      
+      }
 }

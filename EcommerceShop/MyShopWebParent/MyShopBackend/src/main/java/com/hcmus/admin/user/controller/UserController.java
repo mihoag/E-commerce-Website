@@ -36,7 +36,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class UserController {
    
 	private static Logger LOGGER = LoggerFactory.getLogger(UserController.class);
-	private String defaultRedirectURL = "redirect:/users/page/1?sortField=firstName&sortDir=asc";
+	private String defaultRedirectURL = "redirect:/users/page/%d?sortField=%s&sortDir=%s&keyword=%s";
 	@Autowired
 	private UserService userService;
 	
@@ -52,6 +52,11 @@ public class UserController {
 		model.addAttribute("title", "New User");
 		return "users/user_form";
 	}
+	
+    private String formatDirectUrl(Integer pageNum, String sortField, String sortDir, String keyword)
+    {
+    	return String.format(defaultRedirectURL, pageNum, sortField, sortDir, keyword);
+    }
 	
 	@PostMapping("/save")
 	public String saveUser(User user, RedirectAttributes redirect, @RequestParam("image") MultipartFile multipartFile)
@@ -74,7 +79,7 @@ public class UserController {
 			redirect.addAttribute("message", "Create new user fail");
 			LOGGER.error(e.getMessage());
 		}
-		return "redirect:/users";
+		return formatDirectUrl(1, "firstName" , "asc", user.getEmail());
 	}
 
 	
@@ -92,16 +97,16 @@ public class UserController {
 			return "users/user_form";
 		} catch (UserNotFoundException e) {
 			redirectAttributes.addAttribute("message", e.getMessage());
-			return defaultRedirectURL;
+			return formatDirectUrl(1, "firstName" , "asc", "");
 			// TODO: handle exception
 		}
 	}
 
 	@GetMapping("/user/{id}/enabled/{status}")
-	public String updateUserEnable(@PathVariable("id") int id, @PathVariable("status") boolean status) throws UserNotFoundException
+	public String updateUserEnable(@PathVariable("id") int id, @PathVariable("status") boolean status, @Param("sortField") String sortField, @Param("sortDir") String sortDir, @Param("keyword") String keyword, @Param("page") int page) throws UserNotFoundException
 	{
 	    userService.updateUserEnable(id, status);
-		return defaultRedirectURL;
+		return formatDirectUrl(page, sortField, sortDir, keyword);
 	}
 	
 	@GetMapping("/export/csv")

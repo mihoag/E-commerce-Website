@@ -1,0 +1,13 @@
+.hidden {
+    display: none;
+}
+a:hover {
+  cursor: pointer;
+}
+
+ .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1055;
+ }
