@@ -36,7 +36,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class UserController {
    
 	private static Logger LOGGER = LoggerFactory.getLogger(UserController.class);
-	
+	private String defaultRedirectURL = "redirect:/users/page/1?sortField=firstName&sortDir=asc";
 	@Autowired
 	private UserService userService;
 	
@@ -92,7 +92,7 @@ public class UserController {
 			return "users/user_form";
 		} catch (UserNotFoundException e) {
 			redirectAttributes.addAttribute("message", e.getMessage());
-			return "redirect:/users";
+			return defaultRedirectURL;
 			// TODO: handle exception
 		}
 	}
@@ -101,7 +101,7 @@ public class UserController {
 	public String updateUserEnable(@PathVariable("id") int id, @PathVariable("status") boolean status) throws UserNotFoundException
 	{
 	    userService.updateUserEnable(id, status);
-		return "redirect:/users";
+		return defaultRedirectURL;
 	}
 	
 	@GetMapping("/export/csv")
@@ -127,20 +127,28 @@ public class UserController {
 	
 	
 	@GetMapping("/page/{pageNum}")
-	public String listByPage(@PathVariable("pageNum") int pageNum, Model model)
+	public String listByPage(@PathVariable("pageNum") int pageNum, @Param("sortField") String sortField,
+			@Param("sortDir") String sortDir,  Model model)
 	{
-	    Page<User> pageUser = userService.listUserByPage(pageNum);
+	    Page<User> pageUser = userService.listUserByPage(pageNum, sortField, sortDir);
 	    List<User> listUsers = pageUser.getContent();
+	    
+	    String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+	       
 	    model.addAttribute("listUsers", listUsers);
 		model.addAttribute("sideBarFieldName", "user");
 		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("totalPages", pageUser.getTotalPages());
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("reverseSortDir", reverseSortDir);
+	
 		return "users/user";
 	}
 
 	@GetMapping("/**")
 	public String home(Model model)
 	{
-		return listByPage(1, model);
+		return listByPage(1, "firstName", "asc", model);
 	}
 }
