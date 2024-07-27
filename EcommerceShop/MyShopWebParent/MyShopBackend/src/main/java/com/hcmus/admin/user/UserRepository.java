@@ -21,5 +21,6 @@ public interface UserRepository extends JpaRepository<User, Integer>, PagingAndS
    @Modifying
    public void updateEnabledStatus(int id, boolean enabled);
    
-   public Page<User> findAll(Pageable pageable);
+   @Query("SELECT u FROM User u WHERE CONCAT(u.id, ' ', u.email, ' ', u.firstName, ' ', u.lastName) LIKE %?1%")
+   public Page<User> findAll(String keyword, Pageable pageable);
 }

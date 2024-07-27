@@ -128,10 +128,15 @@ public class UserController {
 	
 	@GetMapping("/page/{pageNum}")
 	public String listByPage(@PathVariable("pageNum") int pageNum, @Param("sortField") String sortField,
-			@Param("sortDir") String sortDir,  Model model)
+			@Param("sortDir") String sortDir, @Param("keyword") String keyword,  Model model)
 	{
-	    Page<User> pageUser = userService.listUserByPage(pageNum, sortField, sortDir);
+		if(keyword == null)
+	    {
+	    	keyword = "";
+	    }
+	    Page<User> pageUser = userService.listUserByPage(pageNum, sortField, sortDir, keyword);
 	    List<User> listUsers = pageUser.getContent();
+	    long totalElement = pageUser.getTotalElements();
 	    
 	    String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
 	       
@@ -142,13 +147,15 @@ public class UserController {
 		model.addAttribute("sortField", sortField);
 		model.addAttribute("sortDir", sortDir);
 		model.addAttribute("reverseSortDir", reverseSortDir);
-	
+	    model.addAttribute("keyword", keyword);
+		model.addAttribute("totalElement", totalElement);
+	    
 		return "users/user";
 	}
 
 	@GetMapping("/**")
 	public String home(Model model)
 	{
-		return listByPage(1, "firstName", "asc", model);
+		return listByPage(1, "firstName", "asc", "", model);
 	}
 }

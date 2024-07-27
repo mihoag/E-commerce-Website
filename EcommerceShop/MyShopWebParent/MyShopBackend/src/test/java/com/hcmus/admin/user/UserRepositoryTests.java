@@ -153,6 +153,24 @@ public class UserRepositoryTests {
 	    });
 	    assertThat(pageUser.getSize()).isEqualTo(pageSize);
 	}
+   
+	@Test
+	public void testFilterUserByPage()
+	{
+		Integer pageNum = 0;
+		Integer pageSize = 4;
+		String keyword = "bruce";
+		
+		Pageable pageable = PageRequest.of(pageNum, pageSize);
+	    Page<User> pageUser = repo.findAll(keyword, pageable);
+	    
+	    List<User> listUser = pageUser.getContent();
+	    listUser.forEach(user -> {
+	         System.out.println(user);
+	    });
+	}
+	
+	
 	
   
    
