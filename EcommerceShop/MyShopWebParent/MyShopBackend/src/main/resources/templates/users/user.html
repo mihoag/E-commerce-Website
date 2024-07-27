@@ -116,8 +116,37 @@
                                 </table>
                                
                                 <!-- Pagination -->
-                                <nav aria-label="..." style="margin: 2% 0 0 1%;">
-                                  
+                                  <nav aria-label="..." style="margin: 2% 0 0 1%;" th:if="${totalPages > 1}">
+                                    <ul class="pagination">
+                           
+                                        <li class="page-item disabled">
+                                            <span th:unless="${currentPage > 1}" class="page-link">First</span>
+                                        </li>
+                                        <li th:if="${currentPage > 1}"  class="page-item"><a class="page-link" th:href="@{/users/page/1}">First</a></li>
+                                    
+                                    
+                                        <li class="page-item disabled">
+                                            <span th:unless="${currentPage > 1}" class="page-link">Previous</span>
+                                        </li>
+                                        <li th:if="${currentPage > 1}"  class="page-item"><a class="page-link" th:href="@{'/users/page/' + ${currentPage - 1}}">Previous</a></li>
+                                        
+                                        <div th:each="i: ${#numbers.sequence(1, totalPages)}">
+			                            <li th:if="${currentPage != i}" class="page-item"><a th:href="@{'/users/page/' + ${i}}" class="page-link" href="#">[[${i}]]</a></li>
+                                        <li th:unless="${currentPage != i}" class="page-item active" aria-current="page">
+                                            <span class="page-link">[[${i}]]</span>
+                                        </li>
+		    
+                                        </div>
+                                        <li class="page-item disabled">
+                                            <span th:unless="${currentPage < totalPages}" class="page-link">Next</span>
+                                        </li>
+                                        <li th:if="${currentPage < totalPages}" class="page-item"><a class="page-link" th:href="@{'/users/page/' + ${currentPage + 1}}">Next</a></li>
+                                   
+                                         <li class="page-item disabled">
+                                            <span th:unless="${currentPage < totalPages}" class="page-link">Last</span>
+                                        </li>
+                                        <li th:if="${currentPage < totalPages}" class="page-item"><a class="page-link" th:href="@{'/users/page/' + ${totalPages}}">Last</a></li>
+                                    </ul>
                                 </nav>
                             </div>
                         </div>

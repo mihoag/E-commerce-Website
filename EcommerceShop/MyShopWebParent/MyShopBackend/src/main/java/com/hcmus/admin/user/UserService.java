@@ -3,6 +3,9 @@ package com.hcmus.admin.user;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,9 @@ import jakarta.transaction.Transactional;
 @Service
 @Transactional
 public class UserService {
+	
+	private static final Integer PAGE_SIZE = 6;
+	
     @Autowired
     private UserRepository userRepo;
      
@@ -117,5 +123,12 @@ public class UserService {
 			// TODO: handle exception
 		    e.printStackTrace();
 		}
+    }
+    
+    public Page<User> listUserByPage(Integer pageNum)
+    {
+    	Pageable pageable = PageRequest.of(pageNum-1, UserService.PAGE_SIZE);
+    	Page<User> pageUser = userRepo.findAll(pageable);
+    	return pageUser;
     }
 }

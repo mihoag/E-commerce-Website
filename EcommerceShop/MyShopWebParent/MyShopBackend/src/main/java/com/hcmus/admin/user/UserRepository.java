@@ -1,15 +1,18 @@
 package com.hcmus.admin.user;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import com.hcmus.common.entity.User;
 import java.util.List;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Integer>, PagingAndSortingRepository<User, Integer> {
 	
    @Query("select u from User u where u.email = ?1")	
    public User  getUserByEmail(String email);
@@ -17,4 +20,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
    @Query("update User u set u.enabled = ?2 where u.id = ?1")
    @Modifying
    public void updateEnabledStatus(int id, boolean enabled);
+   
+   public Page<User> findAll(Pageable pageable);
 }

@@ -13,6 +13,9 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Rollback;
 
 import com.hcmus.common.entity.Role;
@@ -133,6 +136,22 @@ public class UserRepositoryTests {
 	@Test
 	public void testEnableUser() {
 		 repo.updateEnabledStatus(1, true);
+	}
+	
+	@Test
+	public void testListFirstPage()
+	{
+		Integer pageNum = 0;
+		Integer pageSize = 4;
+		
+		Pageable pageable = PageRequest.of(pageNum, pageSize);
+	    Page<User> pageUser = repo.findAll(pageable);
+	    
+	    List<User> listUser = pageUser.getContent();
+	    listUser.forEach(user -> {
+	         System.out.println(user);
+	    });
+	    assertThat(pageUser.getSize()).isEqualTo(pageSize);
 	}
 	
   

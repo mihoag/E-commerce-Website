@@ -6,6 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -124,13 +125,22 @@ public class UserController {
 		exporter.export(listUsers, response);
 	}
 	
+	
+	@GetMapping("/page/{pageNum}")
+	public String listByPage(@PathVariable("pageNum") int pageNum, Model model)
+	{
+	    Page<User> pageUser = userService.listUserByPage(pageNum);
+	    List<User> listUsers = pageUser.getContent();
+	    model.addAttribute("listUsers", listUsers);
+		model.addAttribute("sideBarFieldName", "user");
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("totalPages", pageUser.getTotalPages());
+		return "users/user";
+	}
 
 	@GetMapping("/**")
 	public String home(Model model)
 	{
-		List<User> listUsers = userService.listAll();
-		model.addAttribute("listUsers", listUsers);
-		model.addAttribute("sideBarFieldName", "user");
-		return "users/user";
+		return listByPage(1, model);
 	}
 }
