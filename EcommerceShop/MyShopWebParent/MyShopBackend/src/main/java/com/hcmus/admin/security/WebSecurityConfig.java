@@ -8,13 +8,14 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-//@EnableWebSecurity(debug = true)
+@EnableWebSecurity()
 public class WebSecurityConfig {
 	@Bean
 	PasswordEncoder passwordEncoder() {
@@ -42,12 +43,25 @@ public class WebSecurityConfig {
 	
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		
+		http.authenticationProvider(authenticationProvider());
 		http.authorizeHttpRequests(
 				auth -> 
-				auth.anyRequest().permitAll()
+				auth.anyRequest().authenticated()
 			)
+		.formLogin(login -> login.loginPage("/login").usernameParameter("email").permitAll())
+		.logout(logout -> logout.permitAll())
+		.rememberMe(remember -> remember
+                .userDetailsService(userDetailService())
+                .tokenValiditySeconds(86400))  // 1 day)
 		.csrf(csrf -> csrf.disable());
+		
 		return http.build();
 	}	
+	
+	  @Bean
+	  WebSecurityCustomizer webSecurityCustomizer() {
+	        return (web) -> web.ignoring().requestMatchers("/images/**", "/js/**", "/common/**", "/css/**");
+	    }
+	
+	
 }

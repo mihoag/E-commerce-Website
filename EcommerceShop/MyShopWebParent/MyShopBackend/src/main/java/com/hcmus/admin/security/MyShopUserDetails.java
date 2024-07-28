@@ -65,5 +65,10 @@ public class MyShopUserDetails implements UserDetails{
 		// TODO Auto-generated method stub
 		return user.isEnabled();
 	}
+	
+	public String getFullname()
+	{
+		return user.getFullName();
+	}
 
 }

@@ -14,6 +14,7 @@ public class MyShopUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String email) {
 		// TODO Auto-generated method stub
 	     User u = userRepo.getUserByEmail(email);
+	     System.out.println(u);
 	     if(u == null)
 	     {
 	    	 throw new UsernameNotFoundException("User not found!");
