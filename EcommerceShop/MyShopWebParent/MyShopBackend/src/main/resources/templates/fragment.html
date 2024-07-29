@@ -20,7 +20,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 </head>
 <body>
- <!--Header-->
+
+
+    <!--Header-->
     <div class="header container-fluid w-100 m-0" th:fragment="header">
         <div class="row w-100">
             <div class="col-md-3">
@@ -37,11 +39,13 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
                    
                    <div class="dropdown-toggle f-flex" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                      <i class="fa-solid fa-user"></i>
-                     <span class="nav-link-text ms-3" sec:authentication="principal.fullname"></span>
+                     <span class="nav-link-text ms-3"  sec:authentication="principal.fullname"></span>
                    </div>
                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                       <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
+                       <li><a class="dropdown-item" th:href="@{/account}">Account</a></li>
+                        <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
                      </ul>
+                 
                    </div>
                 </div>
                 
@@ -52,12 +56,59 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
     </div>
 
     <!--End header-->  
+    
+   
+    <!-- Pagination -->
+                                  <nav th:fragment="pagination"  style="margin: 2% 0 0 1%;" th:if="${totalPages > 1}">
+                                    <ul class="pagination">
+                           
+                                        <li class="page-item disabled">
+                                            <span th:unless="${currentPage > 1}" class="page-link">First</span>
+                                        </li>
+                                        
+                                        <li th:if="${currentPage > 1}"  class="page-item">
+                                           <a class="page-link" th:href="@{'/' +  ${sideBarFieldName} +'/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}}">First</a>
+                                        </li>
+                                    
+                                        <li class="page-item disabled">
+                                            <span th:unless="${currentPage > 1}" class="page-link">Previous</span>
+                                        </li>
+                                        
+                                        <li th:if="${currentPage > 1}"  class="page-item">
+                                          <a class="page-link" th:href="@{'/' +  ${sideBarFieldName} +'/page/' + ${currentPage - 1}  + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}}">Previous</a>
+                                        </li>
+                                        
+                                         <div th:each="i: ${#numbers.sequence(1, totalPages)}">
+			                              <li th:if="${currentPage != i}" class="page-item">
+			                                   <a th:href="@{'/' +  ${sideBarFieldName} + '/page/' + ${i}  + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}}" class="page-link" href="#">[[${i}]]</a>
+			                              </li>
+			                              
+                                          <li th:unless="${currentPage != i}" class="page-item active" aria-current="page">
+                                            <span class="page-link">[[${i}]]</span>
+                                          </li>
+                                          
+                                        </div>
+                                        
+                                        <li class="page-item disabled">
+                                            <span th:unless="${currentPage < totalPages}" class="page-link">Next</span>
+                                        </li>
+                                        
+                                        <li th:if="${currentPage < totalPages}" class="page-item"><a class="page-link" th:href="@{'/' +  ${sideBarFieldName} + '/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}}">Next</a></li>
+                                   
+                                         <li class="page-item disabled">
+                                            <span th:unless="${currentPage < totalPages}" class="page-link">Last</span>
+                                        </li>
+                                        
+                                        <li th:if="${currentPage < totalPages}" class="page-item"><a class="page-link" th:href="@{'/' +  ${sideBarFieldName} + '/page/' + ${totalPages}  + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}}">Last</a></li>
+                                    </ul>
+                                </nav>
+    
      <!--Side bar-->
      <aside class="navbar navbar-vertical rounded-4 my-3 ms-4 me-4 position-fixed mt-4" style="width: 20%;"
                     id="sidenav-main" th:fragment="sidebar">
         <div class="w-100">
               <ul class="navbar-nav">
-                 <li class="nav-item my-2 active">
+                 <li class = "nav-item my-2" th:classappend="${sideBarFieldName == 'users' ? 'active' : ''}">
                   <a class="nav-link active ps-4 py-3" th:href="@{/users}">
                    <span class="nav-icon">
                     <i class="fa-solid fa-user" style="max-width: 20px;"></i>
@@ -115,10 +166,13 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
        </div>
     </aside>
                 
+    <!-- Footer -->            
     <div th:fragment="footer" class="text-center m-3">
 		<p>MyShop Control Panel - Copyright &copy; MyShop</p>
 	</div>
 
+
+     <!-- Dropdown navigation -->
 	 <nav th:fragment="navigationDropdown" class="navbar navbar-expand-lg navbar-light bg-light hidden" id= "navigationDropdown">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -196,8 +250,15 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
             </div>
         </div>
     </nav>
-	 
-	 
+	
+	
+	<!-- Column link -->
+	<th th:fragment="column_link(columnLabel, columnField)" class="hideable-column">
+        <i th:if="${sortField eq columnField}" th:classappend="${sortDir eq 'desc' ? 'fa-solid fa-arrow-down' : 'fa-solid fa-arrow-up'}"></i>
+       <a style="text-decoration: none;" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+        th:href="@{'/'  + ${sideBarFieldName} + '/page/' + ${currentPage} + '?sortField=' + ${columnField} +'&sortDir=' + ${reverseSortDir}}">[[${columnLabel}]]</a> 
+    </th>
+	
 </body>
 
 </html>

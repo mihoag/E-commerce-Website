@@ -148,7 +148,7 @@ public class UserController {
 	    String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
 	       
 	    model.addAttribute("listUsers", listUsers);
-		model.addAttribute("sideBarFieldName", "user");
+		model.addAttribute("sideBarFieldName", "users");
 		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("totalPages", pageUser.getTotalPages());
 		model.addAttribute("sortField", sortField);
@@ -156,6 +156,7 @@ public class UserController {
 		model.addAttribute("reverseSortDir", reverseSortDir);
 	    model.addAttribute("keyword", keyword);
 		model.addAttribute("totalElement", totalElement);
+	    
 	    
 		return "users/user";
 	}
