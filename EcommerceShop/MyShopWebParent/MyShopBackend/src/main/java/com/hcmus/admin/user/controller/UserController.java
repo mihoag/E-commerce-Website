@@ -160,6 +160,8 @@ public class UserController {
 	    
 		return "users/user";
 	}
+	
+	
 
 	@GetMapping("/**")
 	public String home(Model model)

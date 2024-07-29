@@ -27,7 +27,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
         <div class="row w-100">
             <div class="col-md-3">
                 <div class="logo ms-5 position-fixed">
-                    <a href="/">
+                    <a th:href="@{/}">
                         <img th:src="@{/img/logo.png}" style="width: 90px; height: 70px;">
                     </a>
                 </div>
@@ -258,6 +258,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
        <a style="text-decoration: none;" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
         th:href="@{'/'  + ${sideBarFieldName} + '/page/' + ${currentPage} + '?sortField=' + ${columnField} +'&sortDir=' + ${reverseSortDir}}">[[${columnLabel}]]</a> 
     </th>
+	
+	
 	
 </body>
 

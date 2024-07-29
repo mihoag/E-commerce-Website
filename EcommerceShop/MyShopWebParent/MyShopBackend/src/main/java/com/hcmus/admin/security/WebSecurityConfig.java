@@ -46,7 +46,10 @@ public class WebSecurityConfig {
 		http.authenticationProvider(authenticationProvider());
 		http.authorizeHttpRequests(
 				auth -> 
-				auth.anyRequest().authenticated()
+				
+				auth.
+				requestMatchers("/users/**").hasAuthority("Admin")
+				.anyRequest().authenticated()
 			)
 		.formLogin(login -> login.loginPage("/login").usernameParameter("email").permitAll())
 		.logout(logout -> logout.permitAll())
