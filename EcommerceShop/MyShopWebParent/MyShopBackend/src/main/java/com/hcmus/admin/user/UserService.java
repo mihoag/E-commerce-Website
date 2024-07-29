@@ -133,4 +133,9 @@ public class UserService {
     	Page<User> pageUser = userRepo.findAll(keyword,pageable);
     	return pageUser;
     }
+    
+    public User getUserByEmail(String email)
+    {
+    	return userRepo.getUserByEmail(email);
+    }
 }

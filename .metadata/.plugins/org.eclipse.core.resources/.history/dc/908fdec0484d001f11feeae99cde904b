@@ -1,0 +1,25 @@
+package com.hcmus.admin.user.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.hcmus.admin.user.UserService;
+
+@Controller
+public class AccountController {
+           
+	@Autowired
+	private UserService userService;
+	
+	@GetMapping("/account")
+	public String viewDetails(@AuthenticationPrincipal ShopmeUserDetails loggedUser,
+			Model model) {
+		String email = loggedUser.getUsername();
+		User user = service.getByEmail(email);
+		model.addAttribute("user", user);
+		
+		return "users/account_form";
+		
+	}
+}
