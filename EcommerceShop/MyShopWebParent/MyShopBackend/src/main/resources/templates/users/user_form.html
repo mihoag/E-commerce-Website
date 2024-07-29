@@ -103,7 +103,10 @@
      
     <script th:if="${title} == 'New User'" type="text/javascript" th:src="@{../js/ConfigViewEvent.js}"></script>
     <script  th:if="${title} == 'New User'"  type="text/javascript" th:src="@{../js/user/ConfigUserFormEvent.js}"></script>
+    <script  th:if="${title} == 'New User'"  type="text/javascript" th:src="@{../js/EventUpload.js}"></script>
+    
     <script th:if="${title} != 'New User'" type="text/javascript" th:src="@{../../js/ConfigViewEvent.js}"></script>
     <script  th:if="${title} != 'New User'"  type="text/javascript" th:src="@{../../js/user/ConfigUserFormEvent.js}"></script>
+     <script  th:if="${title} == 'New User'"  type="text/javascript" th:src="@{../../js/EventUpload.js}"></script>
 </body>
 </html>

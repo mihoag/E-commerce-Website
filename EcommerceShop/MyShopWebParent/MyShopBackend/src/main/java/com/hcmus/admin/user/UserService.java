@@ -40,16 +40,18 @@ public class UserService {
     public User saveUser(User user) throws UserNotFoundException
     {
     	boolean isUpdatingMode = (user.getId() != null);
+    	user.setPassword(user.getPassword().trim());
+    	
     	if(isUpdatingMode)
     	{
-    		if(!user.getPassword().isEmpty())
+    		if(user.getPassword().equals(""))
     		{
     			Integer id = user.getId();
         		User userInDb = getUserById(id);
         		user.setPassword(userInDb.getPassword());
     		}
     		else
-    		{
+    		{  		   
     		   encodePassword(user);	
     		}
     	}

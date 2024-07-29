@@ -13,12 +13,15 @@
                <!--Body table student-->
                <main class="main-content border-radius-lg">
                     <div class="card mt-3">
+                    <div th:if="${message != null}"
+			             	class="alert alert-success text-center">[[${message}]]</div>
+                    
                         <!-- Table  -->
                         <div class="card-body px-0 pb-2">
                               <!--  form for create new user -->
                              <form th:action="@{/account/update}" method="post" class="row g-3 mx-4 my-4" enctype="multipart/form-data" th:object="${user}">
                                <input type="hidden" id = "id" th:field="*{id}" />
-                               
+                             
                                <div class="col-md-12">
                                  <label for="inputEmail4" class="form-label">Email</label>
                                  <input type="email" th:field = "*{email}" id="email" readonly="readonly" class="form-control" placeholder="Enter your email" minlength="8" maxlength="128" required="required" >
@@ -37,12 +40,16 @@
                                 
                                 <div class="col-md-12">
                                  <label for="inputPassword4" class="form-label">Password</label>
-                                  <input th:field="*{password}" type="password" class="form-control" required="required" minlength="5" maxlength="40" placeholder="Enter password">                          
+                                  <input th:field="*{password}" type="password" class="form-control"  
+                                   minlength="5" maxlength="40" oninput="checkMatchPassword(document.getElementById('confirmPassword'))"
+                                  placeholder="leave blank if you don't want to change password">                          
                                 </div>
                                 
                                 <div class="col-md-12">
                                  <label for="inputPassword4" class="form-label">Confirm password</label>
-                                  <input th:if = "${user.id == null}" th:field="*{password}" type="password" class="form-control" required="required" minlength="5" maxlength="40" placeholder="Confirm your password">   
+                                 <input id="confirmPassword" type="password" class="form-control"  minlength="5" maxlength="40" 
+                                 placeholder="Confirm your password" oninput="checkMatchPassword(this)">   
+                                   <small id="messageConfirmPassword" class="form-text hidden" style="color: red;">Passwords do not match!</small>
                                 </div>
                                
                           
@@ -52,6 +59,20 @@
                                 </label>
                                 <span><b>[[${user.roles}]]</b></span>
                                </div>
+                               
+			          	<div class="form-group row hidden">
+					      <label class="col-sm-4 col-form-label">Roles:</label>
+					      <div class="col-sm-8">
+						  <th:block th:each="role : ${listRoles}">
+							<input type="checkbox" th:field="*{roles}" th:text="${role.name}"
+								th:value="${role.id}" class="m-2" />
+							- <small>[[${role.description}]]</small>
+							<br />
+						  </th:block>
+					     </div>
+				        </div>
+                               
+                               
                                 
                                <div class="col-12 d-flex">
                                  <label class="form-check-label" for="gridCheck">
@@ -59,7 +80,7 @@
                                    </label>
                                    &nbsp;
                                  <div class="form-check">      
-                                   <input class="form-check-input" type="checkbox" th:field="*{enabled}" id="gridCheck">                         
+                                   <input class="form-check-input" readonly="readonly" type="checkbox" th:field="*{enabled}" id="gridCheck">                         
                                  </div>
                                </div>
                                
@@ -90,5 +111,9 @@
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+     <script type="text/javascript" th:src="@{/js/user/ConfigAccountUser.js}">
+     </script>
+     
+     <script type="text/javascript" th:src="@{/js/EventUpload.js}"></script>
 </body>
 </html>
