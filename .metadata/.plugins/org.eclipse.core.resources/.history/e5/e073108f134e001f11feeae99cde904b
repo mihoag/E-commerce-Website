@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragment :: page_head('Error')" />
+<body>
+    
+</body>
+</html>

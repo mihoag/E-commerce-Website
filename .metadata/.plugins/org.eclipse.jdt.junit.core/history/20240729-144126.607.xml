@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="PasswordEncoder.testBcryptEncoder" project="MyShopBackend" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="com.hcmus.admin.user.PasswordEncoder" time="0.001" displayname="PasswordEncoder" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.user.PasswordEncoder]">
-    <testcase name="testBcryptEncoder" classname="com.hcmus.admin.user.PasswordEncoder" time="0.001" displayname="testBcryptEncoder()" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.user.PasswordEncoder]/[method:testBcryptEncoder()]"/>
-  </testsuite>
-</testrun>

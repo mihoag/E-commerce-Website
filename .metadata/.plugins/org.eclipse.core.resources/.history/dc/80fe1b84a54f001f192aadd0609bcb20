@@ -1,0 +1,5 @@
+package com.hcmus.admin.category;
+
+public interface CategoryRepository {
+
+}

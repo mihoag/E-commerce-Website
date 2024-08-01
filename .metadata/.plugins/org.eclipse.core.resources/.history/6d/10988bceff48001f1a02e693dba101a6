@@ -1,5 +1,0 @@
-package com.hcmus.admin.user;
-
-public class PasswordEncoder {
-
-}
