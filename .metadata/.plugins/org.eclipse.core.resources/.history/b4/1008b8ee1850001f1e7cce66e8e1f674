@@ -1,0 +1,2 @@
+const messageCateName = document.getElementById("messageCateName");
+const messageAlias = document.getElementById("messageAlias");

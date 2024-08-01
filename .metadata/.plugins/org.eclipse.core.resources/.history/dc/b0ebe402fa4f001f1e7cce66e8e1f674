@@ -1,0 +1,12 @@
+package com.hcmus.admin.category;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class CategoryRestController {
+    // check unique name
+	
+	// check unique alias
+	
+	// check unique 
+}

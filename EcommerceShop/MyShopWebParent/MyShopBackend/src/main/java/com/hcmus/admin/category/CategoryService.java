@@ -1,5 +1,12 @@
 package com.hcmus.admin.category;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,14 +30,14 @@ public class CategoryService {
    @Autowired
    private CategoryRepository repo;
    
-   public Page<Category> listUserByPage(Integer pageNum, String sortDir)
+   public Page<Category> listUserByPage(Integer pageNum, String sortField,String sortDir)
    {
-    Sort sort = Sort.by("name");
+    Sort sort = Sort.by(sortField);
     if(sortDir.equals("asc"))
     {
     	sort = sort.ascending();
     }
-    else
+    else if(sortDir.equals("desc"))
     {
     	sort = sort.descending();
     }
@@ -70,5 +77,118 @@ public class CategoryService {
 	 } catch (Exception e) {
 	    e.printStackTrace();
      }
+   }
+   
+   public boolean checkUniqueName(Integer id, String name)
+   {
+   	 Category cate = repo.findByName(name);
+   	 if(cate == null)
+   	 {
+   		return true;
+     }
+   	
+   	 boolean isCreatingMode = (id == null);
+   	
+   	 if(isCreatingMode)
+   	 {
+   		return false;
+   	 }
+   	 else
+   	 {
+   		if(cate.getId() != id)
+   		{
+   			return false;
+   		}
+   	 }
+   	 return true;
+   }
+   
+   public boolean checkUniqueAlias(Integer id, String alias)
+   {
+   	 Category cate = repo.findByAlias(alias);
+   	 if(cate == null)
+   	 {
+   		return true;
+     }
+   	
+   	 boolean isCreatingMode = (id == null);
+   	
+   	 if(isCreatingMode)
+   	 {
+   		return false;
+   	 }
+   	 else
+   	 {
+   		if(cate.getId() != id)
+   		{
+   			return false;
+   		}
+   	 }
+   	 return true;
+   } 
+   
+   public List<Category> listCategoriesUsedInForm()
+   {
+	   List<Category> categoryUsedInForm = new ArrayList<>();
+	   
+	   List<Category> categoryInDb = repo.findRootCategories(Sort.by("name").ascending());
+	   
+	   for (Category category : categoryInDb) {
+		   categoryUsedInForm.add(Category.copyIdAndName(category.getId(), category.getName()));
+			
+			Set<Category> children = sortCategory(category.getChildren());
+			
+			for (Category subCategory : children) {
+				String name = "--" + subCategory.getName();
+				categoryUsedInForm.add(Category.copyIdAndName(subCategory.getId(), name));
+				
+				listSubCategoriesUsedInForm(categoryUsedInForm, subCategory, 1);
+			}
+		}	
+	   return categoryUsedInForm;
+   }
+   
+   private void listSubCategoriesUsedInForm(List<Category> categoriesUsedInForm, 
+			Category parent, int subLevel) {
+		int newSubLevel = subLevel + 1;
+		Set<Category> children = sortCategory(parent.getChildren());
+		
+		for (Category subCategory : children) {
+			String name = "";
+			for (int i = 0; i < newSubLevel; i++) {				
+				name += "--";
+			}
+			name += subCategory.getName();
+			
+			categoriesUsedInForm.add(Category.copyIdAndName(subCategory.getId(), name));
+			
+			listSubCategoriesUsedInForm(categoriesUsedInForm, subCategory, newSubLevel);
+		}		
+   }
+   
+   public SortedSet<Category> sortCategory(Set<Category> categories)
+   {
+	    return sortCategory("asc", categories);
+   }
+   
+   public SortedSet<Category> sortCategory(String sort,Set<Category> categories)
+   {
+	   SortedSet<Category> sortedChildren = new TreeSet<>(new Comparator<Category>() {
+
+	   @Override
+	   public int compare(Category o1, Category o2) {
+			// TODO Auto-generated method stub
+			if(sort.equals("asc"))
+			{
+				return o1.getName().compareToIgnoreCase(o2.getName());
+			}
+			else
+			{
+				return o2.getName().compareToIgnoreCase(o1.getName());
+			}
+		}
+	   });
+	   sortedChildren.addAll(categories);
+	   return sortedChildren;
    }
 }

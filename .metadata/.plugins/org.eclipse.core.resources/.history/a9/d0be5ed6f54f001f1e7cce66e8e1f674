@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head th:replace="fragment :: page_head('User Form Page')" />
+<body style="background-color: #f5f7f6;">
+   <!-- Header -->
+    <div th:replace="fragment :: header"></div>
+    <div class="container-fluid w-100 mt-2">
+       
+        <div class="row w-100">
+            <div class="col-md-3">
+               <!-- start side bar -->
+               <aside th:replace="fragment :: sidebar"></aside>
+               <!--end side bar-->
+            </div>
+            
+            <div class="col-md-9">
+               <div id = "manageTitle" class = "d-flex"><h3>Manage category | [[${title}]]</h3></div>
+               <!--Body table student-->
+               <main class="main-content border-radius-lg">
+                    <div class="card mt-3">
+                        <!-- Table  -->
+                        <div class="card-body px-0 pb-2">
+                              <!--  form for create new user -->
+                             <form name = "formNewCategory" th:action="@{/category/save}" method="post" class="row g-3 mx-4 my-4" enctype="multipart/form-data" th:object="${category}">
+                               <input type="hidden" id = "id" th:field="*{id}" />
+                               <div class="col-md-12">
+                                 <label for="inputEmail4" class="form-label">Category name</label>
+                                 <input type="text" th:field = "*{name}" id="cateName" class="form-control" placeholder="Enter category name" minlength="8" maxlength="128" required="required" >
+                                 <small id="messageCateName" class="form-text hidden" style="color: red;"></small>
+                               </div>
+                    
+                               
+                                <div class="col-6">
+                                 <label for="firstname" class="form-label">Alias</label>
+                                 <input type="text" class="form-control" minlength="2" required="required" th:field="*{alias}"  maxlength="45" placeholder="Enter alias">
+                               </div>
+                                <div class="col-6">
+                                 <label for="lastname" class="form-label">Last name</label>
+                                 <input type="text" class="form-control" minlength="8" maxlength="128" id="lastname" th:field="*{lastName}" required="required" placeholder="Enter your last name">
+                               </div>
+
+                               <div class="col-12 d-flex">
+                                 <label class="form-check-label" for="gridCheck">
+                                      Enabled
+                                   </label>
+                                   &nbsp;
+                                 <div class="form-check">
+                        
+                                   <input class="form-check-input" type="checkbox" th:field="*{enabled}" id="gridCheck">
+                         
+                                 </div>
+                               </div>
+                               
+                               <div class="col-12 d-flex">
+                                   <label class="col-sm-1 col-form-label">Photos:</label>
+										<div class="col-sm-11">
+											 <input type="hidden" th:field="*{photos}" />
+											 <input type="file"
+												id="fileImage" name="image" accept="image/png, image/jpeg"
+												class="mb-2" />
+											 <img id="thumbnail" th:src="@{${user.photosImagePath}}"  alt="Photos preview"
+												 class="img-fluid" />
+										</div>
+                               </div>
+                               
+                               <div class="col-12 f-flex justify-content-center">
+                                 <button type="submit" class="btn btn-primary">Save</button>
+                                 <a type="submit" th:href="@{.}" class="btn btn-secondary">Cancel</a>
+                               </div>
+                             </form>   
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+     </div>
+     <div th:replace="fragment :: footer"></div>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+  
+</body>
+</html>

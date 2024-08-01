@@ -16,7 +16,7 @@ import org.springframework.test.annotation.Rollback;
 
 import com.hcmus.common.entity.Category;
 
-@DataJpaTest()
+@DataJpaTest(showSql = false)
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
 public class CategoryRepositoryTests {

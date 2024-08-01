@@ -21,8 +21,9 @@
                <main class="main-content border-radius-lg">
                     <div class="card mt-3">
                      <form class="d-flex mx-2 my-2" method="get" th:action="@{'/categories/page/1'}">
-                       <input class="form-control me-1" type="text"  name="keyword"   placeholder="Enter the keyword"> 
-                       <input th:value="${sortDir}" name="sortDir" hidden>
+                      <input class="form-control me-1" type="text"  name="keyword" th:value="${keyword}"  placeholder="Enter the keyword"> 
+                      <input th:value="${sortDir}" name="sortDir" hidden>
+                      <input hidden  th:value="${sortField}" name="sortField"> 
                        <button class="btn btn-primary"  style="width: 150px;" type="submit">Search</button> &nbsp;
                        <a class="btn btn-secondary" th:href="@{/categories}" style="width: 150px;">Clear</a>
                      </form>
@@ -86,8 +87,8 @@
                                       
                                             <td>
                                                <div class="d-flex flex-column justify-content-center">
-                                                  <a th:href="@{'/categories/category/' + ${category.id} + '/enabled/false' +  '?sortDir=' + ${sortDir} + '&page=' + ${currentPage}}" th:if="${category.enabled}"  class="fa-solid fa-circle-check"></a>
-                                                  <a th:href="@{'/categories/category/' + ${category.id} + '/enabled/true'  +  '?sortDir=' + ${sortDir} + '&page=' + ${currentPage}}" th:unless ="${category.enabled}" class="fa-solid fa-ban"></a>
+                                                  <a th:href="@{'/categories/category/' + ${category.id} + '/enabled/false' +  '?sortDir=' + ${sortDir} + '&sortField=' + ${sortField} + '&page=' + ${currentPage}}" th:if="${category.enabled}"  class="fa-solid fa-circle-check"></a>
+                                                  <a th:href="@{'/categories/category/' + ${category.id} + '/enabled/true'  +  '?sortDir=' + ${sortDir} + '&sortField=' + ${sortField} + '&page=' + ${currentPage}}" th:unless ="${category.enabled}" class="fa-solid fa-ban"></a>
                                                </div>
                                             </td>
                                             
@@ -150,7 +151,7 @@
                                 
                                  <div th:if="${totalElement == 0}" class = "d-flex justify-content-center dy-3">Category not found !</div>
                                     <!-- Pagination -->
-                                    <!--  <nav th:replace="fragment :: pagination" ></nav>  -->
+                                 <nav th:replace="fragment :: pagination" ></nav>
                                  </div>
                         </div>
                     </div>

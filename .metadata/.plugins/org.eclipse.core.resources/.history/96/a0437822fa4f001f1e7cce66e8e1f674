@@ -1,0 +1,23 @@
+package com.hcmus.admin.category;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class CategoryRestController {
+	
+	@Autowired
+	private CategoryService service;
+	
+    // check unique name
+    @PostMapping("/check_name")
+	  public String checkDuplicateEmail(Integer id ,  String name) {
+      System.out.println(id + " " + email);
+		return userService.checkUniqueEmail(id, email) ? "OK" : "Duplicated";
+    }
+	
+	
+	// check unique alias
+
+}

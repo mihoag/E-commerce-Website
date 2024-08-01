@@ -1,0 +1,26 @@
+const messageCateName = document.getElementById("messageCateName");
+const messageAlias = document.getElementById("messageAlias");
+
+function showMessage(element, message)
+{
+	element.classList.remove("hidden");
+	element.innerText = message;
+}
+messageCateName.addEventListener('blur',  function(event) {
+        var cateNameMessage = event.target.value;
+        var params = {name : cateNameMessage};
+             const url = '/MyshopAdmin/api/categories/check_name';          
+             $.post(url, params, async function (response) {
+				  if (response == "OK") {
+			       messageCateName.classList.add("hidden")
+		    } else if (response == "Duplicated") {
+			    showMessage(messageCateName,"The email is existed");
+		    }
+			}).fail(function () {
+				 showMessage(messageCateName,"Fail to connect to server");	
+			 });
+});
+
+
+
+

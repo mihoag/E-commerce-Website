@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.webservices.server.WebServiceServerTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 
@@ -18,8 +19,15 @@ public class CategoryServiceTests {
 	  @Test
       public void listCategoryPerPage()
       {
-    	  Page<Category> categoriesPage = service.listUserByPage(1, "asc");
+    	  Page<Category> categoriesPage = service.listUserByPage(1,"name", "asc");
     	  List<Category> categories = categoriesPage.getContent();
     	  categories.forEach(cate -> System.out.println(cate));
       }
+	  
+	  @Test
+	  public void listCategoriesUsedInForm()
+	  {
+		  List<Category> categories =  service.listCategoriesUsedInForm();
+		  categories.forEach(cate -> System.out.println(cate));
+	  }
 }

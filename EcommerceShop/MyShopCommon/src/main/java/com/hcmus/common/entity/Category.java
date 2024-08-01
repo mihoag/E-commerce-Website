@@ -50,6 +50,15 @@ public class Category extends IdBasedEntity{
 		this.id = id;
 	}
 	
+	public static Category copyIdAndName(int id, String name)
+	{
+		Category cate = new Category();
+		cate.setId(id);
+		cate.setName(name);
+		
+		return cate;
+	}
+	
 
 	public Category(Integer id, String name, String alias, String image, boolean enabled, Category parent) {
 		super();

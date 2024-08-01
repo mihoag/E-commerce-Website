@@ -34,8 +34,9 @@ formNewUser.addEventListener('submit', async function(event) {
 });
 
 email.addEventListener('blur',  function(event) {
-        var emailText = event.target.value;
-        var params = {email : emailText};
+       	var userEmail = $("#email").val();
+	    var userId = $("#id").val();
+        var params = {id: userId ,email : userEmail};
              const url = '/MyshopAdmin/api/users/check_email';          
              $.post(url, params, async function (response) {
 				  if (response == "OK") {
