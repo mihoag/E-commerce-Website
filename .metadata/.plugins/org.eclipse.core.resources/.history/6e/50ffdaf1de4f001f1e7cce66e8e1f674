@@ -1,0 +1,15 @@
+package com.hcmus.admin.category;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class CategoryServiceTests {
+	
+	  @Autowired
+	  
+	  @Test
+      public void listCategoryPerPage()
+      {
+    	  
+      }
+}

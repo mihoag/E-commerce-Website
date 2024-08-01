@@ -1,0 +1,23 @@
+package com.hcmus.admin.category;
+
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+
+import com.hcmus.common.entity.Category;
+
+public class CategoryServiceTests {
+	
+	  @Autowired
+	  private CategoryService service;
+	  
+	  @Test
+      public void listCategoryPerPage()
+      {
+    	  Page<Category> categoriesPage = service.listUserByPage(1, "asc");
+    	  List<Category> categories = categoriesPage.getContent();
+    	  categories.forEach(cate -> System.out.println(cate));
+      }
+}

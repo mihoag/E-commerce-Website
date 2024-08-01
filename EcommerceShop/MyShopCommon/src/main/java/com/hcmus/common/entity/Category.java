@@ -14,6 +14,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name =  "categories")
@@ -156,5 +157,13 @@ public class Category extends IdBasedEntity{
 		Category other = (Category) obj;
 		return Objects.equals(id, other.id);
 	}
+	
+	@Transient
+	public String getPhotosImagePath() {
+		if (this.id == null) return "/images/image-thumbnail.png";
+		
+		return "/category-images/" + this.id + "/" + this.image;
+	}
+	
 
 }

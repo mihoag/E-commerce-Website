@@ -1,0 +1,18 @@
+package com.hcmus.admin.category;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import jakarta.transaction.Transactional;
+
+@Service
+@Transactional
+public class CategoryService {
+	
+   private static final Integer PAGE_SIZE = 6; 	
+   @Autowired
+   private CategoryRepository repo;
+   
+   
+   
+}

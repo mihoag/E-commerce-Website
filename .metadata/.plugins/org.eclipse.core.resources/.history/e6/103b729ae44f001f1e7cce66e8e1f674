@@ -1,0 +1,67 @@
+package com.hcmus.admin.category;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
+import com.hcmus.admin.user.UserNotFoundException;
+import com.hcmus.admin.user.UserService;
+import com.hcmus.common.entity.Category;
+import com.hcmus.common.entity.User;
+
+import jakarta.transaction.Transactional;
+
+@Service
+@Transactional
+public class CategoryService {
+	
+   private static final Integer PAGE_SIZE = 6; 	
+   
+   @Autowired
+   private CategoryRepository repo;
+   
+   public Page<Category> listUserByPage(Integer pageNum, String sortDir)
+   {
+    Sort sort = Sort.by("name");
+    if(sortDir.equals("asc"))
+    {
+    	sort = sort.ascending();
+    }
+    else
+    {
+    	sort = sort.descending();
+    }
+    
+    
+   	Pageable pageable = PageRequest.of(pageNum-1, CategoryService.PAGE_SIZE, sort);
+   	Page<Category> pageCategory = repo.findAll(pageable);
+   	
+   	return pageCategory;
+   }
+   
+   public Category getCateById(int id) throws 
+   {
+   	Category category;
+   	 try {
+   		category = repo.findById(id).get();
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new ("User not found with id " + id);
+		}
+        return user;
+   }
+   
+   public void deleteUserById(int id) throws UserNotFoundException
+   {
+   	try {
+   		userRepo.deleteById(id);
+		} catch (Exception e) {
+		   throw new UserNotFoundException("User not found with id " + id);
+		}
+   }
+   
+   
+}
