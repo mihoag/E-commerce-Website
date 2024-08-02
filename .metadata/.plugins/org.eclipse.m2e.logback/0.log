@@ -7168,3 +7168,204 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact org.springfra
 2024-08-01 23:03:50,477 [Worker-325: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
 2024-08-01 23:03:50,479 [Worker-325: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
 2024-08-01 23:03:50,482 [Worker-325: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:01:54,756 [Worker-336: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:01:54,829 [Worker-336: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:01:54,836 [Worker-336: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:02:30,466 [Worker-325: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:02:30,497 [Worker-325: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:02:30,503 [Worker-325: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:03:05,596 [Worker-337: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:03:05,642 [Worker-337: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:03:05,650 [Worker-337: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:03:46,185 [Worker-340: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:03:46,192 [Worker-340: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:03:46,197 [Worker-340: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:04:00,300 [Worker-338: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:04:00,344 [Worker-338: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:04:00,351 [Worker-338: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:06:56,906 [Worker-335: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:06:57,019 [Worker-335: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:06:57,029 [Worker-335: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:06:58,364 [Worker-344: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:06:58,465 [Worker-344: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:06:58,475 [Worker-344: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:07:43,981 [Worker-336: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 08:07:44,002 [Worker-336: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:07:44,111 [Worker-336: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:08:00,541 [Worker-336: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 08:08:00,543 [Worker-336: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:08:00,545 [Worker-336: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:09:01,381 [Worker-343: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:09:01,392 [Worker-343: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:09:01,398 [Worker-343: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:10:41,701 [Worker-343: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:10:41,764 [Worker-343: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:10:41,772 [Worker-343: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:20:48,510 [Worker-346: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:20:48,528 [Worker-346: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:20:48,533 [Worker-346: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:21:56,195 [Worker-349: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:21:56,204 [Worker-349: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:21:56,212 [Worker-349: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:22:13,680 [Worker-344: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 08:22:13,683 [Worker-344: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 08:22:13,684 [Worker-344: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:22:25,323 [Worker-346: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:22:25,430 [Worker-346: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:22:25,435 [Worker-346: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:22:35,681 [Worker-350: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:22:35,784 [Worker-350: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:22:35,789 [Worker-350: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:24:27,275 [Worker-347: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:24:27,363 [Worker-347: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:24:27,371 [Worker-347: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:24:41,108 [Worker-345: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:24:41,147 [Worker-345: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:24:41,154 [Worker-345: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:24:42,269 [Worker-351: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:24:42,319 [Worker-351: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:24:42,325 [Worker-351: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:28:09,788 [Worker-349: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:28:09,797 [Worker-349: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:28:09,804 [Worker-349: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:30:55,708 [Worker-354: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:30:55,730 [Worker-354: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:30:55,734 [Worker-354: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:31:34,417 [Worker-347: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:31:34,422 [Worker-347: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:31:34,427 [Worker-347: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:32:10,142 [Worker-354: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:32:10,160 [Worker-354: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:32:10,164 [Worker-354: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:35:13,545 [Worker-357: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:35:13,553 [Worker-357: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:35:13,560 [Worker-357: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:35:25,181 [Worker-347: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:35:25,196 [Worker-347: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:35:25,202 [Worker-347: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:47:00,559 [Worker-364: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:47:00,572 [Worker-364: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:47:00,577 [Worker-364: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:47:51,542 [Worker-352: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:47:51,553 [Worker-352: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:47:51,560 [Worker-352: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:48:10,293 [Worker-352: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:48:10,307 [Worker-352: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:48:10,311 [Worker-352: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:49:10,313 [Worker-352: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:49:10,325 [Worker-352: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:49:10,333 [Worker-352: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:49:17,344 [Worker-365: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:49:17,350 [Worker-365: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:49:17,357 [Worker-365: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:49:31,857 [Worker-364: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:49:31,871 [Worker-364: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:49:31,877 [Worker-364: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:49:35,282 [Worker-363: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:49:35,295 [Worker-363: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:49:35,303 [Worker-363: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:51:20,112 [Worker-364: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:51:20,121 [Worker-364: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:51:20,127 [Worker-364: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:51:58,913 [Worker-365: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:51:58,922 [Worker-365: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:51:58,929 [Worker-365: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:53:09,323 [Worker-365: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:53:09,382 [Worker-365: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:53:09,392 [Worker-365: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:53:23,276 [Worker-363: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:53:23,304 [Worker-363: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:53:23,333 [Worker-363: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:53:39,389 [Worker-364: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:53:39,399 [Worker-364: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:53:39,405 [Worker-364: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:53:54,279 [Worker-366: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:53:54,293 [Worker-366: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:53:54,299 [Worker-366: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:57:06,820 [Worker-369: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:57:06,831 [Worker-369: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 08:57:06,840 [Worker-369: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:59:16,456 [Worker-371: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 08:59:16,460 [Worker-371: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:59:16,465 [Worker-371: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 08:59:42,388 [Worker-368: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 08:59:42,390 [Worker-368: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 08:59:42,393 [Worker-368: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:00:21,764 [Worker-370: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 09:00:21,767 [Worker-370: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:00:21,771 [Worker-370: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:00:31,072 [Worker-371: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 09:00:31,076 [Worker-371: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:00:31,079 [Worker-371: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:00:41,555 [Worker-372: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 09:00:41,558 [Worker-372: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:00:41,562 [Worker-372: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:20:12,644 [Worker-369: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 09:20:12,648 [Worker-369: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:20:12,652 [Worker-369: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:20:50,975 [Worker-374: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 09:20:50,978 [Worker-374: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:20:50,982 [Worker-374: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:21:08,231 [Worker-366: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 09:21:08,233 [Worker-366: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:21:08,236 [Worker-366: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:21:19,679 [Worker-369: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 09:21:19,682 [Worker-369: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:21:19,685 [Worker-369: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:21:28,914 [Worker-374: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 09:21:28,916 [Worker-374: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:21:28,919 [Worker-374: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:21:41,721 [Worker-374: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 09:21:41,725 [Worker-374: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:21:41,729 [Worker-374: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:21:51,667 [Worker-376: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 09:21:51,671 [Worker-376: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:21:51,674 [Worker-376: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:23:24,130 [Worker-373: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 09:23:24,132 [Worker-373: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:23:24,135 [Worker-373: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:23:33,668 [Worker-377: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 09:23:33,670 [Worker-377: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:23:33,673 [Worker-377: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:28:35,063 [Worker-373: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 09:28:35,067 [Worker-373: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:28:35,087 [Worker-373: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:28:44,348 [Worker-378: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 09:28:44,350 [Worker-378: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:28:44,353 [Worker-378: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:34:31,065 [Worker-379: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 09:34:31,068 [Worker-379: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:34:31,073 [Worker-379: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:35:25,807 [Worker-380: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 09:35:25,810 [Worker-380: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:35:25,813 [Worker-380: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:36:44,022 [Worker-387: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 09:36:44,025 [Worker-387: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:36:44,031 [Worker-387: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:38:09,963 [Worker-380: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 09:38:09,966 [Worker-380: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:38:09,969 [Worker-380: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:38:32,765 [Worker-384: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 09:38:32,767 [Worker-384: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:38:32,769 [Worker-384: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:39:20,125 [Worker-388: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 09:39:20,128 [Worker-388: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:39:20,133 [Worker-388: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:39:24,118 [Worker-390: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-02 09:39:24,120 [Worker-390: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:39:24,123 [Worker-390: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:45:57,490 [Worker-392: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:45:57,633 [Worker-392: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 09:45:57,639 [Worker-392: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:46:47,836 [Worker-380: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:46:48,070 [Worker-380: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 09:46:48,089 [Worker-380: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:48:04,803 [Worker-395: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:48:04,813 [Worker-395: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 09:48:04,821 [Worker-395: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:48:11,730 [Worker-394: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:48:11,738 [Worker-394: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 09:48:11,747 [Worker-394: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
+2024-08-02 09:48:46,603 [Worker-392: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-02 09:48:46,619 [Worker-392: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 25 resources from src\main\resources to target\classes
+2024-08-02 09:48:46,625 [Worker-392: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\EcommerceShop\MyShopWebParent\MyShopBackend\src\test\resources
