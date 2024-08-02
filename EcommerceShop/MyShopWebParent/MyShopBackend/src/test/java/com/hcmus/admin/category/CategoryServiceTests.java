@@ -19,7 +19,7 @@ public class CategoryServiceTests {
 	  @Test
       public void listCategoryPerPage()
       {
-    	  Page<Category> categoriesPage = service.listUserByPage(1,"name", "asc");
+    	  Page<Category> categoriesPage = service.listCategoryByPage(1,"name", "asc");
     	  List<Category> categories = categoriesPage.getContent();
     	  categories.forEach(cate -> System.out.println(cate));
       }

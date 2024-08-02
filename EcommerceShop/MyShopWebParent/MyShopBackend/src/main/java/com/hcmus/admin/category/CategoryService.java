@@ -30,7 +30,7 @@ public class CategoryService {
    @Autowired
    private CategoryRepository repo;
    
-   public Page<Category> listUserByPage(Integer pageNum, String sortField,String sortDir)
+   public Page<Category> listCategoryByPage(Integer pageNum, String sortField,String sortDir)
    {
     Sort sort = Sort.by(sortField);
     if(sortDir.equals("asc"))
@@ -61,7 +61,7 @@ public class CategoryService {
         return category;
    }
    
-   public void deleteCById(int id) throws CategoryNotFoundException 
+   public void deleteById(int id) throws CategoryNotFoundException 
    {
    	    try {
    		   repo.deleteById(id);
@@ -190,5 +190,10 @@ public class CategoryService {
 	   });
 	   sortedChildren.addAll(categories);
 	   return sortedChildren;
+   }
+   
+   public Category save(Category cate)
+   {
+	   return repo.save(cate);
    }
 }

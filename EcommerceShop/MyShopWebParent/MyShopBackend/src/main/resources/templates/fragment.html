@@ -253,7 +253,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 	
 	
 	<!-- Column link -->
-	<th th:fragment="column_link(columnLabel, columnField)" class="hideable-column">
+	<th th:fragment="column_link(columnLabel, columnField, hide)"  th:classappend="${hide == true ? 'hideable-column' : ''}">
         <i th:if="${sortField eq columnField}" th:classappend="${sortDir eq 'desc' ? 'fa-solid fa-arrow-down' : 'fa-solid fa-arrow-up'}"></i>
        <a style="text-decoration: none;" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
         th:href="@{'/'  + ${sideBarFieldName} + '/page/' + ${currentPage} + '?sortField=' + ${columnField} +'&sortDir=' + ${reverseSortDir}}">[[${columnLabel}]]</a> 

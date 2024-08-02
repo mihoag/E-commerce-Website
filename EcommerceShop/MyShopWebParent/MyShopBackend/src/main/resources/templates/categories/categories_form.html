@@ -21,23 +21,23 @@
                         <!-- Table  -->
                         <div class="card-body px-0 pb-2">
                               <!--  form for create new user -->
-                             <form name = "formNewCategory" th:action="@{/category/save}" method="post" class="row g-3 mx-4 my-4" enctype="multipart/form-data" th:object="${category}">
+                             <form name = "formNewCategory"  th:action="@{/category/save}" method="post" class="row g-3 mx-4 my-4" enctype="multipart/form-data" th:object="${category}">
                                <input type="hidden" id = "id" th:field="*{id}" />
                                <div class="col-md-12">
-                                 <label for="inputEmail4" class="form-label">Category name</label>
+                                 <label for="name" class="form-label">Category name</label>
                                  <input type="text" th:field = "*{name}" class="form-control" placeholder="Enter category name" minlength="8" maxlength="128" required="required" >
                                  <small id="messageCateName" class="form-text hidden" style="color: red;">The category name is existed</small>
                                </div>
                     
                                
                                 <div class="col-6">
-                                 <label for="firstname" class="form-label">Alias</label>
+                                 <label for="alias" class="form-label">Alias</label>
                                  <input type="text" class="form-control" minlength="2" required="required" th:field="*{alias}"  maxlength="45" placeholder="Enter alias">
                                  <small id="messageAlias" class="form-text hidden" style="color: red;">The alias is existed</small>
                                </div>
                                
                                <div class="col-6">
-                                 <label for="lastname" class="form-label">Parent Category:</label>
+                                 <label for="parent" class="form-label">Parent Category:</label>
                                  	<select class="form-control" th:field="*{parent}">
 							         <option value="0">[No Parent]</option>
 							          <th:block th:each="cat : ${categoriesParent}">
