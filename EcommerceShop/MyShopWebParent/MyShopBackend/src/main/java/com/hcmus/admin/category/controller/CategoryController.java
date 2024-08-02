@@ -85,7 +85,7 @@ public class CategoryController {
 			LOGGER.error(e.getMessage());
 			ra.addAttribute("message", "Error: " + e.getMessage());
 		}
-		return "categories/categories";
+		return "redirect:/categories";
 	}
 	
 	@PostMapping("/save")
@@ -112,6 +112,7 @@ public class CategoryController {
 		}
 		return "redirect:/categories";
 	}
+	
 	@GetMapping("/category/{id}/enabled/{status}")
 	public String updateUserEnable(@PathVariable("id") int id, @PathVariable("status") boolean status, @Param("sortField") String sortField, @Param("sortDir") String sortDir, @Param("keyword") String keyword, @Param("page") int page, Model model) throws UserNotFoundException
 	{

@@ -35,7 +35,7 @@ public class Category extends IdBasedEntity{
 	@JoinColumn(name = "parent_id", unique = false)
 	private Category parent;
 	
-	@OneToMany(mappedBy = "parent")
+	@OneToMany(mappedBy = "parent", orphanRemoval = true)
 	@OrderBy("name asc")
 	private Set<Category> children = new HashSet<>();
 
