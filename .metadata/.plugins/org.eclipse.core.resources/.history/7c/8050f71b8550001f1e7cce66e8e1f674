@@ -89,22 +89,16 @@ public class CategoryController {
 	}
 	
 	@GetMapping("/edit/{id}")
-	public String editCategory(@PathVariable("id") int id, Model model ,RedirectAttributes ra)
+	public String editCategory(@PathVariable("id") int id, RedirectAttributes ra)
 	{
 		try {
 			Category cate = service.getCateById(id);
-			model.addAttribute("category", cate);
 		} catch (Exception e) {
 			// TODO: handle exception
 			LOGGER.error(e.getMessage());
 			ra.addAttribute("message","Error: " + e.getMessage());
 			return "redirect:/categories";
 		}
-		
-		List<Category> categoriesParent = service.listCategoriesUsedInForm();
-		model.addAttribute("categoriesParent", categoriesParent);
-		model.addAttribute("sideBarFieldName", "categories");
-		model.addAttribute("title", "Edit category ( id : " + id + " )");
 		return "categories/categories_form";
 	}
 	

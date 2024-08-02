@@ -103,8 +103,9 @@ public class CategoryController {
 		
 		List<Category> categoriesParent = service.listCategoriesUsedInForm();
 		model.addAttribute("categoriesParent", categoriesParent);
+		
 		model.addAttribute("sideBarFieldName", "categories");
-		model.addAttribute("title", "Edit category ( id : " + id + " )");
+		model.addAttribute("title", "New category" );
 		return "categories/categories_form";
 	}
 	
