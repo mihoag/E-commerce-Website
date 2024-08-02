@@ -11,7 +11,7 @@ function showMessage(element, message)
 	element.innerText = message;
 }
 
-function checkNameUnique()
+async function checkNameUnique()
 {
 		var cateName = $("#name").val();
 	    var id = $("#id").val();
@@ -19,16 +19,16 @@ function checkNameUnique()
              const url = '/MyshopAdmin/api/categories/check_name';          
              $.post(url, params, async function (response) {
 				  if (response == "OK") {
-			        return true;
+			      await checkAliasUnique();
 		    } else if (response == "Duplicated") {
-			     return false;
+			     
 		    }
 			}).fail(function () {
-				  return false;			 
+				  			 
 		    });
 }
 
-function checkAliasUnique()
+async function checkAliasUnique()
 {
 	    var alias = $("#alias").val();
 	    var id = $("#id").val();
@@ -36,16 +36,14 @@ function checkAliasUnique()
              const url = '/MyshopAdmin/api/categories/check_alias';          
              $.post(url, params, async function (response) {
 				  if (response == "OK") {
-			       return true;
+			      formNewCategory.submit();
 		    } else if (response == "Duplicated") {
-			    return false;
+			    
 		    }
 			}).fail(function () {
-				return false;
+				
 			 });
 }
-
-
 
 nameInput.addEventListener('blur',  function(event) {
 	  	var cateName = $("#name").val();
@@ -53,7 +51,6 @@ nameInput.addEventListener('blur',  function(event) {
         var params = {id : id, name : cateName};
              const url = '/MyshopAdmin/api/categories/check_name';          
              $.post(url, params, async function (response) {
-				  console.log(response);
 				  if (response == "OK") {
 			       messageCateName.classList.add("hidden")
 		    } else if (response == "Duplicated") {
@@ -80,17 +77,10 @@ aliasInput.addEventListener('blur',  function(event) {
 			 });
 });
 
-formNewCategory.addEventListener('submit', function(event) {
+formNewCategory.addEventListener('submit', async function(event) {
         // Prevent the default form submission
         event.preventDefault();
-        var check1 = checkNameUnique();
-        var check2 = checkAliasUnique();
-        
-        if(check1 && check2)
-        {
-			formNewCategory.submit();
-		}
-		return false;
+        await checkNameUnique();
 });
 
 

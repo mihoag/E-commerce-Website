@@ -33,7 +33,7 @@ public class CategoryController {
 	
 	@GetMapping("/page/{pageNum}") 
 	public String listByPage(@PathVariable(name = "pageNum") int pageNum, @RequestParam(name = "sortField")  String sortField ,
-			String sortDir, @RequestParam("keyword") String keyword	, @RequestParam(name = "message", defaultValue = "") String message
+			String sortDir, @Param("keyword") String keyword	, @Param("message") String message
 			,Model model)
 	{
 		    if (sortDir ==  null || sortDir.isEmpty()) {
@@ -56,7 +56,7 @@ public class CategoryController {
 			model.addAttribute("reverseSortDir", reverseSortDir);
 		    model.addAttribute("keyword", keyword);
 			model.addAttribute("totalElement", totalElement);
-			model.addAttribute("message", message.equals("") ? null : message);
+			model.addAttribute("message", message);
 			
 		    return "categories/categories";
 	}
@@ -89,7 +89,7 @@ public class CategoryController {
 	}
 	
 	@PostMapping("/save")
-	public String saveCategory(Category cate, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra)
+	public String saveCategory(Category cate, @RequestParam("photo") MultipartFile multipartFile, RedirectAttributes ra)
 	{
 		try {
 			if (!multipartFile.isEmpty()) {
@@ -120,7 +120,7 @@ public class CategoryController {
 	   return listByPage(page, sortField, sortDir, keyword, "Update category status successfully", model);
 	}
 	@GetMapping("/**")
-	public String listFirstPage(String sortDir, Model model, @RequestParam(name = "message", defaultValue = "") String message) {
+	public String listFirstPage(String sortDir, Model model, @Param("message") String message) {
 		return listByPage(1, "name", sortDir, "" , message,model);
 	}
 }

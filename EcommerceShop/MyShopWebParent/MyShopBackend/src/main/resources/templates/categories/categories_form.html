@@ -21,7 +21,7 @@
                         <!-- Table  -->
                         <div class="card-body px-0 pb-2">
                               <!--  form for create new user -->
-                             <form name = "formNewCategory"  th:action="@{/category/save}" method="post" class="row g-3 mx-4 my-4" enctype="multipart/form-data" th:object="${category}">
+                             <form name = "formNewCategory"  th:action="@{/categories/save}" method="post" class="row g-3 mx-4 my-4" enctype="multipart/form-data" th:object="${category}">
                                <input type="hidden" id = "id" th:field="*{id}" />
                                <div class="col-md-12">
                                  <label for="name" class="form-label">Category name</label>
@@ -61,7 +61,7 @@
 										<div class="col-sm-11">
 											 <input type="hidden" th:field="*{image}" />
 											 <input type="file"
-												id="fileImage" name="image" accept="image/png, image/jpeg"
+												id="fileImage" name="photo" accept="image/png, image/jpeg"
 												class="mb-2" />
 											 <img id="thumbnail" th:src="@{${category.photosImagePath}}"  alt="Photos preview"
 												 class="img-fluid" />
