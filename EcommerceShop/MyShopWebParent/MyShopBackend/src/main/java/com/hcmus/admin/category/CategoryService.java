@@ -6,20 +6,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import com.hcmus.admin.category.controller.CategoryPageInfo;
-import com.hcmus.admin.user.UserNotFoundException;
-import com.hcmus.admin.user.UserService;
 import com.hcmus.common.entity.Category;
-import com.hcmus.common.entity.User;
-
 import jakarta.transaction.Transactional;
 
 @Service
@@ -199,14 +193,15 @@ public class CategoryService {
 	   List<Category> categoryInDb = repo.findRootCategories(Sort.by("name").ascending());
 	   
 	   for (Category category : categoryInDb) {
-		   categoryUsedInForm.add(Category.copyIdAndName(category.getId(), category.getName()));
+		   categoryUsedInForm.add(Category.copyFull(category));
 			
 			Set<Category> children = sortCategory(category.getChildren());
 			
 			for (Category subCategory : children) {
 				String name = "--" + subCategory.getName();
-				categoryUsedInForm.add(Category.copyIdAndName(subCategory.getId(), name));
-				
+				Category cloneCate = Category.copyFull(category);
+				cloneCate.setName(name);
+				categoryUsedInForm.add(cloneCate);
 				listSubCategoriesUsedInForm(categoryUsedInForm, subCategory, 1);
 			}
 		}	
@@ -224,8 +219,9 @@ public class CategoryService {
 				name += "--";
 			}
 			name += subCategory.getName();
-			
-			categoriesUsedInForm.add(Category.copyIdAndName(subCategory.getId(), name));
+			Category cloneCate = Category.copyFull(subCategory);
+			cloneCate.setName(name);
+			categoriesUsedInForm.add(cloneCate);
 			
 			listSubCategoriesUsedInForm(categoriesUsedInForm, subCategory, newSubLevel);
 		}		

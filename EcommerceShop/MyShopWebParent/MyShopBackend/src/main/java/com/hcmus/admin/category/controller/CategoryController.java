@@ -1,5 +1,6 @@
 package com.hcmus.admin.category.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -19,9 +20,16 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hcmus.admin.category.CategoryService;
+import com.hcmus.admin.category.export.CategoryCsvExporter;
+import com.hcmus.admin.category.export.CategoryExcelExporter;
+import com.hcmus.admin.category.export.CategoryPdfExporter;
 import com.hcmus.admin.user.UserNotFoundException;
+import com.hcmus.admin.user.export.UserCsvExporter;
 import com.hcmus.admin.util.FileUploadUtil;
 import com.hcmus.common.entity.Category;
+import com.hcmus.common.entity.User;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/categories")
@@ -138,6 +146,30 @@ public class CategoryController {
 	   service.updateCategoryEnable(id, status);
 	   return listByPage(page, sortField, sortDir, keyword, "Update category status successfully", model);
 	}
+	
+	@GetMapping("/export/csv")
+	public void exportToCSV(HttpServletResponse response) throws IOException {
+		List<Category> listCategories = service.listCategoriesUsedInForm();
+	    CategoryCsvExporter exporter = new CategoryCsvExporter();
+	    exporter.export(listCategories, response);
+	}
+	
+
+	@GetMapping("/export/excel")
+	public void exportToExcel(HttpServletResponse response) throws IOException {
+		List<Category> listCategories = service.listCategoriesUsedInForm();
+	    CategoryExcelExporter exporter = new CategoryExcelExporter();
+	    exporter.export(listCategories, response);
+	}
+	
+	@GetMapping("/export/pdf")
+	public void exportToPdf(HttpServletResponse response) throws IOException {
+		List<Category> listCategories = service.listCategoriesUsedInForm();
+	    CategoryPdfExporter exporter = new CategoryPdfExporter();
+	    exporter.export(listCategories, response);
+	}
+	
+	
 	@GetMapping("/**")
 	public String listFirstPage(String sortDir, Model model, @Param("message") String message) {
 		return listByPage(1, "name", sortDir, "" , message,model);
