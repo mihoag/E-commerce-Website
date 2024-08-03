@@ -1,0 +1,35 @@
+package com.hcmus.admin.category;
+
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.webservices.server.WebServiceServerTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+
+import com.hcmus.admin.category.controller.CategoryPageInfo;
+import com.hcmus.common.entity.Category;
+
+@SpringBootTest
+public class CategoryServiceTests {
+	
+	  @Autowired
+	  private CategoryService service;
+	  
+	  @Test
+      public void listCategoryPerPage()
+      {
+		  CategoryPageInfo pageInfo = new CategoryPageInfo();
+    	  Page<Category> categoriesPage = service.listCategoryByPage(pageInfo ,1,"name", "asc","", "");
+    	  List<Category> categories = categoriesPage.getContent();
+    	  categories.forEach(cate -> System.out.println(cate));
+      }
+	  
+	  @Test
+	  public void listCategoriesUsedInForm()
+	  {
+		  List<Category> categories =  service.listCategoriesUsedInForm();
+		  categories.forEach(cate -> System.out.println(cate));
+	  }
+}

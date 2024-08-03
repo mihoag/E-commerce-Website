@@ -174,5 +174,34 @@ public class Category extends IdBasedEntity{
 		return "/category-images/" + this.id + "/" + this.image;
 	}
 	
+	public boolean isHasChildren() {
+		return hasChildren;
+	}
 
+	public void setHasChildren(boolean hasChildren) {
+		this.hasChildren = hasChildren;
+	}
+
+	@Transient
+	private boolean hasChildren;
+
+
+	public static Category copyFull(Category category) {
+		Category copyCategory = new Category();
+		copyCategory.setId(category.getId());
+		copyCategory.setName(category.getName());
+		copyCategory.setImage(category.getImage());
+		copyCategory.setAlias(category.getAlias());
+		copyCategory.setEnabled(category.isEnabled());
+		copyCategory.setHasChildren(category.getChildren().size() > 0);
+		
+		return copyCategory;		
+	}
+	
+	public static Category copyFull(Category category, String name) {
+		Category copyCategory = Category.copyFull(category);
+		copyCategory.setName(name);
+		
+		return copyCategory;
+	}
 }

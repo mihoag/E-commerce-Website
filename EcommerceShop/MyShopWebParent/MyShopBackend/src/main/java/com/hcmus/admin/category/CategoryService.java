@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.hcmus.admin.category.controller.CategoryPageInfo;
 import com.hcmus.admin.user.UserNotFoundException;
 import com.hcmus.admin.user.UserService;
 import com.hcmus.common.entity.Category;
@@ -26,11 +27,12 @@ import jakarta.transaction.Transactional;
 public class CategoryService {
 	
    private static final Integer PAGE_SIZE = 6; 	
+   public static final int ROOT_CATEGORIES_PER_PAGE = 1;
    
    @Autowired
    private CategoryRepository repo;
    
-   public Page<Category> listCategoryByPage(Integer pageNum, String sortField,String sortDir)
+   public List<Category> listCategoryByPage(CategoryPageInfo pageInfo, Integer pageNum, String sortField,String sortDir, String keyword)
    {
     Sort sort = Sort.by(sortField);
     if(sortDir.equals("asc"))
@@ -42,12 +44,75 @@ public class CategoryService {
     	sort = sort.descending();
     }
     
-    
-   	Pageable pageable = PageRequest.of(pageNum-1, CategoryService.PAGE_SIZE, sort);
-   	Page<Category> pageCategory = repo.findAll(pageable);
-   	
-   	return pageCategory;
+	Pageable pageable = PageRequest.of(pageNum - 1, ROOT_CATEGORIES_PER_PAGE, sort);
+	
+	Page<Category> pageCategories = null;
+	
+	if (keyword != null && !keyword.isEmpty()) {
+		pageCategories = repo.search(keyword, pageable);	
+	} else {
+		pageCategories = repo.findRootCategories(pageable);
+	}
+	
+	List<Category> rootCategories = pageCategories.getContent();
+	
+	pageInfo.setTotalElement(pageCategories.getTotalElements());
+	pageInfo.setTotalPage(pageCategories.getTotalPages());
+	
+	if (keyword != null && !keyword.isEmpty()) {
+		List<Category> searchResult = pageCategories.getContent();
+		for (Category category : searchResult) {
+			category.setHasChildren(category.getChildren().size() > 0);
+		}
+		
+		return searchResult;
+		
+	} else {
+		
+		return listHierarchicalCategories(rootCategories, sortDir);
+	}
    }
+   
+   
+	private List<Category> listHierarchicalCategories(List<Category> rootCategories, String sortDir) {
+		List<Category> hierarchicalCategories = new ArrayList<>();
+		
+		for (Category rootCategory : rootCategories) {
+			hierarchicalCategories.add(Category.copyFull(rootCategory));
+			
+			Set<Category> children = sortCategory(sortDir,rootCategory.getChildren());
+			
+			for (Category subCategory : children) {
+				String name = "--" + subCategory.getName();
+				hierarchicalCategories.add(Category.copyFull(subCategory, name));
+				
+				listSubHierarchicalCategories(hierarchicalCategories, subCategory, 1, sortDir);
+			}
+		}
+		
+		return hierarchicalCategories;
+	}
+	
+	private void listSubHierarchicalCategories(List<Category> hierarchicalCategories,
+			Category parent, int subLevel, String sortDir) {
+		
+		Set<Category> children = sortCategory(sortDir, parent.getChildren());
+		int newSubLevel = subLevel + 1;
+		
+		for (Category subCategory : children) {
+			String name = "";
+			for (int i = 0; i < newSubLevel; i++) {				
+				name += "--";
+			}
+			name += subCategory.getName();
+		
+			hierarchicalCategories.add(Category.copyFull(subCategory, name));
+			
+			listSubHierarchicalCategories(hierarchicalCategories, subCategory, newSubLevel, sortDir);
+		}
+		
+	}
+	
    
    public Category getCateById(int id) throws CategoryNotFoundException 
    {

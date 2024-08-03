@@ -40,23 +40,22 @@ public class CategoryController {
 			  sortDir = "asc";
 		    }
 		  
-		    Page<Category> categoryPage = service.listCategoryByPage(pageNum,sortField, sortDir);
-		
-		    List<Category> listCategory = categoryPage.getContent();
-		    long totalElement = categoryPage.getTotalElements();
+		    CategoryPageInfo pageInfo = new CategoryPageInfo();
+		    List<Category> listCategory = service.listCategoryByPage(pageInfo, pageNum,sortField, sortDir, keyword);
+	
 		    
 		    String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";  
 		    
 		    model.addAttribute("listCategories", listCategory);
 			model.addAttribute("sideBarFieldName", "categories");
 			model.addAttribute("currentPage", pageNum);
-			model.addAttribute("totalPages", categoryPage.getTotalPages());
+			model.addAttribute("totalPages", pageInfo.getTotalPage());
 			model.addAttribute("sortField", sortField);
 			model.addAttribute("sortDir", sortDir);
 			model.addAttribute("reverseSortDir", reverseSortDir);
 		    model.addAttribute("keyword", keyword);
-			model.addAttribute("totalElement", totalElement);
-			model.addAttribute("message", message);
+			model.addAttribute("totalElement", pageInfo.getTotalElement());
+			model.addAttribute("message", message == null ? "" : message);
 			
 		    return "categories/categories";
 	}

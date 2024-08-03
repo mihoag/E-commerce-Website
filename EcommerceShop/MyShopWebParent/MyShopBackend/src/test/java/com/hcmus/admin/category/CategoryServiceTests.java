@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.webservices.server.WebService
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 
+import com.hcmus.admin.category.controller.CategoryPageInfo;
 import com.hcmus.common.entity.Category;
 
 @SpringBootTest
@@ -19,8 +20,9 @@ public class CategoryServiceTests {
 	  @Test
       public void listCategoryPerPage()
       {
-    	  Page<Category> categoriesPage = service.listCategoryByPage(1,"name", "asc");
-    	  List<Category> categories = categoriesPage.getContent();
+		  CategoryPageInfo pageInfo = new CategoryPageInfo();
+		  List<Category> categories = service.listCategoryByPage(pageInfo ,1,"name", "asc", "");
+   
     	  categories.forEach(cate -> System.out.println(cate));
       }
 	  
