@@ -1,0 +1,5 @@
+package com.hcmus.admin.brand.export;
+
+public class BrandExcelExporter {
+
+}

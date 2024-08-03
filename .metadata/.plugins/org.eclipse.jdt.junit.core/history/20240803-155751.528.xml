@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="BrandReposiotoryTests.testUpdateBrand" project="MyShopBackend" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.hcmus.admin.brand.BrandReposiotoryTests" time="0.605" displayname="BrandReposiotoryTests" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.brand.BrandReposiotoryTests]">
+    <testcase name="testUpdateBrand" classname="com.hcmus.admin.brand.BrandReposiotoryTests" time="0.604" displayname="testUpdateBrand()" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.brand.BrandReposiotoryTests]/[method:testUpdateBrand()]"/>
+  </testsuite>
+</testrun>

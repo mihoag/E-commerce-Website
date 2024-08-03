@@ -1,0 +1,16 @@
+package com.hcmus.admin.brand;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.stereotype.Repository;
+
+import com.hcmus.common.entity.Brand;
+import com.hcmus.common.entity.Category;
+import java.util.List;
+
+
+@Repository
+public interface BrandRepository extends JpaRepository<Brand, Integer> , PagingAndSortingRepository<Brand, Integer>{
+
+	public Category findByName(String name);
+}

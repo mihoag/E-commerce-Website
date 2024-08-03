@@ -1,0 +1,5 @@
+package com.hcmus.admin.brand;
+
+public class BrandService {
+
+}

@@ -126,7 +126,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
                   </a>
                 </li>
                 
-                <li class="nav-item my-2">
+                <li class="nav-item my-2" th:classappend="${sideBarFieldName == 'brands' ? 'active' : ''}">
                   <a class="nav-link active ps-4 py-3" th:href="@{/brands}">
                    <span class="nav-icon">
                   <i class="fa-solid fa-copyright" style="max-width: 20px;"></i>

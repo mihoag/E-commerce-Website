@@ -1,0 +1,66 @@
+package com.hcmus.admin.brand;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.annotation.Rollback;
+
+import com.hcmus.admin.user.UserRepository;
+import com.hcmus.common.entity.Brand;
+import com.hcmus.common.entity.Category;
+
+
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = Replace.NONE)
+@Rollback(false)
+public class BrandReposiotoryTests {
+
+	   @Autowired
+	   private BrandRepository repo;
+	   
+	
+	   @Test
+	   public void testCreateBrand()
+	   {
+		   Brand brand = new Brand("Default brand");
+		   
+		   Category cate1 = new Category(1);
+		   Set<Category> categories = new HashSet<>();
+		   categories.add(cate1);
+		   brand.setCategories(categories);
+		   
+		   
+		   
+	   }
+	  
+	   
+	   @Test
+	   public void testListAllBrands()
+	   {
+		  
+	   }
+	   
+	   @Test
+	   public void testGetBrandById()
+	   {
+		
+	   }
+	   
+	   @Test
+	   public void testUpdateBrand()
+	   {
+		   
+	   }
+	     
+	   @Test
+	   public void testDeleteBrand()
+	   {
+		  
+	   }
+	
+}

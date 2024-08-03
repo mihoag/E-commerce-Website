@@ -49,7 +49,8 @@ public class WebSecurityConfig {
 				
 				auth.
 				requestMatchers("/users/**").hasAuthority("Admin")
-			    .requestMatchers("/categories/**").hasAnyAuthority("Admin")
+			    .requestMatchers("/categories/**").hasAnyAuthority("Admin","Editor")
+			    .requestMatchers("/brands/**").hasAnyAuthority("Admin","Editor")
 				.anyRequest().authenticated()
 			)
 		.formLogin(login -> login.loginPage("/login").usernameParameter("email").permitAll())
