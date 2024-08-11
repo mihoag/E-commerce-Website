@@ -17,7 +17,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
-@Entity
+@Entity 
 @Table(name = "users")
 public class User {
 

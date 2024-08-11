@@ -1,9 +1,0 @@
-function checkMatchPassword(confirmPassword)
- {
-            console.log(confirmPassword.value)
-            if (confirmPassword.value != $("#password").val()) {
-				confirmPassword.setCustomValidity("Passwords do not match!");
-			} else {
-				confirmPassword.setCustomValidity("");
-			}
- }

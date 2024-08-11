@@ -120,9 +120,7 @@ public class UserService {
     }
     
     public void updateUserEnable(Integer id, boolean enable)
-    {	
-    	System.out.println(id + " " + enable);
-    	
+    {	   	
     	try {
 			userRepo.updateEnabledStatus(id, enable);
 		} catch (Exception e) {

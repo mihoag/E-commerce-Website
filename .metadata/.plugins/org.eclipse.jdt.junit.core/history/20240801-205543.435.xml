@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="CategoryServiceTests.listCategoryPerPage" project="MyShopBackend" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="com.hcmus.admin.category.CategoryServiceTests" time="0.72" displayname="CategoryServiceTests" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.category.CategoryServiceTests]">
-    <testcase name="listCategoryPerPage" classname="com.hcmus.admin.category.CategoryServiceTests" time="0.72" displayname="listCategoryPerPage()" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.category.CategoryServiceTests]/[method:listCategoryPerPage()]"/>
-  </testsuite>
-</testrun>

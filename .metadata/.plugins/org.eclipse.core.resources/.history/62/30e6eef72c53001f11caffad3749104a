@@ -1,0 +1,10 @@
+package com.hcmus.admin.product;
+
+public class ProductDTO {
+	private String name;
+	private String imagePath;
+	private float price;
+	private float cost;
+	
+	
+}

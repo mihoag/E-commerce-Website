@@ -1,0 +1,8 @@
+package com.hcmus.admin.configuration;
+
+public class Snippet {
+	public static void main(String[] args) {
+		4152
+	}
+}
+

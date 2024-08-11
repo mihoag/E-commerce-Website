@@ -1,0 +1,12 @@
+package com.hcmus.common.entity.product;
+
+import com.hcmus.common.entity.IdBasedEntity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "product_details")
+public class ProductDetail  extends IdBasedEntity{
+    
+}
