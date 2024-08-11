@@ -1,8 +1,64 @@
 package com.hcmus.admin.product.Controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.hcmus.admin.brand.BrandService;
+import com.hcmus.admin.category.CategoryService;
+import com.hcmus.admin.product.ProductService;
+import com.hcmus.common.entity.Brand;
+import com.hcmus.common.entity.product.Product;
 
 @Controller
+@RequestMapping("/products")
 public class ProductController {
 
+	private String defaultRedirectURL = "redirect:/products/page/%d?sortField=%s&sortDir=%s&keyword=%s&categoryId=0";
+	
+	@Autowired private ProductService productService;
+	@Autowired private BrandService brandService;
+	@Autowired private CategoryService categoryService;
+	
+	@GetMapping
+	public String listFirstPage()
+	{
+		return String.format(defaultRedirectURL, 1, "name", "asc","");
+	}
+	
+	
+	@GetMapping("/page/{pageNum}")
+	public String listByPage(@PathVariable("pageNum") int pageNum, @Param("sortField") String sortField,
+			@Param("sortDir") String sortDir, @Param("keyword") String keyword, Integer categoryId, Model model) {
+		
+		     if(keyword == null)
+		     {
+		    	 keyword = "";
+		     }
+		     
+		     Page<Product> pageProduct = productService.listByPage(pageNum, sortField, sortDir, keyword, categoryId);
+		     
+		
+		     List<Product> lsProduct = pageProduct.getContent();
+		     String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+		     
+		     model.addAttribute("products", lsProduct);
+		     model.addAttribute("sideBarFieldName", "products");
+			 model.addAttribute("currentPage", pageNum);
+			 model.addAttribute("totalPages", pageProduct.getTotalPages());
+			 model.addAttribute("sortField", sortField);
+		     model.addAttribute("sortDir", sortDir);
+			 model.addAttribute("reverseSortDir", reverseSortDir);
+			 model.addAttribute("keyword", keyword);
+		     model.addAttribute("totalElement", pageProduct.getTotalElements());
+		     return "products/products";	
+	}
+	
 }

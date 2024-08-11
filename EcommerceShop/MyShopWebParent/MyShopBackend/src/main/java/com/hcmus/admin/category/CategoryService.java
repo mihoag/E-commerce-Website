@@ -255,6 +255,12 @@ public class CategoryService {
    
    public Category save(Category cate)
    {
+		Category parent = cate.getParent();
+		if (parent != null) {
+			String allParentIds = parent.getAllParentIDs() == null ? "-" : parent.getAllParentIDs();
+			allParentIds += String.valueOf(parent.getId()) + "-";
+			cate.setAllParentIDs(allParentIds);
+		}
 	   return repo.save(cate);
    }
 }

@@ -135,7 +135,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
                   </a>
                 </li>
                 
-                <li class="nav-item my-2">
+                <li class="nav-item my-2" th:classappend="${sideBarFieldName == 'products' ? 'active' : ''}">
                   <a class="nav-link active ps-4 py-3" th:href="@{/products}">
                    <span class="nav-icon">
                     <i class="fa-solid fa-mobile" style="max-width: 20px;"></i>
@@ -144,8 +144,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
                   </a>
                 </li>
                 
-                <li class="nav-item my-2">
-                  <a class="nav-link active ps-4 py-3" th:href="@{/customers}">
+                <li class="nav-item my-2" th:classappend="${sideBarFieldName == 'customers' ? 'active' : ''}">
+                  <a class="nav-link active ps-4 py-3" th:href="@{/customers}" >
                    <span class="nav-icon">
                     <i class="fa-solid fa-users" style="max-width: 20px;"></i>
                    </span>
@@ -154,7 +154,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
                 </li>
                 
                 
-                <li class="nav-item my-2">
+                <li class="nav-item my-2" th:classappend="${sideBarFieldName == 'shipping' ? 'active' : ''}">
                   <a class="nav-link active ps-4 py-3" th:href="@{/shipping}">
                    <span class="nav-icon">
                     <i class="fa-solid fa-truck-fast" style="max-width: 20px;"></i>

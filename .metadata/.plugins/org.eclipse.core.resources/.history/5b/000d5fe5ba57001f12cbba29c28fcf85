@@ -1,0 +1,70 @@
+package com.hcmus.admin.product;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.hcmus.common.entity.product.Product;
+
+import jakarta.transaction.Transactional;
+
+@Service
+@Transactional
+public class ProductService {
+	
+	public static final int PRODUCTS_PER_PAGE = 5;
+	
+	@Autowired
+	private ProductRepository repo;
+	
+	public List<Product> listAll() {
+		return (List<Product>) repo.findAll();
+	}
+	
+	
+	
+	public void saveProductPrice(Product productInForm) {
+		Product productInDB = repo.findById(productInForm.getId()).get();
+		productInDB.setCost(productInForm.getCost());
+		productInDB.setPrice(productInForm.getPrice());
+		productInDB.setDiscountPercent(productInForm.getDiscountPercent());
+		
+		repo.save(productInDB);
+	}
+	
+	
+	public String checkUnique(Integer id, String name) {
+		boolean isCreatingNew = (id == null || id == 0);
+		Product productByName = repo.findByName(name);
+		
+		if (isCreatingNew) {
+			if (productByName != null) return "Duplicate";
+		} else {
+			if (productByName != null && productByName.getId() != id) {
+				return "Duplicate";
+			}
+		}
+		return "OK";
+	}
+
+	public void updateProductEnabledStatus(Integer id, boolean enabled) {
+		repo.updateEnabledStatus(id, enabled);
+	}
+	
+	public void delete(Integer id)
+	{
+		repo.deleteById(id);
+	}
+	
+	public Product get(Integer id) throws ProductNotFoundException {
+		try {
+			return repo.findById(id).get();
+		} catch (NoSuchElementException ex) {
+			throw new ProductNotFoundException("Could not find any product with ID " + id);
+		}
+	}
+	
+ 
+}
