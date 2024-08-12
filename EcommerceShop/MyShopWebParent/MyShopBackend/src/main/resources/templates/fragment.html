@@ -67,7 +67,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
                                         </li>
                                         
                                         <li th:if="${currentPage > 1}"  class="page-item">
-                                           <a class="page-link" th:href="@{'/' +  ${sideBarFieldName} +'/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}}">First</a>
+                                           <a class="page-link" th:href="@{'/' +  ${sideBarFieldName} +'/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword} + ${categoryId != null ? '&categoryId=' + categoryId : ''}}">First</a>
                                         </li>
                                     
                                         <li class="page-item disabled">
@@ -75,12 +75,12 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
                                         </li>
                                         
                                         <li th:if="${currentPage > 1}"  class="page-item">
-                                          <a class="page-link" th:href="@{'/' +  ${sideBarFieldName} +'/page/' + ${currentPage - 1}  + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}}">Previous</a>
+                                          <a class="page-link" th:href="@{'/' +  ${sideBarFieldName} +'/page/' + ${currentPage - 1}  + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword} + ${categoryId != null ? '&categoryId=' + categoryId : ''}}">Previous</a>
                                         </li>
                                         
                                          <div th:each="i: ${#numbers.sequence(1, totalPages)}">
 			                              <li th:if="${currentPage != i}" class="page-item">
-			                                   <a th:href="@{'/' +  ${sideBarFieldName} + '/page/' + ${i}  + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}}" class="page-link" href="#">[[${i}]]</a>
+			                                   <a th:href="@{'/' +  ${sideBarFieldName} + '/page/' + ${i}  + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword} + ${categoryId != null ? '&categoryId=' + categoryId : ''}}" class="page-link" href="#">[[${i}]]</a>
 			                              </li>
 			                              
                                           <li th:unless="${currentPage != i}" class="page-item active" aria-current="page">
@@ -93,13 +93,12 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
                                             <span th:unless="${currentPage < totalPages}" class="page-link">Next</span>
                                         </li>
                                         
-                                        <li th:if="${currentPage < totalPages}" class="page-item"><a class="page-link" th:href="@{'/' +  ${sideBarFieldName} + '/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}}">Next</a></li>
+                                        <li th:if="${currentPage < totalPages}" class="page-item"><a class="page-link" th:href="@{'/' +  ${sideBarFieldName} + '/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword} + ${categoryId != null ? '&categoryId=' + categoryId : ''}}">Next</a></li>
                                    
                                          <li class="page-item disabled">
                                             <span th:unless="${currentPage < totalPages}" class="page-link">Last</span>
-                                        </li>
-                                        
-                                        <li th:if="${currentPage < totalPages}" class="page-item"><a class="page-link" th:href="@{'/' +  ${sideBarFieldName} + '/page/' + ${totalPages}  + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}}">Last</a></li>
+                                        </li>                     
+                                        <li th:if="${currentPage < totalPages}" class="page-item"><a class="page-link" th:href="@{'/' +  ${sideBarFieldName} + '/page/' + ${totalPages}  + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword} + ${categoryId != null ? '&categoryId=' + categoryId : ''}}">Last</a></li>
                                     </ul>
                                 </nav>
     
@@ -256,7 +255,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 	<th th:fragment="column_link(columnLabel, columnField, hide)"  th:classappend="${hide == true ? 'hideable-column' : ''}">
         <i th:if="${sortField eq columnField}" th:classappend="${sortDir eq 'desc' ? 'fa-solid fa-arrow-down' : 'fa-solid fa-arrow-up'}"></i>
        <a style="text-decoration: none;" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-        th:href="@{'/'  + ${sideBarFieldName} + '/page/' + ${currentPage} + '?sortField=' + ${columnField} +'&sortDir=' + ${reverseSortDir}}">[[${columnLabel}]]</a> 
+        th:href="@{'/'  + ${sideBarFieldName} + '/page/' + ${currentPage} + '?sortField=' + ${columnField} +'&sortDir=' + ${reverseSortDir} + ${categoryId != null ? '&categoryId=' + categoryId : ''}}">[[${columnLabel}]]</a> 
     </th>
 	
 	

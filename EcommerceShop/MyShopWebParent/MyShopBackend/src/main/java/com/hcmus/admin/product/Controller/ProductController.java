@@ -14,14 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.hcmus.admin.brand.BrandService;
 import com.hcmus.admin.category.CategoryService;
 import com.hcmus.admin.product.ProductService;
+import com.hcmus.admin.user.UserNotFoundException;
 import com.hcmus.common.entity.Brand;
+import com.hcmus.common.entity.Category;
 import com.hcmus.common.entity.product.Product;
 
 @Controller
 @RequestMapping("/products")
 public class ProductController {
 
-	private String defaultRedirectURL = "redirect:/products/page/%d?sortField=%s&sortDir=%s&keyword=%s&categoryId=0";
+	private String defaultRedirectURL = "redirect:/products/page/%d?sortField=%s&sortDir=%s&keyword=%s&categoryId=%d";
 	
 	@Autowired private ProductService productService;
 	@Autowired private BrandService brandService;
@@ -30,7 +32,7 @@ public class ProductController {
 	@GetMapping
 	public String listFirstPage()
 	{
-		return String.format(defaultRedirectURL, 1, "name", "asc","");
+		return String.format(defaultRedirectURL, 1, "name", "asc","", 0);
 	}
 	
 	
@@ -49,6 +51,12 @@ public class ProductController {
 		     List<Product> lsProduct = pageProduct.getContent();
 		     String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
 		     
+		     
+		     List<Category> listCategories = categoryService.listCategoriesUsedInForm();
+				
+			 if (categoryId != null) model.addAttribute("categoryId", categoryId);
+		     
+			 model.addAttribute("listCategories", listCategories);
 		     model.addAttribute("products", lsProduct);
 		     model.addAttribute("sideBarFieldName", "products");
 			 model.addAttribute("currentPage", pageNum);
@@ -59,6 +67,13 @@ public class ProductController {
 			 model.addAttribute("keyword", keyword);
 		     model.addAttribute("totalElement", pageProduct.getTotalElements());
 		     return "products/products";	
+	}
+	
+	@GetMapping("/product/{id}/enabled/{status}")
+	public String updateProductEnable(@PathVariable("id") int id, @PathVariable("status") boolean status, @Param("sortField") String sortField, @Param("sortDir") String sortDir, @Param("keyword") String keyword, @Param("page") int page, @Param("categoryId") Integer categoryId) throws UserNotFoundException
+	{
+	    productService.updateProductEnabledStatus(id, status);
+	    return String.format(defaultRedirectURL, page, sortField, sortDir,keyword, categoryId);
 	}
 	
 }

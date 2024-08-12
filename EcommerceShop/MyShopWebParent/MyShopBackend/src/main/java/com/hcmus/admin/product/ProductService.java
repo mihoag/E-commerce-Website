@@ -4,10 +4,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.hibernate.query.SortDirection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.hcmus.common.entity.product.Product;
@@ -29,7 +31,10 @@ public class ProductService {
 	
 	
 	public Page<Product> listByPage(int pageNum, String sortField, String sortDir, String keyword, Integer categoryId) {
-		Pageable pageable = PageRequest.of(pageNum-1, PRODUCTS_PER_PAGE);
+		
+		Sort sort = Sort.by(sortField);
+		sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
+		Pageable pageable = PageRequest.of(pageNum-1, PRODUCTS_PER_PAGE, sort);
 	
 		Page<Product> page = null;
 		

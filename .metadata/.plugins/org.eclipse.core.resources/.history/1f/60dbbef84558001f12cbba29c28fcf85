@@ -1,0 +1,3 @@
+  $("#dropdownCategory").on("change", function () {
+	console.log("ok");				$("#formSearch").submit();
+			});
