@@ -113,7 +113,7 @@
                                                <a class="text-secondary font-weight-bold text-xs"
                                                  th:href="@{/products/detail/} + ${product.id}">
                                                     Detail
-                                                </a>      &nbsp;
+                                                </a>      
                                                 <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
                                                    data-toggle="tooltip" data-bs-toggle="modal" th:attr="data-id=${product.id}"
                                                    data-bs-target="#deleteProduct">

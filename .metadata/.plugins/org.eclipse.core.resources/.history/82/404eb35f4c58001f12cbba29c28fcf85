@@ -109,11 +109,7 @@
                                             </td>
                                         
                                           
-                                            <td>          
-                                               <a class="text-secondary font-weight-bold text-xs"
-                                                 th:href="@{/products/detail/} + ${product.id}">
-                                                    Detail
-                                                </a>      &nbsp;
+                                            <td>                
                                                 <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
                                                    data-toggle="tooltip" data-bs-toggle="modal" th:attr="data-id=${product.id}"
                                                    data-bs-target="#deleteProduct">
@@ -145,7 +141,7 @@
 					     
 					      
 					       <div class="mt-2">
-					       <a  class="text-secondary font-weight-bold text-xs"
+					       <a
 							th:href="@{'/products/detail/' + ${product.id}}"><i class="fa-solid fa-circle-info"></i></a>
 					                            &nbsp;
                                                 <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
