@@ -1,0 +1,83 @@
+  
+dropdownBrands = $("#brand");
+dropdownCategories = $("#category");
+const newForm = document.forms['newForm'];
+const nameInput =  $("#name");
+$(document).ready(function() {
+
+	$("#shortDescription").richText();
+	$("#fullDescription").richText();
+
+	dropdownBrands.change(function() {
+		dropdownCategories.empty();
+		getCategories();
+	});
+
+	//getCategoriesForNewForm();
+
+});
+
+function getCategories() {
+	brandId = dropdownBrands.val();
+	var url =  '/MyshopAdmin/api/brands/' + brandId + "/categories";
+
+	$.get(url, function(responseJson) {
+		console.log(responseJson);
+		$.each(responseJson, function(index, category) {
+			$("<option>").val(category.id).text(category.name).appendTo(dropdownCategories);
+		});
+	});
+}
+
+async function checkNameUnique()
+{
+		var productname = $("#name").val();
+	    var id = $("#id").val();
+        var params = {id : id, name : productname};
+             const url = '/MyshopAdmin/api/products/checkname';          
+             $.post(url, params, async function (response) {
+				  if (response == "OK") {
+			         newForm.submit();
+		    } else if (response == "Duplicate") {
+			     
+		    }
+			}).fail(function () {
+				  			 
+		    });
+}
+
+nameInput.addEventListener('blur',  function(event) {
+	  	var name = $("#name").val();
+	    var id = $("#id").val();
+        var params = {id : id, name : name};
+             const url = '/MyshopAdmin/api/brands/check_name';          
+             $.post(url, params, async function (response) {
+				console.log(response)
+				  if (response == "OK") {
+			       messageBrandName.classList.add("hidden")
+		    } else if (response == "Duplicate") {
+			    showMessage(messageBrandName,"The brand name is existed");
+		    }
+			}).fail(function () {
+				 showMessage(messageBrandName,"Fail to connect to server");	
+			 });
+});
+
+
+function showMessage(element, message)
+{
+	element.classList.remove("hidden");
+	element.innerText = message;
+}
+
+newForm.addEventListener('submit', async function(event) {
+        // Prevent the default form submission
+        event.preventDefault();
+        await checkNameUnique();
+});
+
+
+
+
+  
+  

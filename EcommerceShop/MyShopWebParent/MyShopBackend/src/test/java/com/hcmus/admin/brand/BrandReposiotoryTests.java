@@ -93,4 +93,11 @@ public class BrandReposiotoryTests {
 			  System.out.println(cate);
 		  }
 	   }
+	   
+	   @Test
+	   public void testFindAllAsc()
+	   {
+		   List<Brand> listBrands = repo.findAll();
+		   listBrands.forEach(System.out::println);
+	   }
 }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<div th:fragment="content" th:remove="tag">
+	                         <div class="card-body px-0 pb-2">
+                              <!--  form for create new user -->
+                          
+                             
+                               <div class="col-md-12">
+                                 <label for="inputName" class="form-label">Product name</label>
+                                 <th:block th:if="${isReadOnlyForSalesperson}">
+					                 <input type="text" class="form-control" th:field="*{name}"
+						                readonly="readonly" />
+				                 </th:block>
+
+				                 <th:block th:unless="${isReadOnlyForSalesperson}">
+					                 <input type="text" class="form-control" th:field="*{name}" required
+						             minlength="3" maxlength="256" />
+				                 </th:block>
+                                 <small id="messageName" class="form-text hidden" style="color: red;"></small>
+                               </div>
+                    
+                               
+                                <div class="col-6">
+                                 <label for="alias" class="form-label">Alias</label>
+                                 <input type="text" class="form-control" minlength="2" required="required" th:field="*{alias}"  maxlength="45" id="firstname" placeholder="Enter your first name">
+                               </div>
+                              
+                               
+                             
+                              
+                        </div>
+	</div>
+</body>
+</html>

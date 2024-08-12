@@ -28,6 +28,8 @@ async function checkNameUnique()
 		    });
 }
 
+
+
 async function checkAliasUnique()
 {
 	    var alias = $("#alias").val();

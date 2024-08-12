@@ -72,8 +72,23 @@ public class ProductController {
 	@GetMapping("/product/{id}/enabled/{status}")
 	public String updateProductEnable(@PathVariable("id") int id, @PathVariable("status") boolean status, @Param("sortField") String sortField, @Param("sortDir") String sortDir, @Param("keyword") String keyword, @Param("page") int page, @Param("categoryId") Integer categoryId) throws UserNotFoundException
 	{
-	    productService.updateProductEnabledStatus(id, status);
 	    return String.format(defaultRedirectURL, page, sortField, sortDir,keyword, categoryId);
+	}
+	
+	@GetMapping("/new")
+	public String newProduct(Model model)
+	{
+		Product product = new Product();
+		
+		List<Brand> brands = brandService.listAll();
+		
+		
+		model.addAttribute("listBrands", brands);
+		model.addAttribute("product", product);
+	    model.addAttribute("sideBarFieldName", "products");
+		model.addAttribute("title", "Create New Product");
+		model.addAttribute("numberOfExistingExtraImages", 0);
+		return "products/products_form";
 	}
 	
 }
