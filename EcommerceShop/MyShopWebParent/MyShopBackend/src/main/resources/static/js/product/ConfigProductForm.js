@@ -39,6 +39,7 @@ async function checkNameUnique()
              const url = '/MyshopAdmin/api/products/checkname';          
              $.post(url, params, async function (response) {
 				  if (response == "OK") {
+					// console.log(response);
 			         newForm.submit();
 		    } else if (response == "Duplicate") {
 			      showMessage(messageName,"The product name is existed");
@@ -74,6 +75,7 @@ function showMessage(element, message)
 
 newForm.addEventListener('submit', async function(event) {
         // Prevent the default form submission
+        //console.log("ok");
         event.preventDefault();
         await checkNameUnique();
 });

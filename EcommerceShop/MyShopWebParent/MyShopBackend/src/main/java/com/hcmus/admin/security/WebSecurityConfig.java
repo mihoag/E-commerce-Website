@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity()
+@EnableWebSecurity(debug = true)
 public class WebSecurityConfig {
 	@Bean
 	PasswordEncoder passwordEncoder() {
@@ -47,7 +47,7 @@ public class WebSecurityConfig {
 		http.authorizeHttpRequests(
 				auth -> 	
 				auth.
-				requestMatchers("/states/list_by_country/**").hasAnyAuthority("Admin", "Salesperson")
+				 requestMatchers("/states/list_by_country/**").hasAnyAuthority("Admin", "Salesperson")
 				.requestMatchers("/users/**", "/settings/**", "/countries/**", "/states/**").hasAuthority("Admin")
 				.requestMatchers("/categories/**", "/brands/**").hasAnyAuthority("Admin", "Editor")
 				
@@ -70,7 +70,6 @@ public class WebSecurityConfig {
 				.requestMatchers("/orders_shipper/update/**").hasAuthority("Shipper")
 				
 				.requestMatchers("/reviews/**").hasAnyAuthority("Admin", "Assistant")
-				
 				.anyRequest().authenticated()	
 			)
 		.formLogin(login -> login.loginPage("/login").usernameParameter("email").permitAll())

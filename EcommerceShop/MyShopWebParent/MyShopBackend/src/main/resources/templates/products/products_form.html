@@ -26,7 +26,7 @@
                <main class="main-content border-radius-lg">
                     <div class="card mt-3">
                     
-           <form th:action="@{/products/save}"  enctype="multipart/form-data"
+           <form th:action="@{/products/save}" method="post"  enctype="multipart/form-data"
 			th:object="${product}" name="newForm"> 
 			<input type="hidden" th:field="*{id}" />
 		    <input

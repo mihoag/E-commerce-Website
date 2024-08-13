@@ -80,6 +80,8 @@ public class MyShopUserDetails implements UserDetails{
 		this.user.setLastName(lastName);
 	}
 	
-	
-
+	public boolean hasRole(String name)
+	{
+		return user.hasRole(name);
+	}
 }
