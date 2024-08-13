@@ -1,7 +1,0 @@
-package com.hcmus.admin.brand.export;
-
-import com.hcmus.admin.AbstractExporter;
-
-public class BrandExcelExporter extends AbstractExporter {
-
-}

@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="ProductRepositoryTest.testCreateProduct" project="MyShopBackend" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="com.hcmus.admin.product.ProductRepositoryTest" time="0.628" displayname="ProductRepositoryTest" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.product.ProductRepositoryTest]">
-    <testcase name="testCreateProduct" classname="com.hcmus.admin.product.ProductRepositoryTest" time="0.628" displayname="testCreateProduct()" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.product.ProductRepositoryTest]/[method:testCreateProduct()]"/>
-  </testsuite>
-</testrun>

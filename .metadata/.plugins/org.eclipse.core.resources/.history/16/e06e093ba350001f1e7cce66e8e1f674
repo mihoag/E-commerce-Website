@@ -1,5 +1,0 @@
-package com.hcmus.admin.category.controller;
-
-public class CategoryPageInfo {
-   private int totalElement;
-}

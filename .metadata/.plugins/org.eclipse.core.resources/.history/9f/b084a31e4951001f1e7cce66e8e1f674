@@ -1,7 +1,0 @@
-package com.hcmus.admin.category.export;
-
-import com.hcmus.admin.AbstractExporter;
-
-public class CategoryPdfExporter extends AbstractExporter{
-
-}

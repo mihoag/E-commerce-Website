@@ -10,9 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hcmus.admin.brand.BrandService;
 import com.hcmus.admin.category.CategoryService;
+import com.hcmus.admin.product.ProductNotFoundException;
 import com.hcmus.admin.product.ProductService;
 import com.hcmus.admin.user.UserNotFoundException;
 import com.hcmus.common.entity.Brand;
@@ -90,5 +92,19 @@ public class ProductController {
 		model.addAttribute("numberOfExistingExtraImages", 0);
 		return "products/products_form";
 	}
+	
+	@GetMapping("/detail/{id}")
+	public String viewProductDetails(@PathVariable("id") Integer id, Model model,
+			RedirectAttributes ra) {
+		try {
+			Product product = productService.get(id);			
+			model.addAttribute("product", product);		
+			return "products/product_detail_modal";
+		} catch (ProductNotFoundException e) {
+			ra.addFlashAttribute("message", e.getMessage());
+			
+			return defaultRedirectURL;
+		}
+	}	
 	
 }

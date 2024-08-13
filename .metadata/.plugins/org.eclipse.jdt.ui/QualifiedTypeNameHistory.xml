@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.lang.Exception"/>
     <fullyQualifiedTypeName name="com.hcmus.admin.AbstractExporter"/>
     <fullyQualifiedTypeName name="java.util.NoSuchElementException"/>
     <fullyQualifiedTypeName name="org.springframework.data.domain.PageRequest"/>
@@ -13,7 +12,6 @@
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
     <fullyQualifiedTypeName name="org.springframework.web.multipart.MultipartFile"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
-    <fullyQualifiedTypeName name="org.springframework.web.servlet.mvc.support.RedirectAttributes"/>
     <fullyQualifiedTypeName name="java.io.IOException"/>
     <fullyQualifiedTypeName name="io.micrometer.common.util.StringUtils"/>
     <fullyQualifiedTypeName name="org.springframework.util.StringUtils"/>
@@ -60,4 +58,6 @@
     <fullyQualifiedTypeName name="com.hcmus.common.entity.Category"/>
     <fullyQualifiedTypeName name="com.hcmus.common.entity.product.Product"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="org.springframework.web.servlet.mvc.support.RedirectAttributes"/>
+    <fullyQualifiedTypeName name="com.hcmus.admin.product.ProductNotFoundException"/>
 </qualifiedTypeNameHistroy>
