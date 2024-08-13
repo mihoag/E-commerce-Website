@@ -46,9 +46,10 @@ public class ProductSaveHelper {
 		try {
 			Files.list(dirPath).forEach(file -> {
 				String filePath = file.toAbsolutePath().toString();
-				int lastIndexOfSlash = filePath.lastIndexOf("/");
+				int lastIndexOfSlash = filePath.lastIndexOf("\\");
 				String fileName = filePath.substring(lastIndexOfSlash + 1, filePath.length()); 
-				if (!Files.isDirectory(file) && product.containsImageName(fileName)) {
+				System.out.println(fileName);
+				if (!Files.isDirectory(file) && !product.containsImageName(fileName)) {
 					try {
 						Files.delete(file);
 						LOGGER.info("Delete file successfull");

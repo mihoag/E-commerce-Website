@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<head th:replace="fragment :: page_head('Home page')" />
+
+<body>
+    <h1>Welcome to user control pannel</h1>
+</body>
+</html>
