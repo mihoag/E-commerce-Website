@@ -40,12 +40,7 @@ public class ProductController {
 	@Autowired private BrandService brandService;
 	@Autowired private CategoryService categoryService;
 	
-	@GetMapping
-	public String listFirstPage()
-	{
-		return String.format(defaultRedirectURL, 1, "name", "asc","", 0);
-	}
-	
+
 	
 	@GetMapping("/page/{pageNum}")
 	public String listByPage(@PathVariable("pageNum") int pageNum, @Param("sortField") String sortField,
@@ -83,6 +78,7 @@ public class ProductController {
 	@GetMapping("/product/{id}/enabled/{status}")
 	public String updateProductEnable(@PathVariable("id") int id, @PathVariable("status") boolean status, @Param("sortField") String sortField, @Param("sortDir") String sortDir, @Param("keyword") String keyword, @Param("page") int page, @Param("categoryId") Integer categoryId) throws UserNotFoundException
 	{
+		productService.updateProductEnabledStatus(id, status);
 	    return String.format(defaultRedirectURL, page, sortField, sortDir,keyword, categoryId);
 	}
 	
@@ -143,9 +139,9 @@ public class ProductController {
 			
 		Product savedProduct = productService.save(product);
 		
-		//ProductSaveHelper.saveUploadedImages(mainImageMultipart, extraImageMultiparts, savedProduct);
+		ProductSaveHelper.saveUploadedImages(mainImageMultipart, extraImageMultiparts, savedProduct);
 		
-		//ProductSaveHelper.deleteExtraImagesWeredRemovedOnForm(product);
+		ProductSaveHelper.deleteExtraImagesWeredRemovedOnForm(product);
 		
 		ra.addFlashAttribute("message", "The product has been saved successfully.");
 		
@@ -197,5 +193,12 @@ public class ProductController {
 			return  String.format(defaultRedirectURL, 1, "name", "asc", "", 0);
 		}
 	}
+	
+	@GetMapping("/**")
+	public String listFirstPage()
+	{
+		return String.format(defaultRedirectURL, 1, "name", "asc","", 0);
+	}
+	
 	
 }

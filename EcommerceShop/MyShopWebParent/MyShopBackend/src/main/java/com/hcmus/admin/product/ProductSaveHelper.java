@@ -1,17 +1,26 @@
 package com.hcmus.admin.product;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.hcmus.admin.util.FileUploadUtil;
 import com.hcmus.common.entity.product.Product;
 import com.hcmus.common.entity.product.ProductImage;
 
 public class ProductSaveHelper {
 
+	
+	private static final Logger LOGGER =LoggerFactory.getLogger(ProductSaveHelper.class);
 	
 	public static void setProductDetails(String[] detailIDs, String[] detailNames, 
 			String[] detailValues, Product product) {
@@ -32,8 +41,25 @@ public class ProductSaveHelper {
 	
 	public static void deleteExtraImagesWeredRemovedOnForm(Product product) {
 		String extraImageDir = "product-images/" + product.getId() + "/extras";
+		Path dirPath = Paths.get(extraImageDir);
 		
-		
+		try {
+			Files.list(dirPath).forEach(file -> {
+				String filePath = file.toAbsolutePath().toString();
+				int lastIndexOfSlash = filePath.lastIndexOf("/");
+				String fileName = filePath.substring(lastIndexOfSlash + 1, filePath.length()); 
+				if (!Files.isDirectory(file) && product.containsImageName(fileName)) {
+					try {
+						Files.delete(file);
+						LOGGER.info("Delete file successfull");
+					} catch (IOException ex) {
+						LOGGER.error("Could not delete file: " + file);
+					}
+				}
+			});
+		} catch (IOException ex) {
+			LOGGER.error("Could not list directory: " + dirPath);
+		}
 	}
 	
 	
@@ -74,4 +100,29 @@ public class ProductSaveHelper {
 			product.setMainImage(fileName);
 		}
 	}
+	
+	public static void saveUploadedImages(MultipartFile mainImageMultipart, 
+			MultipartFile[] extraImageMultiparts, Product savedProduct) throws IOException {
+		
+		if (!mainImageMultipart.isEmpty()) {
+			String fileName = StringUtils.cleanPath(mainImageMultipart.getOriginalFilename());
+			String uploadDir = "product-images/" + savedProduct.getId();
+			
+			FileUploadUtil.cleanDir(uploadDir);
+			FileUploadUtil.saveFile(uploadDir, fileName, mainImageMultipart);					
+		}
+		
+		if (extraImageMultiparts.length > 0) {
+			String uploadDir = "product-images/" + savedProduct.getId() + "/extras";
+			
+			for (MultipartFile multipartFile : extraImageMultiparts) {
+				if (multipartFile.isEmpty()) continue;
+				
+				String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+				FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);	
+			}
+		}
+		
+	}
+
 }
