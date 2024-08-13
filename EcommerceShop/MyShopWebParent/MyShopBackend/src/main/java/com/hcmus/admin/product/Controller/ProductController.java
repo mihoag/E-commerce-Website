@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hcmus.admin.brand.BrandNotFoundException;
 import com.hcmus.admin.brand.BrandService;
 import com.hcmus.admin.category.CategoryService;
 import com.hcmus.admin.product.ProductNotFoundException;
@@ -24,6 +25,7 @@ import com.hcmus.admin.product.ProductSaveHelper;
 import com.hcmus.admin.product.ProductService;
 import com.hcmus.admin.security.MyShopUserDetails;
 import com.hcmus.admin.user.UserNotFoundException;
+import com.hcmus.admin.util.FileUploadUtil;
 import com.hcmus.common.entity.Brand;
 import com.hcmus.common.entity.Category;
 import com.hcmus.common.entity.product.Product;
@@ -149,7 +151,21 @@ public class ProductController {
 		
 		return  String.format(defaultRedirectURL, 1, "name", "asc",product.getName(), 0);
 	}
-
-
+	
+	
+	@GetMapping("/delete/{id}")
+	public String deleteProduct(@PathVariable(name = "id") Integer id, 
+			Model model,
+			RedirectAttributes redirectAttributes) {
+		productService.delete(id);
+		String productDir = "product-images/" + id;
+		FileUploadUtil.removeDir(productDir);
+		
+		redirectAttributes.addAttribute("message", 
+				"The product has ID "+ id +" has been deleted successfully");
+		
+		return  String.format(defaultRedirectURL, 1, "name", "asc", "", 0);
+	}
+	
 	
 }
