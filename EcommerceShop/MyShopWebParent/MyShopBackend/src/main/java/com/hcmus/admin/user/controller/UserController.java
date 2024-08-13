@@ -47,6 +47,7 @@ public class UserController {
 		List<Role> listRoles = userService.listRole();
 		User user  = new User();
 		user.setEnabled(true);
+		model.addAttribute("sideBarFieldName", "users");
 		model.addAttribute("user", user);
 		model.addAttribute("listRoles", listRoles);
 		model.addAttribute("title", "New User");
@@ -92,6 +93,7 @@ public class UserController {
 			User user = userService.getUserById(id);
 			List<Role> listRoles = userService.listRole();
 			
+			model.addAttribute("sideBarFieldName", "users");
 			model.addAttribute("user", user);
 			model.addAttribute("listRoles", listRoles);
 			model.addAttribute("title", String.format("Update user ( id : %d )", id));
@@ -157,12 +159,9 @@ public class UserController {
 	    model.addAttribute("keyword", keyword);
 		model.addAttribute("totalElement", totalElement);
 	    
-	    
 		return "users/user";
 	}
 	
-	
-
 	@GetMapping("/**")
 	public String home(Model model)
 	{
