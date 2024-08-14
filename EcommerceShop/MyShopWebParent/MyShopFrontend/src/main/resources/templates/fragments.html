@@ -47,8 +47,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
                 class="float-start"
               >
                 <img
-                  src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png"
-                  height="35"
+                  th:src="@{images/logo.png}"
+                  height="40"
                 />
               </a>
             </div>
@@ -77,9 +77,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
             </div>
             <!-- Center elements -->
 
-            <!-- Right elements -->
-
-            <!-- Right elements -->
+          
           </div>
         </div>
       </div>
@@ -92,17 +90,50 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
           class="container justify-content-center justify-content-md-between"
         >
           <!-- Toggle button -->
-          <button
-            class="navbar-toggler border py-2 text-dark"
-            type="button"
-            data-mdb-toggle="collapse"
+         
+            <!-- Navbar toggle -->      
+    <nav  class="navbar-toggler border py-2 text-dark" data-mdb-toggle="collapse"
             data-mdb-target="#navbarLeftAlignExample"
             aria-controls="navbarLeftAlignExample"
             aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <i class="fas fa-bars"></i>
-          </button>
+            aria-label="Toggle navigation">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li  class="dropdown-item" >
+                        <a   id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Careers
+                        </a>
+                     
+                    </li>
+                    
+                    <li  class="dropdown-item" >
+                        <a   id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Payments
+                        </a>
+                      
+                    </li>
+                    
+                    <li  class="dropdown-item" >
+                        <a   id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                           Shipping & Delivery
+                        </a>                     
+                    </li>                    
+                    <li  class="dropdown-item" >
+                        <a   id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Contact
+                        </a>
+                    </li>
+                   
+                </ul>
+            </div>
+        </div>
+    </nav>
+            <!-- End navbar -->
+      
 
           <!-- Collapsible wrapper -->
           <div class="collapse navbar-collapse" id="navbarLeftAlignExample">
@@ -129,6 +160,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
         <!-- Container wrapper -->
       </nav>
       <!-- Navbar -->
+      
       <!-- Jumbotron -->
       <div class="bg-primary text-white py-5">
         <div class="container py-5">
@@ -144,6 +176,14 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
       </div>
       <!-- Jumbotron -->
     </header>
+    
+    
+    
+    
+    
+    
+	
+    
     
     
     
@@ -169,7 +209,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
               <i class="fab fa-lg fa-cc-paypal text-dark"></i>
             </div>
             <!--- payment --->
-            <p class="mt-2 text-dark">© 2023 Copyright: MDBootstrap.com</p>
+            <p class="mt-2 text-dark">© 2023 Copyright: MyShop.com</p>
             <!--- language selector --->
             <div class="dropdown dropup">
               <a

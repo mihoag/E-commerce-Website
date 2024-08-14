@@ -3753,3 +3753,33 @@ org.eclipse.wst.xml.core.internal.document.StructuredDocumentRegionManagementExc
 	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:651)
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:588)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1459)
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-08-14 08:52:23.566
+!MESSAGE Classpath changed for project: MyShopFrontend
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-08-14 08:53:37.184
+!MESSAGE Classpath changed for project: MyShopCommon
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-08-14 08:53:37.807
+!MESSAGE Classpath changed for project: MyShopBackend
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-08-14 08:53:37.807
+!MESSAGE Classpath changed for project: MyShopFrontend
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-08-14 09:05:52.741
+!MESSAGE Classpath changed for project: MyShopBackend
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-08-14 09:06:16.079
+!MESSAGE Classpath changed for project: MyShopBackend
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-08-14 09:06:37.805
+!MESSAGE Classpath changed for project: MyShopBackend
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-08-14 09:06:37.805
+!MESSAGE Classpath changed for project: MyShopCommon
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-08-14 09:06:37.806
+!MESSAGE Classpath changed for project: MyShopFrontend
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-08-14 09:07:42.706
+!MESSAGE Classpath changed for project: MyShopFrontend
