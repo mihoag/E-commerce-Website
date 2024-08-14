@@ -22,4 +22,10 @@ public class CategoryService {
     {
     	return repo.findByAliasEnabled(alias);
     }
+    
+    public List<Category> seachByKeyWord(String keyword)
+    {
+    	List<Category> categories = repo.findByKeyWord(keyword);
+    	return categories;
+    }
 }

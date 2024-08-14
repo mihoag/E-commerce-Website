@@ -14,4 +14,7 @@ public interface CategoryRepository extends CrudRepository<Category, Integer>  {
 	
 	@Query("SELECT c FROM Category c WHERE c.enabled = true AND c.alias = ?1")
 	public Category findByAliasEnabled(String alias);
+	
+	@Query("select c from Category c WHERE c.name like %?1%")
+	public List<Category> findByKeyWord(String keyword);
 }

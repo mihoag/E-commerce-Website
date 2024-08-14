@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="CategoryRepositoryTest.testListAll" project="MyShopFrontend" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="com.hcmus.site.category.CategoryRepositoryTest" time="0.628" displayname="CategoryRepositoryTest" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.site.category.CategoryRepositoryTest]">
-    <testcase name="testListAll" classname="com.hcmus.site.category.CategoryRepositoryTest" time="0.628" displayname="testListAll()" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.site.category.CategoryRepositoryTest]/[method:testListAll()]"/>
-  </testsuite>
-</testrun>

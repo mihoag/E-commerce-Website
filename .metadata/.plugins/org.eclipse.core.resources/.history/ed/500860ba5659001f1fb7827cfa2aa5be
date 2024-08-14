@@ -1,3 +1,0 @@
-spring.application.name=MyShopFrontend
-server.port=80
-server.servlet.context-path= /Myshop

@@ -3,6 +3,7 @@ package com.hcmus.site;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +19,15 @@ public class MainController {
 	private CategoryService service;
 	
 	@GetMapping("")
-	public String userHome(Model model)
+	public String userHome(Model model, @Param("keyword") String keyword)
 	{
-		List<Category> categories = service.listAll();
+		if(keyword == null)
+		{
+			keyword ="";
+		}
+		List<Category> categories = service.seachByKeyWord(keyword);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("searchField", "categories");
 		model.addAttribute("listCategories", categories);
 		return "index";
 	}
