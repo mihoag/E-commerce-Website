@@ -50,6 +50,39 @@ public class ProductController {
 		model.addAttribute("listParentCategories", listParentCategories);
 		return "product/products_by_category";
 	}
+	
+	@GetMapping("/p/{alias}")
+	public String getDetailProduct(@PathVariable String alias, Model model)
+	{
+		try {
+			Product product = productService.getProduct(alias);
+			List<Category> listCategoryParents = categoryService.getCategoryParents(product.getCategory());
+			//Page<Review> listReviews = reviewService.list3MostVotedReviewsByProduct(product);
+			
+			//Customer customer = controllerHelper.getAuthenticatedCustomer(request);
+			/*
+			if (customer != null) {
+				boolean customerReviewed = reviewService.didCustomerReviewProduct(customer, product.getId());
+				voteService.markReviewsVotedForProductByCustomer(listReviews.getContent(), product.getId(), customer.getId());
+				
+				if (customerReviewed) {
+					model.addAttribute("customerReviewed", customerReviewed);
+				} else {
+					boolean customerCanReview = reviewService.canCustomerReviewProduct(customer, product.getId());
+					model.addAttribute("customerCanReview", customerCanReview);
+				}
+			}
+			*/
+			model.addAttribute("listCategoryParents", listCategoryParents);
+			model.addAttribute("product", product);
+			//model.addAttribute("listReviews", listReviews);
+			model.addAttribute("pageTitle", product.getShortName());
+			
+			return "product/product_detail";
+		} catch (ProductNotFoundException e) {
+			return "error/404";
+		}
+	}
 
 	
 }

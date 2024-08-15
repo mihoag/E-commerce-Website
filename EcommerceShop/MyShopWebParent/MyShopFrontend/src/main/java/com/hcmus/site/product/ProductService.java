@@ -30,9 +30,7 @@ public class ProductService {
  		if (product == null) {
  			throw new ProductNotFoundException("Could not find any product with alias " + alias);
  		}
- 		
  		return product;
  	}
-     
 }
 

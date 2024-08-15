@@ -36,7 +36,7 @@ public class ProductRepositoryTests {
 		Integer id = 8;
 		String idMatcher = "-8-";
 		
-		Page<Product> products = repo.listByCategory(id, idMatcher, PageRequest.of(0, 10));
+		Page<Product> products = repo.listByCategory(id, idMatcher, "",PageRequest.of(0, 10));
 		List<Product> listProducts = products.getContent();
 		listProducts.forEach(System.out::println);
 	}

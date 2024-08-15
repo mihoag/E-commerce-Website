@@ -116,7 +116,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
                   
                   
                   <div class="col-xl-6 col-md-5 col-sm-7">
-                    <h5>[[${product.name}]]</h5>
+                    <a th:href="@{${product.URI}}"><h5>[[${product.shortName}]]</h5></a>
                     <div class="d-flex flex-row">
                       <div class="text-warning mb-1 me-2">
                       
