@@ -40,7 +40,7 @@ public class ProductController {
 		List<Category> listParentCategories = categoryService.getCategoryParents(cate);
 		Page<Product> pageProducts = productService.listByCategory(pageNum, cate.getId(), keyword);
 		
-		
+		model.addAttribute("searchField", "products");
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("totalElements", pageProducts.getTotalElements());

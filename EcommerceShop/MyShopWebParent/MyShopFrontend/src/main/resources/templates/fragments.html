@@ -59,8 +59,17 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
                       <a class="btn btn-secondary" th:href="@{.}" style="width: 60px;">Clear</a>
 
               </div>
-        
-                          </form>
+          </form>
+          
+           <form class="col-lg-5 col-md-12 col-12" th:action="@{'/c/' + ${category.alias} + '/page/1'}" th:if="${searchField} eq 'products'">               
+           
+              <div class="input-group d-flex">
+                      <input class="form-control me-1" type="text"  name="keyword" th:value="${keyword}"  placeholder="Enter the product name"> 
+                      <button class="btn btn-primary"  style="width: 70px;" type="submit">Search</button> &nbsp;
+                      <a class="btn btn-secondary" th:href="@{'/c/' + ${category.alias}}" style="width: 60px;">Clear</a>
+
+              </div>
+          </form>
             
             <!-- Center elements -->
             <div class="order-lg-last col-lg-5 col-sm-8 col-8">
