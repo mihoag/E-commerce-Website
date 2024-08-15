@@ -1,0 +1,49 @@
+package com.hcmus.site.product;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.hcmus.common.entity.Category;
+import com.hcmus.common.entity.product.Product;
+import com.hcmus.site.category.CategoryService;
+
+@Controller
+public class ProductController {
+
+	@Autowired private ProductService productService;
+	
+	@Autowired private CategoryService categoryService;
+	
+	@GetMapping("/c/{alias}")
+	public String listFirstPage(@PathVariable("alias") String alias, Model model)
+	{
+		return listByPage(alias, 1, model);
+	}
+	
+	@GetMapping("/c/{alias}/page/{pageNum}")
+	public String listByPage(@PathVariable("alias") String alias, @Param("pageNum") Integer pageNum, Model model)
+	{
+	
+		Category cate = categoryService.getByAlias(alias);
+		List<Category> listParentCategories = categoryService.getCategoryParents(cate);
+		Page<Product> pageProducts = productService.listByCategory(pageNum, cate.getId());
+		
+		
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("totalElements", pageProducts.getTotalElements());
+		model.addAttribute("totalPage", pageProducts.getTotalPages());
+		model.addAttribute("listProducts", pageProducts.getContent());
+		model.addAttribute("category", cate);
+		model.addAttribute("listParentCategories", listParentCategories);
+		return "product/products_by_category";
+	}
+
+	
+}

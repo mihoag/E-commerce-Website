@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ProductRepositoryTests.searchProduct" project="MyShopFrontend" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.hcmus.site.product.ProductRepositoryTests" time="1.682" displayname="ProductRepositoryTests" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.site.product.ProductRepositoryTests]">
+    <testcase name="searchProduct" classname="com.hcmus.site.product.ProductRepositoryTests" time="1.682" displayname="searchProduct()" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.site.product.ProductRepositoryTests]/[method:searchProduct()]"/>
+  </testsuite>
+</testrun>

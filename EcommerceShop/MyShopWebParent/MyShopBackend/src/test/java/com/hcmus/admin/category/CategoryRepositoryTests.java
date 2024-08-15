@@ -111,4 +111,15 @@ public class CategoryRepositoryTests {
 	{
 		//Category cate1 = new Category(1,'Electronics','electronics','electronics.png',1,NULL)
 	}
+	
+	
+	@Test
+	public void updateCategory()
+	{
+		List<Category> categories = repo.findAll();
+		for(Category cate : categories)
+		{
+			repo.save(cate);
+		}
+	}
 }

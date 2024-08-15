@@ -4,16 +4,16 @@
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="link-detail"/>
+		<item key="selection" value="allParentID"/>
 		<list key="findhistory">
+			<item value="allPar"/>
+			<item value="allParentId"/>
 			<item value="link-detail"/>
 			<item value="image"/>
 			<item value="lastName"/>
 			<item value="photos"/>
 			<item value="user"/>
 			<item value="&quot;dropdown&quot;"/>
-			<item value="Le Minh Hoang"/>
-			<item value="defaultRedirectURL"/>
 		</list>
 		<list key="replacehistory">
 		</list>

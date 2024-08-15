@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="CategoryServiceTests.updateAllCategories" project="MyShopBackend" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.hcmus.admin.category.CategoryServiceTests" time="0.532" displayname="CategoryServiceTests" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.category.CategoryServiceTests]">
+    <testcase name="updateAllCategories" classname="com.hcmus.admin.category.CategoryServiceTests" time="0.532" displayname="updateAllCategories()" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.category.CategoryServiceTests]/[method:updateAllCategories()]"/>
+  </testsuite>
+</testrun>

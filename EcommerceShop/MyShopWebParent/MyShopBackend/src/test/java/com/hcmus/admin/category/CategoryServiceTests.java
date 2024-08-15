@@ -32,4 +32,27 @@ public class CategoryServiceTests {
 		  List<Category> categories =  service.listCategoriesUsedInForm();
 		  categories.forEach(cate -> System.out.println(cate));
 	  }
+	  
+	  @Test
+	  public void updateAllCategories() throws CategoryNotFoundException
+	  {
+		 for( int i = 12 ;i <= 31 ; i++)
+		 {
+			 Category cate = service.getCateById(i);
+			 service.save(cate);
+		 }
+		
+	  }
+	  
+	  @Test
+	  public void updateNameCategory() throws CategoryNotFoundException
+	  {
+		  
+		  for(int i = 1 ; i <=31 ; i++)
+		  {
+			  Category cate = service.getCateById(i);
+			  cate.setName(cate.getName().replaceAll("--", ""));
+			  service.save(cate);
+		  }	  
+	  }
 }

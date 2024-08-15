@@ -1,0 +1,9 @@
+package com.hcmus.common.entity;
+
+import jakarta.persistence.MappedSuperclass;
+
+@MappedSuperclass
+public abstract class AbstractAddress  extends IdBasedEntity  {
+	
+
+}

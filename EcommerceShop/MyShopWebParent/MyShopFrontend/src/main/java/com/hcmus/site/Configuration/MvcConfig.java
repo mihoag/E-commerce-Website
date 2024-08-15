@@ -1,4 +1,4 @@
-package com.hcmus.site.Configuration;
+package com.hcmus.site.configuration;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,6 +14,7 @@ public class MvcConfig implements WebMvcConfigurer{
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 	
 		exposeDirectory("category-images", registry);
+		exposeDirectory("product-images", registry);
 
 	}
 	

@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
 import com.hcmus.common.entity.Category;
+import com.hcmus.common.entity.product.Product;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
@@ -31,4 +32,5 @@ public class CategoryRepositoryTest {
 	  Category cate = repo.findByAliasEnabled(alias);
 	  System.out.println(cate);
 	}
+	
 }
