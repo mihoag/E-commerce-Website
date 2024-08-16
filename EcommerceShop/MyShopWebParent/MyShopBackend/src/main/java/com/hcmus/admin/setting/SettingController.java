@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hcmus.common.entity.Currency;
 import com.hcmus.common.entity.setting.Setting;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 @RequestMapping("/setting")
@@ -32,4 +35,12 @@ public class SettingController {
 		model.addAttribute("sideBarFieldName", "setting");
 		return "settings/settings";
 	}
+	
+	@PostMapping("/save_general")
+	public String saveGeneralSetting(@RequestBody String entity) {
+		//TODO: process POST request
+		
+		return entity;
+	}
+	
 }

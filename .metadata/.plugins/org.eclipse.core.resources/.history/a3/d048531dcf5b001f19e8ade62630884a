@@ -1,0 +1,11 @@
+package com.hcmus.admin.setting.country;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.hcmus.common.entity.Country;
+
+@Repository
+public interface CountryRepository extends JpaRepository<Country, Integer>{
+
+}
