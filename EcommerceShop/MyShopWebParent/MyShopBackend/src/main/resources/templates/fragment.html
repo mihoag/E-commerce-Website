@@ -161,6 +161,16 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
                   <span class="nav-link-text ms-3">Shipping</span>
                   </a>
                 </li>
+                
+                <li class="nav-item my-2" th:classappend="${sideBarFieldName == 'setting' ? 'active' : ''}">
+                  <a class="nav-link active ps-4 py-3" th:href="@{/setting}">
+                   <span class="nav-icon">
+                     <i class="fa-solid fa-gear" style="max-width: 20px;"></i>
+                   </span>
+                  <span class="nav-link-text ms-3">Setting</span>
+                  </a>
+                </li>   
+                
               </ul>
        </div>
     </aside>
@@ -236,6 +246,18 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
                     
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="@{/shipping}" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Shipping
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="@{/setting}" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Shipping
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">

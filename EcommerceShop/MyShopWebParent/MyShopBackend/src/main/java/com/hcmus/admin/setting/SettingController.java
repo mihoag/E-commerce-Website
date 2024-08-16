@@ -6,18 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hcmus.common.entity.Currency;
 import com.hcmus.common.entity.setting.Setting;
 
 @Controller
+@RequestMapping("/setting")
 public class SettingController {
     
 	@Autowired private SettingService service;
 	
 	@Autowired private CurrencyRepository currencyRepo;
 	
-	@GetMapping("/settings")
+	@GetMapping("")
 	public String listAll(Model model) {
 		List<Setting> listSettings = service.listAllSettings();
 		List<Currency> listCurrencies = currencyRepo.findAllByOrderByNameAsc();
@@ -27,7 +29,7 @@ public class SettingController {
 		for (Setting setting : listSettings) {
 			model.addAttribute(setting.getKey(), setting.getValue());
 		}
-	
+		model.addAttribute("sideBarFieldName", "setting");
 		return "settings/settings";
 	}
 }

@@ -55,7 +55,7 @@ public class Currency extends IdBasedEntity{
 
 	@Override
 	public String toString() {
-		return "Currency [name=" + name + ", symbol=" + symbol + ", code=" + code + "]";
+		return name + " - " + code + " - " + symbol;
 	}
 	
 	
