@@ -1,4 +1,4 @@
-const MAX_FILE_SIZE = 102400; // 100KB
+const MAX_FILE_SIZE = 102400*6; // 100KB
 $("#fileImage").change(function() {
 		if (!checkFileSize(this)) {
 			return;

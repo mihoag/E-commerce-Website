@@ -1,5 +1,7 @@
 package com.hcmus.site.product;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.hcmus.common.entity.Category;
 import com.hcmus.common.entity.product.Product;
+import com.hcmus.common.entity.product.ProductDetail;
 import com.hcmus.site.category.CategoryService;
 
 import jakarta.websocket.server.PathParam;
@@ -57,6 +60,11 @@ public class ProductController {
 		try {
 			Product product = productService.getProduct(alias);
 			List<Category> listCategoryParents = categoryService.getCategoryParents(product.getCategory());
+			
+			Category categoryParent = product.getCategory();
+			List<Product> relatedProducts = productService.getProductByCate(categoryParent);
+			relatedProducts.remove(product);
+			
 			//Page<Review> listReviews = reviewService.list3MostVotedReviewsByProduct(product);
 			
 			//Customer customer = controllerHelper.getAuthenticatedCustomer(request);
@@ -72,9 +80,16 @@ public class ProductController {
 					model.addAttribute("customerCanReview", customerCanReview);
 				}
 			}
+			
 			*/
+			List<ProductDetail> details = product.getDetails();
+			details.forEach(System.out::println);
+			System.out.println(details.size());
+			model.addAttribute("relatedProducts", relatedProducts);
 			model.addAttribute("listCategoryParents", listCategoryParents);
 			model.addAttribute("product", product);
+			
+			
 			//model.addAttribute("listReviews", listReviews);
 			model.addAttribute("pageTitle", product.getShortName());
 			

@@ -1,11 +1,14 @@
 package com.hcmus.site.product;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.hcmus.common.entity.Category;
 import com.hcmus.common.entity.product.Product;
 
 @Service
@@ -32,5 +35,10 @@ public class ProductService {
  		}
  		return product;
  	}
+    
+    public List<Product> getProductByCate(Category cate)
+    {
+    	return repo.findByCategory(cate);
+    }
 }
 

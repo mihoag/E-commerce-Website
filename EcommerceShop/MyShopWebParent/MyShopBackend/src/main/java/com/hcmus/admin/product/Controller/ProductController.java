@@ -180,10 +180,11 @@ public class ProductController {
 				}
 			}
 			
+			model.addAttribute("sideBarFieldName", "products");
 			model.addAttribute("isReadOnlyForSalesperson", isReadOnlyForSalesperson);
 			model.addAttribute("product", product);
 			model.addAttribute("listBrands", listBrands);
-			model.addAttribute("pageTitle", "Edit Product (ID: " + id + ")");
+			model.addAttribute("title", "Edit Product (ID: " + id + ")");
 			model.addAttribute("numberOfExistingExtraImages", numberOfExistingExtraImages);
 			
 			return "products/products_form";

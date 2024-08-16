@@ -13,7 +13,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.annotation.Rollback;
 
+import com.hcmus.common.entity.Category;
 import com.hcmus.common.entity.product.Product;
+import com.hcmus.site.category.CategoryRepository;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
@@ -22,6 +24,9 @@ public class ProductRepositoryTests {
 
 	@Autowired
 	private ProductRepository repo;
+	
+	@Autowired
+	private CategoryRepository cateRepo;
 	
 	@Test
 	public void findByAlias()
@@ -48,5 +53,14 @@ public class ProductRepositoryTests {
 		Page<Product> products = repo.search(keyword, PageRequest.of(0, 4));
 		products.forEach(System.out::println);
 		assertThat(products.getSize()).isEqualTo(4);
+	}
+	
+	@Test
+	public void testFindByCategory()
+	{
+		Category category = cateRepo.findById(6).get();
+		List<Product> products = repo.findByCategory(category);
+		
+		products.forEach(System.out::println);
 	}
 }
