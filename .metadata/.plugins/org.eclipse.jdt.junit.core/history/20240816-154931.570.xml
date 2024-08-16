@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="CurrencyRepositoryTests.testCreateCurrencies" project="MyShopBackend" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.hcmus.admin.setting.CurrencyRepositoryTests" time="0.732" displayname="CurrencyRepositoryTests" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.setting.CurrencyRepositoryTests]">
+    <testcase name="testCreateCurrencies" classname="com.hcmus.admin.setting.CurrencyRepositoryTests" time="0.732" displayname="testCreateCurrencies()" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.setting.CurrencyRepositoryTests]/[method:testCreateCurrencies()]"/>
+  </testsuite>
+</testrun>

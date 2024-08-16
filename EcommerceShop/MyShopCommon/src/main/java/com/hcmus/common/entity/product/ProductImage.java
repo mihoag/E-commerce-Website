@@ -55,5 +55,12 @@ public class ProductImage extends IdBasedEntity {
 	public String getImagePath() {
 		return "/product-images/" + product.getId() + "/extras/" + this.name;
 	}
+
+	@Override
+	public String toString() {
+		return "ProductImage [name=" + name + ", product=" + product + "]";
+	}
+	
+	
 	
 }
