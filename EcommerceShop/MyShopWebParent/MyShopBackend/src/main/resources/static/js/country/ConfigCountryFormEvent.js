@@ -18,12 +18,12 @@ function loadCountries()
 		dropDownCountries.empty();
 
 		$.each(responseJSON, function(index, country) {
-			console.log(country)
+			//console.log(country)
 			optionValue = country.id + "-" + country.code;
 			$("<option>").val(optionValue).text(country.name).appendTo(dropDownCountries);
 		});
 	}).done(function() {
-	
+	 
 		showToast("All countries have been loaded");
 	}).fail(function() {
 		showToast("ERROR: Could not connect to server or server encountered an error");

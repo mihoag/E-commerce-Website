@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 import com.hcmus.common.entity.setting.Setting;
 import com.hcmus.common.entity.setting.SettingCategory;
 
+import jakarta.transaction.Transactional;
+
 @Service
+@Transactional
 public class SettingService {
     @Autowired private SettingRepository repo;
   
@@ -31,6 +34,18 @@ public class SettingService {
 	
 	public void saveAll(Iterable<Setting> settings) {
 		repo.saveAll(settings);
+	}
+	
+	public void updateSetting(String key, String value)
+	{
+		List<Setting> listSettings = repo.findByKey(key);
+		if(listSettings != null)
+		{
+			Setting s = listSettings.get(0);
+			System.out.println(s);
+			s.setValue(value);
+			repo.save(s);
+		}
 	}
 	
 	public List<Setting> getMailServerSettings() {

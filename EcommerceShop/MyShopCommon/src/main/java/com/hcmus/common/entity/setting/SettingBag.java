@@ -37,4 +37,14 @@ public class SettingBag {
 			setting.setValue(value);
 		}
 	}
+
+	public List<Setting> getListSettings() {
+		return listSettings;
+	}
+
+	public void setListSettings(List<Setting> listSettings) {
+		this.listSettings = listSettings;
+	}
+	
+	
 }

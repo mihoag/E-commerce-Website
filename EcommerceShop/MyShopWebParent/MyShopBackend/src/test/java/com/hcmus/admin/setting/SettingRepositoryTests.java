@@ -48,4 +48,13 @@ public class SettingRepositoryTests {
 				decimalDigits, thousandsPointType));
 		
 	}
+	
+	@Test
+	public void testUpdate()
+	{
+		String key = "SITE_LOGO";
+		String value = "logo1.png";
+		repo.updateSetting(key, value);
+		
+	}
 }
