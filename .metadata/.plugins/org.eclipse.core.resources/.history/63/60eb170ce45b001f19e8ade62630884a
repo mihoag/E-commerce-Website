@@ -1,0 +1,5 @@
+const buttonLoadCountries = document.getElementById("buttonLoadCountries");
+const dropDownCountries = document.getElementById("dropDownCountries");
+const fieldCountryName = document.getElementById("fieldCountryName");
+const buttonAddCountry = document.getElementById("buttonAddCountry");
+const buttonUpdateCountry = document.getElementById("buttonUpdateCountry");
