@@ -13,7 +13,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <title>[[${title}]]</title>
+    <title>[[${title}]] - [[${SITE_NAME}]]</title>
     <!-- Font Awesome -->
     <link
       rel="stylesheet"
@@ -210,7 +210,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
               <i class="fab fa-lg fa-cc-paypal text-dark"></i>
             </div>
             <!--- payment --->
-            <p class="mt-2 text-dark">© 2023 Copyright: MyShop.com</p>
+            <p class="mt-2 text-dark">[[${COPYRIGHT}]]</p>
             <!--- language selector --->
             <div class="dropdown dropup">
               <a
@@ -285,6 +285,41 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
     <!-- Footer -->
 
 
+
+     <div th:fragment="product_price" th:remove="tag">
+		<th:block th:if="${product.discountPercent &lt;= 0}">
+			<div
+				th:replace="fragments :: format_currency(${product.price})"></div>
+		</th:block>
+		<th:block th:if="${product.discountPercent > 0}">
+			<span style="font-size: larger; color: darkred">
+				<div
+					th:replace="fragments :: format_currency(${product.discountPrice})"></div>
+			</span>
+			<del>
+				<span>
+					<div
+						th:replace="fragments :: format_currency(${product.price})"></div>
+				</span>
+			</del>
+		</th:block>
+	</div>
+ 
+      <!-- Format currency -->
+      <div th:fragment="format_currency(amount)" th:remove="tag">
+      <span
+        th:if="${CURRENCY_SYMBOL_POSITION == 'Before price'}"
+        th:remove="tag"
+        >[[${CURRENCY_SYMBOL}]]</span
+      >
+
+      [[${#numbers.formatDecimal(amount, 1, THOUSANDS_POINT_TYPE,
+      DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]
+
+      <span th:if="${CURRENCY_SYMBOL_POSITION == 'After price'}" th:remove="tag"
+        >[[${CURRENCY_SYMBOL}]]</span
+      >
+     </div>
 
 
      <!-- Pagination -->

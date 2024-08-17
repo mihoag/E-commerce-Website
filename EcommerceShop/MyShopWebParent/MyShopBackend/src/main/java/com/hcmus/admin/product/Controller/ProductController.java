@@ -17,18 +17,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.hcmus.admin.brand.BrandNotFoundException;
 import com.hcmus.admin.brand.BrandService;
 import com.hcmus.admin.category.CategoryService;
-import com.hcmus.admin.product.ProductNotFoundException;
 import com.hcmus.admin.product.ProductSaveHelper;
 import com.hcmus.admin.product.ProductService;
 import com.hcmus.admin.security.MyShopUserDetails;
-import com.hcmus.admin.user.UserNotFoundException;
 import com.hcmus.admin.util.FileUploadUtil;
 import com.hcmus.common.entity.Brand;
 import com.hcmus.common.entity.Category;
 import com.hcmus.common.entity.product.Product;
+import com.hcmus.common.exception.BrandNotFoundException;
+import com.hcmus.common.exception.ProductNotFoundException;
+import com.hcmus.common.exception.UserNotFoundException;
 
 @Controller
 @RequestMapping("/products")

@@ -1,0 +1,8 @@
+const buttonLoadCountriesForStates = $("#buttonLoadCountriesForStates")
+const dropDownCountriesForStates= $("#dropDownCountriesForStates")
+const dropDownStates= $("#dropDownStates")
+const labelStateName= $("#labelStateName")
+const fieldStateName= $("#fieldStateName")
+const buttonAddState= $("#buttonAddState")
+const buttonUpdateState= $("#buttonUpdateState")
+const buttonDeleteState= $("#buttonDeleteState")

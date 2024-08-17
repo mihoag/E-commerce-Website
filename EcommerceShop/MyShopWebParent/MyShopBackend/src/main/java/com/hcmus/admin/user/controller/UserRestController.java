@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hcmus.admin.user.UserNotFoundException;
 import com.hcmus.admin.user.UserService;
 import com.hcmus.common.entity.User;
+import com.hcmus.common.exception.UserNotFoundException;
 
 @RestController
 @RequestMapping("/api/users")

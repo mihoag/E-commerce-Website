@@ -3,7 +3,7 @@
 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
 <meta charset="UTF-8">
-<head th:replace="fragments :: page_head('Home page')" />
+<head th:replace="fragments :: page_head('Detail Product')" />
 
 <body>
      <!--  -->
@@ -71,7 +71,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
           </div>
 
           <div class="mb-3">
-            <span class="h5">$[[${product.discountPrice}]]</span>
+               <div th:replace="fragments :: product_price"></div>
           </div>
 
           <p th:utext="${product.shortDescription}">
@@ -147,7 +147,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
                   <a th:href="@{${rP.URI}}" class="nav-link mb-1">
                      [[${rP.shortName}]]
                   </a>
-                  <strong class="text-dark"> $[[${rP.discountPrice}]]</strong>
+                   <div th:replace="fragments :: product_price"></div>
                 </div>
               </div>
 

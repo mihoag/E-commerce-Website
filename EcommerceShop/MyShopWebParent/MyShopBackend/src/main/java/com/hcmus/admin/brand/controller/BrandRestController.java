@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hcmus.admin.brand.BrandNotFoundException;
 import com.hcmus.admin.brand.BrandService;
 import com.hcmus.admin.category.CategoryDto;
 import com.hcmus.common.entity.Brand;
 import com.hcmus.common.entity.Category;
+import com.hcmus.common.exception.BrandNotFoundException;
 
 @RestController
 @RequestMapping("/api/brands")

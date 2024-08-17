@@ -23,11 +23,11 @@ import com.hcmus.admin.category.CategoryService;
 import com.hcmus.admin.category.export.CategoryCsvExporter;
 import com.hcmus.admin.category.export.CategoryExcelExporter;
 import com.hcmus.admin.category.export.CategoryPdfExporter;
-import com.hcmus.admin.user.UserNotFoundException;
 import com.hcmus.admin.user.export.UserCsvExporter;
 import com.hcmus.admin.util.FileUploadUtil;
 import com.hcmus.common.entity.Category;
 import com.hcmus.common.entity.User;
+import com.hcmus.common.exception.UserNotFoundException;
 
 import jakarta.servlet.http.HttpServletResponse;
 

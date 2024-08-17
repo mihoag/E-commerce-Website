@@ -1,0 +1,7 @@
+package com.hcmus.common.exception;
+
+public class Snippet {
+	private Integer id;
+		private String name;
+}
+

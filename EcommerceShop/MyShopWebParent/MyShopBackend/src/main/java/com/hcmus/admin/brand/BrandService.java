@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.hcmus.common.entity.Brand;
+import com.hcmus.common.exception.BrandNotFoundException;
 
 @Service
 public class BrandService {

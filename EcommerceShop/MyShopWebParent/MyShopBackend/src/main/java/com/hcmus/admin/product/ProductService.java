@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.hcmus.common.entity.product.Product;
+import com.hcmus.common.exception.ProductNotFoundException;
 
 import jakarta.transaction.Transactional;
 

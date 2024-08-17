@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 
 import com.hcmus.admin.category.controller.CategoryPageInfo;
 import com.hcmus.common.entity.Category;
+import com.hcmus.common.exception.CategoryNotFoundException;
 
 @SpringBootTest
 public class CategoryServiceTests {

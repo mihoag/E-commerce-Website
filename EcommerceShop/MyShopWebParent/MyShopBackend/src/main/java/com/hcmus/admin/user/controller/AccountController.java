@@ -15,10 +15,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hcmus.admin.security.MyShopUserDetails;
-import com.hcmus.admin.user.UserNotFoundException;
 import com.hcmus.admin.user.UserService;
 import com.hcmus.admin.util.FileUploadUtil;
 import com.hcmus.common.entity.User;
+import com.hcmus.common.exception.UserNotFoundException;
 
 import ch.qos.logback.classic.Logger;
 

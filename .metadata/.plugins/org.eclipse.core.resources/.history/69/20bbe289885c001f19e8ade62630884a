@@ -1,0 +1,5 @@
+package com.hcmus.admin.setting.state;
+
+public class StateRestController {
+
+}

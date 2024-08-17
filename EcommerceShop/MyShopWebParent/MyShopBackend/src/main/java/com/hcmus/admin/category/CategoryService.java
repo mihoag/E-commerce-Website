@@ -14,6 +14,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.hcmus.admin.category.controller.CategoryPageInfo;
 import com.hcmus.common.entity.Category;
+import com.hcmus.common.exception.CategoryNotFoundException;
+
 import jakarta.transaction.Transactional;
 
 @Service

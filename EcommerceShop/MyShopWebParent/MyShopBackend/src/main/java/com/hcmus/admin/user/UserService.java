@@ -15,6 +15,7 @@ import com.hcmus.admin.category.controller.CategoryPageInfo;
 import com.hcmus.common.entity.Category;
 import com.hcmus.common.entity.Role;
 import com.hcmus.common.entity.User;
+import com.hcmus.common.exception.UserNotFoundException;
 
 import jakarta.transaction.Transactional;
 

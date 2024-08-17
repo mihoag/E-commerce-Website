@@ -3,7 +3,7 @@
 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
 <meta charset="UTF-8">
-<head th:replace="fragments :: page_head('Home page')" />
+<head th:replace="fragments :: page_head('Products Per Category')" />
 
 <body>
      <!--  -->
@@ -129,14 +129,16 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
                     </p>
                   </div>
                   <div class="col-xl-3 col-md-3 col-sm-5 d-column">
-                    <div class="d-flex float-end  flex-row align-items-center mb-1">
-                      <h4 class="mb-1 me-1">$[[${product.discountPrice}]]</h4>
+                    <div class="d-flex float-start  flex-row align-items-center mb-1">
+                    
+
+                      <span class="mb-1 me-1">$[[${product.discountPrice}]]</span>
                
                     </div>
                     
-                    <div class="mt-4 d-flex float-end ">
+                    <div class="mt-4 d-flex">
                       <a
-                         class="py-1  nav-link d-flex align-items-center float-end"
+                         class="py-1  nav-link d-flex align-items-center"
                        >
                       <i class="fas fa-shopping-cart m-1 me-md-2"></i>
                        </a>
