@@ -54,7 +54,7 @@ public class SettingRepositoryTests {
 	{
 		String key = "SITE_LOGO";
 		String value = "logo1.png";
-		repo.updateSetting(key, value);
+		//repo.updateSetting(key, value);
 		
 	}
 }

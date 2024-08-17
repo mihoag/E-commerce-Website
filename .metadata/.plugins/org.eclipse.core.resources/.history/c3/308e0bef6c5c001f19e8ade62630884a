@@ -1,0 +1,38 @@
+const buttonLoadCountries =$("#buttonLoadCountries");
+const dropDownCountries = $("#dropDownCountries");
+const fieldCountryName = $("#fieldCountryName");
+const buttonAddCountry = $("#buttonAddCountry");
+const buttonUpdateCountry = $("#buttonUpdateCountry");
+const buttonDeleteCountry = $("#buttonDeleteCountry");
+const toastLiveExample = $('#liveToast')
+
+buttonLoadCountries.on('click', async function()
+{
+	loadCountries();
+})
+
+function loadCountries()
+{
+    url =  "/MyshopAdmin/api/country";
+	$.get(url, function(responseJSON) {
+		dropDownCountries.empty();
+
+		$.each(responseJSON, function(index, country) {
+			//console.log(country)
+			optionValue = country.id + "-" + country.code;
+			$("<option>").val(optionValue).text(country.name).appendTo(dropDownCountries);
+		});
+	}).done(function() {
+	 
+		showToast("All countries have been loaded");
+	}).fail(function() {
+		showToast("ERROR: Could not connect to server or server encountered an error");
+	});
+}
+
+function showToast(value)
+{
+	  $("#toastMessage").text(value);
+	  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+      toastBootstrap.show()
+}

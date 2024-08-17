@@ -43,6 +43,7 @@ public class CountryController {
 	
 	@PostMapping("/save")
 	public String save(@RequestBody Country country) {
+		System.out.println(country);
 		Country savedCountry = repo.save(country);
 		return String.valueOf(savedCountry.getId());
 	}

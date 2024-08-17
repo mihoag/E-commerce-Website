@@ -24,6 +24,8 @@
                <div id = "manageTitle" class = "d-flex"><h3>Site Setting</h3></div>
                <!--Body table student-->
           <main class="main-content border-radius-lg">
+          		<div th:if="${message != null}"
+			  class="alert alert-success text-center">[[${message}]]</div>
              <div class="card mt-3">
 
                <ul class="nav nav-tabs" id="myTab" role="tablist">
