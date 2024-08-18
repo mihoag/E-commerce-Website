@@ -1,0 +1,29 @@
+contextPath = "[[@{/}]]";
+var messageConfirmPassword = $("#messageConfirmPassword")
+
+function checkEmailUnique(form) {
+			url = contextPath + "api/customers/check_email";
+			customerEmail = $("#email").val();
+			
+
+			params = {email: customerEmail};
+
+			$.post(url, params, function (response) {
+				if (response == "OK") {
+					form.submit();
+				} else if (response == "Duplicated") {
+					showToast("There is another cusotmer having the email " + customerEmail);
+				} else {
+					showToast("Unknown response from server");
+				}
+			}).fail(function () {
+				showToast("Could not connect to the server");
+			});
+
+			return false;
+}
+
+function checkPasswordMatch(confirmPassword)
+{
+	 var password = $("#password").val();
+}

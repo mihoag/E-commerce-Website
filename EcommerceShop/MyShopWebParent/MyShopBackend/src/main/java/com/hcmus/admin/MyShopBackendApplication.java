@@ -10,5 +10,4 @@ public class MyShopBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MyShopBackendApplication.class, args);
 	}
-	
 }
