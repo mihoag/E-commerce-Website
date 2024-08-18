@@ -47,6 +47,18 @@ public class SettingService {
 			repo.save(s);
 		}
 	}
+	public MailSettingBag getMailSettings()
+	{
+		List<Setting> settings = new ArrayList<>();
+		List<Setting> mailServerSettings = repo.findByCategory(SettingCategory.MAIL_SERVER);
+		List<Setting> mailTemplateSettings = repo.findByCategory(SettingCategory.MAIL_TEMPLATES);
+		
+		settings.addAll(mailServerSettings);
+		settings.addAll(mailTemplateSettings);
+		
+		return new MailSettingBag(settings);
+		
+	}
 	
 	public List<Setting> getMailServerSettings() {
 		return repo.findByCategory(SettingCategory.MAIL_SERVER);

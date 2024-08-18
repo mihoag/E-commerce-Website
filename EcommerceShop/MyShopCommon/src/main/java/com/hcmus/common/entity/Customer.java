@@ -95,5 +95,9 @@ public class Customer extends AbstractAddressWithCountry{
 		this.resetPasswordToken = resetPasswordToken;
 	}
 	
+	public String getFullName()
+	{
+		return firstName + " " + lastName;
+	}
 	
 }

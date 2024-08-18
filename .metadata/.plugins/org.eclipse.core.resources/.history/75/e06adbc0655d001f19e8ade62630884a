@@ -1,0 +1,30 @@
+package com.hcmus.site.customer;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.hcmus.common.entity.Customer;
+import com.hcmus.site.setting.CountryRepository;
+
+import jakarta.transaction.Transactional;
+
+@Service
+@Transactional
+public class CustomerService {
+
+	@Autowired private CountryRepository countryRepo;
+	@Autowired
+	private CustomerRepository customerRepo;
+	
+	public String checkEmail(String email)
+	{
+		Customer customer = customerRepo.findByEmail(email);
+		if(customer == null)
+		{
+			return "OK";
+		}
+		return "Duplicated";
+	}
+	
+	public 
+}

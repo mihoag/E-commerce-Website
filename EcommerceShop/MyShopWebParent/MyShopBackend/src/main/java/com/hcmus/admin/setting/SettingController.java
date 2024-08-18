@@ -85,6 +85,18 @@ public class SettingController {
 		return "redirect:/setting";
 	}
 	
+	@PostMapping("/save_mail_templates")
+	public String saveMailTemplates(HttpServletRequest request, RedirectAttributes ra) {
+		//TODO: process POST request
+		
+	    updateSettingValuesFromForm(request, service.getMailTemplateSettings());
+		
+		ra.addFlashAttribute("message", "Mail templates have been saved.");
+		ra.addFlashAttribute("tab", "mailTemplate");
+		return "redirect:/setting";
+	}
+	
+	
 	public void updateSettingValuesFromForm(HttpServletRequest request, List<Setting> settings)
 	{
 	    for(Setting setting : settings)

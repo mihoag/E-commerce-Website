@@ -42,7 +42,7 @@
                          <button class="nav-link" th:classappend="${tab eq 'mail'} ? 'active' : ''" id="settings-tab" data-bs-toggle="tab" data-bs-target="#mailserver" type="button" role="tab" aria-controls="settings" aria-selected="false">Mail Server</button>
                       </li>
                       <li class="nav-item" role="presentation">
-                         <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#mailtemplate" type="button" role="tab" aria-controls="settings" aria-selected="false">Mail Templates</button>
+                         <button class="nav-link" th:classappend="${tab eq 'mailTemplate'} ? 'active' : ''" id="settings-tab" data-bs-toggle="tab" data-bs-target="#mailtemplate" type="button" role="tab" aria-controls="settings" aria-selected="false">Mail Templates</button>
                       </li>
                       <li class="nav-item" role="presentation">
                          <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#payments" type="button" role="tab" aria-controls="settings" aria-selected="false">Payments</button>
@@ -68,8 +68,8 @@
                      	 	<div th:replace="settings/mail_server :: content"></div>
                          </div>
                       
-                         <div class="tab-pane" id="mailtemplate" role="tabpanel" aria-labelledby="settings-tab">
-                           
+                         <div class="tab-pane" th:classappend="${tab eq 'mailTemplate'} ? 'active' : ''" id="mailtemplate" role="tabpanel" aria-labelledby="settings-tab">
+                           	<div th:replace="settings/mail_templates/mail_templates :: content"></div>
                          </div>
                          
                          <div class="tab-pane" id="payments" role="tabpanel" aria-labelledby="settings-tab">
@@ -110,5 +110,6 @@
     <script type="text/javascript" th:src="@{/js/EventUpload.js}"></script>
     <script type="text/javascript" th:src="@{/js/country/ConfigCountryFormEvent.js}"></script>
     <script type="text/javascript" th:src="@{/js/country/ConfigStateFormEvent.js}"></script>
+     <script type="text/javascript" th:src="@{/js/country/ConfigMailTemplateEvent.js}"></script>
 </body>
 </html>

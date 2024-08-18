@@ -1,16 +1,29 @@
 package com.hcmus.site.customer;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hcmus.common.entity.Country;
 import com.hcmus.common.entity.Customer;
+import com.hcmus.common.entity.setting.Setting;
+import com.hcmus.site.Utility;
 import com.hcmus.site.setting.CountryRepository;
+import com.hcmus.site.setting.GeneralSettingBag;
+import com.hcmus.site.setting.MailSettingBag;
+import com.hcmus.site.setting.SettingService;
+
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class CustomerController {
@@ -21,7 +34,8 @@ public class CustomerController {
 	@Autowired
 	private CountryRepository countryRepo;
 	
-	
+	@Autowired
+	private SettingService settingService;
 	
 	@GetMapping("/register")
 	public String showRegisterForm(Model model)
@@ -34,5 +48,49 @@ public class CustomerController {
 		
 		return "register/register_form";
 	}
+	
+	@PostMapping("/create_customer")
+	public String createCustomer(Customer customer, Model model,
+			HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
+		
+		customerService.registerCustomer(customer);
+		sendVerificationEmail(request, customer);
+		return "register/register_success";
+	}
+	
+	private void sendVerificationEmail(HttpServletRequest request, Customer customer) 
+			throws UnsupportedEncodingException, MessagingException {
+		MailSettingBag emailSettings = settingService.getMailSettings();
+		JavaMailSenderImpl mailSender = Utility.prepareMailSender(emailSettings);
+		
+		String toAddress = customer.getEmail();
+		String subject = emailSettings.getCustomerVerifySubject();
+		String content = emailSettings.getCustomerVerifyContent();
+		
+		MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message);
+		
+		helper.setFrom(emailSettings.getFromAddress(), emailSettings.getSenderName());
+		helper.setTo(toAddress);
+		helper.setSubject(subject);
+		
+		content = content.replace("[[CustomerName]]", customer.getFullName());
+		
+		System.out.println(Utility.getSiteURL(request));
+		String verifyURL = Utility.getSiteURL(request) + "/verify?code=" + customer.getVerificationCode();
+		
+		content = content.replace("[[VerificationLink]]", verifyURL);
+		content = content.replace("[[CompanyName]]", emailSettings.getSenderName());
+		content = content.replace("[[SupportEmail]]", emailSettings.getFromAddress());
+		
+		helper.setText(content, true);
+		
+		mailSender.send(message);
+		
+		System.out.println("to Address: " + toAddress);
+		System.out.println("Verify URL: " + verifyURL);
+	}	
+	
+	
 	
 }
