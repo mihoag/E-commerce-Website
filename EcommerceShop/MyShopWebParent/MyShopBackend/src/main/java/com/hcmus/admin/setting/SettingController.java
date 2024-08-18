@@ -36,7 +36,7 @@ public class SettingController {
 	@Autowired private CurrencyRepository currencyRepo;
 	
 	@GetMapping("")
-	public String listAll(Model model) {
+	public String listAll(Model model, HttpServletRequest request) {
 		List<Setting> listSettings = service.listAllSettings();
 		List<Currency> listCurrencies = currencyRepo.findAllByOrderByNameAsc();
 		
@@ -45,6 +45,14 @@ public class SettingController {
 		for (Setting setting : listSettings) {
 			model.addAttribute(setting.getKey(), setting.getValue());
 		}
+		
+	
+		String tab = (String) request.getAttribute("tab");
+		if(tab == null)
+		{
+			request.setAttribute("tab", "general");
+		}
+		
 		model.addAttribute("sideBarFieldName", "setting");
 		return "settings/settings";
 	}
@@ -60,6 +68,20 @@ public class SettingController {
 		updateSettingValuesFromForm(request, settingBag.getListSettings());
 		
 		ra.addFlashAttribute("message", "General settings have been saved.");
+		ra.addFlashAttribute("tab", "general");
+		return "redirect:/setting";
+	}
+	
+	@PostMapping("/save_mail_server")
+	public String saveMailConfig(
+			HttpServletRequest request, RedirectAttributes ra) throws IllegalStateException, IOException {
+		//TODO: process POST request
+	
+		MailSettingBag mailSettingBag = service.getMailSettings();
+		updateSettingValuesFromForm(request, mailSettingBag.getListSettings());
+		
+		ra.addFlashAttribute("message", "Mail settings have been saved.");
+		ra.addFlashAttribute("tab", "mail");
 		return "redirect:/setting";
 	}
 	

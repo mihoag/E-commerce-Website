@@ -29,8 +29,8 @@
              <div class="card mt-3">
 
                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                      <li class="nav-item" role="presentation">
-                          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab" aria-controls="home" aria-selected="true">General</button>
+                      <li class="nav-item" th:classappend="${tab eq 'general'} ? 'active' : ''" role="presentation">
+                          <button class="nav-link active"  id="home-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab" aria-controls="home" aria-selected="true">General</button>
                       </li>
                       <li class="nav-item" role="presentation">
                          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#countries" type="button" role="tab" aria-controls="profile" aria-selected="false">Countries</button>
@@ -39,7 +39,7 @@
                          <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#states" type="button" role="tab" aria-controls="messages" aria-selected="false">States</button>
                       </li>
                       <li class="nav-item" role="presentation">
-                         <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#mailserver" type="button" role="tab" aria-controls="settings" aria-selected="false">Mail Server</button>
+                         <button class="nav-link" th:classappend="${tab eq 'mail'} ? 'active' : ''" id="settings-tab" data-bs-toggle="tab" data-bs-target="#mailserver" type="button" role="tab" aria-controls="settings" aria-selected="false">Mail Server</button>
                       </li>
                       <li class="nav-item" role="presentation">
                          <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#mailtemplate" type="button" role="tab" aria-controls="settings" aria-selected="false">Mail Templates</button>
@@ -52,7 +52,7 @@
 
 
                       <div class="tab-content mx-3 my-3">
-                         <div class="tab-pane active" id="general" role="tabpanel" aria-labelledby="home-tab">
+                         <div class="tab-pane" th:classappend="${tab eq 'general'} ? 'active' : ''" id="general" role="tabpanel" aria-labelledby="home-tab">
                             <div th:replace="settings/general :: content"></div>
                          </div>
                          
@@ -64,12 +64,12 @@
                       	    <div th:replace="settings/states :: content"></div>
                          </div>
                          
-                         <div class="tab-pane" id="mailserver" role="tabpanel" aria-labelledby="settings-tab">
-                     	 
+                         <div class="tab-pane" th:classappend="${tab eq 'mail'} ? 'active' : ''" id="mailserver" role="tabpanel" aria-labelledby="settings-tab">
+                     	 	<div th:replace="settings/mail_server :: content"></div>
                          </div>
                       
                          <div class="tab-pane" id="mailtemplate" role="tabpanel" aria-labelledby="settings-tab">
-                          
+                           
                          </div>
                          
                          <div class="tab-pane" id="payments" role="tabpanel" aria-labelledby="settings-tab">
