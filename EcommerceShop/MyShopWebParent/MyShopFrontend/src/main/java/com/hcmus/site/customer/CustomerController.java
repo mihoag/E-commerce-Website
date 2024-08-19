@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hcmus.common.entity.Country;
 import com.hcmus.common.entity.Customer;
@@ -49,6 +50,7 @@ public class CustomerController {
 		return "register/register_form";
 	}
 	
+	// Create new customer
 	@PostMapping("/create_customer")
 	public String createCustomer(Customer customer, Model model,
 			HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
@@ -56,6 +58,20 @@ public class CustomerController {
 		customerService.registerCustomer(customer);
 		sendVerificationEmail(request, customer);
 		return "register/register_success";
+	}
+	
+	
+	// 
+	@GetMapping("/verify")
+	public String verifyCustomer(@RequestParam("code") String code)
+	{
+		boolean checkVerify = customerService.checkVerification(code);
+		
+		if(!checkVerify)
+		{ 
+			return "register/verify_fail";
+		}
+		return "register/verify_success";
 	}
 	
 	private void sendVerificationEmail(HttpServletRequest request, Customer customer) 

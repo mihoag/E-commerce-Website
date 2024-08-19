@@ -1,0 +1,53 @@
+package com.hcmus.site.customer;
+
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.hcmus.common.entity.AuthenticationType;
+import com.hcmus.common.entity.Customer;
+import com.hcmus.site.setting.CountryRepository;
+
+import jakarta.transaction.Transactional;
+import net.bytebuddy.utility.RandomString;
+
+@Service
+@Transactional
+public class CustomerService {
+
+	@Autowired private CountryRepository countryRepo;
+	@Autowired
+	private CustomerRepository customerRepo;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	public String checkEmail(String email)
+	{
+		Customer customer = customerRepo.findByEmail(email);
+		if(customer == null)
+		{
+			return "OK";
+		}
+		return "Duplicated";
+	}
+	
+	public void registerCustomer(Customer customer) {
+		encodePassword(customer);
+		customer.setEnabled(false);
+		customer.setCreatedTime(new Date());
+		customer.setAuthenticationType(AuthenticationType.DATABASE);
+		
+		String randomCode = RandomString.make(64);
+		customer.setVerificationCode(randomCode);
+		
+		customerRepo.save(customer);
+		
+	}
+	
+	private void encodePassword(Customer customer) {
+		String encodedPassword = passwordEncoder.encode(customer.getPassword());
+		customer.setPassword(encodedPassword);
+	}
+}
