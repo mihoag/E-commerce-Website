@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hcmus.common.entity.Customer;
@@ -53,6 +55,27 @@ public class CustomerService {
 		// TODO: handle exception
 		throw new CustomerNotFoundException("Customer not found with id " + id);
 	}
+   }
+   
+   public Customer saveCustomer(Customer customer)
+   {
+	    if(customer.getPassword().isEmpty())
+	    {
+	    	 Customer customerDb = repo.findById(customer.getId()).get();
+	    	 customer.setPassword(customerDb.getPassword());
+	    }
+	    else
+	    {
+	    	encodePassword(customer);
+	    }
+	    
+	    return repo.save(customer);
+   }
+   
+   public void encodePassword(Customer customer)
+   {
+	   PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	   customer.setPassword(passwordEncoder.encode(customer.getPassword()));
    }
    
    

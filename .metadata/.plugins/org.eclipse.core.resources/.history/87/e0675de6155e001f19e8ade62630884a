@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head th:replace="fragment :: page_head('Customer Management Page')" />
+<body style="background-color: #f5f7f6;">
+   <!-- Header -->
+   <div th:replace="fragment :: header"></div>
+
+    <div class="container-fluid w-100 mt-2">
+       
+        <div class="row w-100">
+            <div class="col-md-3">
+               <!-- start side bar -->
+               <aside th:replace="fragment :: sidebar"></aside>
+               <!--end side bar-->
+            </div>
+            
+            <div class="col-md-9">
+            <div id = "manageTitle" class = "d-flex justify-content-center"><h3>Manage Customers</h3></div>
+            
+            <!--Body table student-->
+               <main class="main-content border-radius-lg">
+                    <div class="card mt-3">
+                     <form class="d-flex mx-2 my-2" method="get" th:action="@{'/customers/page/1'}">
+                      <input class="form-control me-1" type="text"  name="keyword" th:value="${keyword}"  placeholder="Enter the keyword"> 
+                      <input th:value="${sortDir}" name="sortDir" hidden>
+                      <input hidden  th:value="${sortField}" name="sortField"> 
+                      <button class="btn btn-primary"  style="width: 150px;" type="submit">Search</button> &nbsp;
+                      <a class="btn btn-secondary" th:href="@{/customers}" style="width: 150px;">Clear</a>
+                     </form>
+                     <div class= "d-flex" id = "functionButtons">
+                        <a th:href="@{/customers/export/excel}" type="button"
+                            class="btn btn-primary mt-3 mx-3" >Export to EXCEL</a>
+                     </div>
+                    
+                        <!-- Table full detail-->
+                        <div class="card-body px-0 pb-2">
+                            <div class="table-responsive p-0">
+                                <table class="table align-items-center mb-0 full-details">
+                                    <thead>
+                                        <tr>
+                                            <th th:replace="fragment ::  column_link('ID', 'id',true)">
+                                               </th>
+                                           
+                                            <th th:replace="fragment ::  column_link('First Name', 'firstName',false)">
+                                               </th>
+                                               
+                                            <th th:replace="fragment ::  column_link('Last Name', 'lastName',false)">
+                                               </th>
+                                            
+                                             <th th:replace="fragment ::  column_link('E-mail', 'email',true)">
+                                               </th>
+                                               
+                                             <th th:replace="fragment ::  column_link('City', 'city',true)">
+                                               </th>
+                                               
+                                             <th th:replace="fragment ::  column_link('State', 'state', true)">
+                                               </th>
+                                             
+                                              <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Country</th>
+                                             
+                                            <th class="text-secondary opacity-7"></th>
+                                        </tr>
+                                    </thead>
+                                   
+                                    <tbody>
+                                    
+                                        <tr th:each="customer : ${listCustomers}">
+                                            <td  class = "hideable-column">
+                                                <div class="d-flex px-4 py-1">
+                                                    <div class="d-flex flex-column justify-content-center ">
+                                                        <h6 class="mb-0 text-sm" th:text="${customer.id}"></h6>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                                                                  
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0" th:text="${customer.firstName}">
+                                                </p>
+                                            </td>
+                                            
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0" th:text="${customer.lastName}">
+                                                </p>
+                                            </td>
+                                            
+                                             <td  class = "hideable-column">
+                                                <p class="text-xs font-weight-bold mb-0" th:text="${customer.email}">
+                                                </p>
+                                            </td>
+                                            
+                                             <td class = "hideable-column">
+                                                <p class="text-xs font-weight-bold mb-0" th:text="${customer.city}">
+                                                </p>
+                                            </td>
+                                            
+                                             <td  class = "hideable-column">
+                                                <p class="text-xs font-weight-bold mb-0" th:text="${customer.state}">
+                                                </p>
+                                            
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0" th:text="${customer.country.name}">
+                                                </p>
+                                            </td>
+
+                                            <td>       
+                                                <a  class="text-secondary font-weight-bold text-xs link-detail"
+							                      th:href="@{'/customers/detail/' + ${customer.id}}">Detail</a>
+                                                &nbsp;         
+                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
+                                                   data-toggle="tooltip" data-bs-toggle="modal" th:attr="data-id=${customer.id}"
+                                                   data-bs-target="#deleteCustomer">
+                                                    Delete
+                                                </a>
+                                                &nbsp;
+                                                <a class="text-secondary font-weight-bold text-xs"
+                                                 th:href="@{/customers/edit/} + ${customer.id}">
+                                                    Update
+                                                </a>
+                                            </td>
+                                      
+                                        </tr>
+                                    </tbody>
+                                </table>
+                      
+                      <!--  Table less detail -->          
+                      <div class="less-details">
+			            <div th:each="customer : ${listCustomers}" class="row m-1">
+			         	
+				        <div class="col-12">
+					        <p class="text-xs font-weight-bold mb-0"><b>[[${customer.firstName}]] [[${customer.lastName}]]</b></p>
+					        <p class="text-xs font-weight-bold mb-0">Email: [[${customer.email}]]</p>
+					        <p class="text-xs font-weight-bold mb-0">Country: [[${customer.country.name}]]</p>
+					       <div class="mt-2">
+                                                 <a  class="text-secondary font-weight-bold text-xs link-detail"
+							        th:href="@{'/customers/detail/' + ${customer.id}}"><i class="fa-solid fa-circle-info"></i></a>
+                                                &nbsp;         
+                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
+                                                   data-toggle="tooltip" data-bs-toggle="modal" th:attr="data-id=${customer.id}"
+                                                   data-bs-target="#deleteCustomer">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </a>
+                                                &nbsp;
+                                                <a class="text-secondary font-weight-bold text-xs"
+                                                 th:href="@{/customers/edit/} + ${customer.id}">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </a>			           
+					       </div>
+					       
+	         		    </div>
+				      <div>&nbsp;</div>
+			           </div>
+		               </div>
+		               
+		               
+                                 <div th:if="${totalElement == 0}" class = "d-flex justify-content-center dy-3">Customer not found !</div>
+                                <!-- Pagination -->
+                                 <nav th:replace="fragment :: pagination"></nav>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+     <div th:replace="fragment :: footer"></div>
+     
+    <!--  Detail Customer -->
+    <div class="modal fade" id="detailModal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+				
+				</div>
+			</div>
+	</div>
+	
+	<!-- Update Customer Form-->
+    <div class="modal fade" id="updateModal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+				
+				</div>
+			</div>
+	</div>
+   
+    <!--Modal dialog delete Brand-->
+    <div class="modal fade" id="deleteCustomer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Customer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                   Are you sure to delete this customer?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a id="buttonDelete"  th:href="@{'/customers/delete'}" type="button" class="btn btn-primary">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+        
+   <script type="text/javascript" th:src="@{/js/ConfigViewEvent.js}"></script>
+   <script type="text/javascript" th:src="@{/js/customer/ConfigCustomerEvent.js}"></script>
+</body>
+</html>

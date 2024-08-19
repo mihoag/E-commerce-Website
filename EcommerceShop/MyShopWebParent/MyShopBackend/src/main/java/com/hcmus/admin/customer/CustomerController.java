@@ -9,11 +9,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hcmus.admin.setting.country.CountryRepository;
 import com.hcmus.admin.util.FileUploadUtil;
+import com.hcmus.common.entity.Country;
 import com.hcmus.common.entity.Customer;
+import com.hcmus.common.entity.product.Product;
 import com.hcmus.common.exception.CustomerNotFoundException;
 
 @Controller
@@ -23,6 +27,8 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 
+	@Autowired
+	private CountryRepository countryRepo;
 	
 	@GetMapping("/page/{pageNum}")
 	public String listByPage(@PathVariable("pageNum") int pageNum, @Param("sortField") String sortField,
@@ -60,6 +66,16 @@ public class CustomerController {
 		return "customers/customer_detail_modal";
 	}
 	
+	@GetMapping("/edit/{id}")
+	public String editCustomer(@PathVariable("id") Integer id, Model model) throws CustomerNotFoundException
+	{
+		Customer customer = customerService.getCustomerById(id);
+		List<Country> listCountries = countryRepo.findAll();
+		model.addAttribute("listCountries", listCountries);
+		model.addAttribute("customer", customer);
+		return "customers/customer_update_form";
+	}
+	
 	@GetMapping("/delete/{id}")
 	public String deleteProduct(@PathVariable(name = "id") Integer id, 
 			Model model,
@@ -69,6 +85,13 @@ public class CustomerController {
 		redirectAttributes.addAttribute("message", 
 				"The customer has ID "+ id +" has been deleted successfully");
 		return listByPage(1, "id", "asc", "", model);
+	}
+	
+	@PostMapping("/save")
+	public String saveCustomer(Customer customer, Model model)
+	{
+		Customer savedCustomer =  customerService.saveCustomer(customer);
+		return listByPage(1, "id", "asc", savedCustomer.getEmail(),model);
 	}
 	
 	@GetMapping("/**")
