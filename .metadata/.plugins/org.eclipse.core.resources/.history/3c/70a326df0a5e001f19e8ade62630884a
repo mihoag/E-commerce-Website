@@ -133,7 +133,7 @@
 			         	
 				        <div class="col-12">
 					        <p class="text-xs font-weight-bold mb-0"><b>[[${customer.firstName}]] [[${customer.lastName}]]</b></p>
-					        <p class="text-xs font-weight-bold mb-0">Email: [[${customer.email}]]</p>
+					        <p class="text-xs font-weight-bold mb-0" th:text="${}">Email: [[${customer.email}]]</p>
 					        <p class="text-xs font-weight-bold mb-0">Country: [[${customer.country.name}]]</p>
 					       <div class="mt-2">
                                                 <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
