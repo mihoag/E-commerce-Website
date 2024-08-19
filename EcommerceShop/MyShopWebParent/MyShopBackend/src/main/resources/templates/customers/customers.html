@@ -105,11 +105,8 @@
                                             </td>
 
                                             <td>       
-                                               <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                   data-toggle="tooltip" data-bs-toggle="modal" th:attr="data-id=${customer.id}"
-                                                   data-bs-target="#detailCustomer">
-                                                    Detail
-                                                </a>
+                                                <a  class="text-secondary font-weight-bold text-xs link-detail"
+							                      th:href="@{'/customers/detail/' + ${customer.id}}">Detail</a>
                                                 &nbsp;         
                                                 <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
                                                    data-toggle="tooltip" data-bs-toggle="modal" th:attr="data-id=${customer.id}"
@@ -136,11 +133,8 @@
 					        <p class="text-xs font-weight-bold mb-0">Email: [[${customer.email}]]</p>
 					        <p class="text-xs font-weight-bold mb-0">Country: [[${customer.country.name}]]</p>
 					       <div class="mt-2">
-                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                   data-toggle="tooltip" data-bs-toggle="modal" th:attr="data-id=${customer.id}"
-                                                   data-bs-target="#detailCustomer">
-                                                   <i class="fa-solid fa-circle-info"></i>
-                                                </a>
+                                                 <a  class="text-secondary font-weight-bold text-xs link-detail"
+							        th:href="@{'/customers/detail/' + ${customer.id}}"><i class="fa-solid fa-circle-info"></i></a>
                                                 &nbsp;         
                                                 <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
                                                    data-toggle="tooltip" data-bs-toggle="modal" th:attr="data-id=${customer.id}"
@@ -172,6 +166,14 @@
     </div>
      <div th:replace="fragment :: footer"></div>
      
+    <!--  Detail Customer -->
+    <div class="modal fade" id="detailModal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+				
+				</div>
+			</div>
+	</div>
    
     <!--Modal dialog delete Brand-->
     <div class="modal fade" id="deleteCustomer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -197,6 +199,6 @@
         crossorigin="anonymous"></script>
         
    <script type="text/javascript" th:src="@{/js/ConfigViewEvent.js}"></script>
-  
+   <script type="text/javascript" th:src="@{/js/customer/ConfigCustomerEvent.js}"></script>
 </body>
 </html>

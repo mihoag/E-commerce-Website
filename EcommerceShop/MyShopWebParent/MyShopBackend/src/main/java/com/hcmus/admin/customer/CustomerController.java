@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hcmus.common.entity.Customer;
+import com.hcmus.common.exception.CustomerNotFoundException;
 
 @Controller
 @RequestMapping("/customers")
@@ -49,6 +50,13 @@ public class CustomerController {
 	    return "customers/customers";
 	}
 	
+	@GetMapping("/detail/{id}")
+	public String getDetailCustomer(@PathVariable("id") Integer id, Model model) throws CustomerNotFoundException
+	{
+		Customer customer = customerService.getCustomerById(id);
+		model.addAttribute("customer", customer);
+		return "customers/customer_detail_modal";
+	}
 	
 	@GetMapping("/**")
 	public String listFirstPage(Model model)
