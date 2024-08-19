@@ -25,9 +25,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
   </div>
     <br>
     <form th:action="@{/create_customer}" method="post"
-			th:object="${customer}" style="max-width: 600px; margin: 0 auto"
-			onsubmit="return checkEmailUnique(this);">
-			
+			th:object="${customer}" style="max-width: 600px; margin: 0 auto" class="px-3 py-3"
+			onsubmit="return checkEmailUnique(this);">	
 				<div class="form-group row">
 					<label class="col-sm-4 col-form-label">First Name:</label>
 					<div class="col-sm-8">

@@ -118,28 +118,36 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
+                 <hr>
                     <li  class="dropdown-item" >
-                        <a   id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a  class="fs-5 text-dark" style="text-decoration: none"    id="navbarDropdownMenuLink" role="button" aria-expanded="false">
                             Careers
                         </a>
                      
                     </li>
-                    
+                    <hr>
                     <li  class="dropdown-item" >
-                        <a   id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a  class="fs-5 text-dark" style="text-decoration: none"   id="navbarDropdownMenuLink" role="button"  aria-expanded="false">
                             Payments
                         </a>
                       
                     </li>
-                    
+                    <hr>
                     <li  class="dropdown-item" >
-                        <a   id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a   class="fs-5 text-dark" style="text-decoration: none"   id="navbarDropdownMenuLink" role="button"  aria-expanded="false">
                            Shipping & Delivery
                         </a>                     
-                    </li>                    
+                    </li>   
+                    <hr>           
                     <li  class="dropdown-item" >
-                        <a   id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a  class="fs-5 text-dark" style="text-decoration: none"  id="navbarDropdownMenuLink" role="button"  aria-expanded="false">
                             Contact
+                        </a>
+                    </li>
+                     <hr>           
+                    <li  class="dropdown-item" >
+                        <a   class="fs-5 text-dark"  th:href="@{/register}" style="text-decoration: none" id="navbarDropdownMenuLink" role="button" aria-expanded="false">
+                            Register
                         </a>
                     </li>
                    

@@ -1,0 +1,27 @@
+package com.hcmus.admin.customer;
+
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/customers")
+public class CustomerController {
+
+	@GetMapping
+	public String listFirstPage(Model model)
+	{
+		return listByPage(1, "id", "asc", "", model);
+	}
+	
+	public String listByPage(@PathVariable("pageNum") int pageNum, @Param("sortField") String sortField,
+			@Param("sortDir") String sortDir, @Param("keyword") String keyword, Model model)
+	{
+		
+		
+		
+	}
+}
