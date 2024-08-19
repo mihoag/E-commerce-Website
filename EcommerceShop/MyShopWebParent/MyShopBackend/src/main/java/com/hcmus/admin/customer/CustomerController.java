@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hcmus.admin.util.FileUploadUtil;
 import com.hcmus.common.entity.Customer;
 import com.hcmus.common.exception.CustomerNotFoundException;
 
@@ -56,6 +58,17 @@ public class CustomerController {
 		Customer customer = customerService.getCustomerById(id);
 		model.addAttribute("customer", customer);
 		return "customers/customer_detail_modal";
+	}
+	
+	@GetMapping("/delete/{id}")
+	public String deleteProduct(@PathVariable(name = "id") Integer id, 
+			Model model,
+			RedirectAttributes redirectAttributes) throws CustomerNotFoundException {
+		customerService.deleteCustomer(id);
+	
+		redirectAttributes.addAttribute("message", 
+				"The customer has ID "+ id +" has been deleted successfully");
+		return listByPage(1, "id", "asc", "", model);
 	}
 	
 	@GetMapping("/**")

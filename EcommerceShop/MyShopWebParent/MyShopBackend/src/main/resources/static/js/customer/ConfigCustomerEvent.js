@@ -4,3 +4,12 @@
 	//console.log(linkDetailURL);
 	$("#detailModal").modal("show").find(".modal-content").load(linkDetailURL);
 });
+
+    $('#deleteCustomer').on('show.bs.modal', async function (event) {
+        var button = $(event.relatedTarget);
+        var idCustomerDelete = button.data('id');  
+        var href = $('#buttonDelete').attr('href');
+        href += "/" + idCustomerDelete;
+        $('#buttonDelete').attr('href',href);
+    })
+    
