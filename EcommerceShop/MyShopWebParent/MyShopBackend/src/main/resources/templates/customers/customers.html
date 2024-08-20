@@ -59,6 +59,10 @@
                                               <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                 Country</th>
+                                                
+                                              <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Enabled</th>
                                              
                                             <th class="text-secondary opacity-7"></th>
                                         </tr>
@@ -102,6 +106,13 @@
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0" th:text="${customer.country.name}">
                                                 </p>
+                                            </td>
+                                            
+                                            <td>
+                                               <div class="d-flex flex-column justify-content-center">
+                                                  <a th:href="@{'/customers/customer/' + ${customer.id} + '/enabled/false' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword} + '&page=' + ${currentPage}}" th:if="${customer.enabled}"  class="fa-solid fa-circle-check"></a>
+                                                  <a th:href="@{'/customers/customer/' + ${customer.id} + '/enabled/true'  + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword} + '&page=' + ${currentPage}}" th:unless ="${customer.enabled}" class="fa-solid fa-ban"></a>
+                                               </div>
                                             </td>
 
                                             <td>       

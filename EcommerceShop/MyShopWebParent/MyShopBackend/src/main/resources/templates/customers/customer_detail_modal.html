@@ -8,33 +8,42 @@
     <div class="tab-content mx-3 my-3">
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Customer ID:</label>
-        <div class="col-sm-10">
-          <input
-            type="text"
-            class="form-control"
-            th:value="${customer.id}"
-            readonly
-          />
+        <div class="col-sm-10 mt-1">
+          [[${customer.id}]]
         </div>
       </div>
 
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Fullname:</label>
-        <div class="col-sm-10">
+        <div class="col-sm-10 mt-1">
          [[${customer.lastName}]]  [[${customer.firstName}]] 
         </div>
       </div>
 
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Email:</label>
-        <div class="col-sm-10">
+        <div class="col-sm-10 mt-1">
           [[${customer.email}]]
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Address line 1:</label>
+        <div class="col-sm-10 mt-1">
+          [[${customer.addressLine1}]]
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Address line 2:</label>
+        <div class="col-sm-10 mt-1">
+          [[${customer.addressLine2}]]
         </div>
       </div>
       
         <div class="form-group row">
         <label class="col-sm-2 col-form-label">City:</label>
-        <div class="col-sm-10">
+        <div class="col-sm-10 mt-1">
           [[${customer.city}]]
         </div>
       </div>
@@ -42,18 +51,39 @@
       
        <div class="form-group row">
         <label class="col-sm-2 col-form-label">State:</label>
-        <div class="col-sm-10">
+        <div class="col-sm-10 mt-1">
           [[${customer.state}]]
         </div>
       </div>
       
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Country:</label>
-        <div class="col-sm-10">
+        <div class="col-sm-10 mt-1">
           [[${customer.country.name}]]
         </div>
       </div>
       
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Postal code:</label>
+        <div class="col-sm-10 mt-1">
+          [[${customer.postalCode}]]
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Created Time:</label>
+        <div class="col-sm-10 mt-1">
+          [[${customer.createdTime}]]
+        </div>
+      </div>  
+      
+       <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Enabled:</label>
+        <div class="col-sm-10 mt-1">
+          [[${customer.enabled}]]
+        </div>
+      </div>  
+          
      </div>                
      </div>
 

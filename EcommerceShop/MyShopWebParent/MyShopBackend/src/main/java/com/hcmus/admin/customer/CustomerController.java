@@ -19,6 +19,7 @@ import com.hcmus.common.entity.Country;
 import com.hcmus.common.entity.Customer;
 import com.hcmus.common.entity.product.Product;
 import com.hcmus.common.exception.CustomerNotFoundException;
+import com.hcmus.common.exception.UserNotFoundException;
 
 @Controller
 @RequestMapping("/customers")
@@ -92,6 +93,13 @@ public class CustomerController {
 	{
 		Customer savedCustomer =  customerService.saveCustomer(customer);
 		return listByPage(1, "id", "asc", savedCustomer.getEmail(),model);
+	}
+	
+	@GetMapping("/customer/{id}/enabled/{status}")
+	public String updateCustomerEnable(@PathVariable("id") int id, @PathVariable("status") boolean status, @Param("sortField") String sortField, @Param("sortDir") String sortDir, @Param("keyword") String keyword, @Param("page") int page, Model model)
+	{
+		customerService.updateCustomerEnable(id, status);
+		return listByPage(page, sortField, sortDir, keyword, model);
 	}
 	
 	@GetMapping("/**")
