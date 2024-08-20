@@ -1,0 +1,67 @@
+<!DOCTYPE>
+<html  xmlns:th = "http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<meta charset="UTF-8">
+<head th:replace="fragments :: page_head('Login')" />
+
+<body>
+     <!--  -->
+  <div th:replace="fragments :: header"></div>
+ 
+    <div class="row d-flex justify-content-center align-items-center h-90">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="">
+          <div class="p-2 text-center">
+
+            <div class="mb-md-2 mt-md-2 pb-5">
+
+              <h2 class="fw-bold mb-2 text-uppercase">Login</h2> <br><br>
+              <form method="post" th:action="@{/login}"> 
+                   <div th:if="${param.error}">
+				    <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+			       </div>
+			    
+              <div data-mdb-input-init class="form-outline form-white mb-4">
+                <input type="email" name="email" placeholder="Enter your email" autocomplete="name" class="form-control form-control-lg" />     
+              </div>
+
+              <div data-mdb-input-init class="form-outline form-white mb-4">
+                <input type="password" name="password" placeholder="Enter your password" autocomplete="on" class="form-control form-control-lg" />   
+              </div>
+            
+              <div class="form-check d-flex justify-content-between mb-1">
+                <div>
+                 <input class="form-check-input" type="checkbox" name="remember-me" /> &nbsp;
+                 <label class="form-check-label" for="form1Example3"> Remember me </label>
+                </div>
+                 <p class="small mb-5 pb-lg-2"><a class="text-dark-50" href="#!">Forgot password?</a></p>
+              </div>
+
+             <button class="btn btn-primary btn-lg px-5" type="submit">Login</button>
+              </form>
+             <div class="d-flex justify-content-center text-center mt-2 pt-1">
+                <a href="#!" class="text-dark"><i class="fab fa-facebook-f fa-lg"></i></a>
+                <a href="#!" class="text-dark"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                <a href="#!" class="text-dark"><i class="fab fa-google fa-lg"></i></a>
+              </div>
+
+            </div>
+
+            <div>
+              <p class="mb-0">Don't have an account? <a href="#!" class="text-dark-50 fw-bold">Sign Up</a>
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div th:replace="fragments :: footer"></div>
+</body>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</html>

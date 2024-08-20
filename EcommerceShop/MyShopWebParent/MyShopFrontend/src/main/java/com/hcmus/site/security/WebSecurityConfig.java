@@ -46,9 +46,16 @@ public class WebSecurityConfig {
 		http.authenticationProvider(authenticationProvider());
 		http.authorizeHttpRequests(
 				auth -> 	
-				auth.anyRequest().permitAll())
-		.csrf(csrf -> csrf.disable());
-		
+				auth.requestMatchers("/account_details", "/update_account_details", "/orders/**",
+						"/cart", "/address_book/**", "/checkout", "/place_order", "/reviews/**", 
+						"/process_paypal_order", "/write_review/**", "/post_review").authenticated()
+				.anyRequest().permitAll())
+				.formLogin(login -> login.loginPage("/login").usernameParameter("email").permitAll())
+				.logout(logout -> logout.permitAll())
+				.rememberMe(remember -> remember
+		                .userDetailsService(userDetailService())
+		                .tokenValiditySeconds(86400))  // 1 day)
+				.csrf(csrf -> csrf.disable());
 		return http.build();
 	}	
 	
