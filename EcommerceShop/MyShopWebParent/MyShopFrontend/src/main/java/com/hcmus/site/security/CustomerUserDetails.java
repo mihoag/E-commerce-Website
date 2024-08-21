@@ -62,4 +62,12 @@ public class CustomerUserDetails implements UserDetails {
 	{
 		return customer.getFullName();
 	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 }

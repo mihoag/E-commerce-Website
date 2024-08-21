@@ -3,6 +3,7 @@ package com.hcmus.site.customer;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,6 @@ public class CustomerService {
 	@Autowired private CountryRepository countryRepo;
 	@Autowired
 	private CustomerRepository customerRepo;
-	@Autowired
-	private PasswordEncoder passwordEncoder;
 	
 	public String checkEmail(String email)
 	{
@@ -47,6 +46,7 @@ public class CustomerService {
 	}
 	
 	private void encodePassword(Customer customer) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(customer.getPassword());
 		customer.setPassword(encodedPassword);
 	}
@@ -62,5 +62,51 @@ public class CustomerService {
 		
 		customerRepo.enable(customer.getId());
 		return true;
+	}
+	
+	public void updateAuthenticationType(Customer customer, AuthenticationType authenticationType)
+	{
+		customer.setAuthenticationType(authenticationType);
+		customerRepo.save(customer);
+	}
+	
+	
+	public void addNewCustomerUponOAuthLogin(String name, String email, String countryCode,
+			AuthenticationType authenticationType) {
+		Customer customer = new Customer();
+		customer.setEmail(email);
+		setName(name, customer);
+		
+		customer.setEnabled(true);
+		customer.setCreatedTime(new Date());
+		customer.setAuthenticationType(authenticationType);
+		customer.setPassword("");
+		customer.setAddressLine1("");
+		customer.setCity("");
+		customer.setState("");
+		customer.setPhoneNumber("");
+		customer.setPostalCode("");
+		customer.setCountry(countryRepo.findByCode(countryCode));
+		
+		customerRepo.save(customer);
+	}	
+	
+	private void setName(String name, Customer customer) {
+		String[] nameArray = name.split(" ");
+		if (nameArray.length < 2) {
+			customer.setFirstName(name);
+			customer.setLastName("");
+		} else {
+			String firstName = nameArray[0];
+			customer.setFirstName(firstName);
+			
+			String lastName = name.replaceFirst(firstName + " ", "");
+			customer.setLastName(lastName);
+		}
+	}
+	
+	public Customer getCustomerByEmail(String email)
+	{
+		return customerRepo.findByEmail(email);
 	}
 }

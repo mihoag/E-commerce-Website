@@ -13,4 +13,8 @@ public interface CountryRepository extends JpaRepository<Country, Integer>{
 
 	@Query("select c from Country c order by c.name asc")
 	public List<Country> listAllAsc();
+	
+	@Query("select c from Country c where c.code = ?1")
+	public Country findByCode(String code);
+	
 }

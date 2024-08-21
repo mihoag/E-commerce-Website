@@ -76,6 +76,7 @@ public class CustomerController {
 	
 	private void sendVerificationEmail(HttpServletRequest request, Customer customer) 
 			throws UnsupportedEncodingException, MessagingException {
+		
 		MailSettingBag emailSettings = settingService.getMailSettings();
 		JavaMailSenderImpl mailSender = Utility.prepareMailSender(emailSettings);
 		
@@ -106,7 +107,4 @@ public class CustomerController {
 		System.out.println("to Address: " + toAddress);
 		System.out.println("Verify URL: " + verifyURL);
 	}	
-	
-	
-	
 }
