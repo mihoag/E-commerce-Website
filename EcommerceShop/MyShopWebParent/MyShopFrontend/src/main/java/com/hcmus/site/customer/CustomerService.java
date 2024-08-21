@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.hcmus.common.entity.AuthenticationType;
 import com.hcmus.common.entity.Country;
 import com.hcmus.common.entity.Customer;
+import com.hcmus.common.exception.CustomerNotFoundException;
 import com.hcmus.site.setting.CountryRepository;
 
 import jakarta.transaction.Transactional;
@@ -139,6 +140,46 @@ public class CustomerService {
 		customerInForm.setResetPasswordToken(customerInDb.getResetPasswordToken());
 		
 		customerRepo.save(customerInForm);
+	}
+	
+	public String updatePasswordToken(String email) throws CustomerNotFoundException
+	{
+		Customer customer = customerRepo.findByEmail(email);
+		
+		if(customer == null)
+		{
+			throw new CustomerNotFoundException("Customer not found with email " + email);
+		}
+	
+		String token = RandomString.make(30);
+		customer.setResetPasswordToken(token);
+		customerRepo.save(customer);
+		
+		return token;
+	}
+	
+	public Customer getCustomerByToken(String token) throws CustomerNotFoundException
+	{
+	    Customer customer = customerRepo.findByResetPasswordToken(token);
+	    if(customer == null)
+	    {
+	    	throw new CustomerNotFoundException("Customer not found with token " + token);
+	    }
+	    
+	    return customer;            
+	}
+	
+	public void updatePassword(String token, String newPassword) throws CustomerNotFoundException {
+		Customer customer = customerRepo.findByResetPasswordToken(token);
+		if (customer == null) {
+			throw new CustomerNotFoundException("No customer found: invalid token");
+		}
+		
+		customer.setPassword(newPassword);
+		customer.setResetPasswordToken(null);
+		encodePassword(customer);
+		
+		customerRepo.save(customer);
 	}
 	
 }
