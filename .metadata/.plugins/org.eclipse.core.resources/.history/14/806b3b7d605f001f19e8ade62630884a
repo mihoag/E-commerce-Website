@@ -15,6 +15,6 @@ spring.security.oauth2.client.registration.google.client-id=326217566106-m45dv35
 spring.security.oauth2.client.registration.google.client-secret=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
 spring.security.oauth2.client.registration.google.scope=email,profile
 
-spring.security.oauth2.client.registration.facebook.client-id=795009705854715
-spring.security.oauth2.client.registration.facebook.client-secret=f09097ff412d53978ed4ae47b5984904
+spring.security.oauth2.client.registration.facebook.client-id=473091968968701
+spring.security.oauth2.client.registration.facebook.client-secret=your-facebook-client-secret
 spring.security.oauth2.client.registration.facebook.scope=email,public_profile
