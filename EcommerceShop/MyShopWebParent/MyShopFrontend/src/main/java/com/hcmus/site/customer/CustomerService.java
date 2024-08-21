@@ -1,6 +1,7 @@
 package com.hcmus.site.customer;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -8,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hcmus.common.entity.AuthenticationType;
+import com.hcmus.common.entity.Country;
 import com.hcmus.common.entity.Customer;
 import com.hcmus.site.setting.CountryRepository;
 
@@ -109,4 +111,34 @@ public class CustomerService {
 	{
 		return customerRepo.findByEmail(email);
 	}
+	
+	public List<Country> listAllCountries()
+	{
+		return countryRepo.findAll();
+	}
+	
+	public void updateCustomer(Customer customerInForm)
+	{
+		BCryptPasswordEncoder bpc = new BCryptPasswordEncoder();
+		Customer customerInDb = customerRepo.findById(customerInForm.getId()).get();
+		if (customerInDb.getAuthenticationType().equals(AuthenticationType.DATABASE)) {
+			if (!customerInForm.getPassword().isEmpty()) {
+				String encodedPassword = bpc.encode(customerInForm.getPassword());
+				customerInForm.setPassword(encodedPassword);			
+			} else {
+				customerInForm.setPassword(customerInDb.getPassword());
+			}		
+		} else {
+			customerInForm.setPassword(customerInDb.getPassword());
+		}
+		
+		customerInForm.setEnabled(customerInDb.isEnabled());
+		customerInForm.setCreatedTime(customerInDb.getCreatedTime());
+		customerInForm.setVerificationCode(customerInDb.getVerificationCode());
+		customerInForm.setAuthenticationType(customerInDb.getAuthenticationType());
+		customerInForm.setResetPasswordToken(customerInDb.getResetPasswordToken());
+		
+		customerRepo.save(customerInForm);
+	}
+	
 }

@@ -1,0 +1,177 @@
+<!DOCTYPE>
+<html  xmlns:th = "http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<meta charset="UTF-8">
+<head th:replace="fragments :: page_head('Registration')" />
+
+<body>
+     <!--  -->
+    <div th:replace="fragments :: header"></div>
+    
+  <div class="bg-primary">
+    <div class="container py-4">
+      <!-- Breadcrumb -->
+      <nav class="d-flex">
+        <h6 class="mb-0">
+           <a th:href="@{/}" class="text-white-50">Home</a>
+       
+          <span class="text-white-50 mx-2"> > </span>
+          <a class="text-white-50">Account User</a>
+        </h6>
+      </nav>
+      <!-- Breadcrumb -->
+    </div>
+  </div>
+    
+	
+	
+	
+<main class= "pt-4">
+    <div class="container">
+        <!--Grid row-->
+        <div class="row">
+            <!--Grid column-->
+            <div class="col-md-12 mb-4">
+                <!--Card-->
+                <div class="card p-4">
+                <form th:action="@{/update_account_details}" method="post"
+			        th:object="${customer}">
+                    <!--Grid row-->
+                    <div class="row mb-3">
+                    
+                    <input type="hidden" th:field="*{id}" />   
+                    <div class="input-group mb-4">
+                        <span class="input-group-text" id="basic-addon1">Authentication type</span>
+                        <input type="text" class="form-control" th:field="*{authenticationType}" readonly="readonly" aria-describedby="basic-addon1" />
+                    </div>
+                    
+                     <!--email-->
+                    <p class="mb-0">
+                        Email 
+                    </p>
+                    <div class="form-outline mb-4">
+                         <input type="email" th:field="*{email}" class="form-control" readonly="readonly" aria-describedby="basic-addon1" />
+                    </div>
+                    
+                        <!--Grid column-->
+                        <div class="col-md-6 mb-2">
+                            <!--firstName-->
+                            <div class="form-outline">
+                                <label class="form-label" for="typeText">First name</label>
+                                <input type="text" id="typeText" class="form-control" th:field="*{firstName}" required="required" maxlength="45" minlength="2"  />
+                                
+                            </div>
+                        </div>
+                        <!--Grid column-->
+
+                        <!--Grid column-->
+                        <div class="col-md-6 mb-2">
+                            <!--lastName-->
+                            <div class="form-outline">
+                               <label class="form-label" for="typeText">Last name</label>
+                                <input type="text" id="typeText" class="form-control" th:field="*{lastName}" required="required" maxlength="45" minlength="2"/>
+                               
+                            </div>
+                        </div>
+                        <!--Grid column-->
+                    </div>
+                    <!--Grid row-->
+
+
+                    <p class="mb-0">
+                        Phone Number
+                    </p>
+                    <div class="form-outline mb-4">
+                        <input type="text" th:field="*{phoneNumber}" class="form-control"
+							required="required" maxlength="15" minlength="8" />
+                    </div>
+                   
+
+                    <!--address-->
+                    <p class="mb-0">
+                        Address
+                    </p>
+                    <div class="form-outline mb-4">
+                        <input type="text" th:field="*{addressLine1}" class="form-control"
+							required="required" maxlength="64" minlength="3"/>
+                    </div>
+
+                    <!--address-2-->
+                    <p class="mb-0">
+                        Address 2 (optional)
+                    </p>
+                    <div class="form-outline mb-4">
+                        <input type="text"  th:field="*{addressLine2}" class="form-control"
+							maxlength="64" />
+                    </div>
+
+                    <!--Grid row-->
+                    <div class="row">
+                    
+                        <div class="col-lg-4 col-md-12 mb-3">
+                            <p class="mb-0">
+                               City
+                            </p>
+                            <div class="form-outline mb-4">
+                             <input type="text" th:field="*{city}" class="form-control"
+							     maxlength="45" minlength="2" />
+                            </div>
+                        </div>
+                    
+                <div class="form-group row  mb-4">
+					<label class="col-sm-4 col-form-label">Country:</label>
+					<div class="col-sm-8">
+						<select class="form-control" th:field="*{country}">
+							<th:block th:each="country : ${listCountries}">
+								<option th:value="${country.id}">[[${country.name}]]</option>
+							</th:block>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group row  mb-4">
+					<label class="col-sm-4 col-form-label">State/Province:</label>
+					<div class="col-sm-8">
+						<input type="text" th:field="*{state}" class="form-control"
+							maxlength="45" minlength="3" list="listStates" />
+						<datalist id="listStates"></datalist>
+					</div>
+				</div>
+				
+				<div class="form-group row mb-4">
+					<label class="col-sm-4 col-form-label">Postal Code:</label>
+					<div class="col-sm-8">
+						<input type="text" th:field="*{postalCode}" class="form-control"
+							maxlength="10" minlength="2" />
+					</div>
+				</div>
+                       
+             </div>
+          
+                  <button class="btn btn-primary" type="submit">Save account</button>
+                  
+                  </form>
+                </div>
+                <!--/.Card-->
+            </div>
+            <!--Grid column-->
+
+            </div>
+            <!--Grid column-->
+        </div>
+        <!--Grid row-->
+    </div>
+</main>
+	
+	
+
+	
+    
+<div th:replace="fragments :: footer"></div>
+</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+ 
+</html>

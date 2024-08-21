@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hcmus.common.entity.Country;
 import com.hcmus.common.entity.Customer;
@@ -107,4 +108,25 @@ public class CustomerController {
 		System.out.println("to Address: " + toAddress);
 		System.out.println("Verify URL: " + verifyURL);
 	}	
+	
+	@GetMapping("/account_details")
+	public String viewAccountDetails(Model model, HttpServletRequest request) {
+		String email = Utility.getEmailOfAuthenticatedCustomer(request);
+		Customer customer = customerService.getCustomerByEmail(email);
+		List<Country> listCountries = customerService.listAllCountries();
+		
+		model.addAttribute("customer", customer);
+		model.addAttribute("listCountries", listCountries);
+		
+		return "customer/account_form";
+	}
+	
+	@PostMapping("/update_account_details")
+	public String updateAccount(Model model, Customer customer, RedirectAttributes ra,
+			HttpServletRequest request)
+	{
+	    customerService.updateCustomer(customer);
+	    ra.addFlashAttribute("message", "Update successfully");
+		return "redirect:/account_details";
+	}
 }
