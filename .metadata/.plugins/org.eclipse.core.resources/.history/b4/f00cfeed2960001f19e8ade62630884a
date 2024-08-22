@@ -1,0 +1,27 @@
+package com.hcmus.site.shopping_cart;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.hcmus.common.entity.CartItem;
+import com.hcmus.site.product.ProductRepository;
+
+@Service
+public class CartService {
+  
+   @Autowired
+   private CartRepository cartRepo;
+   
+   @Autowired 
+   private ProductRepository productRepo;
+   
+   public CartItem getCartItem(Integer id)
+   {
+	   return cartRepo.findById(id).get();
+   }
+   
+   public List<CartItem> 
+   
+}

@@ -1,0 +1,42 @@
+package com.hcmus.site.cart;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.annotation.Rollback;
+
+import com.hcmus.common.entity.CartItem;
+import com.hcmus.common.entity.Customer;
+import com.hcmus.common.entity.product.Product;
+import com.hcmus.site.shopping_cart.CartRepository;
+
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = Replace.NONE)
+@Rollback(false)
+public class CartRepositoryTests {
+	@Autowired private CartRepository repo;
+	@Autowired private TestEntityManager entityManager;
+	
+	@Test
+	public void testSaveItem() {
+		Integer customerId = 2;
+		Integer productId = 1;
+		
+		Customer customer = entityManager.find(Customer.class, customerId);
+		Product product = entityManager.find(Product.class, productId);
+		
+		CartItem newItem = new CartItem();
+		newItem.setCustomer(customer);
+		newItem.setProduct(product);
+		newItem.setQuantity(1);
+		
+		CartItem savedItem = repo.save(newItem);
+		
+		assertThat(savedItem.getId()).isGreaterThan(0);
+	}
+}

@@ -1,0 +1,24 @@
+var cartItems = document.getElementsByClassName("cart-item");
+
+document.addEventListener('DOMContentLoaded', function()
+{
+	Array.from(cartItems).forEach(function(cartItem) {
+      var id = cartItem.getAttribute("pid");
+      var quantityValue = document.getElementById("quantity" + id).value;
+    
+      addToCart(id, quantityValue);
+})
+
+function addToCart(productId, quantity)
+{
+	 url = contextPath + "cart/add/" + productId + "/" + quantity;
+	 $.ajax({
+		type: "GET",
+		url: url,
+  	}).done(function(response) {
+	 	showModalDialog("Shopping Cart", response);
+	 }).fail(function() {
+		showErrorModal("Error while adding product to shopping cart.");
+	 });
+  
+}

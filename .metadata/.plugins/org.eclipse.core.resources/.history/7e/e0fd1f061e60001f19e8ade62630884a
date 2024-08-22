@@ -1,0 +1,23 @@
+package com.hcmus.common.entity;
+
+import com.hcmus.common.entity.product.Product;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Table
+@Entity(name = "cart_items")
+public class CartItem extends IdBasedEntity{
+
+	@ManyToOne
+	@JoinColumn(name = "customer_id")
+	private Customer customer;
+	
+	@ManyToOne
+	@JoinColumn(name = "product_id")
+	private Product product;
+	
+	
+}

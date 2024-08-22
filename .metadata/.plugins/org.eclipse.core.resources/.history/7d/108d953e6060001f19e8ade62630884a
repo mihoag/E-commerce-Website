@@ -1,0 +1,14 @@
+var cartItems = document.getElementsByClassName("cart-item");
+
+document.addEventListener('DOMContentLoaded', function()
+{
+	Array.from(cartItems).forEach(function(cartItem) {
+      var id = cartItem.getAttribute("pid");
+   });
+
+})
+
+function addToCart()
+{
+	
+}

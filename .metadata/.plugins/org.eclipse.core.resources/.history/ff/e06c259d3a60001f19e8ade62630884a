@@ -1,0 +1,11 @@
+var minusElements;
+var plusElements;
+
+document.addEventListener("DOMContentLoaded", function()
+{
+	minusElements = document.getElementsByClassName("linkMinus");
+	plusElements = document.getElementsByClassName("linkPlus");
+	
+	console.log(minusElements);
+	console.log(plusElements);
+})

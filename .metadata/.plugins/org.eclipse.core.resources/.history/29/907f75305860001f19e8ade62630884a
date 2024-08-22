@@ -1,0 +1,35 @@
+var minusElements;
+var plusElements;
+
+document.addEventListener("DOMContentLoaded", function()
+{
+	minusElements = document.getElementsByClassName("linkMinus");
+	plusElements = document.getElementsByClassName("linkPlus");
+	
+	for(var minusElement of minusElements)
+	{
+		var id =minusElement.getAttribute("pid");
+		minusElement.addEventListener('click', function()
+		{
+			let quantityId = "quantity" + id;
+			let valueQuantity = document.getElementById(quantityId);
+			let value = valueQuantity.value;
+			if(value == 1)
+			{
+				return;
+			}
+		})
+	}
+	
+	for(var plusElement of plusElements)
+	{
+		var id =plusElement.getAttribute("pid");
+		plusElement.addEventListener('click', function()
+		{
+			let quantityId = "quantity" + id;
+			let valueQuantity = document.getElementById(quantityId);
+			let value = valueQuantity.value;
+			console.log(value);
+		})
+	}
+})

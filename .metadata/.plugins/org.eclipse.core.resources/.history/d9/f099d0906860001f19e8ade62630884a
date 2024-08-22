@@ -1,0 +1,51 @@
+package com.hcmus.site.shopping_cart;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.hcmus.common.entity.Customer;
+import com.hcmus.common.exception.CustomerNotFoundException;
+import com.hcmus.site.Utility;
+import com.hcmus.site.customer.CustomerService;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+@RestController
+@RequestMapping("/api/cart")
+public class CartRestController {
+	
+	@Autowired
+	private CartService cartService;
+	
+	@Autowired
+	private CustomerService customerService;
+	
+	///api/cart/add/
+	@GetMapping("/add/{productId}/{quantity}")
+	public ResponseEntity<?> addToCart(@PathVariable("productId") Integer productId, @PathVariable("quantity") Integer quantity,
+			HttpServletRequest request)
+	{
+		try {
+			Customer customer = getCustomerByAuthenticatedRequest(request);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return ResponseEntity.internalServerError().build();
+		}
+		return ResponseEntity.ok().build();
+	}
+	
+	public Customer getCustomerByAuthenticatedRequest(HttpServletRequest request) throws CustomerNotFoundException
+	{
+		String email = Utility.getEmailOfAuthenticatedCustomer(request);
+		Customer customer = customerService.getCustomerByEmail(email);
+		if(customer == null)
+		{
+			throw new CustomerNotFoundException("Customer not found with email " + email);
+		}
+		return customer;
+	}
+}
