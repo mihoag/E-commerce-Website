@@ -92,3 +92,39 @@ function updateTotalPrice(total)
 function formatCurrency(amount) {
 	return $.number(amount, decimalDigits, decimalSeparator, thousandsSeparator);
 }
+
+function deleteProduct(productId)
+{
+	 url = "api/cart/delete/" + productId;
+	 $.ajax({
+		type: "GET",
+		url: url,
+  	}).done(function(response) {
+	 	showToast("The product with id " + productId + " was removed successfully")
+	 	updateTotalPrice(response);
+	 	$("#item" + productId).remove();
+	 	updateRemainedItemsQuantity();
+	 }).fail(function() {
+		showToast("Error while ajusting product quantity in shopping cart.");
+	 });
+}
+
+function updateRemainedItemsQuantity()
+{
+	var elements = document.getElementsByClassName("product-in-cart");
+	
+	const length = elements.length;
+	
+	$("#totalItem").text(length);
+	
+	if(length == 0){
+	 $("#list-items").remove();	
+	 $("#noItemMessage").show();
+	}
+}
+
+function removeItem(item)
+{
+	 var id =item.getAttribute("pid");
+	 deleteProduct(id);
+}

@@ -107,12 +107,20 @@ public class CartRepositoryTests {
 	@Test
 	public void testDeleteByCustomerAndProduct() {
 		Integer customerId = 10;
-		Integer productId = 10;
+		Integer productId = 8;
 		
 		repo.deleteByCustomerAndProduct(customerId, productId);
 		
 		CartItem item = repo.findByCustomerAndProduct(new Customer(customerId), new Product(productId));
 		
 		assertThat(item).isNull();
+	}
+	
+	@Test
+	public void deleteByCustomer()
+	{
+		Integer customerId = 2;
+		repo.deleteByCustomer(customerId);
+		
 	}
 }

@@ -11,8 +11,10 @@ import com.hcmus.common.entity.product.Product;
 import com.hcmus.site.product.ProductRepository;
 
 import ch.qos.logback.core.joran.spi.NewRuleProvider;
+import jakarta.transaction.Transactional;
 
 @Service
+@Transactional
 public class CartService {
   
    @Autowired
@@ -46,9 +48,17 @@ public class CartService {
 	   }
    }
    
-   public void deleteByCustomerAndProduct(Integer customerId, Integer productId)
+   public float deleteByCustomerAndProduct(Integer customerId, Integer productId)
    {
-	   cartRepo.deleteByCustomerAndProduct(productId, customerId);
+	   cartRepo.deleteByCustomerAndProduct(customerId, productId);
+	   
+	   List<CartItem> cartItems = cartRepo.findByCustomer(new Customer(customerId));
+	   float total = 0;
+	   for(CartItem item :  cartItems)
+	   {
+		   total += item.getSubTotal();
+	   }
+	   return total;
    }
    
    public Integer addToCart(Customer customer, Integer productId, Integer quantity) throws ShoppingCartException
