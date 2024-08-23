@@ -1,4 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
 
+</body>
+</html><!DOCTYPE html>
 <html xmlns:th = "http://www.thymeleaf.org">
 <head th:replace="fragment :: page_head('User Form Page')" />
 <body style="background-color: #f5f7f6;">

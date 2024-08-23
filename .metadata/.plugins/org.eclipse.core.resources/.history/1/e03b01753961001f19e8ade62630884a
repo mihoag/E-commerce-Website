@@ -5,7 +5,7 @@
       <a
         th:if="${sr.codSupported}"
         class="fas fa-hand-holding-usd fa-2x icon-green"
-        th:href="@{'/shipping_rates/cod/'+  ${sr.id} + '/enabled/false' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword} + '&page=' + ${currentPage}}"
+        th:href="@{'/shipping_rates/cod/' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword} + '&page=' + ${currentPage}}"
         title="Disable COD support for this destination"
       ></a>
       <a

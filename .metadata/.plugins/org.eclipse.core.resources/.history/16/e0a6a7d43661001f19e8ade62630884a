@@ -88,7 +88,7 @@
                                                 </p>
                                             </td>
                                             
-                                             <td class = "text-center">
+                                             <td>
                                                 <div th:replace="shipping_rates/shipping_rates_fragment :: cod_support" />
                                             </td>
                                  

@@ -61,14 +61,6 @@ public class ShippingRateController {
 		return "shipping_rates/shippingrate";		
 	}
 	
-	@GetMapping("/cod/{id}/enabled/{enabled}")
-	public String updateCod(@PathVariable("id") Integer id, @PathVariable("enabled") boolean enabled,
-			@Param("sortField") String sortField, @Param("sortDir") String sortDir, @Param("keyword") String keyword, @Param("page") int page, Model model) throws ShippingRateNotFoundException
-	{
-		shippingService.updateCOD(id, enabled);
-		return listByPage(page, sortField, sortDir, keyword, model);
-	}
-	
 	/*@GetMapping("/new")
 	public String newShippingRate(Model model) {
 		List<Category> listCategories = categoryService.listCategoriesUsedInForm();
