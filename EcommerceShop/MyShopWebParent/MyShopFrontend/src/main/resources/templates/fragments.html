@@ -13,6 +13,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/jquery-number@2.1.6/jquery.number.min.js"></script>
+
     <title>[[${title}]] - [[${SITE_NAME}]]</title>
     <!-- Font Awesome -->
     <link
@@ -100,7 +102,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
                 </a>
                  </th:block>
 
-                <a
+                <a th:href="@{/cart}"
                   class="border rounded py-1 px-3 nav-link d-flex align-items-center"
                 >
                   <i class="fas fa-shopping-cart m-1 me-md-2"></i>

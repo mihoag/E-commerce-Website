@@ -1,0 +1,40 @@
+package com.hcmus.site.shopping_cart;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.hcmus.common.entity.CartItem;
+import com.hcmus.common.entity.Customer;
+import com.hcmus.common.exception.CustomerNotFoundException;
+import com.hcmus.site.Utility;
+import com.hcmus.site.customer.CustomerService;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+@Controller
+@RequestMapping("/cart")
+public class CartController {
+    
+	@Autowired
+	private CartService cartService;
+	
+	@Autowired
+	private CustomerService customerService;
+
+	@GetMapping("/**")
+	public String getCartItems(Model model, HttpServletRequest request)
+	{
+		String email = Utility.getEmailOfAuthenticatedCustomer(request);
+		Customer customer = customerService.getCustomerByEmail(email);
+	
+		List<CartItem> listCartItems = cartService.listCartItems(customer);
+		
+		model.addAttribute("", listCartItems);
+		return "cart/shopping_cart";
+	}
+}

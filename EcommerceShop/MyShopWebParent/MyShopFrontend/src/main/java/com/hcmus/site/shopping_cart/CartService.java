@@ -81,4 +81,21 @@ public class CartService {
 	   return updatedQuantity;
    }
    
+   public float updateQuantity(Customer customer, Integer productId, Integer quantity)
+   {
+	   Product product = new Product(productId);
+	   CartItem cartItem = cartRepo.findByCustomerAndProduct(customer, product);
+	   cartItem.setQuantity(quantity);
+	   
+	   cartRepo.save(cartItem);
+	   
+	   List<CartItem> cartItems = cartRepo.findByCustomer(customer);
+	   float total = 0;
+	   for(CartItem item :  cartItems)
+	   {
+		   total += item.getSubTotal();
+	   }
+	   return total;
+   }
+   
 }

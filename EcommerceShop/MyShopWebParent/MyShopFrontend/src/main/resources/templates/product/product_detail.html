@@ -87,10 +87,17 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
           <hr />
 
-  
-          <a th:if="${product.inStock}" href="#" class="btn btn-warning shadow-0"> Buy now </a>
-          <a th:if="${product.inStock}" href="#" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </a>
-      
+          <th:block th:if="${product.inStock}">
+          <a  href="#" class="btn btn-warning shadow-0"> Buy now </a>
+          <br>
+          <div class = "d-flex mt-2" style="height: 40px">
+                     <div th:replace="cart/quantity_control :: quantity_control(1, ${product.id})"></div>
+                     &nbsp;&nbsp;
+                     
+             <a  th:pid="${product.id}" class="btn btn-primary shadow-0 cart-item"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </a>
+          </div>
+         
+          </th:block>
         </div>
       </main>
     </div>
@@ -187,5 +194,6 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script type="text/javascript" th:src="@{/js/cart/QuantityControl.js}"></script>
+    <script type="text/javascript" th:src="@{/js/cart/ConfigCartEvent.js}"></script>
     <script type="text/javascript" th:src="@{/js/ToastEvent.js}"></script>
 </html>

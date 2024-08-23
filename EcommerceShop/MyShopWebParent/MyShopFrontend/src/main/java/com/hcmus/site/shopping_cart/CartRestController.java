@@ -40,6 +40,14 @@ public class CartRestController {
 		}
 	}
 	
+	@GetMapping("/update/{productId}/{quantity}")
+	public float updateQuantity(@PathVariable("productId") Integer productId, @PathVariable("quantity") Integer quantity,
+			HttpServletRequest request) throws CustomerNotFoundException
+	{
+		Customer customer = getCustomerByAuthenticatedRequest(request);
+		return cartService.updateQuantity(customer, productId, quantity);
+	}
+	
 	public Customer getCustomerByAuthenticatedRequest(HttpServletRequest request) throws CustomerNotFoundException
 	{
 		String email = Utility.getEmailOfAuthenticatedCustomer(request);

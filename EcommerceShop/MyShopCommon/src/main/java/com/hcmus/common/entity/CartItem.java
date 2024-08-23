@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 
 @Entity
@@ -21,6 +22,9 @@ public class CartItem extends IdBasedEntity{
 	private Product product;
 	
 	private int quantity;
+	
+	@Transient
+	private float shippingCost;
 
 
 	public CartItem(Customer customer, Product product, int quantity) {
@@ -58,4 +62,19 @@ public class CartItem extends IdBasedEntity{
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+
+	public float getShippingCost() {
+		return shippingCost;
+	}
+
+	public void setShippingCost(float shippingCost) {
+		this.shippingCost = shippingCost;
+	}
+	
+	public float getSubTotal()
+	{
+		return quantity*product.getDiscountPrice();
+	}
+	
+	
 }
