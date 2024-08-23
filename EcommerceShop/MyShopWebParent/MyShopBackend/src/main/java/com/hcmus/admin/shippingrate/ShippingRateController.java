@@ -21,6 +21,7 @@ import com.hcmus.admin.brand.export.BrandExcelExporter;
 import com.hcmus.admin.util.FileUploadUtil;
 import com.hcmus.common.entity.Brand;
 import com.hcmus.common.entity.Category;
+import com.hcmus.common.entity.Country;
 import com.hcmus.common.entity.ShippingRate;
 import com.hcmus.common.exception.BrandNotFoundException;
 
@@ -65,90 +66,67 @@ public class ShippingRateController {
 	public String updateCod(@PathVariable("id") Integer id, @PathVariable("enabled") boolean enabled,
 			@Param("sortField") String sortField, @Param("sortDir") String sortDir, @Param("keyword") String keyword, @Param("page") int page, Model model) throws ShippingRateNotFoundException
 	{
+		System.out.println(enabled);
 		shippingService.updateCOD(id, enabled);
 		return listByPage(page, sortField, sortDir, keyword, model);
 	}
 	
-	/*@GetMapping("/new")
-	public String newShippingRate(Model model) {
-		List<Category> listCategories = categoryService.listCategoriesUsedInForm();
-		
-		model.addAttribute("listCategories", listCategories);
-		model.addAttribute("brand", new Brand());
-		model.addAttribute("title", "Create New Brand");
-		model.addAttribute("sideBarFieldName", "brands");
-		return "brand/brand_form";		
-	}
-	*/
-	
-	/*
-	@PostMapping("/save")
-	public String saveBrand(Brand brand, @RequestParam("fileImage") MultipartFile multipartFile,
-			RedirectAttributes ra) throws IOException {
-		if (!multipartFile.isEmpty()) {
-			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-			brand.setLogo(fileName);
-			
-			Brand savedBrand = brandService.save(brand);
-			String uploadDir = "brand-logos/" + savedBrand.getId();
-			
-			FileUploadUtil.cleanDir(uploadDir);
-			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-		
-		} else {
-			brandService.save(brand);
-		}
-		
-		ra.addAttribute("message", "The brand has been saved successfully.");
-		return defaultRedirectURL + "&keyword=" + brand.getName();		
-	}*/
-	
-	
-	/*
-	@GetMapping("/edit/{id}")
-	public String editBrand(@PathVariable(name = "id") Integer id, Model model,
-			RedirectAttributes ra) {
-		try {
-			Brand brand = brandService.get(id);
-			List<Category> listCategories = categoryService.listCategoriesUsedInForm();
-			
-			model.addAttribute("brand", brand);
-			model.addAttribute("listCategories", listCategories);
-			model.addAttribute("title", "Edit Brand (ID: " + id + ")");
-			
-			return "brand/brand_form";			
-		} catch (BrandNotFoundException ex) {
-			ra.addFlashAttribute("message", ex.getMessage());
-			return defaultRedirectURL;
-		}
-	}*/
-	
-	
-	/*
 	@GetMapping("/delete/{id}")
-	public String deleteShippingRate(@PathVariable(name = "id") Integer id, 
-			Model model,
-			RedirectAttributes redirectAttributes) {
+	public String deleteRate(@PathVariable(name = "id") Integer id, @Param("sortField") String sortField, @Param("sortDir") String sortDir, 
+			@Param("keyword") String keyword, @Param("page") int page,
+			Model model, RedirectAttributes ra) {
 		try {
-			brandService.delete(id);
-			String brandDir = "brand-logos/" + id;
-			FileUploadUtil.removeDir(brandDir);
-			
-			redirectAttributes.addAttribute("message", 
-					"The brand ID " + id + " has been deleted successfully");
-		} catch (BrandNotFoundException ex) {
-			redirectAttributes.addAttribute("message", ex.getMessage());
+			shippingService.delete(id);
+			ra.addFlashAttribute("message", "The shipping rate ID " + id + " has been deleted.");
+		} catch (ShippingRateNotFoundException ex) {
+			ra.addFlashAttribute("message", ex.getMessage());
 		}
-		
-		return defaultRedirectURL;
-	}
-	*/
+		return listByPage(page, sortField, sortDir, keyword, model);
+	}	
 	
-	@GetMapping("/**")
-	public String listFirstPage(Model model)
-	{
-	   return listByPage(1, "country", "asc", "", model);
+	
+	@GetMapping("/new")
+	public String newRate(Model model) {
+		List<Country> listCountries = shippingService.listAllCountries();
+		
+		model.addAttribute("rate", new ShippingRate());
+		model.addAttribute("listCountries", listCountries);	
+		model.addAttribute("title", "New Shipping Rate");
+		model.addAttribute("sideBarFieldName", "shipping_rates");
+		return "shipping_rates/shipping_rate_form";		
 	}
+	
+	@GetMapping("/edit/{id}")
+	public String editRate(@PathVariable(name = "id") Integer id,
+			Model model, RedirectAttributes ra) {
+		try {
+			ShippingRate rate = shippingService.get(id);
+			List<Country> listCountries = shippingService.listAllCountries();
+			
+			model.addAttribute("listCountries", listCountries);			
+			model.addAttribute("rate", rate);
+			model.addAttribute("title", "Edit Rate (ID: " + id + ")");
+			model.addAttribute("sideBarFieldName", "shipping_rates");
+			
+			return "shipping_rates/shipping_rate_form";
+		} catch (ShippingRateNotFoundException ex) {
+			ra.addFlashAttribute("message", ex.getMessage());
+			return listFirstPage(model);
+		}
+	}
+
+
+	@PostMapping("/save")
+	public String saveRate(ShippingRate rate, RedirectAttributes ra, Model model) {
+		try {
+			shippingService.save(rate);
+			ra.addFlashAttribute("message", "The shipping rate has been saved successfully.");
+		} catch (ShippingRateAlreadyExistsException ex) {
+			ra.addFlashAttribute("message", ex.getMessage());
+		}
+		 return listByPage(1, "country", "asc", rate.getState(), model);
+	}
+	
 	
 	@GetMapping("/export/excel")
 	public void exportToExcel(HttpServletResponse response) throws IOException {
@@ -156,4 +134,12 @@ public class ShippingRateController {
 	    ShippingRateExcelExporter exporter = new ShippingRateExcelExporter();
 	    exporter.export(shippingRates, response);
 	}
+	
+	@GetMapping("/**")
+	public String listFirstPage(Model model)
+	{
+	   return listByPage(1, "country", "asc", "", model);
+	}
+	
+	
 }

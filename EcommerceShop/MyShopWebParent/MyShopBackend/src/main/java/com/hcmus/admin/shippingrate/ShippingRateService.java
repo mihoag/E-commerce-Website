@@ -79,4 +79,16 @@ public class ShippingRateService {
 		return shipRepo.findAll();
 	}
 
+	public void save(ShippingRate rateInForm) throws ShippingRateAlreadyExistsException {
+		ShippingRate rateInDB = shipRepo.findByCountryAndState(
+				rateInForm.getCountry().getId(), rateInForm.getState());
+		boolean foundExistingRateInNewMode = rateInForm.getId() == null && rateInDB != null;
+		boolean foundDifferentExistingRateInEditMode = rateInForm.getId() != null && rateInDB != null && !rateInDB.equals(rateInForm);
+		
+		if (foundExistingRateInNewMode || foundDifferentExistingRateInEditMode) {
+			throw new ShippingRateAlreadyExistsException("There's already a rate for the destination "
+						+ rateInForm.getCountry().getName() + ", " + rateInForm.getState()); 					
+		}
+		shipRepo.save(rateInForm);
+	}
 }

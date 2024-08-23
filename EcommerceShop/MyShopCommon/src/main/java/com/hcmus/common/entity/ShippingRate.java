@@ -1,5 +1,7 @@
 package com.hcmus.common.entity;
 
+import java.util.Objects;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -74,5 +76,21 @@ public class ShippingRate extends IdBasedEntity {
 				+ country + ", state=" + state + "]";
 	}
 	
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		IdBasedEntity other = (IdBasedEntity) obj;
+		return Objects.equals(id, other.id);
+	}
 	
 }
