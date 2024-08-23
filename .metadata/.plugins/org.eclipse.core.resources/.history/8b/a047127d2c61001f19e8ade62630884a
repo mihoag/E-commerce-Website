@@ -1,0 +1,7 @@
+package com.hcmus.admin.shippingrate;
+
+import com.hcmus.admin.AbstractExporter;
+
+public class ShippingRateExcelExporter extends AbstractExporter {
+
+}

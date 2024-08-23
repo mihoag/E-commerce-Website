@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ShippingRateRepositoryTest.testUpdateCODSupport" project="MyShopBackend" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.hcmus.admin.shippingrate.ShippingRateRepositoryTest" time="0.742" displayname="ShippingRateRepositoryTest" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.shippingrate.ShippingRateRepositoryTest]">
+    <testcase name="testUpdateCODSupport" classname="com.hcmus.admin.shippingrate.ShippingRateRepositoryTest" time="0.742" displayname="testUpdateCODSupport()" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.shippingrate.ShippingRateRepositoryTest]/[method:testUpdateCODSupport()]"/>
+  </testsuite>
+</testrun>

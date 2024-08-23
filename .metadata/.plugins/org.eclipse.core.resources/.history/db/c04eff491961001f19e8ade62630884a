@@ -1,0 +1,5 @@
+package com.hcmus.common.entity;
+
+public class ShippingRate {
+
+}

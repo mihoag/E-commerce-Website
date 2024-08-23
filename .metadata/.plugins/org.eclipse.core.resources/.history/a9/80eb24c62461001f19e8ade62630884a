@@ -1,0 +1,5 @@
+package com.hcmus.admin.shippingrate;
+
+public class ShippingRateNotFoundException {
+
+}

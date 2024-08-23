@@ -23,6 +23,11 @@ public class Country extends IdBasedEntity{
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Country(Integer id)
+	{
+		setId(id);
+	}
 
 	public Country(String name, String code, Set<State> states) {
 		super();
