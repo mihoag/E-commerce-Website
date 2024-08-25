@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="OrderRepositoryTest.testCreateNewOrderWithSingleProduct" project="MyShopBackend" tests="1" started="1" failures="0" errors="1" ignored="0">
+  <testsuite name="com.hcmus.admin.order.OrderRepositoryTest" time="0.78" displayname="OrderRepositoryTest" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.order.OrderRepositoryTest]">
+    <testcase name="testCreateNewOrderWithSingleProduct" classname="com.hcmus.admin.order.OrderRepositoryTest" time="0.78" displayname="testCreateNewOrderWithSingleProduct()" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.order.OrderRepositoryTest]/[method:testCreateNewOrderWithSingleProduct()]">
+      <error>java.lang.NullPointerException: Cannot invoke "com.hcmus.common.entity.Customer.getFirstName()" because "this.customer" is null&#13;
+	at com.hcmus.common.entity.order.Order.copyAddressFromCustomer(Order.java:178)&#13;
+	at com.hcmus.admin.order.OrderRepositoryTest.testCreateNewOrderWithSingleProduct(OrderRepositoryTest.java:38)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+&#13;
+</error>
+    </testcase>
+  </testsuite>
+</testrun>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="OrderRepositoryTest.testListOrders" project="MyShopBackend" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.hcmus.admin.order.OrderRepositoryTest" time="0.672" displayname="OrderRepositoryTest" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.order.OrderRepositoryTest]">
+    <testcase name="testListOrders" classname="com.hcmus.admin.order.OrderRepositoryTest" time="0.672" displayname="testListOrders()" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.order.OrderRepositoryTest]/[method:testListOrders()]"/>
+  </testsuite>
+</testrun>
