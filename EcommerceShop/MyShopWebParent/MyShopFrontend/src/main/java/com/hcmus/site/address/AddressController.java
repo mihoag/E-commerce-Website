@@ -61,6 +61,32 @@ public class AddressController {
 	}
 	
 	
+	@GetMapping("/edit/{id}")
+	public String editAddress(@PathVariable("id") Integer addressId, Model model,
+			HttpServletRequest request) throws CustomerNotFoundException {
+	    Customer customer = getCustomerByAuthenticatedRequest(request);
+		List<Country> listCountries = customerService.listAllCountries();
+		
+		Address address = addService.get(addressId, customer.getId());
+
+		model.addAttribute("address", address);
+		model.addAttribute("listCountries", listCountries);
+		model.addAttribute("pageTitle", "Edit Address (ID: " + addressId + ")");
+		
+		return "address/address_form";
+	}
+	
+	@GetMapping("/delete/{id}")
+	public String deleteAddress(@PathVariable("id") Integer addressId, RedirectAttributes ra,
+			HttpServletRequest request) throws CustomerNotFoundException {
+		Customer customer = getCustomerByAuthenticatedRequest(request);
+		addService.delete(addressId, customer.getId());
+		
+		ra.addFlashAttribute("message", "The address ID " + addressId + " has been deleted.");
+		
+		return "redirect:/address_book";
+	}
+	
 	@GetMapping("/**")
 	public String home(Model model, HttpServletRequest request) throws CustomerNotFoundException
 	{

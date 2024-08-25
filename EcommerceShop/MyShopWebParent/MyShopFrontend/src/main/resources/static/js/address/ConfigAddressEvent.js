@@ -4,3 +4,11 @@ $(".link-add").on("click", function (e) {
 	//console.log(linkDetailURL);
 	$("#formModal").modal("show").find(".modal-body").load(linkAddlURL);
 });
+
+$(".link-edit").on("click", function (e) {
+	e.preventDefault();
+	var linkEditlURL = $(this).attr("href");
+	//console.log(linkDetailURL);
+	$("#formModal").modal("show").find(".modal-body").load(linkEditlURL);
+});
+
