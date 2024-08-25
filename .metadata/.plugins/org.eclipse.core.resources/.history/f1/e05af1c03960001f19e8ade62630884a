@@ -1,7 +1,0 @@
-var minusElements;
-var plusElements;
-
-document.addEventListener("DOMContentLoaded", function()
-{
-	
-})

@@ -1,8 +1,0 @@
-package com.hcmus.common.entity;
-
-public class CountryDTO {
- 
-	private Integer id;
-	private String name;
-	private String code;
-}

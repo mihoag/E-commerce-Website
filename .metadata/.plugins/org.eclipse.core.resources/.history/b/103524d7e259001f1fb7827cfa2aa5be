@@ -1,8 +1,0 @@
-package com.hcmus.site.category;
-
-import org.springframework.stereotype.Service;
-
-@Service
-public class CategoryService {
-
-}

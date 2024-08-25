@@ -1,2 +1,0 @@
-const buttonLoadCountries = document.getElementById("buttonLoadCountries");
-const dropDownCountries = document.getElementById("dropDownCountries");

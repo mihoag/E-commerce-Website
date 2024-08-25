@@ -1,0 +1,5 @@
+package com.hcmus.site.address;
+
+public class AddressRestController {
+
+}

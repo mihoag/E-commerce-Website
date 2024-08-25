@@ -6,6 +6,7 @@
 		<item key="isRegEx" value="false"/>
 		<item key="selection" value="Dis"/>
 		<list key="findhistory">
+			<item value="border"/>
 			<item value="dis"/>
 			<item value="URI"/>
 			<item value="paging"/>
@@ -13,7 +14,6 @@
 			<item value="allParentId"/>
 			<item value="link-detail"/>
 			<item value="image"/>
-			<item value="lastName"/>
 		</list>
 		<list key="replacehistory">
 		</list>

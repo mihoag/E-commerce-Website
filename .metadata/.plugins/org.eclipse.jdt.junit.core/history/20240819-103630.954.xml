@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="CustomerRepositoryTests.testFindAll" project="MyShopBackend" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="com.hcmus.admin.customer.CustomerRepositoryTests" time="0.856" displayname="CustomerRepositoryTests" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.customer.CustomerRepositoryTests]">
-    <testcase name="testFindAll" classname="com.hcmus.admin.customer.CustomerRepositoryTests" time="0.856" displayname="testFindAll()" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.customer.CustomerRepositoryTests]/[method:testFindAll()]"/>
-  </testsuite>
-</testrun>

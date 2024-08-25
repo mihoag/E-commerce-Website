@@ -1,5 +1,0 @@
-package com.hcmus.site.product;
-
-public class ProductNotFoundException {
-
-}

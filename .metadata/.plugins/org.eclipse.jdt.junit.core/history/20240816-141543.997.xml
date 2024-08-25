@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="SettingRepositoryTests.testCreateGeneralSettings" project="MyShopBackend" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="com.hcmus.admin.setting.SettingRepositoryTests" time="0.694" displayname="SettingRepositoryTests" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.setting.SettingRepositoryTests]">
-    <testcase name="testCreateGeneralSettings" classname="com.hcmus.admin.setting.SettingRepositoryTests" time="0.694" displayname="testCreateGeneralSettings()" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.setting.SettingRepositoryTests]/[method:testCreateGeneralSettings()]"/>
-  </testsuite>
-</testrun>

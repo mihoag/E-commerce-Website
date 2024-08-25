@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="SettingRepositoryTests.testUpdate" project="MyShopBackend" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="com.hcmus.admin.setting.SettingRepositoryTests" time="0.554" displayname="SettingRepositoryTests" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.setting.SettingRepositoryTests]">
-    <testcase name="testUpdate" classname="com.hcmus.admin.setting.SettingRepositoryTests" time="0.554" displayname="testUpdate()" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.setting.SettingRepositoryTests]/[method:testUpdate()]"/>
-  </testsuite>
-</testrun>

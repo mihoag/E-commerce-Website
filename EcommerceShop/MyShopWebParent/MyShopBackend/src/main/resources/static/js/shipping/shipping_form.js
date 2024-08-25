@@ -4,7 +4,6 @@ const dropDownStates = $("#listStates")
 console.log(dropDownCountries)
 dropDownCountries.on('change', function()
 {
-	console.log("ok");
 	loadStateByCountry();
 })
 

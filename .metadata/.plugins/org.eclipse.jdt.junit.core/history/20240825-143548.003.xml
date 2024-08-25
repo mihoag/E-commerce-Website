@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="AddressRepositoryTest.testSetDefault (1)" project="MyShopFrontend" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.hcmus.site.address.AddressRepositoryTest" time="0.705" displayname="AddressRepositoryTest" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.site.address.AddressRepositoryTest]">
+    <testcase name="testSetDefault" classname="com.hcmus.site.address.AddressRepositoryTest" time="0.705" displayname="testSetDefault()" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.site.address.AddressRepositoryTest]/[method:testSetDefault()]"/>
+  </testsuite>
+</testrun>

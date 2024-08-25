@@ -1,8 +1,0 @@
-var minusElements;
-var plusElements;
-
-document.addEventListener("DOMContentLoaded", function()
-{
-	minusElements = document.getElementsByClassName("");
-	plusElements = document.getElementsByClassName("");
-})

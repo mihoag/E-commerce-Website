@@ -1,7 +1,0 @@
-package com.hcmus.common.entity.setting;
-
-import java.util.List;
-
-public class SettingBag {
-	public List<Setting> settings;
-}
