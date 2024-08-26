@@ -72,8 +72,7 @@ public class ShippingRateController {
 	}
 	
 	@GetMapping("/delete/{id}")
-	public String deleteRate(@PathVariable(name = "id") Integer id, @Param("sortField") String sortField, @Param("sortDir") String sortDir, 
-			@Param("keyword") String keyword, @Param("page") int page,
+	public String deleteRate(@PathVariable(name = "id") Integer id,
 			Model model, RedirectAttributes ra) {
 		try {
 			shippingService.delete(id);
@@ -81,7 +80,7 @@ public class ShippingRateController {
 		} catch (ShippingRateNotFoundException ex) {
 			ra.addFlashAttribute("message", ex.getMessage());
 		}
-		return listByPage(page, sortField, sortDir, keyword, model);
+		return listFirstPage(model);
 	}	
 	
 	

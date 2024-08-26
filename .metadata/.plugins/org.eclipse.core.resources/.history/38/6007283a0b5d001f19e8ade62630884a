@@ -1,5 +1,0 @@
-package com.hcmus.common.entity;
-
-public class AbstractAddressWithCountry extends AbstractAddress {
-
-}

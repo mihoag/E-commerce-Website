@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="OrderRepositoryTest.testCreateNewOrderWithMultipleProducts" project="MyShopBackend" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="com.hcmus.admin.order.OrderRepositoryTest" time="0.752" displayname="OrderRepositoryTest" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.order.OrderRepositoryTest]">
-    <testcase name="testCreateNewOrderWithMultipleProducts" classname="com.hcmus.admin.order.OrderRepositoryTest" time="0.752" displayname="testCreateNewOrderWithMultipleProducts()" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.order.OrderRepositoryTest]/[method:testCreateNewOrderWithMultipleProducts()]"/>
-  </testsuite>
-</testrun>

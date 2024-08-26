@@ -1,0 +1,16 @@
+package com.hcmus.admin.order;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.hcmus.admin.setting.country.CountryRepository;
+
+@Service
+public class OrderService {
+
+	@Autowired private OrderRepository orderRepo;
+	
+	@Autowired private CountryRepository countryRepo;
+	
+	
+}

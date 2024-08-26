@@ -112,6 +112,8 @@ public class AddressController {
 	}
 	
 	
+	
+	
 	public Customer getCustomerByAuthenticatedRequest(HttpServletRequest request) throws CustomerNotFoundException
 	{
 		String email = Utility.getEmailOfAuthenticatedCustomer(request);
