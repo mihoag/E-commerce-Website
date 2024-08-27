@@ -5,12 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.hcmus.admin.security.MyShopUserDetails;
 import com.hcmus.admin.setting.SettingService;
 import com.hcmus.common.entity.order.Order;
 import com.hcmus.common.entity.setting.Setting;
@@ -56,6 +58,27 @@ public class OrderController {
 		     return "order/orders";	
 	}
 	
+	@GetMapping("/detail/{id}")
+	public String detailOrder(@PathVariable("id") Integer id, HttpServletRequest request,@AuthenticationPrincipal MyShopUserDetails loggedUser,  Model model) throws OrderNotFoundException
+	{
+		
+	
+		    Order order = orderSerice.get(id);
+		    loadCurrencySetting(request);	
+		    
+            boolean isVisibleForAdminOrSalesperson = false;
+			
+			if (loggedUser.hasRole("Admin") || loggedUser.hasRole("Salesperson")) {
+				isVisibleForAdminOrSalesperson = true;
+			}
+			
+			model.addAttribute("isVisibleForAdminOrSalesperson", isVisibleForAdminOrSalesperson);
+		    model.addAttribute("order", order);
+		
+		    return "order/order_detail_modal";
+	}
+	
+
 	
 	
 	@GetMapping("/**")

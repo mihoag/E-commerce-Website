@@ -93,7 +93,7 @@
                                           
                                             <td>          
                                                <a class="text-secondary font-weight-bold text-xs link-detail"
-                                                 th:href="@{/order/detail/} + ${order.id}">
+                                                 th:href="@{/orders/detail/} + ${order.id}">
                                                     Detail
                                                 </a>      &nbsp;
                                                 <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
@@ -131,7 +131,7 @@
 						   <div>
 							      <a  class="text-secondary font-weight-bold text-xs link-detail"
 							         th:href="@{'/orders/detail/' + ${order.id}}"><i class="fa-solid fa-circle-info"></i></a>
-					                            &nbsp;
+					                 &nbsp;
                                                 <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
                                                    data-toggle="tooltip" data-bs-toggle="modal" th:attr="data-id=${order.id}"
                                                    data-bs-target="#deleteOrder">
@@ -159,19 +159,32 @@
         </div>
     </div>
     
-    
-    <div class="modal fade" id="detailModal">
-			<div class="modal-dialog modal-xl">
-				<div class="modal-content">
-				
-				</div>
-			</div>
-	</div>
+  
 	
      <div th:replace="fragment :: footer"></div>
      
+     
+       <div class="modal modal-lg fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detail Order</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                      
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+         
+                </div>
+            </div>
+        </div>
+    </div>
+	
+     
    
-    <!--Modal dialog delete Brand-->
+    <!--Modal dialog delete Order-->
     <div class="modal fade" id="deleteOrder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -195,6 +208,6 @@
         crossorigin="anonymous"></script>
 
    <script type="text/javascript" th:src="@{/js/ConfigViewEvent.js}"></script>
-   
+   <script type="text/javascript" th:src="@{/js/order/OrderEvent.js}"></script>
 </body>
 </html>
