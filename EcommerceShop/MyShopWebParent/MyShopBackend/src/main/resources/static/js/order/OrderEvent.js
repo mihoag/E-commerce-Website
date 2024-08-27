@@ -4,3 +4,13 @@ $(".link-detail").on("click", function (e) {
 	console.log(linkDetailURL);
 	$("#detailModal").modal("show").find(".modal-body").load(linkDetailURL);
 });
+
+  $('#deleteOrder').on('show.bs.modal', async function (event) {
+        var button = $(event.relatedTarget);
+        var idOrderDelete = button.data('id');  
+        var href = $('#buttonDelete').attr('href');
+        href += "/" + idOrderDelete;
+        $('#buttonDelete').attr('href',href);
+})
+    
+    
