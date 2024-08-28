@@ -87,8 +87,6 @@ $('#buttonAdd').on('click', function()
         
 })
 
-
-
 function generateProductCode(productId, productName, mainImagePath, productCost, productPrice, shippingCost, quantity) {
 	nextCount = productDetailCount + 1;
 	productDetailCount++;
@@ -106,7 +104,7 @@ function generateProductCode(productId, productName, mainImagePath, productCost,
 			<div class="row">
 				<div class="col-1">
 					<div class="divCount">${nextCount}</div>
-					<div><a class="fas fa-trash icon-dark linkRemove" href="" rowNumber="${nextCount}"></a></div>				
+					<div><a class="fas fa-trash icon-dark linkRemove"  rowNumber="${nextCount}"></a></div>				
 				</div>
 				<div class="col-11 col-sm-4">
 					<img src="${mainImagePath}" class="img-fluid" />
