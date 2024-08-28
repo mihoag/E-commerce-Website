@@ -65,6 +65,7 @@
 									th:readonly="${isTrackWithStatusNew}" required>[[${track.notes}]]</textarea>
 							</div>
 						</div>
+
 					</div>
 				</div>
 				<div th:id="'emptyLine' + ${status.count}" class="row">&nbsp;</div>
