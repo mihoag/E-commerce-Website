@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hcmus.admin.security.MyShopUserDetails;
 import com.hcmus.admin.setting.SettingService;
+import com.hcmus.common.entity.Country;
 import com.hcmus.common.entity.order.Order;
 import com.hcmus.common.entity.setting.Setting;
 
@@ -72,6 +73,7 @@ public class OrderController {
 	}
 	
 	
+	
 	@GetMapping("/detail/{id}")
 	public String detailOrder(@PathVariable("id") Integer id, HttpServletRequest request,@AuthenticationPrincipal MyShopUserDetails loggedUser,  Model model) throws OrderNotFoundException
 	{
@@ -91,6 +93,28 @@ public class OrderController {
 		
 		    return "order/order_detail_modal";
 	}
+	
+
+	@GetMapping("/edit/{id}")
+	public String editOrder(@PathVariable("id") Integer id, Model model, RedirectAttributes ra,
+			HttpServletRequest request) {
+		try {
+			Order order = orderSerice.get(id);;
+			
+			List<Country> listCountries = orderSerice.listAllCountries();
+			
+			model.addAttribute("title", "Edit Order (ID: " + id + ")");
+			model.addAttribute("order", order);
+			model.addAttribute("listCountries", listCountries);
+			
+			return "order/order_form";
+			
+		} catch (OrderNotFoundException ex) {
+			ra.addFlashAttribute("message", ex.getMessage());
+			return defaultRedirectURL;
+		}
+	}	
+	 
 	
 
 	

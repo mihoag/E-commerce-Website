@@ -16,6 +16,7 @@
             
             <div class="col-md-9">
             <div id = "manageTitle" class = "d-flex justify-content-center"><h3>Manage Orders</h3></div>
+            <div th:if="${message != null}" class="alert alert-success text-center">[[${message}]]</div>
             
             <!--Body table student-->
                <main class="main-content border-radius-lg">
@@ -103,7 +104,7 @@
                                                 </a>
                                                 &nbsp;
                                                 <a class="text-secondary font-weight-bold text-xs"
-                                                 th:href="@{/order/edit/} + ${order.id}">
+                                                 th:href="@{/orders/edit/} + ${order.id}">
                                                     Update
                                                 </a>
                                             </td>
