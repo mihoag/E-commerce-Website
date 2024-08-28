@@ -108,6 +108,5 @@
     <script type="text/javascript" th:src="@{/js/order/order_form_overview_products.js}"></script>
     <script type="text/javascript" th:src="@{/js/order/order_form_add_product.js}"></script>
     <script type="text/javascript" th:src="@{/js/order/order_form_remove_product.js}"></script>
-    <script type="text/javascript" th:src="@{/js/order/order_form_tracks.js}"></script>
 </body>
 </html>
