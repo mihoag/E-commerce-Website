@@ -1,0 +1,21 @@
+$("#linkAddProduct").on("click", function (e) {
+	e.preventDefault();
+	var linkAddlURL = $(this).attr("href");
+	console.log(linkAddlURL);
+	$("#addProductModal").modal("show").find(".modal-body").load(linkAddlURL);
+});
+
+$('#buttonAdd').on('click', function()
+{
+	var productId = [];
+	var quantity = [];
+	$('.check-add:checked').each(function() {
+            var pid = $(this).attr('pid');
+            productId.push(pid);
+            let quan = document.getElementById("quan" + pid).value;
+            quantity.push(quan);
+        });
+        
+    console.log(productId);
+    console.log(quantity);
+})

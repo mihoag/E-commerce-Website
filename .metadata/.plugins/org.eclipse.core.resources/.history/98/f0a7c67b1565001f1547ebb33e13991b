@@ -1,0 +1,6 @@
+$(".link-add").on("click", function (e) {
+	e.preventDefault();
+	var linkAddlURL = $(this).attr("href");
+	//console.log(linkDetailURL);
+	$("#addProductModal").modal("show").find(".modal-body").load(linkAddlURL);
+});

@@ -126,5 +126,10 @@ public class ProductService {
 		}
 	}
 	
+	public List<Product> listProductNotInOrder(Integer orderId)
+	{
+		return repo.listProductNotIntOrder(orderId);
+	}
+	
  
 }

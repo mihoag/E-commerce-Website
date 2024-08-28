@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.hcmus.admin.product.ProductRepository;
 import com.hcmus.admin.setting.country.CountryRepository;
 import com.hcmus.common.entity.Country;
 import com.hcmus.common.entity.order.Order;
@@ -24,6 +25,8 @@ public class OrderService {
 	@Autowired private OrderRepository orderRepo;
 	
 	@Autowired private CountryRepository countryRepo;
+	
+	@Autowired private ProductRepository productRepo;
 	
 	public Page<Order> listByPage(int pageNum, String sortField, String sortDir, String keyword) {
 		
@@ -98,5 +101,5 @@ public class OrderService {
 		}
 		
 	}
-	
+
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ProductRepositoryTest.listProductNotInOrder(Integer)" project="MyShopBackend" tests="1" started="1" failures="0" errors="1" ignored="0">
+  <testsuite name="com.hcmus.admin.product.ProductRepositoryTest" time="0.629" displayname="ProductRepositoryTest" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.product.ProductRepositoryTest]">
+    <testcase name="listProductNotInOrder" classname="com.hcmus.admin.product.ProductRepositoryTest" time="0.629" displayname="listProductNotInOrder(Integer)" parameters="java.lang.Integer" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.admin.product.ProductRepositoryTest]/[method:listProductNotInOrder(java.lang.Integer)]">
+      <error>org.junit.jupiter.api.extension.ParameterResolutionException: No ParameterResolver registered for parameter [java.lang.Integer orderId] in method [public void com.hcmus.admin.product.ProductRepositoryTest.listProductNotInOrder(java.lang.Integer)].&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+&#13;
+</error>
+    </testcase>
+  </testsuite>
+</testrun>

@@ -1,0 +1,37 @@
+ <th:block th:each="product : ${listProducts}">
+                <div class="card mb-3 product-in-cart" th:id="'product' + ${product.id}" >
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <div class="col-5 d-flex flex-row align-items-center">
+                        <div>
+                          <img
+                            th:src="'/MyshopAdmin' + ${product.mainImagePath}"
+                            class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+                        </div>
+                        <div class="ms-3">
+                          <h6>[[${product.shortName}]]</h6>
+                        </div>
+                      </div>
+                   <div class="col-7 d-flex flex-row align-items-center justify-content-between">    
+                     <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                     
+                      <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2 linkMinus" th:pid="${item.product.id}">
+                        <i class="fas fa-minus"></i>
+                      </button>
+
+                      <input type="text"
+					  th:value="${item.quantity}" 
+					  readonly="readonly" class="form-control text-center"
+					  style="width: 55px"  th:id="'quantity' + ${item.product.id}" />
+					  
+                      <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2 linkPlus" th:pid="${item.product.id}">
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>
+
+                        <a onclick="removeItem(this)" th:pid="${item.product.id}" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
+                  </div>
+                    </div>
+                  </div>
+                </div>
+</th:block>

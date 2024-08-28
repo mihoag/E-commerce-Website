@@ -3,6 +3,7 @@ package com.hcmus.admin.product;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,7 @@ import org.springframework.test.annotation.Rollback;
 
 import com.hcmus.common.entity.Brand;
 import com.hcmus.common.entity.Category;
+import com.hcmus.common.entity.order.Order;
 import com.hcmus.common.entity.product.Product;
 
 @DataJpaTest
@@ -139,5 +141,13 @@ public class ProductRepositoryTest {
 		
 		Product savedProduct = repo.save(product);
 		assertThat(savedProduct.getDetails()).isNotEmpty();		
+	}
+	
+	@Test
+	public void listProductNotInOrder()
+	{
+		Integer orderId = 3;
+		List<Product> products = repo.listProductNotIntOrder(orderId);
+		products.forEach(System.out::println);
 	}
 }

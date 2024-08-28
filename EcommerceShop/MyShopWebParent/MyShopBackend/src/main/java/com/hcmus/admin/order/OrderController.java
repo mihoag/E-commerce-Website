@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hcmus.admin.product.ProductService;
 import com.hcmus.admin.security.MyShopUserDetails;
 import com.hcmus.admin.setting.SettingService;
 import com.hcmus.common.entity.Country;
 import com.hcmus.common.entity.order.Order;
+import com.hcmus.common.entity.product.Product;
 import com.hcmus.common.entity.setting.Setting;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,6 +32,8 @@ public class OrderController {
 	@Autowired
 	private OrderService orderSerice;
 	@Autowired private SettingService settingService;
+	@Autowired
+	private  ProductService productService;
 	
 	
 	@GetMapping("/page/{pageNum}")
@@ -113,11 +117,15 @@ public class OrderController {
 			ra.addFlashAttribute("message", ex.getMessage());
 			return defaultRedirectURL;
 		}
-	}	
-	 
+	}
 	
-
-	
+	@GetMapping("/notproducts/{id}")
+	public String showProductNotInOrders(@PathVariable("id") Integer id, Model model)
+	{
+		List<Product> listProducts = productService.listProductNotInOrder(id);
+		model.addAttribute("listProducts", listProducts);
+		return "order/orders_products_form";
+	}
 	
 	@GetMapping("/**")
 	public String listFirstPage(Model model)

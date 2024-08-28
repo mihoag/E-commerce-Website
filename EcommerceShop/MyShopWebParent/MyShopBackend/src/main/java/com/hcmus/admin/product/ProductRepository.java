@@ -1,5 +1,7 @@
 package com.hcmus.admin.product;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -47,4 +49,10 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, Pagi
 	
 	@Query("SELECT p FROM Product p WHERE p.name LIKE %?1%")
 	public Page<Product> searchProductsByName(String keyword, Pageable pageable);
+	
+	
+	
+	@Query(value  = "select * from products where id not in (select product_id from order_detail where order_id = ?1)", nativeQuery = true)
+	public List<Product> listProductNotIntOrder(Integer OrderId);
+	
 }

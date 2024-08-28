@@ -14,7 +14,7 @@ import com.hcmus.admin.product.ProductRepository;
 import com.hcmus.admin.setting.country.CountryRepository;
 import com.hcmus.common.entity.Country;
 import com.hcmus.common.entity.ShippingRate;
-
+import com.hcmus.common.entity.product.Product;
 
 import jakarta.transaction.Transactional;
 
@@ -90,5 +90,22 @@ public class ShippingRateService {
 						+ rateInForm.getCountry().getName() + ", " + rateInForm.getState()); 					
 		}
 		shipRepo.save(rateInForm);
+	}
+	
+	public float calculateShippingCost(Integer productId, Integer countryId, String state) 
+			throws ShippingRateNotFoundException {
+		ShippingRate shippingRate = shipRepo.findByCountryAndState(countryId, state);
+		
+		if (shippingRate == null) {
+			throw new ShippingRateNotFoundException("No shipping rate found for the given "
+					+ "destination. You have to enter shipping cost manually.");
+		}
+		
+		Product product = productRepo.findById(productId).get();
+		
+		float dimWeight = (product.getLength() * product.getWidth() * product.getHeight()) / DIM_DIVISOR;
+		float finalWeight = product.getWeight() > dimWeight ? product.getWeight() : dimWeight;
+				
+		return finalWeight * shippingRate.getRate();
 	}
 }
