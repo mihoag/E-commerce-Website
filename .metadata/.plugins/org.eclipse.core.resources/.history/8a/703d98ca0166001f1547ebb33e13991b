@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+
+<head> 
+   <head th:replace="fragment :: page_head('Order Form')" />
+  
+     <script src="https://cdn.jsdelivr.net/npm/jquery-number@2.1.6/jquery.number.min.js"></script>
+</head>
+
+<body style="background-color: #f5f7f6;">
+   <!-- Header -->
+    <div th:replace="fragment :: header"></div>
+    <div class="container-fluid w-100 mt-2">
+       
+        <div class="row w-100">
+            <div class="col-md-3">
+               <!-- start side bar -->
+               <aside th:replace="fragment :: sidebar"></aside>
+               <!--end side bar-->
+            </div>
+            
+            <div class="col-md-9">
+               <div id = "manageTitle" class = "d-flex"><h3>Manage Order | [[${title}]]</h3></div>
+               <!--Body table student-->
+               
+               <main class="main-content border-radius-lg">
+               <div class="card mt-3">
+            <form th:action="@{/order/save}" th:object="${order}" method="post"
+			onsubmit="return processFormBeforeSubmit();">
+			<input type="hidden" th:field="*{id}" />
+			<div>
+				<ul class="nav nav-tabs" id="myTab" role="tablist">
+					<li class="nav-item" role="presentation">
+						 <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab" aria-controls="home" aria-selected="true">Overview</button>
+					</li>
+					<li class="nav-item" role="presentation">
+					   <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#products" type="button" role="tab" aria-controls="profile" aria-selected="false">Products</button>
+					</li>
+					<li class="nav-item" role="presentation">
+					   <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#shipping" type="button" role="tab" aria-controls="profile" aria-selected="false">Shipping</button>
+					</li>
+					<li class="nav-item" role="presentation">
+					<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#track" type="button" role="tab" aria-controls="profile" aria-selected="false">Track</button>
+					</li>
+				</ul>
+				<div class="tab-content" id="myTabContent">
+					<div class="tab-pane fade show active p-3" id="overview"
+						role="tabpanel">
+						<div th:replace="order/order_form_overview :: content"></div>
+					</div>
+
+					<div class="tab-pane fade p-3" id="products" role="tabpanel">
+						<div th:replace="order/order_form_products :: content"></div>
+					</div>
+
+					<div class="tab-pane fade p-3" id="shipping" role="tabpanel">
+						<div th:replace="order/order_form_shipping :: content"></div>
+					</div>
+
+					<div class="tab-pane fade p-3" id="track" role="tabpanel">
+					    <div th:replace="order/order_form_tracks :: content"></div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<p class="text-center">
+					<input type="submit" value="Save" class="btn btn-primary m-3" /> <input
+						type="button" value="Cancel" class="btn btn-secondary"
+						id="buttonCancel" />
+				</p>
+			</div>
+		</form>
+                  </div>
+                </main>
+            </div>
+        </div>
+    </div>
+    
+    
+ <div aria-live="polite" aria-atomic="true" class="position-relative">
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+
+      <strong class="me-auto">Info</strong>
+  
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      <span id="toastMessage"></span>
+    </div>
+   </div>
+  </div>
+
+</div>
+        
+    
+     <div th:replace="fragment :: footer"></div>
+       <script type="text/javascript" th:src="@{/js/ConfigViewEvent.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript">
+       contextPath = "[[@{/}]]";
+    </script>
+    
+    <script type="text/javascript" th:src="@{/js/ToastEvent.js}"></script>
+    <script type="text/javascript" th:src="@{/js/order/order_form_overview_products.js}"></script>
+    <script type="text/javascript" th:src="@{/js/order/order_form_add_product.js}"></script>
+    <script type="text/javascript" th:src="@{/js/order/order_form_remove_product.js}"></script>
+    <script type="text/javascript" th:src="@{/js/order/order_form_tracks.js}"></script>
+</body>
+</html>

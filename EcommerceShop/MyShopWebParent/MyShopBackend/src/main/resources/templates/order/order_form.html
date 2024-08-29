@@ -25,7 +25,7 @@
                
                <main class="main-content border-radius-lg">
                <div class="card mt-3">
-            <form th:action="@{/order/save}" th:object="${order}" method="post"
+            <form th:action="@{/orders/save}" th:object="${order}" method="post"
 			onsubmit="return processFormBeforeSubmit();">
 			<input type="hidden" th:field="*{id}" />
 			<div>
