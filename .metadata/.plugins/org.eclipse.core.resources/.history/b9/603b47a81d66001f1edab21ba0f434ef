@@ -1,0 +1,62 @@
+package com.hcmus.site.checkout;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.hcmus.site.address.AddressService;
+import com.hcmus.site.customer.CustomerService;
+import com.hcmus.site.setting.SettingService;
+import com.hcmus.site.shipping.ShippingRateService;
+import com.hcmus.site.shopping_cart.CartService;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+@Controller
+public class CheckoutController {
+	@Autowired private CheckoutService checkoutService;
+	@Autowired private AddressService addressService;
+	@Autowired private ShippingRateService shipService;
+	@Autowired private CartService cartService;
+	@Autowired private SettingService settingService;
+	@Autowired private CustomerService customerService;
+
+	@GetMapping("/checkout")
+	public String showCheckoutPage(Model model, HttpServletRequest request) {
+		
+		String email = 
+		Customer customer = controllerHelper.getAuthenticatedCustomer(request);
+		
+		Address defaultAddress = addressService.getDefaultAddress(customer);
+		ShippingRate shippingRate = null;
+		
+		if (defaultAddress != null) {
+			model.addAttribute("shippingAddress", defaultAddress.toString());
+			shippingRate = shipService.getShippingRateForAddress(defaultAddress);
+		} else {
+			model.addAttribute("shippingAddress", customer.toString());
+			shippingRate = shipService.getShippingRateForCustomer(customer);
+		}
+		
+		if (shippingRate == null) {
+			return "redirect:/cart";
+		}
+		
+		List<CartItem> cartItems = cartService.listCartItems(customer);
+		CheckoutInfo checkoutInfo = checkoutService.prepareCheckout(cartItems, shippingRate);
+		
+		String currencyCode = settingService.getCurrencyCode();
+		PaymentSettingBag paymentSettings = settingService.getPaymentSettings();
+		String paypalClientId = paymentSettings.getClientID();
+		
+		model.addAttribute("paypalClientId", paypalClientId);
+		model.addAttribute("currencyCode", currencyCode);
+		model.addAttribute("customer", customer);
+		model.addAttribute("checkoutInfo", checkoutInfo);
+		model.addAttribute("cartItems", cartItems);
+		
+		return "checkout/checkout";
+	}
+	
+}

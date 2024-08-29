@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hcmus.common.entity.Currency;
 import com.hcmus.common.entity.setting.Setting;
 import com.hcmus.common.entity.setting.SettingCategory;
 
@@ -16,6 +17,7 @@ import jakarta.transaction.Transactional;
 public class SettingService {
     @Autowired private SettingRepository repo;
   
+    @Autowired private CurrencyRepository currencyRepo;
 	public List<Setting> listAllSettings() {
 		return (List<Setting>) repo.findAll();
 	}
@@ -38,15 +40,13 @@ public class SettingService {
 	
 	public void updateSetting(String key, String value)
 	{
-		List<Setting> listSettings = repo.findByKey(key);
-		if(listSettings != null)
-		{
-			Setting s = listSettings.get(0);
+		
+			Setting s = repo.findByKey(key);
 			System.out.println(s);
 			s.setValue(value);
 			repo.save(s);
-		}
 	}
+	
 	public MailSettingBag getMailSettings()
 	{
 		List<Setting> settings = new ArrayList<>();
@@ -56,8 +56,7 @@ public class SettingService {
 		settings.addAll(mailServerSettings);
 		settings.addAll(mailTemplateSettings);
 		
-		return new MailSettingBag(settings);
-		
+		return new MailSettingBag(settings);	
 	}
 	
 	public List<Setting> getMailServerSettings() {
@@ -75,4 +74,11 @@ public class SettingService {
 	public List<Setting> getPaymentSettings() {
 		return repo.findByCategory(SettingCategory.PAYMENT);
 	}	
+	
+	public String getCurrencyCode() {
+		Setting setting = repo.findByKey("CURRENCY_ID");
+		Integer currencyId = Integer.parseInt(setting.getValue());
+		Currency currency = currencyRepo.findById(currencyId).get();
+		return currency.getCode();
+	}
 }
