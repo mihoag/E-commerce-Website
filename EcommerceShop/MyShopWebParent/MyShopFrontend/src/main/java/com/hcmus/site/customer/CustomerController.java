@@ -127,6 +127,18 @@ public class CustomerController {
 	{
 	    customerService.updateCustomer(customer);
 	    ra.addFlashAttribute("message", "Update successfully");
-		return "redirect:/account_details";
+		
+		String redirectOption = request.getParameter("redirect");
+		String redirectURL = "redirect:/account_details";
+	    
+	    if ("address_book".equals(redirectOption)) {
+			redirectURL = "redirect:/address_book";
+		} else if ("cart".equals(redirectOption)) {
+			redirectURL = "redirect:/cart";
+		} else if ("checkout".equals(redirectOption)) {
+			redirectURL = "redirect:/address_book?redirect=checkout";
+		}
+		
+		return redirectURL;
 	}
 }

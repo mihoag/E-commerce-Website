@@ -14,6 +14,7 @@ import com.hcmus.common.entity.ShippingRate;
 import com.hcmus.site.Utility;
 import com.hcmus.site.address.AddressService;
 import com.hcmus.site.customer.CustomerService;
+import com.hcmus.site.setting.PaymentSettingBag;
 import com.hcmus.site.setting.SettingService;
 import com.hcmus.site.shipping.ShippingRateService;
 import com.hcmus.site.shopping_cart.CartService;
@@ -54,10 +55,10 @@ public class CheckoutController {
 		CheckoutInfo checkoutInfo = checkoutService.prepareCheckout(cartItems, shippingRate);
 		
 		String currencyCode = settingService.getCurrencyCode();
-		//PaymentSettingBag paymentSettings = settingService.getPaymentSettings();
-		//String paypalClientId = paymentSettings.getClientID();
+		PaymentSettingBag paymentSettings = new PaymentSettingBag(settingService.getPaymentSettings());
+		String paypalClientId = paymentSettings.getClientID();
 		
-		//model.addAttribute("paypalClientId", paypalClientId);
+		model.addAttribute("paypalClientId", paypalClientId);
 		model.addAttribute("currencyCode", currencyCode);
 		model.addAttribute("customer", customer);
 		model.addAttribute("checkoutInfo", checkoutInfo);

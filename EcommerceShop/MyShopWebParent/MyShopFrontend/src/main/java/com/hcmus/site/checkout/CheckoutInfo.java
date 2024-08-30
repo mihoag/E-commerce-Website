@@ -54,7 +54,6 @@ public class CheckoutInfo {
 	public Date getDeliverDate() {
 		Calendar calendar = Calendar.getInstance();
 		calendar.add(Calendar.DATE, deliverDays);
-		
 		return calendar.getTime();
 	}
 	

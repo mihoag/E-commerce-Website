@@ -1,0 +1,4 @@
+console.log("ok");
+$("#radioCOD").on("click", function () {
+  $("#buttonSubmit").removeClass("d-none");
+});

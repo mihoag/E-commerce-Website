@@ -96,6 +96,16 @@ public class SettingController {
 		return "redirect:/setting";
 	}
 	
+	@PostMapping("/save_payment")
+	public String savePayment(HttpServletRequest request, RedirectAttributes ra) {
+	
+	    updateSettingValuesFromForm(request, service.getPaymentSettings());
+		
+		ra.addFlashAttribute("message", "Payment settings have been saved.");
+		ra.addFlashAttribute("tab", "payment");
+		return "redirect:/setting";
+	}
+	
 	
 	public void updateSettingValuesFromForm(HttpServletRequest request, List<Setting> settings)
 	{

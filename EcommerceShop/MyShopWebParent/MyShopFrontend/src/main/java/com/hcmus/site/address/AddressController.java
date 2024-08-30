@@ -57,7 +57,16 @@ public class AddressController {
 		//System.out.println(customer);
 		//System.out.println(addressId);
 		addService.setDefaultAddress(addressId, customer.getId());
-		return "redirect:/address_book";
+		String redirectOption = request.getParameter("redirect");
+		String redirectURL = "redirect:/address_book";
+		
+		if ("cart".equals(redirectOption)) {
+			redirectURL = "redirect:/cart";
+		} else if ("checkout".equals(redirectOption)) {
+			redirectURL = "redirect:/checkout";
+		}
+		
+		return redirectURL;
 	}
 	
 	
@@ -103,6 +112,7 @@ public class AddressController {
 			}
 		}
 		
+		model.addAttribute("redirect", listAdress);
 		model.addAttribute("listAddresses", listAdress);
 		model.addAttribute("customer", customer);
 		model.addAttribute("totalItems", listAdress.size());

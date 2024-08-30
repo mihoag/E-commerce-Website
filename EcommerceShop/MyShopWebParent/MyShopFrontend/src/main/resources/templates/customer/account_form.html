@@ -40,7 +40,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
                 <form th:action="@{/update_account_details}" method="post"
 			        th:object="${customer}">
                     <!--Grid row-->
-
+                    <input type="hidden"
+				       name="redirect" th:value="${param.redirect}" />
+				       
                     <input type="hidden" th:field="*{id}" />   
                     <div class="input-group mb-4">
                         <span class="input-group-text" id="basic-addon1">Authentication type</span>
