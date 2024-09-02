@@ -46,7 +46,7 @@ public class OrderController {
 	
 	@GetMapping("/page/{pageNum}")
 	public String listByPage(@PathVariable("pageNum") int pageNum, @Param("sortField") String sortField,
-			@Param("sortDir") String sortDir, @Param("keyword") String keyword, Model model, HttpServletRequest request) {
+			@Param("sortDir") String sortDir, @Param("keyword") String keyword, Model model, @AuthenticationPrincipal MyShopUserDetails loggedUser,HttpServletRequest request) {
 		
 		     if(keyword == null)
 		     {
@@ -69,6 +69,11 @@ public class OrderController {
 			 model.addAttribute("reverseSortDir", reverseSortDir);
 			 model.addAttribute("keyword", keyword);
 		     model.addAttribute("totalElement", pageOrder.getTotalElements());
+		     
+		 	if (!loggedUser.hasRole("Admin") && !loggedUser.hasRole("Salesperson") && loggedUser.hasRole("Shipper")) {
+				return "order/orders_shipper";
+			}
+		     
 		     return "order/orders";	
 	}
 	
