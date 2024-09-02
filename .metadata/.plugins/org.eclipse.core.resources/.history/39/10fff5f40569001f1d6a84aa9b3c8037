@@ -1,0 +1,5 @@
+package com.hcmus.site.checkout.paypal;
+
+public class PayPalApiException {
+
+}

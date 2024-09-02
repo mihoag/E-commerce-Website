@@ -4,8 +4,9 @@
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="format_currency"/>
+		<item key="selection" value="dataListState"/>
 		<list key="findhistory">
+			<item value="dataListState"/>
 			<item value="format_currency"/>
 			<item value="border"/>
 			<item value="dis"/>
@@ -13,7 +14,6 @@
 			<item value="paging"/>
 			<item value="allPar"/>
 			<item value="allParentId"/>
-			<item value="link-detail"/>
 		</list>
 		<list key="replacehistory">
 		</list>

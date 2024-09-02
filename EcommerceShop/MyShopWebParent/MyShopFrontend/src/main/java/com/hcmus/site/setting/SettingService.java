@@ -79,6 +79,11 @@ public class SettingService {
 		return repo.findByCategory(SettingCategory.PAYMENT);
 	}	
 	
+	public PaymentSettingBag getPaymentSettingBag()
+	{
+		return new PaymentSettingBag(getPaymentSettings());
+	}
+	
 	public String getCurrencyCode() {
 		Setting setting = repo.findByKey("CURRENCY_ID");
 		Integer currencyId = Integer.parseInt(setting.getValue());

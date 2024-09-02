@@ -21,6 +21,8 @@ import com.hcmus.common.entity.order.Order;
 import com.hcmus.common.entity.order.PaymentMethod;
 import com.hcmus.site.Utility;
 import com.hcmus.site.address.AddressService;
+import com.hcmus.site.checkout.paypal.PayPalApiException;
+import com.hcmus.site.checkout.paypal.PaypalService;
 import com.hcmus.site.customer.CustomerService;
 import com.hcmus.site.order.OrderService;
 import com.hcmus.site.setting.CurrencySettingBag;
@@ -44,6 +46,7 @@ public class CheckoutController {
 	@Autowired private SettingService settingService;
 	@Autowired private CustomerService customerService;
 	@Autowired private OrderService orderService;
+	@Autowired private PaypalService paypalService;
 	
 
 	@GetMapping("/checkout")
@@ -110,6 +113,32 @@ public class CheckoutController {
 		sendOrderConfirmationEmail(request, createdOrder);
 		
 		return "checkout/order_completed";
+	}
+	
+	@PostMapping("/process_paypal_order")
+	public String processPayPalOrder(HttpServletRequest request, Model model) 
+			throws UnsupportedEncodingException, MessagingException, CartItemNotFoundException {
+		String orderId = request.getParameter("orderId");
+		
+		String pageTitle = "Checkout Failure";
+		String message = null;
+		
+		try {
+			if (paypalService.validateOrder(orderId)) {
+				return placeOrder(request);
+			} else {
+				pageTitle = "Checkout Failure";
+				message = "ERROR: Transaction could not be completed because order information is invalid";
+			}
+		} catch (PayPalApiException e) {
+			message = "ERROR: Transaction failed due to error: " + e.getMessage();
+		}
+		
+		model.addAttribute("pageTitle", pageTitle);
+		model.addAttribute("title", pageTitle);
+		model.addAttribute("message", message);
+		
+		return "message";
 	}
 	
 	
