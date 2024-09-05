@@ -346,8 +346,15 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 		</th:block>
 	</div>
  
-      <!-- Format currency -->
-      <div th:fragment="format_currency(amount)" th:remove="tag">
+  
+    <!-- Column link -->
+	<th th:fragment="column_link(columnLabel, columnField, hide)"  th:classappend="${hide == true ? 'hideable-column' : ''}">
+        <i th:if="${sortField eq columnField}" th:classappend="${sortDir eq 'desc' ? 'fa-solid fa-arrow-down' : 'fa-solid fa-arrow-up'}"></i>
+       <a style="text-decoration: none;" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+        th:href="@{'/'  + ${sideBarFieldName} + '/page/' + ${currentPage} + '?sortField=' + ${columnField} +'&sortDir=' + ${reverseSortDir} + ${categoryId != null ? '&categoryId=' + categoryId : ''}}">[[${columnLabel}]]</a> 
+    </th>
+   
+<div th:fragment="format_currency(amount)" th:remove="tag">
       <span
         th:if="${CURRENCY_SYMBOL_POSITION == 'Before price'}"
         th:remove="tag"
@@ -360,17 +367,19 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
       <span th:if="${CURRENCY_SYMBOL_POSITION == 'After price'}" th:remove="tag"
         >[[${CURRENCY_SYMBOL}]]</span
       >
-     </div>
+    </div>
 
-    <!-- Column link -->
-	<th th:fragment="column_link(columnLabel, columnField, hide)"  th:classappend="${hide == true ? 'hideable-column' : ''}">
-        <i th:if="${sortField eq columnField}" th:classappend="${sortDir eq 'desc' ? 'fa-solid fa-arrow-down' : 'fa-solid fa-arrow-up'}"></i>
-       <a style="text-decoration: none;" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-        th:href="@{'/'  + ${sideBarFieldName} + '/page/' + ${currentPage} + '?sortField=' + ${columnField} +'&sortDir=' + ${reverseSortDir} + ${categoryId != null ? '&categoryId=' + categoryId : ''}}">[[${columnLabel}]]</a> 
-    </th>
-    
-     <div th:fragment="format_time(dateTime)" th:remove="tag">
+    <div th:fragment="format_time(dateTime)" th:remove="tag">
       <span th:text="${#dates.format(dateTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+    </div>
+
+    <div th:fragment="currency_input(amount)" th:remove="tag">
+      <input
+        type="text"
+        readonly
+        class="form-control"
+        th:value="${(CURRENCY_SYMBOL_POSITION == 'Before price' ? CURRENCY_SYMBOL : '') + #numbers.formatDecimal(amount, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE) + (CURRENCY_SYMBOL_POSITION == 'After price' ? CURRENCY_SYMBOL : '')}"
+      />
     </div>
 
 

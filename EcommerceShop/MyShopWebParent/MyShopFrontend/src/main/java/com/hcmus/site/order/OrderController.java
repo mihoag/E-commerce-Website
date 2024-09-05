@@ -59,4 +59,37 @@ public class OrderController {
 		 return "orders/orders_customer";		
 	}
 
+	@GetMapping("/detail/{id}")
+	public String viewOrderDetails(Model model,
+			@PathVariable(name = "id") Integer id, HttpServletRequest request) {
+		String email = Utility.getEmailOfAuthenticatedCustomer(request);
+		Customer customer = customerService.getCustomerByEmail(email);
+		
+		Order order = orderService.getOrder(id, customer);
+		
+		//setProductReviewableStatus(customer, order);
+		
+		model.addAttribute("order", order);
+		
+		return "orders/order_details_modal";
+	}	
+	
+	/*private void setProductReviewableStatus(Customer customer, Order order) {
+		Iterator<OrderDetail> iterator = order.getOrderDetails().iterator();
+		
+		while(iterator.hasNext()) {
+			OrderDetail orderDetail = iterator.next();
+			Product product = orderDetail.getProduct();
+			Integer productId = product.getId();
+			
+			boolean didCustomerReviewProduct = reviewService.didCustomerReviewProduct(customer, productId);
+			product.setReviewedByCustomer(didCustomerReviewProduct);
+			
+			if (!didCustomerReviewProduct) {
+				boolean canCustomerReviewProduct = reviewService.canCustomerReviewProduct(customer, productId);
+				product.setCustomerCanReview(canCustomerReviewProduct);
+			}
+			
+		}
+	}*/
 }
