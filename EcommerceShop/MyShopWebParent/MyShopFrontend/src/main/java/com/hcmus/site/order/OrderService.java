@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.hcmus.common.entity.Address;
@@ -20,8 +24,12 @@ import com.hcmus.site.checkout.CheckoutInfo;
 
 @Service
 public class OrderService {
+	public static final int ORDERS_PER_PAGE = 5;
 	@Autowired
 	private OrderRepository repo;
+
+	@Autowired
+	private OrderDetailRepository orderDetailRepo;
 	
 	public Order createOrder(Customer customer, Address address, List<CartItem> cartItems,
 			PaymentMethod paymentMethod, CheckoutInfo checkoutInfo) {
@@ -50,9 +58,11 @@ public class OrderService {
 			newOrder.copyShippingAddress(address);
 		}
 		
-		Set<OrderDetail> orderDetails = newOrder.getOrderDetails();
+		Set<OrderDetail> orderDetails =  newOrder.getOrderDetails();
 		
 		for (CartItem cartItem : cartItems) {
+		
+			System.out.println(cartItem);
 			Product product = cartItem.getProduct();
 			
 			OrderDetail orderDetail = new OrderDetail();
@@ -65,8 +75,11 @@ public class OrderService {
 			orderDetail.setShippingCost(cartItem.getShippingCost());
 			
 			orderDetails.add(orderDetail);
+			System.out.println(orderDetails.size());
 		}
-		
+
+		newOrder.setOrderDetails(orderDetails);
+	
 		OrderTrack track = new OrderTrack();
 		track.setOrder(newOrder);
 		track.setStatus(OrderStatus.NEW);
@@ -77,4 +90,27 @@ public class OrderService {
 		
 		return repo.save(newOrder);
 	}
+	
+	public Page<Order> listForCustomerByPage(Customer customer, int pageNum, 
+			String sortField, String sortDir, String keyword) {
+		Sort sort = Sort.by(sortField);
+		sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
+		
+		Pageable pageable = PageRequest.of(pageNum - 1, ORDERS_PER_PAGE, sort);
+		
+		if (!keyword.equals("")) {
+			return repo.findAll(keyword, customer.getId(), pageable);
+		}
+		
+		return repo.findAll(customer.getId(), pageable);
+	}
+	
+	public Order getOrder(Integer id, Customer customer) {
+		return repo.findByIdAndCustomer(id, customer);
+	}	
+	
+	
+	
+	
+	
 }

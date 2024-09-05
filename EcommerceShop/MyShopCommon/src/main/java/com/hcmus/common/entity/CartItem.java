@@ -75,6 +75,10 @@ public class CartItem extends IdBasedEntity{
 	{
 		return quantity*product.getDiscountPrice();
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "CartItem [customer=" + customer + ", product=" + product + ", quantity=" + quantity + ", shippingCost="
+				+ shippingCost + "]";
+	}
 }

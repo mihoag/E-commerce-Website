@@ -106,6 +106,9 @@ public class CheckoutController {
 		}
 				
 		List<CartItem> cartItems = cartService.listCartItems(customer);
+		
+
+		
 		CheckoutInfo checkoutInfo = checkoutService.prepareCheckout(cartItems, shippingRate);
 		
 		Order createdOrder = orderService.createOrder(customer, defaultAddress, cartItems, paymentMethod, checkoutInfo);

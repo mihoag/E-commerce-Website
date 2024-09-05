@@ -1,0 +1,62 @@
+package com.hcmus.site.order;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.hcmus.common.entity.Customer;
+import com.hcmus.site.customer.CustomerService;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+@Controller
+@RequestMapping("/orders")
+public class OrderController {
+	@Autowired
+	private OrderService orderService;
+	
+	@Autowired
+	private CustomerService customerService;
+	
+	@GetMapping("/orders")
+	public String listFirstPage(Model model, HttpServletRequest request) {
+		return listOrdersByPage(model, request, 1, "orderTime", "desc", null);
+	}
+	
+	@GetMapping("/orders/page/{pageNum}")
+	public String listOrdersByPage(Model model, HttpServletRequest request,
+						@PathVariable(name = "pageNum") int pageNum,
+						String sortField, String sortDir, String keyword
+			) {
+		Customer customer = controllerHelper.getAuthenticatedCustomer(request);
+		
+		Page<Order> page = orderService.listForCustomerByPage(customer, pageNum, sortField, sortDir, keyword);
+		List<Order> listOrders = page.getContent();
+		
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("listOrders", listOrders);
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("moduleURL", "/orders");
+		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+		
+		long startCount = (pageNum - 1) * OrderService.ORDERS_PER_PAGE + 1;
+		model.addAttribute("startCount", startCount);
+		
+		long endCount = startCount + OrderService.ORDERS_PER_PAGE - 1;
+		if (endCount > page.getTotalElements()) {
+			endCount = page.getTotalElements();
+		}
+		
+		model.addAttribute("endCount", endCount);
+		
+		return "orders/orders_customer";		
+	}
+
+}

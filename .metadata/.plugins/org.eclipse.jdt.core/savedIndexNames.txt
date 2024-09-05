@@ -103,7 +103,6 @@ INDEX VERSION 1.134+F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\.metadata\.plug
 668646404.index
 2125061066.index
 2205965019.index
-3026106991.index
 4276651067.index
 1409615600.index
 3851673042.index
