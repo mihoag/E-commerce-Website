@@ -20,6 +20,7 @@ import com.hcmus.common.entity.order.OrderStatus;
 import com.hcmus.common.entity.order.OrderTrack;
 import com.hcmus.common.entity.order.PaymentMethod;
 import com.hcmus.common.entity.product.Product;
+import com.hcmus.common.exception.OrderNotFoundException;
 import com.hcmus.site.checkout.CheckoutInfo;
 
 @Service
@@ -109,6 +110,33 @@ public class OrderService {
 		return repo.findByIdAndCustomer(id, customer);
 	}	
 	
+	public void setOrderReturnRequested(OrderReturnRequest request, Customer customer) 
+			throws OrderNotFoundException {
+		Order order = repo.findByIdAndCustomer(request.getOrderId(), customer);
+		
+		if (order == null) {
+			throw new OrderNotFoundException("Order ID " + request.getOrderId() + " not found");
+		}
+		
+		if (order.isReturnRequested()) return;
+		
+		OrderTrack track = new OrderTrack();
+		track.setOrder(order);
+		track.setUpdatedTime(new Date());
+		track.setStatus(OrderStatus.RETURN_REQUESTED);
+		
+		String notes = "Reason: " + request.getReason();
+		if (!"".equals(request.getNote())) {
+			notes += ". " + request.getNote();
+		}
+		
+		track.setNotes(notes);
+		
+		order.getOrderTracks().add(track);
+		order.setStatus(OrderStatus.RETURN_REQUESTED);
+		
+		repo.save(order);
+	}
 	
 	
 	
