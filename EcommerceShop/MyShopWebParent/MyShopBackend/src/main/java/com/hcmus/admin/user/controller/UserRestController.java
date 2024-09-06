@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hcmus.admin.AmazonS3Util;
 import com.hcmus.admin.user.UserService;
 import com.hcmus.common.entity.User;
 import com.hcmus.common.exception.UserNotFoundException;
@@ -32,6 +33,8 @@ public class UserRestController {
       {
     	  try {
     		userService.deleteUserById(id);
+    		String userDir = "user-photos/" + id;
+			AmazonS3Util.removeFolder(userDir);
 			return ResponseEntity.ok().build();
 		} catch (Exception e) {
 			// TODO: handle exception

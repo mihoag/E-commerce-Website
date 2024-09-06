@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hcmus.admin.AmazonS3Util;
 import com.hcmus.admin.category.CategoryService;
 import com.hcmus.admin.category.export.CategoryCsvExporter;
 import com.hcmus.admin.category.export.CategoryExcelExporter;
@@ -86,6 +87,8 @@ public class CategoryController {
 	{
 		try {
 			service.deleteById(id);
+			String categoryDir = "category-images/" + id;
+			AmazonS3Util.removeFolder(categoryDir);
 			ra.addAttribute("message", "Delete category successfully");
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -125,8 +128,8 @@ public class CategoryController {
 				Category savedCate = service.save(cate);
 				
 				String uploadDir = "category-images/" + savedCate.getId();
-				FileUploadUtil.cleanDir(uploadDir);
-			    FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);	
+				AmazonS3Util.removeFolder(uploadDir);
+				AmazonS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
 			} else {
 				if (cate.getImage().isEmpty()) cate.setImage(null);
 				service.save(cate);

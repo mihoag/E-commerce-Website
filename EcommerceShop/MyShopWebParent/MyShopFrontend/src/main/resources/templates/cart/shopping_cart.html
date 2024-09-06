@@ -50,7 +50,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
                       <div class="col-5 d-flex flex-row align-items-center">
                         <div>
                           <img
-                            th:src="'/Myshop' + ${item.product.mainImagePath}"
+                            th:src="${item.product.mainImagePath}"
                             class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
                         </div>
                         <div class="ms-3">

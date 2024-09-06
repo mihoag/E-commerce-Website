@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hcmus.admin.AmazonS3Util;
 import com.hcmus.admin.user.UserRepository;
 import com.hcmus.admin.user.UserService;
 import com.hcmus.admin.user.export.UserCsvExporter;
@@ -69,8 +70,8 @@ public class UserController {
 				User savedUser = userService.saveUser(user);
 				
 				String uploadDir = "user-photos/" + savedUser.getId();
-				FileUploadUtil.cleanDir(uploadDir);
-			    FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);	
+				AmazonS3Util.removeFolder(uploadDir);
+				AmazonS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
 			} else {
 				if (user.getPhotos().isEmpty()) user.setPhotos(null);
 				
