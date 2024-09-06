@@ -1,0 +1,5 @@
+package com.hcmus.admin;
+
+public class AmazonS3UtilTests {
+
+}

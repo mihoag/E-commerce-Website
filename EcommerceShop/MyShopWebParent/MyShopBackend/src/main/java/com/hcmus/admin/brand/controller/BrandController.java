@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hcmus.admin.AmazonS3Util;
 import com.hcmus.admin.brand.BrandService;
 import com.hcmus.admin.brand.export.BrandExcelExporter;
 import com.hcmus.admin.category.CategoryService;
@@ -86,8 +87,8 @@ public class BrandController {
 			Brand savedBrand = brandService.save(brand);
 			String uploadDir = "brand-logos/" + savedBrand.getId();
 			
-			FileUploadUtil.cleanDir(uploadDir);
-			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+			AmazonS3Util.removeFolder(uploadDir);
+			AmazonS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
 		
 		} else {
 			brandService.save(brand);
@@ -122,8 +123,7 @@ public class BrandController {
 		try {
 			brandService.delete(id);
 			String brandDir = "brand-logos/" + id;
-			FileUploadUtil.removeDir(brandDir);
-			
+			AmazonS3Util.removeFolder(brandDir);
 			redirectAttributes.addAttribute("message", 
 					"The brand ID " + id + " has been deleted successfully");
 		} catch (BrandNotFoundException ex) {

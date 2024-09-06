@@ -57,7 +57,5 @@ public class Currency extends IdBasedEntity{
 	public String toString() {
 		return name + " - " + code + " - " + symbol;
 	}
-	
-	
-	
+
 }

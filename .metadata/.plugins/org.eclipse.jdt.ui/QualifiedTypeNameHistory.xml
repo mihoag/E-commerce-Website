@@ -1,26 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.springframework.data.repository.PagingAndSortingRepository"/>
-    <fullyQualifiedTypeName name="com.hcmus.admin.order.OrderRepository"/>
-    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
-    <fullyQualifiedTypeName name="org.hibernate.query.Page"/>
-    <fullyQualifiedTypeName name="org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager"/>
-    <fullyQualifiedTypeName name="org.junit.jupiter.api.Test"/>
-    <fullyQualifiedTypeName name="com.hcmus.common.entity.product.Product"/>
-    <fullyQualifiedTypeName name="com.hcmus.common.entity.order.PaymentMethod"/>
-    <fullyQualifiedTypeName name="java.util.Optional"/>
-    <fullyQualifiedTypeName name="java.text.DateFormat"/>
-    <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
-    <fullyQualifiedTypeName name="java.text.ParseException"/>
-    <fullyQualifiedTypeName name="com.hcmus.admin.setting.country.CountryRepository"/>
-    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
-    <fullyQualifiedTypeName name="java.util.NoSuchElementException"/>
-    <fullyQualifiedTypeName name="com.hcmus.common.entity.Country"/>
-    <fullyQualifiedTypeName name="com.hcmus.common.entity.order.OrderStatus"/>
-    <fullyQualifiedTypeName name="com.hcmus.common.entity.order.OrderTrack"/>
-    <fullyQualifiedTypeName name="java.util.Date"/>
-    <fullyQualifiedTypeName name="com.hcmus.admin.order.OrderService"/>
-    <fullyQualifiedTypeName name="com.hcmus.admin.setting.SettingService"/>
     <fullyQualifiedTypeName name="com.hcmus.common.entity.setting.Setting"/>
     <fullyQualifiedTypeName name="com.hcmus.admin.order.OrderNotFoundException"/>
     <fullyQualifiedTypeName name="org.springframework.security.core.annotation.AuthenticationPrincipal"/>
@@ -40,7 +19,6 @@
     <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
     <fullyQualifiedTypeName name="com.hcmus.site.order.OrderDetailRepository"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.Set"/>
     <fullyQualifiedTypeName name="com.hcmus.common.entity.order.OrderDetail"/>
     <fullyQualifiedTypeName name="java.lang.Exception"/>
@@ -60,4 +38,26 @@
     <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
     <fullyQualifiedTypeName name="com.hcmus.common.exception.OrderNotFoundException"/>
     <fullyQualifiedTypeName name="com.hcmus.common.entity.Customer"/>
+    <fullyQualifiedTypeName name="com.hcmus.common.entity.Constant"/>
+    <fullyQualifiedTypeName name="org.slf4j.Logger"/>
+    <fullyQualifiedTypeName name="org.slf4j.LoggerFactory"/>
+    <fullyQualifiedTypeName name="software.amazon.awssdk.services.s3.S3Client"/>
+    <fullyQualifiedTypeName name="software.amazon.awssdk.services.s3.model.ListObjectsRequest"/>
+    <fullyQualifiedTypeName name="software.amazon.awssdk.services.s3.model.ListObjectsResponse"/>
+    <fullyQualifiedTypeName name="software.amazon.awssdk.services.s3.model.S3Object"/>
+    <fullyQualifiedTypeName name="java.util.ListIterator"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="software.amazon.awssdk.services.s3.model.PutObjectRequest"/>
+    <fullyQualifiedTypeName name="software.amazon.awssdk.core.sync.RequestBody"/>
+    <fullyQualifiedTypeName name="java.io.IOException"/>
+    <fullyQualifiedTypeName name="software.amazon.awssdk.services.s3.model.DeleteObjectRequest"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.Test"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.io.FileNotFoundException"/>
+    <fullyQualifiedTypeName name="java.io.InputStream"/>
+    <fullyQualifiedTypeName name="java.io.FileInputStream"/>
+    <fullyQualifiedTypeName name="com.hcmus.admin.AmazonS3Util"/>
+    <fullyQualifiedTypeName name="com.hcmus.admin.AmazonS3UtilTests"/>
+    <fullyQualifiedTypeName name="com.hcmus.site.security.oauth.CustomerOAuth2User"/>
+    <fullyQualifiedTypeName name="com.hcmus.site.security.oauth.CustomerOAuth2UserService"/>
 </qualifiedTypeNameHistroy>

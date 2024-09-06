@@ -4,8 +4,9 @@
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="divReason"/>
+		<item key="selection" value="MainImage"/>
 		<list key="findhistory">
+			<item value="mainImage"/>
 			<item value="firstButton"/>
 			<item value="returnOrderModal"/>
 			<item value="shipping"/>
@@ -13,7 +14,6 @@
 			<item value="currency_input"/>
 			<item value="product"/>
 			<item value="fragment"/>
-			<item value="paging"/>
 		</list>
 		<list key="replacehistory">
 		</list>
