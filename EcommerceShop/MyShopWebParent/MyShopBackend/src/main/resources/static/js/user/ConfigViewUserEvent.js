@@ -38,10 +38,12 @@
 
            $.get(`/MyshopAdmin/api/users/${id}`, function (responseJson) {
             
+            console.log(responseJson);
+            
             detailId.innerText = responseJson.id;
             detailEmail.innerText = responseJson.email;
             detailName.innerText = responseJson.last_name + " " + responseJson.first_name;
-            detailPhoto.innerText = responseJson.photos;
+            detailPhoto.setAttribute("src", responseJson.photos_image_path);
             detailEnabled.innerText = responseJson.enabled;
             detailRole.innerText =  makeRoles(responseJson.roles);
             

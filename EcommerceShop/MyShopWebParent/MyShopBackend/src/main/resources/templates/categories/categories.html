@@ -73,7 +73,7 @@
                                             </td>
                                           
                                             <td >
-                                                  <img th:src="'/MyshopAdmin' + ${category.photosImagePath}" alt="Example Image" style="width: 100px" class="img-fluid">
+                                                  <img th:src="${category.photosImagePath}" alt="Example Image" style="width: 100px" class="img-fluid">
                                             </td>
                                             
                                             <td>
@@ -114,7 +114,7 @@
                       <div class="less-details">
 			            <div th:each="category : ${listCategories}" class="row m-1">
 			         	<div class="col-4">
-					        <img th:src="'/MyshopAdmin' + ${category.photosImagePath}" alt="Example Image" style="width: 100px" class="img-fluid">
+					        <img th:src="${category.photosImagePath}" alt="Example Image" style="width: 100px" class="img-fluid">
 				        </div>
 				        <div class="col-8">
 					       <div>[[${category.name}]]</div>

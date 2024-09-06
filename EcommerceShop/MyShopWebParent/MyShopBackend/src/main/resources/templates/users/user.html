@@ -123,7 +123,7 @@
                       <div class="less-details">
 			            <div th:each="user : ${listUsers}" class="row m-1">
 			         	<div class="col-4">
-					        <img th:src="'/MyshopAdmin' + ${user.photosImagePath}" alt="Example Image" style="width: 100px" class="img-fluid">
+					        <img th:src="${user.photosImagePath}" alt="Example Image" style="width: 100px" class="img-fluid">
 				        </div>
 				        <div class="col-8">
 					       <div>[[${user.fullName}]]</div>
@@ -196,7 +196,6 @@
 
                 <div class="modal-body">
                     <div class="col-auto d-flex justify-content-center">
-               
                         <img id = "detailPhoto" src = "https://th.bing.com/th/id/OIP.QjynegEfQVPq5kIEuX9fWQHaFj" alt="Example Image" style="width: 100px" class="img-fluid">
                     </div><hr>
                     <div class="col-auto">

@@ -86,7 +86,7 @@
                                             </td>
                                           
                                             <td>
-                                                 <img th:src="'/MyshopAdmin' + ${product.mainImagePath}"
+                                                 <img th:src="${product.mainImagePath}"
                                                   alt="Example Image" style="width: 100px" class="img-fluid">
                                             </td>
                                             
@@ -135,7 +135,7 @@
                       <div class="less-details">
 			            <div th:each="product : ${products}" class="row m-1">
 			         	<div class="col-4">
-					        <img th:src="'/MyshopAdmin' + ${product.mainImagePath}" alt="Example Image" style="width: 100px" class="img-fluid">
+					        <img th:src="${product.mainImagePath}" alt="Example Image" style="width: 100px" class="img-fluid">
 				        </div>
 				        <div class="col-8">
 					      <div>

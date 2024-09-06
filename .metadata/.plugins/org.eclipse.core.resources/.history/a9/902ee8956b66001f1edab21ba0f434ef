@@ -1,5 +1,0 @@
-$(document).ready(function () {
-	$("#radioCOD").on("click", function () {
-		$("#buttonSubmit").removeClass("d-none");
-	});
-});

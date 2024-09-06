@@ -68,7 +68,7 @@
                                             </td>
                                           
                                             <td>
-                                                 <img th:src="'/MyshopAdmin' + ${brand.logoPath}"
+                                                 <img th:src="${brand.logoPath}"
                                                   alt="Example Image" style="width: 100px" class="img-fluid">
                                             </td>
                                             <td>
@@ -104,7 +104,7 @@
                       <div class="less-details">
 			            <div th:each="brand : ${listBrand}" class="row m-1">
 			         	<div class="col-4">
-					        <img th:src="'/MyshopAdmin' + ${brand.logoPath}" alt="Example Image" style="width: 100px" class="img-fluid">
+					        <img th:src="${brand.logoPath}" alt="Example Image" style="width: 100px" class="img-fluid">
 				        </div>
 				        <div class="col-8">
 					       <div>[[${brand.name}]]</div>
