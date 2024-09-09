@@ -1,0 +1,5 @@
+package com.hcmus.admin.report;
+
+public class AbstractReportService {
+
+}

@@ -27,7 +27,8 @@ public interface OrderRepository extends JpaRepository<Order, Integer>, PagingAn
 			+ " o.customer.lastName LIKE %?1%")
 	public Page<Order> findAll(String keyword, Pageable pageable);
 	
-	@Query("SELECT o FROM Order o WHERE"
+	@Query("SELECT NEW com.hcmus.common.entity.order.Order(o.id, o.orderTime, o.productCost,"
+			+ " o.subtotal, o.total) FROM Order o WHERE"
 			+ " o.orderTime BETWEEN ?1 AND ?2 ORDER BY o.orderTime ASC")
 	public List<Order> findByOrderTimeBetween(Date startTime, Date endTime);
 }

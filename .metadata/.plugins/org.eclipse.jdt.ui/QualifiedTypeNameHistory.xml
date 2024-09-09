@@ -56,8 +56,8 @@
     <fullyQualifiedTypeName name="java.io.FileNotFoundException"/>
     <fullyQualifiedTypeName name="java.io.InputStream"/>
     <fullyQualifiedTypeName name="java.io.FileInputStream"/>
-    <fullyQualifiedTypeName name="com.hcmus.admin.AmazonS3Util"/>
     <fullyQualifiedTypeName name="com.hcmus.admin.AmazonS3UtilTests"/>
     <fullyQualifiedTypeName name="com.hcmus.site.security.oauth.CustomerOAuth2User"/>
     <fullyQualifiedTypeName name="com.hcmus.site.security.oauth.CustomerOAuth2UserService"/>
+    <fullyQualifiedTypeName name="com.hcmus.admin.AmazonS3Util"/>
 </qualifiedTypeNameHistroy>
