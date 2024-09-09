@@ -1,0 +1,13 @@
+package com.hcmus.admin.report;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import com.hcmus.admin.setting.SettingService;
+
+@Controller
+public class ReportController {
+
+	@Autowired
+	private SettingService settings;
+}

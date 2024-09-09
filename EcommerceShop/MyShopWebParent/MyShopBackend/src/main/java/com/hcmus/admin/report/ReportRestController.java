@@ -3,6 +3,7 @@ package com.hcmus.admin.report;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -43,9 +44,27 @@ public class ReportRestController {
 	public List<ReportItem> getReportDataByDatePeriod(@PathVariable("startDate") String startDate,
 			@PathVariable("endDate") String endDate) throws ParseException {
 		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+		
 		Date startTime = dateFormatter.parse(startDate);
 		Date endTime = dateFormatter.parse(endDate);
 		
-		return masterOrderReportService.getReportDataByDateRange(startTime, endTime, ReportType.DAY);
+		Calendar calStartOnly = Calendar.getInstance();
+		calStartOnly.setTime(startTime);
+		Calendar calEndOnly = Calendar.getInstance();
+		calEndOnly.setTime(endTime);
+		
+		Calendar calStart = Calendar.getInstance();
+		calStart.set(Calendar.YEAR, calStartOnly.get(Calendar.YEAR));
+		calStart.set(Calendar.MONTH, calStartOnly.get(Calendar.MONTH));
+		calStart.set(Calendar.DAY_OF_MONTH, calStartOnly.get(Calendar.DAY_OF_MONTH));
+		
+		Calendar calEnd = Calendar.getInstance();
+		calEnd.set(Calendar.YEAR, calEndOnly.get(Calendar.YEAR));
+		calEnd.set(Calendar.MONTH, calEndOnly.get(Calendar.MONTH));
+		calEnd.set(Calendar.DAY_OF_MONTH, calEndOnly.get(Calendar.DAY_OF_MONTH));
+		
+		return masterOrderReportService.getReportDataByDateRange(calStart.getTime(), calEnd.getTime(), ReportType.DAY);
 	}
+	
+	
 }

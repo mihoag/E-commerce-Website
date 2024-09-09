@@ -209,8 +209,8 @@ public class OrderRepositoryTest {
 	@Test
 	public void testFindByOrderTimeBetween() throws ParseException {
 		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-		Date startTime = dateFormatter.parse("2021-08-01");
-		Date endTime = dateFormatter.parse("2021-08-31");
+		Date startTime = dateFormatter.parse("2024-09-02");
+		Date endTime = dateFormatter.parse("2024-09-09");
 		
 		List<Order> listOrders = repo.findByOrderTimeBetween(startTime, endTime);
 		

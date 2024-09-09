@@ -18,11 +18,16 @@ public class MasterOrderReportService extends AbstractReportService {
 	
 	@Override
 	protected List<ReportItem> getReportDataByDateRangeInternal(Date startTime, Date endTime, ReportType reportType) {
+		System.out.println(startTime.toString());
+		System.out.println(endTime.toString());
 		List<Order> listOrders = repo.findByOrderTimeBetween(startTime, endTime);		
 		List<ReportItem> listReportItems = createReportData(startTime, endTime, reportType);
-		
-		System.out.println();
+		//printRawData(listOrders);
+		//System.out.println(listOrders.size());
+		//System.out.println("--------");
 		calculateSalesForReportData(listOrders, listReportItems);
+		//System.out.println("--------");
+		////printReportData(listReportItems);
 		return listReportItems;
 	}
 
@@ -30,9 +35,12 @@ public class MasterOrderReportService extends AbstractReportService {
 		for (Order order : listOrders) {
 			String orderDateString = dateFormatter.format(order.getOrderTime());
 			
+			
 			ReportItem reportItem = new ReportItem(orderDateString);
 			
 			int itemIndex = listReportItems.indexOf(reportItem);
+			
+			//System.out.println(itemIndex);
 			
 			if (itemIndex >= 0) {
 				reportItem = listReportItems.get(itemIndex);
@@ -56,6 +64,7 @@ public class MasterOrderReportService extends AbstractReportService {
 		Date currentDate = startDate.getTime();
 		String dateString = dateFormatter.format(currentDate);
 		
+		
 		listReportItems.add(new ReportItem(dateString));
 		
 		do {
@@ -67,7 +76,6 @@ public class MasterOrderReportService extends AbstractReportService {
 			
 			currentDate = startDate.getTime();
 			dateString = dateFormatter.format(currentDate);	
-			
 			listReportItems.add(new ReportItem(dateString));
 			
 		} while (startDate.before(endDate));
@@ -75,5 +83,17 @@ public class MasterOrderReportService extends AbstractReportService {
 		return listReportItems;		
 	}
 	
-
+	private void printReportData(List<ReportItem> listReportItems) {
+		listReportItems.forEach(item -> {
+			System.out.printf("%s, %10.2f, %10.2f, %d \n", item.getIdentifier(), item.getGrossSales(),
+					item.getNetSales(), item.getOrdersCount());
+		});	
+	}
+	
+	private void printRawData(List<Order> listOrders) {
+		listOrders.forEach(order -> {
+			System.out.printf("%-3d | %s | %10.2f | %10.2f \n",
+					order.getId(), order.getOrderTime(), order.getTotal(), order.getProductCost());
+		});
+	}
 }

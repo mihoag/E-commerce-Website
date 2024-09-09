@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html  xmlns:th = "http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head th:fragment="page_head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!--Fonts and icons-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/3cc4fda4ce.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/admin/header.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/sidebar.css}">
+    <link rel="stylesheet" th:href="@{/common/style.css}">
+    <title>[[${title}]]</title>
+
+</head>
+<body>
+
+
+    <!--Header-->
+    <div class="header container-fluid w-100 m-0" th:fragment="header">
+        <div class="row w-100">
+            <div class="col-md-3">
+                <div class="logo ms-5 position-fixed">
+                    <a th:href="@{/}">
+                        <img th:src="@{/img/logo.png}" style="width: 90px; height: 70px;">
+                    </a>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end col-md-9 fs-5">
+                <!-- Admin information -->
+                <div class="dropdown">
+                  <div class = "d-flex">
+                   
+                   <div class="dropdown-toggle f-flex" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                     <i class="fa-solid fa-user"></i>
+                     <span class="nav-link-text ms-3"  sec:authentication="principal.fullname"></span>
+                   </div>
+                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                       <li><a class="dropdown-item" th:href="@{/account}">Account</a></li>
+                        <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
+                     </ul>
+                 
+                   </div>
+                </div>
+                
+                <!-- Dropdown menu -->
+                <div th:replace="fragment :: navigationDropdown"></div>
+            </div>
+        </div>
+    </div>
+
+    <!--End header-->  
+    
+   
+    <!-- Pagination -->
+                                  <nav th:fragment="pagination"  style="margin: 2% 0 0 1%;" th:if="${totalPages > 1}">
+                                    <ul class="pagination">
+                           
+                                        <li class="page-item disabled">
+                                            <span th:unless="${currentPage > 1}" class="page-link">First</span>
+                                        </li>
+                                        
+                                        <li th:if="${currentPage > 1}"  class="page-item">
+                                           <a class="page-link" th:href="@{'/' +  ${sideBarFieldName} +'/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword} + ${categoryId != null ? '&categoryId=' + categoryId : ''}}">First</a>
+                                        </li>
+                                    
+                                        <li class="page-item disabled">
+                                            <span th:unless="${currentPage > 1}" class="page-link">Previous</span>
+                                        </li>
+                                        
+                                        <li th:if="${currentPage > 1}"  class="page-item">
+                                          <a class="page-link" th:href="@{'/' +  ${sideBarFieldName} +'/page/' + ${currentPage - 1}  + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword} + ${categoryId != null ? '&categoryId=' + categoryId : ''}}">Previous</a>
+                                        </li>
+                                        
+                                         <div th:each="i: ${#numbers.sequence(1, totalPages)}">
+			                              <li th:if="${currentPage != i}" class="page-item">
+			                                   <a th:href="@{'/' +  ${sideBarFieldName} + '/page/' + ${i}  + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword} + ${categoryId != null ? '&categoryId=' + categoryId : ''}}" class="page-link" href="#">[[${i}]]</a>
+			                              </li>
+			                              
+                                          <li th:unless="${currentPage != i}" class="page-item active" aria-current="page">
+                                            <span class="page-link">[[${i}]]</span>
+                                          </li>
+                                          
+                                        </div>
+                                        
+                                        <li class="page-item disabled">
+                                            <span th:unless="${currentPage < totalPages}" class="page-link">Next</span>
+                                        </li>
+                                        
+                                        <li th:if="${currentPage < totalPages}" class="page-item"><a class="page-link" th:href="@{'/' +  ${sideBarFieldName} + '/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword} + ${categoryId != null ? '&categoryId=' + categoryId : ''}}">Next</a></li>
+                                   
+                                         <li class="page-item disabled">
+                                            <span th:unless="${currentPage < totalPages}" class="page-link">Last</span>
+                                        </li>                     
+                                        <li th:if="${currentPage < totalPages}" class="page-item"><a class="page-link" th:href="@{'/' +  ${sideBarFieldName} + '/page/' + ${totalPages}  + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword} + ${categoryId != null ? '&categoryId=' + categoryId : ''}}">Last</a></li>
+                                    </ul>
+                                </nav>
+    
+     <!--Side bar-->
+     <aside class="navbar navbar-vertical rounded-4 my-3 ms-4 me-4 position-fixed mt-4" style="width: 20%;"
+                    id="sidenav-main" th:fragment="sidebar">
+        <div class="w-100">
+              <ul class="navbar-nav">
+              <th:block sec:authorize="hasAuthority('Admin')">
+                 <li class = "nav-item my-2" th:classappend="${sideBarFieldName == 'users' ? 'active' : ''}">
+                  <a class="nav-link active ps-4 py-3" th:href="@{/users}">
+                   <span class="nav-icon">
+                    <i class="fa-solid fa-user" style="max-width: 20px;"></i>
+                   </span>
+                  <span class="nav-link-text ms-3">User</span>
+                  </a>
+                </li>
+               </th:block>
+               
+                <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                <li class="nav-item my-2"  th:classappend="${sideBarFieldName == 'categories' ? 'active' : ''}">
+                  <a class="nav-link active ps-4 py-3" th:href="@{/categories}">
+                   <span class="nav-icon"> 
+                    <i class="fa-solid fa-list" style="max-width: 20px;"></i>
+                   </span>
+                  <span class="nav-link-text ms-3">Categories</span>
+                  </a>
+                </li>
+
+                
+                <li class="nav-item my-2" th:classappend="${sideBarFieldName == 'brands' ? 'active' : ''}">
+                  <a class="nav-link active ps-4 py-3" th:href="@{/brands}">
+                   <span class="nav-icon">
+                  <i class="fa-solid fa-copyright" style="max-width: 20px;"></i>
+                   </span>
+                  <span class="nav-link-text ms-3">Brands</span>
+                  </a>
+                </li>
+                </th:block>
+                
+                <th:block
+                sec:authorize="hasAnyAuthority('Admin', 'Salesperson', 'Editor', 'Shipper')"
+                >
+                <li class="nav-item my-2" th:classappend="${sideBarFieldName == 'products' ? 'active' : ''}">
+                  <a class="nav-link active ps-4 py-3" th:href="@{/products}">
+                   <span class="nav-icon">
+                    <i class="fa-solid fa-mobile" style="max-width: 20px;"></i>
+                   </span>
+                  <span class="nav-link-text ms-3">Products</span>
+                  </a>
+                </li>
+                
+                 </th:block>
+                
+                <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
+                <li class="nav-item my-2" th:classappend="${sideBarFieldName == 'customers' ? 'active' : ''}">
+                  <a class="nav-link active ps-4 py-3" th:href="@{/customers}" >
+                   <span class="nav-icon">
+                    <i class="fa-solid fa-users" style="max-width: 20px;"></i>
+                   </span>
+                  <span class="nav-link-text ms-3">Customers</span>
+                  </a>
+                </li>
+                </th:block>
+                
+                  <th:block
+                  sec:authorize="hasAnyAuthority('Admin', 'Salesperson', 'Shipper')"
+                  >
+                <li class="nav-item my-2" th:classappend="${sideBarFieldName == 'orders' ? 'active' : ''}">
+                  <a class="nav-link active ps-4 py-3" th:href="@{/orders}">
+                   <span class="nav-icon">
+                   <i class="fa-brands fa-wpforms" style="max-width: 20px;"></i>
+                   </span>
+                  <span class="nav-link-text ms-3">Order</span>
+                  </a>
+                </li>
+                 </th:block>
+                 
+            <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
+               <li class="nav-item my-2" th:classappend="${sideBarFieldName == 'reports' ? 'active' : ''}">
+                  <a class="nav-link active ps-4 py-3" th:href="@{/reports}">
+                   <span class="nav-icon">
+                    <i class="fa-solid fa-truck-fast" style="max-width: 20px;"></i>
+                   </span>
+                  <span class="nav-link-text ms-3">Sale reports</span>
+                  </a>
+                </li>
+            </th:block>
+                
+                <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
+                <li class="nav-item my-2" th:classappend="${sideBarFieldName == 'shipping_rates' ? 'active' : ''}">
+                  <a class="nav-link active ps-4 py-3" th:href="@{/shipping_rates}">
+                   <span class="nav-icon">
+                    <i class="fa-solid fa-truck-fast" style="max-width: 20px;"></i>
+                   </span>
+                  <span class="nav-link-text ms-3">Shipping</span>
+                  </a>
+                </li>
+                </th:block>
+                
+                
+                <li  sec:authorize="hasAuthority('Admin')" class="nav-item my-2" th:classappend="${sideBarFieldName == 'setting' ? 'active' : ''}">
+                  <a class="nav-link active ps-4 py-3" th:href="@{/setting}">
+                   <span class="nav-icon">
+                     <i class="fa-solid fa-gear" style="max-width: 20px;"></i>
+                   </span>
+                  <span class="nav-link-text ms-3">Setting</span>
+                  </a>
+                </li>   
+                
+              </ul>
+       </div>
+    </aside>
+                
+    <!-- Footer -->            
+    <div th:fragment="footer" class="text-center m-3">
+		<p>MyShop Control Panel - Copyright &copy; MyShop</p>
+	</div>
+
+
+     <!-- Dropdown navigation -->
+	 <nav th:fragment="navigationDropdown" class="navbar navbar-expand-lg navbar-light bg-light hidden" id= "navigationDropdown">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" th:href="@{/users}" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            User
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" th:href="@{/categories}" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Categories
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="@{/brands}" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Brands
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="@{/products}" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Products
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="@{/customers}" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Customers
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="@{/shipping}" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Shipping
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="@{/setting}" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Shipping
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+	
+	
+	<!-- Column link -->
+	<th th:fragment="column_link(columnLabel, columnField, hide)"  th:classappend="${hide == true ? 'hideable-column' : ''}">
+        <i th:if="${sortField eq columnField}" th:classappend="${sortDir eq 'desc' ? 'fa-solid fa-arrow-down' : 'fa-solid fa-arrow-up'}"></i>
+       <a style="text-decoration: none;" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+        th:href="@{'/'  + ${sideBarFieldName} + '/page/' + ${currentPage} + '?sortField=' + ${columnField} +'&sortDir=' + ${reverseSortDir} + ${categoryId != null ? '&categoryId=' + categoryId : ''}}">[[${columnLabel}]]</a> 
+    </th>
+    
+    <!-- format currency -->
+     <div th:fragment="format_currency(amount)" th:remove="tag">
+      <span
+        th:if="${CURRENCY_SYMBOL_POSITION == 'Before price'}"
+        th:remove="tag"
+        >[[${CURRENCY_SYMBOL}]]</span
+      >
+
+      [[${#numbers.formatDecimal(amount, 1, THOUSANDS_POINT_TYPE,
+      DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]
+
+      <span th:if="${CURRENCY_SYMBOL_POSITION == 'After price'}" th:remove="tag"
+        >[[${CURRENCY_SYMBOL}]]</span
+      >
+     </div>
+     
+     
+     <div th:fragment="format_time(dateTime)" th:remove="tag">
+		<span th:text="${#dates.format(dateTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+	</div>
+
+	<div th:fragment="currency_input(amount)" th:remove="tag">
+		<input type="text" readonly class="form-control"
+			th:value="${(CURRENCY_SYMBOL_POSITION == 'Before price' ? CURRENCY_SYMBOL : '') + #numbers.formatDecimal(amount, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE) + (CURRENCY_SYMBOL_POSITION == 'After price' ? CURRENCY_SYMBOL : '')}">
+	</div>
+	
+	
+	
+</body>
+
+</html>

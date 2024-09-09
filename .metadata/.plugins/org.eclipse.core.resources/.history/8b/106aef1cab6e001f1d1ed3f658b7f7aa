@@ -1,0 +1,13 @@
+package com.hcmus.admin.order;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.hcmus.admin.report.MasterOrderReportService;
+
+@SpringBootTest
+public class OrderDetailServiceTests {
+
+	@Autowired
+	private private MasterOrderReportService service;
+}
