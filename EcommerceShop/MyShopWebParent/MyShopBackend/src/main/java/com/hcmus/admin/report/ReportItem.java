@@ -104,5 +104,4 @@ public class ReportItem {
 	public void increaseProductsCount(int count) {
 		this.productsCount += count;
 	}
-	
 }
