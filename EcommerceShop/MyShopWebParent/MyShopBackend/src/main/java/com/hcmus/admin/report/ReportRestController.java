@@ -75,7 +75,22 @@ public class ReportRestController {
 		Date startTime = dateFormatter.parse(startDate);
 		Date endTime = dateFormatter.parse(endDate);
 		
-		return orderDetailReportService.getReportDataByDateRange(startTime, endTime, reportType);
+		Calendar calStartOnly = Calendar.getInstance();
+		calStartOnly.setTime(startTime);
+		Calendar calEndOnly = Calendar.getInstance();
+		calEndOnly.setTime(endTime);
+		
+		Calendar calStart = Calendar.getInstance();
+		calStart.set(Calendar.YEAR, calStartOnly.get(Calendar.YEAR));
+		calStart.set(Calendar.MONTH, calStartOnly.get(Calendar.MONTH));
+		calStart.set(Calendar.DAY_OF_MONTH, calStartOnly.get(Calendar.DAY_OF_MONTH));
+		
+		Calendar calEnd = Calendar.getInstance();
+		calEnd.set(Calendar.YEAR, calEndOnly.get(Calendar.YEAR));
+		calEnd.set(Calendar.MONTH, calEndOnly.get(Calendar.MONTH));
+		calEnd.set(Calendar.DAY_OF_MONTH, calEndOnly.get(Calendar.DAY_OF_MONTH));
+		
+		return orderDetailReportService.getReportDataByDateRange(calStart.getTime(), calEnd.getTime(), reportType);
 	}
 	
 	@GetMapping("/{groupBy}/{period}")

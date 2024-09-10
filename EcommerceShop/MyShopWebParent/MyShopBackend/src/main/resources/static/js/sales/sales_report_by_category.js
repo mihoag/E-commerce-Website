@@ -17,6 +17,9 @@ function loadSalesReportByDateForCategory(period) {
 	}
 
 	$.get(requestURL, function(responseJSON) {
+		
+		//console.log(responseJSON);
+		
 		prepareChartDataForSalesReportByCategory(responseJSON);
 		customizeChartForSalesReportByCategory();
 		formatChartData(data, 1, 2);
@@ -39,7 +42,7 @@ function prepareChartDataForSalesReportByCategory(responseJSON) {
 		data.addRows([[reportItem.identifier, reportItem.gross_sales, reportItem.net_sales]]);
 		totalGrossSales += parseFloat(reportItem.gross_sales);
 		totalNetSales += parseFloat(reportItem.net_sales);
-		totalItems += parseInt(reportItem.productsCount);
+		totalItems += parseInt(reportItem.products_count);
 	});
 }
 

@@ -17,6 +17,9 @@ public class OrderDetailReportService extends AbstractReportService{
 	
 	@Override
 	protected List<ReportItem> getReportDataByDateRangeInternal(Date startDate, Date endDate, ReportType reportType) {
+		System.out.println(startDate.toString());
+		System.out.println(endDate.toString());
+		
 		List<OrderDetail> listOrderDetails = null;
 		
 		if (reportType.equals(ReportType.CATEGORY)) {
@@ -25,7 +28,7 @@ public class OrderDetailReportService extends AbstractReportService{
 			listOrderDetails = repo.findWithProductAndTimeBetween(startDate, endDate);
 		}
 		
-		//printRawData(listOrderDetails);
+		printRawData(listOrderDetails);
 		
 		List<ReportItem> listReportItems = new ArrayList<>();
 		
@@ -55,7 +58,7 @@ public class OrderDetailReportService extends AbstractReportService{
 			}
 		}
 		
-		//printReportData(listReportItems);
+		printReportData(listReportItems);
 		
 		return listReportItems;
 	}
@@ -69,8 +72,8 @@ public class OrderDetailReportService extends AbstractReportService{
 
 	private void printRawData(List<OrderDetail> listOrderDetails) {
 		for (OrderDetail detail : listOrderDetails) {
-			System.out.printf("%d, %-20s, %10.2f, %10.2f, %10.2f \n",
-					detail.getQuantity(), detail.getProduct().getShortName().substring(0, 20),
+			System.out.printf("%d, %10.2f, %10.2f, %10.2f \n",
+					detail.getQuantity(),
 					detail.getSubtotal(), detail.getProductCost(), detail.getShippingCost());
 		}
 	}

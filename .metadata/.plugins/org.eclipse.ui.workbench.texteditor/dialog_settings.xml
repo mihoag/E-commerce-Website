@@ -4,8 +4,9 @@
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="img"/>
+		<item key="selection" value="formatChartData"/>
 		<list key="findhistory">
+			<item value="formatChartData"/>
 			<item value="img"/>
 			<item value="mainImage"/>
 			<item value="firstButton"/>
@@ -13,7 +14,6 @@
 			<item value="shipping"/>
 			<item value="format_currency(amount)"/>
 			<item value="currency_input"/>
-			<item value="product"/>
 		</list>
 		<list key="replacehistory">
 		</list>
