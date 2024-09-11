@@ -18,4 +18,5 @@ public interface ReviewRepository  extends JpaRepository<Review, Integer>{
 	
 	
 	Review findByOrderDetail(OrderDetail orderDetail);
+
 }

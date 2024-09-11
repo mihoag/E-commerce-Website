@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.hcmus.common.entity.Review;
 import com.hcmus.common.entity.order.Order;
 import com.hcmus.common.entity.order.OrderDetail;
+import com.hcmus.common.entity.product.Product;
 import com.hcmus.site.order.OrderDetailRepository;
 import com.hcmus.site.order.OrderRepository;
 
@@ -29,9 +30,26 @@ public class ReviewService {
 		}
 		
 		OrderDetail orderDetail = repoOrderDetail.findById(orderDetailId).get();
+		
+		// update review product
+		Product product = orderDetail.getProduct();
+		int count = product.getReviewCount();
+		product.setReviewCount(count+1);
+		float newRating = avgRating(product.getAverageRating(), count, rating);
+		product.setAverageRating(newRating);
+		
+		orderDetail.setProduct(product);
+		
 		Review review = new Review(headline, comment, rating, new Date());
+		orderDetail.setReview(true);
 		review.setOrderDetail(orderDetail);
+		
 		return repoReview.save(review);	
+	}
+	
+	public float avgRating(float currentRating, int currentCount, int newRating)
+	{
+		return (currentRating*currentCount+ newRating)/(currentCount+1);
 	}
 	
 	public List<Review> getReviewByProductId(Integer productId)
@@ -55,7 +73,4 @@ public class ReviewService {
 			return false;
 		}
 	}
-	
-	
-	
 }

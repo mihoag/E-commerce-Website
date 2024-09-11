@@ -11,6 +11,22 @@
     display: none;
 }
 
+.restaurant-detailed-ratings-and-reviews hr {
+    margin: 0 -24px;
+}
+.reviews-members .media .mr-3 {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+}
+
+.rounded-pill {
+    border-radius: 50rem!important;
+}
+
+.restaurant-detailed-ratings-and-reviews hr {
+    margin: 0 -24px;
+}
 
 @media screen and (max-width: 768px) {
 	/* small screen */

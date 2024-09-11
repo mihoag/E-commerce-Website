@@ -26,6 +26,8 @@ public class OrderDetail extends IdBasedEntity {
 	@JoinColumn(name = "order_id")
 	private Order order;
 	
+	private boolean isReview;
+	
 	public OrderDetail() {
 	}
 
@@ -107,6 +109,14 @@ public class OrderDetail extends IdBasedEntity {
 		return "OrderDetail [quantity=" + quantity + ", productCost=" + productCost + ", shippingCost=" + shippingCost
 				+ ", unitPrice=" + unitPrice + ", subtotal=" + subtotal + ", product=" + product + ", order=" + order
 				+ "]";
+	}
+
+	public boolean isReview() {
+		return isReview;
+	}
+
+	public void setReview(boolean isReview) {
+		this.isReview = isReview;
 	}
 	
 	

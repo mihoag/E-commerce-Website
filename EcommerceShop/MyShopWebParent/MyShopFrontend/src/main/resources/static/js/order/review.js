@@ -5,6 +5,7 @@ function addEventHandlerForWriteReviewButton()
 {
 	
 	$('.write-review').on("click", function() {
+		var writeRv = $(this);
 		 var pid = $(this).attr('pid');
 		 var idSubmit = '#submit' + pid;
 	     var submitBtn = $(idSubmit);
@@ -29,9 +30,9 @@ function addEventHandlerForWriteReviewButton()
                   const url = '/Myshop/api/review';          
                   $.post(url, params, async function (response) {
 				     showToast(response);
-				     $('#headline' + pid).val('');
-				     $('#comment' + pid).val('');
-				     
+				     writeRv.addClass('d-none');
+				     submitBtn.addClass('d-none');
+				     $(reviewId).addClass('d-none');
 			      }).fail(function (e) {
 				  
 		          });

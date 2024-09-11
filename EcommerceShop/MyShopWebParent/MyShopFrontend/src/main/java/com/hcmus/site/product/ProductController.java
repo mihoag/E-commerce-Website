@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.hcmus.common.entity.Category;
+import com.hcmus.common.entity.Review;
 import com.hcmus.common.entity.product.Product;
 import com.hcmus.common.entity.product.ProductDetail;
 import com.hcmus.site.category.CategoryService;
+import com.hcmus.site.review.ReviewDTO;
+import com.hcmus.site.review.ReviewService;
 
 import jakarta.websocket.server.PathParam;
 
@@ -25,6 +28,8 @@ public class ProductController {
 	@Autowired private ProductService productService;
 	
 	@Autowired private CategoryService categoryService;
+	
+	@Autowired private ReviewService reviewService;
 	
 	@GetMapping("/c/{alias}")
 	public String listFirstPage(@PathVariable("alias") String alias, Model model)
@@ -63,7 +68,10 @@ public class ProductController {
 			
 			Category categoryParent = product.getCategory();
 			List<Product> relatedProducts = productService.getProductByCate(categoryParent);
+			
 			relatedProducts.remove(product);
+			
+			List<Review> reviews = reviewService.getReviewByProductId(product.getId());
 			
 			//Page<Review> listReviews = reviewService.list3MostVotedReviewsByProduct(product);
 			
@@ -82,9 +90,14 @@ public class ProductController {
 			}
 			
 			*/
+			System.out.println(product.getAverageRating());
+			System.out.println(product.getReviewCount());
+			
 			List<ProductDetail> details = product.getDetails();
 			details.forEach(System.out::println);
 			System.out.println(details.size());
+			
+			model.addAttribute("listReviews", reviews);
 			model.addAttribute("relatedProducts", relatedProducts);
 			model.addAttribute("listCategoryParents", listCategoryParents);
 			model.addAttribute("product", product);
@@ -98,6 +111,4 @@ public class ProductController {
 			return "error/404";
 		}
 	}
-
-	
 }

@@ -114,7 +114,7 @@
 					
 					<div class="col-sm-8">
 						<div class="text-wrap">
-							<b>[[${product.name}]]</b>
+							<a th:href="@{${product.URI}}">[[${product.name}]]</a>
 						</div>
 
 						<div>
@@ -127,7 +127,7 @@
 						</div>
 						<br>
 						<div>
-							<a th:pid = "${detail.id}"
+							<a th:pid = "${detail.id}" th:if = "${!detail.isReview and detail.order.isDelivered}"
                              class="btn btn-info write-review">Write Review</a>
                              <a th:id = "'submit' + ${detail.id}"
                              class="btn btn-info d-none">Submit</a>
