@@ -19,7 +19,6 @@ public class OrderDetailReportService extends AbstractReportService{
 	protected List<ReportItem> getReportDataByDateRangeInternal(Date startDate, Date endDate, ReportType reportType) {
 		System.out.println(startDate.toString());
 		System.out.println(endDate.toString());
-		
 		List<OrderDetail> listOrderDetails = null;
 		
 		if (reportType.equals(ReportType.CATEGORY)) {

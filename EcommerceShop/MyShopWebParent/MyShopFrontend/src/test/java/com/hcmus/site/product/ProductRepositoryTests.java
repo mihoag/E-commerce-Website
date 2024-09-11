@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.annotation.Rollback;
 
 import com.hcmus.common.entity.Category;
+import com.hcmus.common.entity.order.OrderDetail;
 import com.hcmus.common.entity.product.Product;
 import com.hcmus.site.category.CategoryRepository;
 
@@ -63,4 +64,6 @@ public class ProductRepositoryTests {
 		
 		products.forEach(System.out::println);
 	}
+	
+	
 }

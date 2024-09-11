@@ -1,0 +1,11 @@
+document.addEventListener('DOMContentLoaded', function()
+{
+	addEventHandlerForWriteReviewButton();
+})
+
+function addEventHandlerForWriteReviewButton()
+{
+	$(".write-review").on("click", function() {
+		
+	});
+}

@@ -1,0 +1,20 @@
+package com.hcmus.site.review;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.hcmus.common.entity.Review;
+
+@Service
+public class ReviewService {
+	@Autowired
+	private ReviewRepository repo;
+	
+	
+	public Review addReview(Review review)
+	{
+		return repo.save(review);
+	}
+	
+	
+}

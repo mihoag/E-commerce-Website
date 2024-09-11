@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;com.hcmus.common.entity.review.java&apos; to &apos;Review.java&apos;&#x0D;&#x0A;- Original project: &apos;MyShopCommon&apos;&#x0D;&#x0A;- Original element: &apos;com.hcmus.common.entity.review.java&apos;&#x0D;&#x0A;- Renamed element: &apos;com.hcmus.common.entity.Review.java&apos;" description="Rename compilation unit &apos;review.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.hcmus.common.entity{review.java" name="Review.java" references="false" stamp="1726017397784" version="1.0"/>
+</session>

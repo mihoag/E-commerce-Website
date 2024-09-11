@@ -1,0 +1,14 @@
+document.addEventListener('DOMContentLoaded', function()
+{
+	addEventHandlerForWriteReviewButton();
+})
+
+function addEventHandlerForWriteReviewButton()
+{
+	console.log($('.write-review'))
+	$('.write-review').on("click", function() {
+		 var idSubmit = 'submit' + $(this).attr('pid');
+		 console.log(idSubmit);
+	     //var submitBtn = 
+	});
+}

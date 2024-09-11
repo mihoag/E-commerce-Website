@@ -1,0 +1,12 @@
+
+addEventHandlerForWriteReviewButton();
+
+function addEventHandlerForWriteReviewButton()
+{
+	
+	$('.write-review').on("click", function() {
+		 var idSubmit = '#submit' + $(this).attr('pid');
+	     var submitBtn = $(idSubmit);
+	     
+	});
+}

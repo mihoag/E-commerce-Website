@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ReviewRepositoryTest.findByOrderDetailTests" project="MyShopFrontend" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.hcmus.site.review.ReviewRepositoryTest" time="0.71" displayname="ReviewRepositoryTest" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.site.review.ReviewRepositoryTest]">
+    <testcase name="findByOrderDetailTests" classname="com.hcmus.site.review.ReviewRepositoryTest" time="0.71" displayname="findByOrderDetailTests()" uniqueid="[engine:junit-jupiter]/[class:com.hcmus.site.review.ReviewRepositoryTest]/[method:findByOrderDetailTests()]"/>
+  </testsuite>
+</testrun>
