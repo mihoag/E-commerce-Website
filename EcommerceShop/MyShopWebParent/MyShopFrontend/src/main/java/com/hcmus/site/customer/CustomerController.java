@@ -138,7 +138,6 @@ public class CustomerController {
 		} else if ("checkout".equals(redirectOption)) {
 			redirectURL = "redirect:/address_book?redirect=checkout";
 		}
-		
 		return redirectURL;
 	}
 }

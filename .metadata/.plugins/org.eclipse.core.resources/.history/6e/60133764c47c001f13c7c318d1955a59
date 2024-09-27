@@ -1,0 +1,27 @@
+package com.hcmus.site.contact;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/contact/sendmail")
+public class ContactRestController {
+	
+	private static Logger LOGGER = LoggerFactory.getLogger(ContactRestController.class);
+	
+	@PostMapping
+	public String sendEmail(String full)
+	{
+		try {
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			LOGGER.error(e.getMessage());
+			
+		}
+		return "OK";
+	}
+}

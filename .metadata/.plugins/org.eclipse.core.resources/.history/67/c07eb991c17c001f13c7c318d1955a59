@@ -1,0 +1,21 @@
+const fullname = $('#fullname');
+const email = $('#email');
+const phone = $('#phone');
+const subject = $('#subject');
+const message = $('#message');
+
+const myForm = document.getElementById('myForm');
+myForm.addEventListener('submit', function()
+{
+	// Get form data
+  const formData = new FormData(event.target);
+
+  // Convert form data to an object
+  const data = {};
+  formData.forEach((value, key) => {
+    data[key] = value;
+  });
+
+  // Convert the object to JSON
+  const jsonData = JSON.stringify(data);
+})
