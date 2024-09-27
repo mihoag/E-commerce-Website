@@ -21,6 +21,8 @@ import com.hcmus.common.entity.product.Product;
 import com.hcmus.common.exception.CustomerNotFoundException;
 import com.hcmus.common.exception.UserNotFoundException;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping("/customers")
 public class CustomerController {
@@ -41,7 +43,6 @@ public class CustomerController {
 		}
 	    Page<Customer> pageCustomers = customerService.listByPage(pageNum, sortField, sortDir, keyword);
 	    
-	    System.out.println(pageCustomers.getTotalPages());
 	    
 	    String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
 	    
@@ -83,16 +84,17 @@ public class CustomerController {
 			RedirectAttributes redirectAttributes) throws CustomerNotFoundException {
 		customerService.deleteCustomer(id);
 	
-		redirectAttributes.addAttribute("message", 
+		redirectAttributes.addFlashAttribute("message", 
 				"The customer has ID "+ id +" has been deleted successfully");
-		return listByPage(1, "id", "asc", "", model);
+		return listFirstPage(model);
 	}
 	
 	@PostMapping("/save")
-	public String saveCustomer(Customer customer, Model model)
+	public String saveCustomer(Customer customer, Model model, RedirectAttributes redirectAttributes)
 	{
 		Customer savedCustomer =  customerService.saveCustomer(customer);
-		return listByPage(1, "id", "asc", savedCustomer.getEmail(),model);
+		redirectAttributes.addFlashAttribute("message", "Save the customer successfully");
+		return listFirstPage(model);
 	}
 	
 	@GetMapping("/customer/{id}/enabled/{status}")

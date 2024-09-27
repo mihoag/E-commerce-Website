@@ -1,4 +1,4 @@
- const message = document.getElementById("message");
+ const message = document.getElementById("toastMessage");
  const detailId = document.getElementById("detailId");
  const detailEmail = document.getElementById("detailEmail");
  const detailName = document.getElementById("detailName");
@@ -19,18 +19,12 @@
  
  $(document).ready(function() {
             // Show the toast
+            console.log(message.innerText);
             if(message.innerText != '')
             {
-			   $('#successToast').toast('show');
-
-              // Set timeout to hide the toast after 3 seconds (3000 milliseconds)
-               setTimeout(function() {
-                 $('#successToast').toast('hide');
-               }, 3000);
+				showToast(message.innerText);
 			}
-			
-			
-			
+		
 	    // Show detail user
         $('#detailUser').on('show.bs.modal', async function (event) {
            var button = $(event.relatedTarget);
@@ -65,12 +59,10 @@
             type: 'DELETE',
             contentType: 'text/html',
             success: function () {
-            	
             	window.location.href = "/MyshopAdmin/users/";
             },
             error: function () {
-            	
-               window.location.href = "/MyshopAdmin/users/";
+                window.location.href = "/MyshopAdmin/users/";
                  	      }});
-        }) 
+    }) 
 });

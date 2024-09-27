@@ -21,3 +21,14 @@
         $('#buttonDelete').attr('href',href);
     })
     
+const message = document.getElementById("toastMessage");  
+$(document).ready(function() {
+            // Show the toast
+            if(message.innerText != '')
+            {
+				showToast(message.innerText);
+			}
+})
+		
+    
+    

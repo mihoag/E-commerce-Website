@@ -42,6 +42,7 @@ public class BrandController {
 	public String listByPage(@PathVariable("pageNum") int pageNum, @Param("sortField") String sortField,
 			@Param("sortDir") String sortDir, @Param("keyword") String keyword,  Model model
 			) {
+		
 		if(keyword == null)
 	    {
 	    	keyword = "";
@@ -62,7 +63,6 @@ public class BrandController {
 	    model.addAttribute("keyword", keyword);
 		model.addAttribute("totalElement", totalElement);
 	    
-		
 		return "brand/brand";		
 	}
 	
@@ -94,7 +94,7 @@ public class BrandController {
 			brandService.save(brand);
 		}
 		
-		ra.addAttribute("message", "The brand has been saved successfully.");
+		ra.addFlashAttribute("message", "The brand has been saved successfully.");
 		return defaultRedirectURL + "&keyword=" + brand.getName();		
 	}
 	
@@ -124,10 +124,10 @@ public class BrandController {
 			brandService.delete(id);
 			String brandDir = "brand-logos/" + id;
 			AmazonS3Util.removeFolder(brandDir);
-			redirectAttributes.addAttribute("message", 
+			redirectAttributes.addFlashAttribute("message", 
 					"The brand ID " + id + " has been deleted successfully");
 		} catch (BrandNotFoundException ex) {
-			redirectAttributes.addAttribute("message", ex.getMessage());
+			redirectAttributes.addFlashAttribute("message", ex.getMessage());
 		}
 		
 		return defaultRedirectURL;

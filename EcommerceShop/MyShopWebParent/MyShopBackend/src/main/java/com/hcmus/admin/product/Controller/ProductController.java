@@ -30,6 +30,8 @@ import com.hcmus.common.exception.BrandNotFoundException;
 import com.hcmus.common.exception.ProductNotFoundException;
 import com.hcmus.common.exception.UserNotFoundException;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping("/products")
 public class ProductController {
@@ -44,12 +46,14 @@ public class ProductController {
 	
 	@GetMapping("/page/{pageNum}")
 	public String listByPage(@PathVariable("pageNum") int pageNum, @Param("sortField") String sortField,
-			@Param("sortDir") String sortDir, @Param("keyword") String keyword, Integer categoryId, Model model) {
+			@Param("sortDir") String sortDir, @Param("keyword") String keyword, Integer categoryId ,Model model) {
 		
 		     if(keyword == null)
 		     {
 		    	 keyword = "";
 		     }
+		     
+		     //System.out.println("Message: " + request.getAttribute("message"));
 		     
 		     Page<Product> pageProduct = productService.listByPage(pageNum, sortField, sortDir, keyword, categoryId);
 		     
@@ -62,6 +66,8 @@ public class ProductController {
 				
 			 if (categoryId != null) model.addAttribute("categoryId", categoryId);
 		     
+			 System.out.println();
+			 
 			 model.addAttribute("listCategories", listCategories);
 		     model.addAttribute("products", lsProduct);
 		     model.addAttribute("sideBarFieldName", "products");
@@ -157,7 +163,7 @@ public class ProductController {
 		String productDir = "product-images/" + id;
 		FileUploadUtil.removeDir(productDir);
 		
-		redirectAttributes.addAttribute("message", 
+		redirectAttributes.addFlashAttribute("message", 
 				"The product has ID "+ id +" has been deleted successfully");
 		
 		return  String.format(defaultRedirectURL, 1, "name", "asc", "", 0);

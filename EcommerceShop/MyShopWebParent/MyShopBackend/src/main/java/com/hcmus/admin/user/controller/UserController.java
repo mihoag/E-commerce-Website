@@ -77,10 +77,10 @@ public class UserController {
 				
 				userService.saveUser(user);
 			}
-			redirect.addAttribute("message", "Create new user successfully!");
+			redirect.addFlashAttribute("message", "Save user successfully!");
 		} catch (Exception e) {
 			// TODO: handle exception
-			redirect.addAttribute("message", "Create new user fail");
+			redirect.addFlashAttribute("message", "Create new user fail");
 			LOGGER.error(e.getMessage());
 		}
 		return formatDirectUrl(1, "firstName" , "asc", user.getEmail());
@@ -98,10 +98,11 @@ public class UserController {
 			model.addAttribute("user", user);
 			model.addAttribute("listRoles", listRoles);
 			model.addAttribute("title", String.format("Update user ( id : %d )", id));
+		
 			
 			return "users/user_form";
 		} catch (UserNotFoundException e) {
-			redirectAttributes.addAttribute("message", e.getMessage());
+			redirectAttributes.addFlashAttribute("message", e.getMessage());
 			return formatDirectUrl(1, "firstName" , "asc", "");
 			// TODO: handle exception
 		}
