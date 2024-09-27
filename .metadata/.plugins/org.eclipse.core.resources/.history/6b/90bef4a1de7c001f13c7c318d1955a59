@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function()
 			
 			subtotal = $("#subtotal" + id);
 			console.log(subtotal);
-			subtotalPrice = (value-1)*(parseFloat($("#subtotal" + id).text().replace(",", "")))/value;
+			subtotalPrice = (value-1)*(parseFloat($("#subtotal" + id).text()))/value;
 			updateSubTotal(subtotal,subtotalPrice);
 			
 			updateQuantity(id,value-1);
