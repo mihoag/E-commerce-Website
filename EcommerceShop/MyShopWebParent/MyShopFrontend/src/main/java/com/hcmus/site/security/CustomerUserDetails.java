@@ -24,8 +24,11 @@ public class CustomerUserDetails implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
-		return customer.getPassword();
+		if (customer.isOTPRequired()) {
+            return customer.getOneTimePassword();
+        }
+         
+        return customer.getPassword();
 	}
 
 	@Override

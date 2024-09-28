@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "customers")
 public class Customer extends AbstractAddressWithCountry{
+	 private static final long OTP_VALID_DURATION = 5 * 60 * 1000;   // 5 minutes
 	@Column(nullable = false, unique = true, length = 45)
 	private String email;
 
@@ -32,6 +33,13 @@ public class Customer extends AbstractAddressWithCountry{
 	@Column(name = "reset_password_token", length = 30)
 	private String resetPasswordToken;
 
+	
+    @Column(name = "one_time_password")
+    private String oneTimePassword;
+     
+    @Column(name = "otp_requested_time")
+    private Date otpRequestedTime;
+	
 	public Customer() {
 	}
 
@@ -99,5 +107,39 @@ public class Customer extends AbstractAddressWithCountry{
 	{
 		return firstName + " " + lastName;
 	}
+	
+	
+	
+	public String getOneTimePassword() {
+		return oneTimePassword;
+	}
+
+	public void setOneTimePassword(String oneTimePassword) {
+		this.oneTimePassword = oneTimePassword;
+	}
+
+	public Date getOtpRequestedTime() {
+		return otpRequestedTime;
+	}
+
+	public void setOtpRequestedTime(Date otpRequestedTime) {
+		this.otpRequestedTime = otpRequestedTime;
+	}
+
+	public boolean isOTPRequired() {
+        if (this.getOneTimePassword() == null) {
+            return false;
+        }
+         
+        long currentTimeInMillis = System.currentTimeMillis();
+        long otpRequestedTimeInMillis = this.otpRequestedTime.getTime();
+         
+        if (otpRequestedTimeInMillis + OTP_VALID_DURATION < currentTimeInMillis) {
+            // OTP expires
+            return false;
+        }
+         
+        return true;
+    }
 	
 }

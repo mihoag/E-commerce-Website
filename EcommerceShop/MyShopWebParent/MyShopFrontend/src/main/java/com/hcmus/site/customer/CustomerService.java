@@ -1,9 +1,12 @@
 package com.hcmus.site.customer;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,8 +15,13 @@ import com.hcmus.common.entity.AuthenticationType;
 import com.hcmus.common.entity.Country;
 import com.hcmus.common.entity.Customer;
 import com.hcmus.common.exception.CustomerNotFoundException;
+import com.hcmus.site.Utility;
 import com.hcmus.site.setting.CountryRepository;
+import com.hcmus.site.setting.MailSettingBag;
+import com.hcmus.site.setting.SettingService;
 
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.transaction.Transactional;
 import net.bytebuddy.utility.RandomString;
 
@@ -24,6 +32,8 @@ public class CustomerService {
 	@Autowired private CountryRepository countryRepo;
 	@Autowired
 	private CustomerRepository customerRepo;
+	@Autowired
+	private SettingService settingService;
 	
 	public String checkEmail(String email)
 	{
@@ -182,4 +192,54 @@ public class CustomerService {
 		customerRepo.save(customer);
 	}
 	
+	 public void generateOneTimePassword(Customer customer) {
+		 PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		 
+		 String OTP = RandomString.make(8);
+		 String encodedOTP = passwordEncoder.encode(OTP);
+		     
+		 customer.setOneTimePassword(encodedOTP);
+		   
+		 customer.setOtpRequestedTime(new Date());
+		     
+		 customerRepo.save(customer);
+		     
+		 sendOTPEmail(customer, OTP);
+	    }
+	     
+	    public void sendOTPEmail(Customer customer, String OTP) {
+	    	MailSettingBag emailSettings = settingService.getMailSettings();
+			JavaMailSenderImpl mailSender = Utility.prepareMailSender(emailSettings);
+			
+			String toAddress = customer.getEmail();	
+			String content = "<p>Hello " + customer.getFirstName() + "</p>"
+		            + "<p>For security reason, you're required to use the following "
+		            + "One Time Password to login:</p>"
+		            + "<p><b>" + OTP + "</b></p>"
+		            + "<br>"
+		            + "<p>Note: this OTP is set to expire in 5 minutes.</p>";
+			
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message);
+			
+			try {
+				helper.setFrom(emailSettings.getFromAddress(), emailSettings.getSenderName());
+				helper.setTo(toAddress);
+				helper.setSubject("SEND OTP");
+				helper.setText(content, true);
+				mailSender.send(message);    
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+	    }
+	 
+	    public void clearOTP(Customer customer) {
+	    	customer.setOneTimePassword(null);
+	        customer.setOtpRequestedTime(null);
+	        customerRepo.save(customer);   
+	    }  
 }

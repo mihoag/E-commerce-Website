@@ -1,0 +1,40 @@
+package com.hcmus.site.security;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
+
+@Service
+public class CaptchaService {
+    private static final String RECAPTCHA_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
+    private final String secretKey = "6LcMS1EqAAAAAOs6qFBZ6D79eOvpAKZT2agylFgU";
+
+    public boolean validateCaptcha(String captchaToken) {
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        
+        MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
+        requestBody.add("secret", secretKey);
+        requestBody.add("response", captchaToken);
+        
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(requestBody, headers);
+        
+        ResponseEntity<Map> response = restTemplate.postForEntity(RECAPTCHA_VERIFY_URL, request, Map.class);
+        java.util.Map<String, Object> body = (java.util.Map<String, Object>) response.getBody();
+        
+        if (body != null && body.containsKey("success")) {
+            Boolean success = (Boolean) body.get("success");
+            if (success) {
+                Double score = (Double) body.get("score");
+                return score >= 0.5; // Set the threshold as needed
+            }
+        }
+        return false;
+    }
+}

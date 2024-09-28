@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.hcmus.site.security.oauth.CustomerOAuth2UserService;
 import com.hcmus.site.security.oauth.OAuth2LoginSuccessHandler;
@@ -25,6 +26,7 @@ public class WebSecurityConfig {
 	@Autowired private CustomerOAuth2UserService oAuth2UserService;
 	@Autowired private OAuth2LoginSuccessHandler oauth2LoginHandler;
 	@Autowired private DatabaseLoginSuccessHandler databaseLoginHandler; 
+	@Autowired private RecaptchaFilter recaptchaFilter;
 	
 	@Bean
 	PasswordEncoder passwordEncoder() {
@@ -54,11 +56,13 @@ public class WebSecurityConfig {
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authenticationProvider(authenticationProvider());
 		http.authorizeHttpRequests(
-				auth -> 	
+				auth -> 
+				
 				auth.requestMatchers("/account_details", "/update_account_details", "/orders/**",
 						"/cart", "/address_book/**", "/checkout", "/place_order", "/reviews/**", 
 						"/process_paypal_order", "/write_review/**", "/post_review").authenticated()
 				.anyRequest().permitAll())
+		        .addFilterBefore(recaptchaFilter, UsernamePasswordAuthenticationFilter.class)
 				.formLogin(login -> login.loginPage("/login").usernameParameter("email").successHandler(databaseLoginHandler).permitAll())
 				.oauth2Login(oauth2Login -> 
                  oauth2Login

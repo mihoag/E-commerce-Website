@@ -21,7 +21,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
                    <div th:if="${param.error}">
 				    <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
 			       </div>
-			    
+			   <input type="hidden" id="recaptchaToken" name="recaptchaToken">     
               <div data-mdb-input-init class="form-outline form-white mb-4">
                 <input type="email" name="email" placeholder="Enter your email" autocomplete="name" class="form-control form-control-lg" />     
               </div>
@@ -64,4 +64,14 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LcMS1EqAAAAAFhhqn1omq27_oiwLEYpkpR0aQuj"></script>
+    <script>
+  grecaptcha.ready(function() {
+    grecaptcha.execute('6LcMS1EqAAAAAFhhqn1omq27_oiwLEYpkpR0aQuj', {action: 'submit'}).then(function(token) {
+      // Pass the token to the backend for verification
+      document.getElementById('recaptchaToken').value = token;
+    });
+  });
+</script>
+    
 </html>
