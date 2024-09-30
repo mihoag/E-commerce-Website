@@ -1,0 +1,27 @@
+package com.hcmus.admin.product;
+
+import java.util.Date;
+
+import jakarta.persistence.Column;
+
+public class FullProductDTO {
+	
+	private int id;
+	private String name;
+	private String alias;
+	private String shortDescription;
+	private String fullDescription;
+	private boolean enabled;
+	private boolean inStock;
+	private float cost;
+	private float price;
+	private float discountPercent;
+	private float length;
+	private float width;
+	private float height;
+	private float weight;
+	private String detail;
+	private String category;
+	private String brand;
+	
+}

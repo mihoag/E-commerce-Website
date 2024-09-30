@@ -38,7 +38,7 @@ public class CaptchaService {
         );
 
         // Process the response
-        Map<String, Object> responseBody = response.getBody();
+         Map<String, Object> responseBody = response.getBody();
         if (responseBody != null && (Boolean) responseBody.get("success")) {
             Double score = (Double) responseBody.get("score");
             System.out.println(score);

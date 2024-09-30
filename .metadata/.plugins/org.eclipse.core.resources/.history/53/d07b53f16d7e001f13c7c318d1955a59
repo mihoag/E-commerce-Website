@@ -1,0 +1,109 @@
+var usernamePage = document.querySelector('#username-page');
+var chatPage = document.querySelector('#chat-page');
+var usernameForm = document.querySelector('#usernameForm');
+var messageInput = document.querySelector('#message');
+var messageArea = document.querySelector('#messageArea');
+var btnSend= document.querySelector('#btnSend');
+var images = document.querySelectorAll('img');
+
+document.addEventListener('DOMContentLoaded', function()
+{
+	 var chatBox = document.getElementById('messageArea'); 
+     var mobileHeight = window.innerHeight;
+     chatBox.style.height = mobileHeight - 150 + 'px';
+     
+     setTimeout(function() {
+		 var divMess = document.createElement('div');
+        divMess.innerHTML = `
+	    <div class="d-flex flex-row justify-content-start">
+        <img
+          src="https://cdn-images-1.medium.com/v2/resize:fit:1600/0*Z7BBg5UiOY2k7MbY.png"
+          alt="avatar 1"
+          style="width: 45px; height: 100%"
+        />
+        <div>
+          <p
+            class="small p-2 ms-3 mb-3 rounded-3"
+            style="background-color: #f5f6f7"
+          >
+           Welcome to our AI-powered product recommendation service! 🎉 Just describe what you're looking for, and our smart chatbot will suggest the best products tailored to your needs. Let's find the perfect match for you! 😊
+          </p>
+         
+        </div>
+      </div>
+	        `  
+
+        messageArea.appendChild(divMess);      
+        messageArea.scrollTop = messageArea.scrollHeight;
+	 }, 2000);
+})
+
+window.addEventListener('resize', function() {
+    var chatBox = document.getElementById('messageArea'); 
+    var mobileHeight = window.innerHeight;
+    chatBox.style.height = mobileHeight - 150 + 'px';
+});
+
+
+
+
+function sendMessage(event) {    
+    var messageContent = messageInput.value.trim();
+    if(messageContent) {
+        var divMess = document.createElement('div');
+        divMess.innerHTML = `
+	    <div class="d-flex justify-content-between">
+                
+                <p class="small mb-1 text-muted"></p>
+                <p class="small mb-1">You</p>
+              </div>
+              <div class="d-flex flex-row justify-content-end"> 
+                <div>
+                  <p
+                    class="small p-2 ms-3 mb-3 rounded-3"
+                    style="background-color: #f5f6f7"
+                  >
+                    ${messageContent}
+                  </p>
+                </div>
+                <img
+                  src="https://openvldoostende.be/wp-content/uploads/2023/01/abstract-user-icon-1.jpg"
+                  alt="avatar 1"
+                  style="width: 30px; height: 100%"
+                />
+              </div>
+	        `  
+        messageInput.value = '';
+        messageArea.appendChild(divMess);      
+        messageArea.scrollTop = messageArea.scrollHeight;
+        recieveMessage(messageContent);   
+    }
+    event.preventDefault();
+}
+
+function recieveMessage(description)
+{
+	const query = {
+      description: description, // your product description
+      top_k: 5 // number of top recommendations you want
+    };
+
+   fetch('http://127.0.0.1:8082/recommend-products', {
+      method: 'POST', // HTTP method
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(query) // convert the query object to a JSON string
+   })
+   .then(response => response.json()) // parse JSON response
+   .then(data => {
+    console.log('Recommended Products:', data);
+    // You can update the UI or handle the response here
+   })
+   .catch(error => {
+    console.error('Error:', error);
+   });
+}
+
+//messageForm.addEventListener('submit', sendMessage, true)
+btnSend.addEventListener('click', sendMessage)

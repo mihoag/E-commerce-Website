@@ -325,6 +325,17 @@ public class Product extends IdBasedEntity {
 	public String getURI() {
 		return "/p/" + this.alias;
 	}
+	
+	@Transient
+	public String concatDetailProduct()
+	{
+		String str = "";
+		for(ProductDetail productDetail : details)
+		{
+			str += productDetail.getName() + " : " + productDetail.getValue()+ ". ";
+		}
+		return str;
+	}
 
 }
 
