@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HelpController {
 
 	@GetMapping
-	public String helpHome()
-	{
-	    return "help/help";
+	public String helpHome() {
+		return "help/help";
 	}
 }

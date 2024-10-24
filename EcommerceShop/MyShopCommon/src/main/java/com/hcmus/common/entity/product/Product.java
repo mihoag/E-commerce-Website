@@ -24,56 +24,56 @@ import jakarta.persistence.Transient;
 @Entity
 @Table(name = "products")
 public class Product extends IdBasedEntity {
-	
+
 	@Column(unique = true, length = 255, nullable = false)
 	private String name;
-	
+
 	@Column(unique = true, length = 255, nullable = false)
 	private String alias;
-	
+
 	@Column(length = 512, nullable = false, name = "short_description")
 	private String shortDescription;
-	
+
 	@Column(length = 4096, nullable = false, name = "full_description")
 	private String fullDescription;
-	
+
 	@Column(name = "created_time", nullable = false, updatable = false)
 	private Date createdTime;
-	
+
 	@Column(name = "updated_time")
 	private Date updatedTime;
-	
+
 	private boolean enabled;
-	
+
 	@Column(name = "in_stock")
 	private boolean inStock;
-	
+
 	private float cost;
-	
+
 	private float price;
-	
+
 	@Column(name = "discount_percent")
 	private float discountPercent;
-	
+
 	private float length;
 	private float width;
 	private float height;
 	private float weight;
-	
+
 	@Column(name = "main_image", nullable = false)
 	private String mainImage;
-		
+
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
 
 	@ManyToOne
-	@JoinColumn(name = "brand_id")	
+	@JoinColumn(name = "brand_id")
 	private Brand brand;
-	
+
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<ProductImage> images = new HashSet<>();
-	
+
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ProductDetail> details = new ArrayList<>();
 
@@ -86,7 +86,7 @@ public class Product extends IdBasedEntity {
 
 	public Product() {
 	}
-	
+
 	public Product(String name) {
 		this.name = name;
 	}
@@ -110,7 +110,6 @@ public class Product extends IdBasedEntity {
 	public String getShortDescription() {
 		return shortDescription;
 	}
-	
 
 	public void setShortDescription(String shortDescription) {
 		this.shortDescription = shortDescription;
@@ -248,16 +247,17 @@ public class Product extends IdBasedEntity {
 	public void setImages(Set<ProductImage> images) {
 		this.images = images;
 	}
-	
+
 	public void addExtraImage(String imageName) {
 		this.images.add(new ProductImage(imageName, this));
 	}
-	
+
 	@Transient
 	public String getMainImagePath() {
-		if (id == null || mainImage == null) return "/images/image-thumbnail.png";
-		
-		return Constant.S3_BASE_URI +  "/product-images/" + this.id + "/" + this.mainImage;
+		if (id == null || mainImage == null)
+			return "/images/image-thumbnail.png";
+
+		return Constant.S3_BASE_URI + "/product-images/" + this.id + "/" + this.mainImage;
 	}
 
 	public List<ProductDetail> getDetails() {
@@ -267,7 +267,7 @@ public class Product extends IdBasedEntity {
 	public void setDetails(List<ProductDetail> details) {
 		this.details = details;
 	}
-	
+
 	public void addDetail(String name, String value) {
 		this.details.add(new ProductDetail(name, value, this));
 	}
@@ -275,20 +275,20 @@ public class Product extends IdBasedEntity {
 	public void addDetail(Integer id, String name, String value) {
 		this.details.add(new ProductDetail(id, name, value, this));
 	}
-	
+
 	public boolean containsImageName(String imageName) {
 		Iterator<ProductImage> iterator = images.iterator();
-		
+
 		while (iterator.hasNext()) {
 			ProductImage image = iterator.next();
 			if (image.getName().equals(imageName)) {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
-	
+
 	@Transient
 	public String getShortName() {
 		if (name.length() > 70) {
@@ -296,7 +296,7 @@ public class Product extends IdBasedEntity {
 		}
 		return name;
 	}
-	
+
 	@Transient
 	public float getDiscountPrice() {
 		if (discountPercent > 0) {
@@ -320,22 +320,19 @@ public class Product extends IdBasedEntity {
 	public void setAverageRating(float averageRating) {
 		this.averageRating = averageRating;
 	}
-	
+
 	@Transient
 	public String getURI() {
 		return "/p/" + this.alias;
 	}
-	
+
 	@Transient
-	public String concatDetailProduct()
-	{
+	public String concatDetailProduct() {
 		String str = "";
-		for(ProductDetail productDetail : details)
-		{
-			str += productDetail.getName() + " : " + productDetail.getValue()+ ". ";
+		for (ProductDetail productDetail : details) {
+			str += productDetail.getName() + " : " + productDetail.getValue() + ". ";
 		}
 		return str;
 	}
 
 }
-

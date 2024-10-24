@@ -3,18 +3,17 @@ var chatPage = document.querySelector('#chat-page');
 var usernameForm = document.querySelector('#usernameForm');
 var messageInput = document.querySelector('#message');
 var messageArea = document.querySelector('#messageArea');
-var btnSend= document.querySelector('#btnSend');
+var btnSend = document.querySelector('#btnSend');
 var images = document.querySelectorAll('img');
 
-document.addEventListener('DOMContentLoaded', function()
-{
-	 var chatBox = document.getElementById('messageArea'); 
-     var mobileHeight = window.innerHeight;
-     chatBox.style.height = mobileHeight - 150 + 'px';
-     
-     setTimeout(function() {
-		 var divMess = document.createElement('div');
-        divMess.innerHTML = `
+document.addEventListener('DOMContentLoaded', function() {
+	var chatBox = document.getElementById('messageArea');
+	var mobileHeight = window.innerHeight;
+	chatBox.style.height = mobileHeight - 150 + 'px';
+
+	setTimeout(function() {
+		var divMess = document.createElement('div');
+		divMess.innerHTML = `
 	    <div class="d-flex flex-row justify-content-start">
         <img
           src="https://cdn-images-1.medium.com/v2/resize:fit:1600/0*Z7BBg5UiOY2k7MbY.png"
@@ -31,27 +30,27 @@ document.addEventListener('DOMContentLoaded', function()
          
         </div>
       </div>
-	        `  
+	        `
 
-        messageArea.appendChild(divMess);      
-        messageArea.scrollTop = messageArea.scrollHeight;
-	 }, 2000);
+		messageArea.appendChild(divMess);
+		messageArea.scrollTop = messageArea.scrollHeight;
+	}, 2000);
 })
 
 window.addEventListener('resize', function() {
-    var chatBox = document.getElementById('messageArea'); 
-    var mobileHeight = window.innerHeight;
-    chatBox.style.height = mobileHeight - 150 + 'px';
+	var chatBox = document.getElementById('messageArea');
+	var mobileHeight = window.innerHeight;
+	chatBox.style.height = mobileHeight - 150 + 'px';
 });
 
 
 
 
-function sendMessage(event) {    
-    var messageContent = messageInput.value.trim();
-    if(messageContent) {
-        var divMess = document.createElement('div');
-        divMess.innerHTML = `
+function sendMessage(event) {
+	var messageContent = messageInput.value.trim();
+	if (messageContent) {
+		var divMess = document.createElement('div');
+		divMess.innerHTML = `
 	    <div class="d-flex justify-content-between">
                 
                 <p class="small mb-1 text-muted"></p>
@@ -72,26 +71,24 @@ function sendMessage(event) {
                   style="width: 30px; height: 100%"
                 />
               </div>
-	        `  
-        messageInput.value = '';
-        messageArea.appendChild(divMess);      
-        messageArea.scrollTop = messageArea.scrollHeight;
-        recieveMessage(messageContent);   
-    }
-    event.preventDefault();
+	        `
+		messageInput.value = '';
+		messageArea.appendChild(divMess);
+		messageArea.scrollTop = messageArea.scrollHeight;
+		recieveMessage(messageContent);
+	}
+	event.preventDefault();
 }
 
 
-function generateResponse(data)
-{
+function generateResponse(data) {
 	var host = window.location.host;
 	var pathName = window.location.pathname;
-   // Context path (typically the root path after the host)
-    var contextPath = pathName.substring(0, pathName.indexOf("/", 1));
-    
+	// Context path (typically the root path after the host)
+	var contextPath = pathName.substring(0, pathName.indexOf("/", 1));
+
 	let str = ``;
-	for(let i = 0; i < data.length ; i++)
-	{
+	for (let i = 0; i < data.length; i++) {
 		str += `  <div class="card mb-3 product-in-cart">
                   <div class="card-body">
                     <div class="d-flex justify-content-between">
@@ -112,9 +109,9 @@ function generateResponse(data)
                     </div>
                   </div>
                 `
-               
+
 	}
-	  return `
+	return `
               <div class="d-flex flex-row justify-content-start">
         <img
           src="https://cdn-images-1.medium.com/v2/resize:fit:1600/0*Z7BBg5UiOY2k7MbY.png"
@@ -134,34 +131,33 @@ function generateResponse(data)
           `
 }
 
-function recieveMessage(description)
-{
+function recieveMessage(description) {
 	const query = {
-      description: description, // your product description
-      top_k: 5 // number of top recommendations you want
-    };
+		description: description, // your product description
+		top_k: 5 // number of top recommendations you want
+	};
 
-   fetch('http://127.0.0.1:8082/recommend-products', {
-      method: 'POST', // HTTP method
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(query) // convert the query object to a JSON string
-   })
-   .then(response => response.json()) // parse JSON response
-   .then(data => {
-    //console.log('Recommended Products:', data);
-    // You can update the UI or handle the response here
-       let res = generateResponse(data);
-       var divMess = document.createElement('div');
-       divMess.innerHTML = res;
-       messageArea.appendChild(divMess);      
-       messageArea.scrollTop = messageArea.scrollHeight;
-      
-   })
-   .catch(error => {
-    console.error('Error:', error);
-   });
+	fetch('http://127.0.0.1:8082/recommend-products', {
+		method: 'POST', // HTTP method
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(query) // convert the query object to a JSON string
+	})
+		.then(response => response.json()) // parse JSON response
+		.then(data => {
+			//console.log('Recommended Products:', data);
+			// You can update the UI or handle the response here
+			let res = generateResponse(data);
+			var divMess = document.createElement('div');
+			divMess.innerHTML = res;
+			messageArea.appendChild(divMess);
+			messageArea.scrollTop = messageArea.scrollHeight;
+
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});
 }
 
 //messageForm.addEventListener('submit', sendMessage, true)

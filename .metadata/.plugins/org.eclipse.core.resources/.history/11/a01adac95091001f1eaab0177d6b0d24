@@ -1,0 +1,69 @@
+package com.hcmus.admin.socket;
+
+import java.net.URI;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.handshake.ServerHandshake;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class ServerClient extends WebSocketClient {
+    private static final int RECONNECT_INTERVAL_SECONDS = 5; // Time between reconnection attempts
+    private AtomicBoolean reconnecting = new AtomicBoolean(false); // To prevent multiple threads
+    private static final Logger logger = LoggerFactory.getLogger(ServerClient.class);
+    
+    public ServerClient(URI serverUri) {
+        super(serverUri);
+    }
+
+    @Override
+    public void onOpen(ServerHandshake handshake) {
+    	logger.info("Connected to Server 2");
+        reconnecting.set(false); // Reset the flag once connection is successful
+    }
+
+    @Override
+    public void onMessage(String message) {
+    	logger.info("Received message from Server 2: " + message);
+    }
+
+    @Override
+    public void onClose(int code, String reason, boolean remote) {
+    	logger.info("Disconnected from Server 2: " + reason);
+        attemptReconnection();
+    }
+
+    @Override
+    public void onError(Exception ex) {
+        logger.error("Error: " + ex.getMessage());
+        attemptReconnection();
+    }
+
+    // Method to send message to Server 2
+    public void sendMessageToServer1(String message) {
+        send(message);  // Send the message to Server 2
+        System.out.println("Sent message to Server 2: " + message);
+    }
+
+    // Attempt reconnection to Server 1
+    private void attemptReconnection() {
+        if (reconnecting.compareAndSet(false, true)) {  // Ensure only one reconnection thread is active
+            new Thread(() -> {
+                while (!isOpen()) {
+                    try {
+                    	TimeUnit.SECONDS.sleep(RECONNECT_INTERVAL_SECONDS);
+                        System.out.println("Attempting to reconnect to Server 2...");
+                        this.reconnectBlocking(); // Blocking reconnect attempt
+                        System.out.println("Reconnected to Server 2");
+                        //reconnecting.set(false); // Reset flag after successful reconnection
+                        //break; // Exit the loop after successful reconnection
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+    }
+}

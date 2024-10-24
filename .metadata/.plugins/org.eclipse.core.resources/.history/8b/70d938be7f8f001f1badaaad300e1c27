@@ -1,0 +1,36 @@
+package com.hcmus.admin.socket;
+
+import java.util.Collections;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.handler.TextWebSocketHandler;
+
+public class ServerHandler extends TextWebSocketHandler {
+	    private static Set<WebSocketSession> sessions = Collections.newSetFromMap(new ConcurrentHashMap<>());
+	    @Override
+	   
+	    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+	        sessions.add(session);
+	        System.out.println("Client connected: " + session.getId());
+	    }
+
+	    @Override
+	    public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+	        // Log the received message from Server 1
+	        System.out.println("Received message from Server 1: " + message.getPayload());
+
+	        // Broadcast the message to all connected HTML clients
+	        broadcastToClients(message.getPayload());
+	    }
+
+	    private void broadcastToClients(String message) throws Exception {
+	        for (WebSocketSession session : sessions) {
+	            if (session.isOpen()) {
+	                session.sendMessage(new TextMessage(message));
+	            }
+	        }
+	    }
+}

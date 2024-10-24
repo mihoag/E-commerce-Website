@@ -1,7 +1,0 @@
-const fullname = $('#fullname');
-const email = $('#email');
-const phone = $('#phone');
-const subject = $('#subject');
-const message = $('#message');
-
-const myForm = document.getElementById('myForm');

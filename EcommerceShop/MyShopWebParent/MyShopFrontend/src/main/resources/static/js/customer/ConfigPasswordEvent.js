@@ -1,23 +1,19 @@
 var messageConfirmPassword = $("#messageConfirmPassword")
 
 
-function checkPasswordMatch(confirmPassword)
-{
-	 var password = $("#password").val();
-	 var confirmP = confirmPassword.value;
-	 
-	 
-	 console.log(password + " " + confirmP);
-	 
-	 if(password != confirmP)
-	 {
-		//console.log("no");
+function checkPasswordMatch(confirmPassword) {
+	var password = $("#password").val();
+	var confirmP = confirmPassword.value;
+
+
+	console.log(password + " " + confirmP);
+
+	if (password != confirmP) {
 		messageConfirmPassword.removeClass("hidden");
 		return false;
-	 }
-	 else{
-		//console.log("ok");
+	}
+	else {
 		messageConfirmPassword.addClass("hidden");
 		return true;
-	 }
+	}
 }

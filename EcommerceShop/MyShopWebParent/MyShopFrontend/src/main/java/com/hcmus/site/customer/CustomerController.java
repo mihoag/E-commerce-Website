@@ -32,106 +32,99 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerService customerService;
-	
+
 	@Autowired
 	private CountryRepository countryRepo;
-	
+
 	@Autowired
 	private SettingService settingService;
-	
+
 	@GetMapping("/register")
-	public String showRegisterForm(Model model)
-	{
+	public String showRegisterForm(Model model) {
 		List<Country> listCountries = countryRepo.findAll();
-		
+
 		model.addAttribute("listCountries", listCountries);
 		model.addAttribute("title", "Customer Registration");
 		model.addAttribute("customer", new Customer());
-		
+
 		return "register/register_form";
 	}
-	
+
 	// Create new customer
 	@PostMapping("/create_customer")
-	public String createCustomer(Customer customer, Model model,
-			HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
-		
+	public String createCustomer(Customer customer, Model model, HttpServletRequest request)
+			throws UnsupportedEncodingException, MessagingException {
+
 		customerService.registerCustomer(customer);
 		sendVerificationEmail(request, customer);
 		return "register/register_success";
 	}
-	
-	
-	// 
+
 	@GetMapping("/verify")
-	public String verifyCustomer(@RequestParam("code") String code)
-	{
+	public String verifyCustomer(@RequestParam("code") String code) {
 		boolean checkVerify = customerService.checkVerification(code);
-		
-		if(!checkVerify)
-		{ 
+
+		if (!checkVerify) {
 			return "register/verify_fail";
 		}
 		return "register/verify_success";
 	}
-	
-	private void sendVerificationEmail(HttpServletRequest request, Customer customer) 
+
+	private void sendVerificationEmail(HttpServletRequest request, Customer customer)
 			throws UnsupportedEncodingException, MessagingException {
-		
+
 		MailSettingBag emailSettings = settingService.getMailSettings();
 		JavaMailSenderImpl mailSender = Utility.prepareMailSender(emailSettings);
-		
+
 		String toAddress = customer.getEmail();
 		String subject = emailSettings.getCustomerVerifySubject();
 		String content = emailSettings.getCustomerVerifyContent();
-		
+
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
-		
+
 		helper.setFrom(emailSettings.getFromAddress(), emailSettings.getSenderName());
 		helper.setTo(toAddress);
 		helper.setSubject(subject);
-		
+
 		content = content.replace("[[CustomerName]]", customer.getFullName());
-		
+
 		System.out.println(Utility.getSiteURL(request));
 		String verifyURL = Utility.getSiteURL(request) + "/verify?code=" + customer.getVerificationCode();
-		
+
 		content = content.replace("[[VerificationLink]]", verifyURL);
 		content = content.replace("[[CompanyName]]", emailSettings.getSenderName());
 		content = content.replace("[[SupportEmail]]", emailSettings.getFromAddress());
-		
+
 		helper.setText(content, true);
-		
+
 		mailSender.send(message);
-		
+
 		System.out.println("to Address: " + toAddress);
 		System.out.println("Verify URL: " + verifyURL);
-	}	
-	
+	}
+
 	@GetMapping("/account_details")
 	public String viewAccountDetails(Model model, HttpServletRequest request) {
 		String email = Utility.getEmailOfAuthenticatedCustomer(request);
 		Customer customer = customerService.getCustomerByEmail(email);
 		List<Country> listCountries = customerService.listAllCountries();
-		
+
 		model.addAttribute("customer", customer);
 		model.addAttribute("listCountries", listCountries);
-		
+
 		return "customer/account_form";
 	}
-	
+
 	@PostMapping("/update_account_details")
-	public String updateAccount(Model model, Customer customer, RedirectAttributes ra,
-			HttpServletRequest request)
-	{
-	    customerService.updateCustomer(customer);
-	    ra.addFlashAttribute("message", "Update successfully");
-		
+	public String updateAccount(Model model, Customer customer, RedirectAttributes ra, HttpServletRequest request) {
+		customerService.updateCustomer(customer);
+		ra.addFlashAttribute("message", "Update successfully");
+
 		String redirectOption = request.getParameter("redirect");
 		String redirectURL = "redirect:/account_details";
-	    
-	    if ("address_book".equals(redirectOption)) {
+
+		if ("address_book".equals(redirectOption)) {
 			redirectURL = "redirect:/address_book";
 		} else if ("cart".equals(redirectOption)) {
 			redirectURL = "redirect:/cart";

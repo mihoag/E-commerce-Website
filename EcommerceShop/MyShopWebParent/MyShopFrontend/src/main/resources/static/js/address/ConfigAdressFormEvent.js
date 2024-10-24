@@ -1,16 +1,14 @@
 const dropDownCountries = $("#country");
 const dropDownStates = $("#listStates")
 
-dropDownCountries.on('change', function()
-{
+dropDownCountries.on('change', function() {
 	loadStateByCountry();
 })
 
 
-function loadStateByCountry()
-{
-   var countryId = dropDownCountries.val();
-   url =  "/Myshop/api/states/list_by_country/" + countryId;
+function loadStateByCountry() {
+	var countryId = dropDownCountries.val();
+	url = "/Myshop/api/states/list_by_country/" + countryId;
 	$.get(url, function(responseJSON) {
 		dropDownStates.empty();
 		$.each(responseJSON, function(index, state) {
@@ -26,7 +24,6 @@ function loadStateByCountry()
 
 
 const addressForm = document.forms['addressForm'];
-$("#buttonAdd").on('click', function()
-{
+$("#buttonAdd").on('click', function() {
 	addressForm.submit();
 })

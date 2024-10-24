@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 @SpringBootApplication
 @EntityScan({"com.hcmus.common.entity"})
 public class MyShopFrontendApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(MyShopFrontendApplication.class, args);
 	}

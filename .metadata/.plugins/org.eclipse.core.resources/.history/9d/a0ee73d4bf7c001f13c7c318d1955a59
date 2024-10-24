@@ -1,3 +1,0 @@
-const fullname = $('#fullname');
-const email = $('#email');
-const phone = $('#phone');

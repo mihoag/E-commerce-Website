@@ -25,30 +25,26 @@ import jakarta.servlet.http.HttpServletRequest;
 @Controller
 public class ForgetPasswordController {
 
-	
 	@Autowired
 	private CustomerService customerService;
-	
+
 	@Autowired
 	private SettingService settingService;
-	
+
 	@GetMapping("/forgot_password")
-	public String renderForgotPasswordForm()
-	{
+	public String renderForgotPasswordForm() {
 		return "customer/forgot_password_form";
 	}
-	
+
 	@PostMapping("/forgot_password")
-	public String postEmailForgotPassword( HttpServletRequest request,Model model)
-	{
+	public String postEmailForgotPassword(HttpServletRequest request, Model model) {
 		String email = (String) request.getParameter("email");
 		try {
 			String token = customerService.updatePasswordToken(email);
 			String link = Utility.getSiteURL(request) + "/reset_password?token=" + token;
 			sendEmail(link, email);
-			
-			model.addAttribute("message", "We have sent a reset password link to your email."
-					+ " Please check.");
+
+			model.addAttribute("message", "We have sent a reset password link to your email." + " Please check.");
 		} catch (Exception e) {
 			// TODO: handle exception
 			model.addAttribute("error", e.getMessage());
@@ -56,14 +52,13 @@ public class ForgetPasswordController {
 
 		return "customer/forgot_password_form";
 	}
-	
+
 	@GetMapping("/reset_password")
-	public String renderResetPassword(Model model, @RequestParam("token") String token)
-	{
+	public String renderResetPassword(Model model, @RequestParam("token") String token) {
 		try {
 			Customer customer = customerService.getCustomerByToken(token);
-		    model.addAttribute("token", token);
-		    return "customer/reset_password_form";
+			model.addAttribute("token", token);
+			return "customer/reset_password_form";
 		} catch (Exception e) {
 			// TODO: handle exception
 			model.addAttribute("pageTitle", "Invalid Token");
@@ -72,50 +67,46 @@ public class ForgetPasswordController {
 		}
 
 	}
-	
+
 	@PostMapping("/reset_password")
-	public String resetPassword(HttpServletRequest request , Model model)
-	{
+	public String resetPassword(HttpServletRequest request, Model model) {
 		String token = request.getParameter("token");
 		String password = request.getParameter("password");
-		
+
 		try {
 			customerService.updatePassword(token, password);
-			
+
 			model.addAttribute("pageTitle", "Reset Your Password");
 			model.addAttribute("title", "Reset Your Password");
 			model.addAttribute("message", "You have successfully changed your password.");
-			
+
 		} catch (CustomerNotFoundException e) {
 			model.addAttribute("pageTitle", "Invalid Token");
 			model.addAttribute("message", e.getMessage());
-		}	
+		}
 
-		return "message";		
+		return "message";
 	}
-	private void sendEmail(String link, String email) 
-			throws UnsupportedEncodingException, MessagingException {
+
+	private void sendEmail(String link, String email) throws UnsupportedEncodingException, MessagingException {
 		MailSettingBag emailSettings = settingService.getMailSettings();
 		JavaMailSenderImpl mailSender = Utility.prepareMailSender(emailSettings);
-		
+
 		String toAddress = email;
 		String subject = "Here's the link to reset your password";
-		
-		String content = "<p>Hello,</p>"
-				+ "<p>You have requested to reset your password.</p>"
-				+ "Click the link below to change your password:</p>"
-				+ "<p><a href=\"" + link + "\">Change my password</a></p>"
-				+ "<br>"
-				+ "<p>Ignore this email if you do remember your password, "
+
+		String content = "<p>Hello,</p>" + "<p>You have requested to reset your password.</p>"
+				+ "Click the link below to change your password:</p>" + "<p><a href=\"" + link
+				+ "\">Change my password</a></p>" + "<br>" + "<p>Ignore this email if you do remember your password, "
 				+ "or you have not made the request.</p>";
-		
+
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
-		
+
 		helper.setFrom(emailSettings.getFromAddress(), emailSettings.getSenderName());
 		helper.setTo(toAddress);
-		helper.setSubject(subject);		
-		
+		helper.setSubject(subject);
+
 		helper.setText(content, true);
 		mailSender.send(message);
 	}

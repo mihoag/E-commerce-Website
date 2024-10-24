@@ -21,29 +21,27 @@ import com.hcmus.common.exception.CountryNotFoundException;
 @RestController
 @RequestMapping("/api/states")
 public class StateRestController {
-    @Autowired
-    private StateRepository repo;
-    
-    @Autowired CountryRepository countryRepo;
-    
-    @GetMapping("/list_by_country/{id}")
-    public List<StateDTO> getListStatesByCountry(@PathVariable("id") Integer idCountry) throws CountryNotFoundException
-    {
-    	Optional<Country> optionalCountry = countryRepo.findById(idCountry);
-    	//System.out.println(optionalCountry.get());
-    	if(!optionalCountry.isPresent())
-    	{
-    		throw new CountryNotFoundException("Country not found with id " + idCountry);
-    	}
-    	List<StateDTO> listDTO = new ArrayList<>();
-  
-    	List<State> states = repo.findByCountryOrderByName(optionalCountry.get());
-    	//states.forEach(System.out::println);
-    	for(State state : states)
-    	{
-    		listDTO.add(new StateDTO(state.getId(), state.getName()));
-    	}
-    	return listDTO;
-    }
-   
+	@Autowired
+	private StateRepository repo;
+
+	@Autowired
+	CountryRepository countryRepo;
+
+	@GetMapping("/list_by_country/{id}")
+	public List<StateDTO> getListStatesByCountry(@PathVariable("id") Integer idCountry)
+			throws CountryNotFoundException {
+		Optional<Country> optionalCountry = countryRepo.findById(idCountry);
+		
+		if (!optionalCountry.isPresent()) {
+			throw new CountryNotFoundException("Country not found with id " + idCountry);
+		}
+		List<StateDTO> listDTO = new ArrayList<>();
+
+		List<State> states = repo.findByCountryOrderByName(optionalCountry.get());
+		for (State state : states) {
+			listDTO.add(new StateDTO(state.getId(), state.getName()));
+		}
+		return listDTO;
+	}
+
 }

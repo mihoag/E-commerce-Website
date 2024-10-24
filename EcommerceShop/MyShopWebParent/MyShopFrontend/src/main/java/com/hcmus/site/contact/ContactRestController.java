@@ -21,45 +21,42 @@ import jakarta.mail.internet.MimeMessage;
 @RestController
 @RequestMapping("/api/contact/sendmail")
 public class ContactRestController {
-	
+
 	private static Logger LOGGER = LoggerFactory.getLogger(ContactRestController.class);
-	
+	private static final String FAIL_STATUS = "Fail";
+	private static final String SUCCESS_STATUS = "OK";
+
 	@Autowired
 	private SettingService settingService;
-	
+
 	@PostMapping
-	public String contactPost(String fullname, String email, String phone, String subject, String message)
-	{
+	public String contactPost(String fullname, String email, String phone, String subject, String message) {
 		try {
 			sendEmail(fullname, email, phone, subject, message);
 		} catch (Exception e) {
-			// TODO: handle exception
 			LOGGER.error(e.getMessage());
-			return "Fail";
+			return FAIL_STATUS;
 		}
-		return "OK";
+		return SUCCESS_STATUS;
 	}
-	
-	private void sendEmail(String fullname, String email, String phone, String subject, String mess) 
+
+	private void sendEmail(String fullname, String email, String phone, String subject, String mess)
 			throws UnsupportedEncodingException, MessagingException {
 		MailSettingBag emailSettings = settingService.getMailSettings();
 		JavaMailSenderImpl mailSender = Utility.prepareMailSender(emailSettings);
-		
-		String toAddress = emailSettings.getUsername();	
-		String content = "<p>Fullname: " + fullname +"</p>"
-				+ "<p>Email: " + email+"</p>"
-				+ "<p>Phone: " + phone+" </p>" 
-				+ "<p>Subject: " + subject+"</p>"
-				+ "<br>"
-				+ "<p>Message: " + mess  +"</p>";
-		
+
+		String toAddress = emailSettings.getUsername();
+		String content = String.format(
+				"<p>Fullname:  %s </p><p>Email: %s </p><p>Phone:  %s</p><p>Subject:  %s </p><br><p>Message: %s </p>",
+				fullname, email, phone, subject, mess);
+
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
-		
+
 		helper.setFrom(emailSettings.getFromAddress(), emailSettings.getSenderName());
 		helper.setTo(toAddress);
-		helper.setSubject(subject);		
-		
+		helper.setSubject(subject);
+
 		helper.setText(content, true);
 		mailSender.send(message);
 	}

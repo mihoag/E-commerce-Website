@@ -10,43 +10,42 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "customers")
-public class Customer extends AbstractAddressWithCountry{
-	 private static final long OTP_VALID_DURATION = 5 * 60 * 1000;   // 5 minutes
+public class Customer extends AbstractAddressWithCountry {
+	private static final long OTP_VALID_DURATION = 5 * 60 * 1000; // 5 minutes
 	@Column(nullable = false, unique = true, length = 45)
 	private String email;
 
 	@Column(nullable = false, length = 64)
 	private String password;
-	
+
 	@Column(name = "verification_code", length = 64)
-	private String verificationCode;	
-	
+	private String verificationCode;
+
 	private boolean enabled;
-	
+
 	@Column(name = "created_time")
 	private Date createdTime;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "authentication_type", length = 10)
 	private AuthenticationType authenticationType;
-	
+
 	@Column(name = "reset_password_token", length = 30)
 	private String resetPasswordToken;
 
-	
-    @Column(name = "one_time_password")
-    private String oneTimePassword;
-     
-    @Column(name = "otp_requested_time")
-    private Date otpRequestedTime;
-	
+	@Column(name = "one_time_password")
+	private String oneTimePassword;
+
+	@Column(name = "otp_requested_time")
+	private Date otpRequestedTime;
+
 	public Customer() {
 	}
 
 	public Customer(Integer id) {
 		this.id = id;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
@@ -102,14 +101,11 @@ public class Customer extends AbstractAddressWithCountry{
 	public void setResetPasswordToken(String resetPasswordToken) {
 		this.resetPasswordToken = resetPasswordToken;
 	}
-	
-	public String getFullName()
-	{
+
+	public String getFullName() {
 		return firstName + " " + lastName;
 	}
-	
-	
-	
+
 	public String getOneTimePassword() {
 		return oneTimePassword;
 	}
@@ -127,19 +123,19 @@ public class Customer extends AbstractAddressWithCountry{
 	}
 
 	public boolean isOTPRequired() {
-        if (this.getOneTimePassword() == null) {
-            return false;
-        }
-         
-        long currentTimeInMillis = System.currentTimeMillis();
-        long otpRequestedTimeInMillis = this.otpRequestedTime.getTime();
-         
-        if (otpRequestedTimeInMillis + OTP_VALID_DURATION < currentTimeInMillis) {
-            // OTP expires
-            return false;
-        }
-         
-        return true;
-    }
-	
+		if (this.getOneTimePassword() == null) {
+			return false;
+		}
+
+		long currentTimeInMillis = System.currentTimeMillis();
+		long otpRequestedTimeInMillis = this.otpRequestedTime.getTime();
+
+		if (otpRequestedTimeInMillis + OTP_VALID_DURATION < currentTimeInMillis) {
+			// OTP expires
+			return false;
+		}
+
+		return true;
+	}
+
 }

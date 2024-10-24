@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.hcmus.common.entity.Currency;
 
-public interface CurrencyRepository extends JpaRepository<Currency, Integer>{
+public interface CurrencyRepository extends JpaRepository<Currency, Integer> {
 
 }

@@ -1,0 +1,31 @@
+package com.hcmus.site.socket;
+
+import java.net.URI;
+
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.handler.TextWebSocketHandler;
+
+public class ServerHandler extends TextWebSocketHandler  {
+
+	 private ServerClient serverClient;
+
+	 public ServerHandler() {
+	        // Initialize the client connection to Server 2
+	        try {
+	            URI uri = new URI("ws://localhost:8080/MyshopAdmin/server2/websocket"); // Change to your Server 2 URL
+	            serverClient = new ServerClient(uri);
+	            serverClient.connect();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    @Override
+	    public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+	        System.out.println("Received message from Client: " + message.getPayload());
+
+	        // Forward the message to Server 2
+	        serverClient.sendMessageToServer2(message.getPayload());
+	    }
+}

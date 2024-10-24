@@ -1,5 +1,7 @@
 package com.hcmus.admin.customer;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -78,5 +80,8 @@ public class CustomerService {
 	   customer.setPassword(passwordEncoder.encode(customer.getPassword()));
    }
    
-   
+   public List<Customer> getAllCustomer(String keyword)
+   {
+	   return repo.findByKeyword(keyword);
+   }
 }

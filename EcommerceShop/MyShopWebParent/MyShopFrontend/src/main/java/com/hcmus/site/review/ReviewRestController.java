@@ -17,35 +17,28 @@ import com.hcmus.common.entity.Review;
 public class ReviewRestController {
 
 	@Autowired
-	private ReviewService reviewService; 
-	
+	private ReviewService reviewService;
+
 	@PostMapping
-	public String addReview(Integer orderDetailId, String headline, String comment, int rating)
-	{
+	public String addReview(Integer orderDetailId, String headline, String comment, int rating) {
 		Review review = reviewService.addReview(orderDetailId, headline, comment, rating);
-		if(review == null)
-		{
+		if (review == null) {
 			return "You have writen review for this product";
-		}
-		else
-		{
+		} else {
 			return "Write review successfully";
 		}
 	}
-	
-	
-	
+
 	@GetMapping("/{id}")
-	public List<ReviewDTO> listReviews(@PathVariable("id") Integer id)
-	{
+	public List<ReviewDTO> listReviews(@PathVariable("id") Integer id) {
 		List<ReviewDTO> listReviewDto = new ArrayList<>();
-		
+
 		List<Review> reviews = reviewService.getReviewByProductId(id);
-		for(Review review : reviews)
-		{
-			listReviewDto.add(new ReviewDTO(review.getId(), review.getHeadline(), review.getComment(), review.getRating(), review.getReviewTime()));
+		for (Review review : reviews) {
+			listReviewDto.add(new ReviewDTO(review.getId(), review.getHeadline(), review.getComment(),
+					review.getRating(), review.getReviewTime()));
 		}
-		
+
 		return listReviewDto;
 	}
 }

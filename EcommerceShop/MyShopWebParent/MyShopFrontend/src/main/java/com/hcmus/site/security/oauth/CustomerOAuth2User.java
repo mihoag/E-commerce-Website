@@ -10,9 +10,8 @@ public class CustomerOAuth2User implements OAuth2User {
 	private String clientName;
 	private String fullName;
 	private OAuth2User oauth2User;
-	
-	public CustomerOAuth2User(OAuth2User oauth2User, String clientName)
-	{
+
+	public CustomerOAuth2User(OAuth2User oauth2User, String clientName) {
 		this.oauth2User = oauth2User;
 		this.clientName = clientName;
 	}
@@ -31,7 +30,7 @@ public class CustomerOAuth2User implements OAuth2User {
 	public String getName() {
 		return oauth2User.getAttribute("name");
 	}
-	
+
 	public String getEmail() {
 		return oauth2User.getAttribute("email");
 	}
@@ -40,11 +39,10 @@ public class CustomerOAuth2User implements OAuth2User {
 		return fullName != null ? fullName : oauth2User.getAttribute("name");
 	}
 
-	
 	public String getClientName() {
 		return clientName;
 	}
-	
+
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}

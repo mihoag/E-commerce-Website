@@ -13,52 +13,47 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
 @Entity
-@Table(name =  "categories")
-public class Category extends IdBasedEntity{
+@Table(name = "categories")
+public class Category extends IdBasedEntity {
 
 	@Column(length = 128, nullable = false, unique = true)
 	private String name;
-	
+
 	@Column(length = 64, nullable = false, unique = true)
 	private String alias;
-	
+
 	@Column(length = 128, nullable = false)
 	private String image;
-	
+
 	private boolean enabled;
-	
 
 	@Column(name = "all_parent_ids", length = 256, nullable = true)
 	private String allParentIDs;
-	
+
 	@OneToOne
 	@JoinColumn(name = "parent_id", unique = false)
 	private Category parent;
-	
+
 	@OneToMany(mappedBy = "parent", orphanRemoval = true)
 	@OrderBy("name asc")
 	private Set<Category> children = new HashSet<>();
 
-	
 	public Category() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	public Category(Integer id)
-	{
+
+	public Category(Integer id) {
 		this.id = id;
 	}
-	
-	public static Category copyIdAndName(int id, String name)
-	{
+
+	public static Category copyIdAndName(int id, String name) {
 		Category cate = new Category();
 		cate.setId(id);
 		cate.setName(name);
-		
+
 		return cate;
 	}
-	
 
 	public Category(Integer id, String name, String alias, String image, boolean enabled, Category parent) {
 		super();
@@ -70,15 +65,13 @@ public class Category extends IdBasedEntity{
 		this.parent = parent;
 	}
 
-	public Category(String name)
-	{
+	public Category(String name) {
 		this.name = name;
 		this.alias = name;
 		this.image = "default.png";
 	}
-     
-	public Category(String name, Category parent)
-	{
+
+	public Category(String name, Category parent) {
 		this.name = name;
 		this.alias = name;
 		this.image = "default.png";
@@ -141,7 +134,6 @@ public class Category extends IdBasedEntity{
 		this.children = children;
 	}
 
-
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
@@ -152,8 +144,6 @@ public class Category extends IdBasedEntity{
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -166,14 +156,15 @@ public class Category extends IdBasedEntity{
 		Category other = (Category) obj;
 		return Objects.equals(id, other.id);
 	}
-	
+
 	@Transient
 	public String getPhotosImagePath() {
-		if (this.id == null) return "/images/image-thumbnail.png";
-		
+		if (this.id == null)
+			return "/images/image-thumbnail.png";
+
 		return Constant.S3_BASE_URI + "/category-images/" + this.id + "/" + this.image;
 	}
-	
+
 	public boolean isHasChildren() {
 		return hasChildren;
 	}
@@ -185,7 +176,6 @@ public class Category extends IdBasedEntity{
 	@Transient
 	private boolean hasChildren;
 
-
 	public static Category copyFull(Category category) {
 		Category copyCategory = new Category();
 		copyCategory.setId(category.getId());
@@ -194,14 +184,14 @@ public class Category extends IdBasedEntity{
 		copyCategory.setAlias(category.getAlias());
 		copyCategory.setEnabled(category.isEnabled());
 		copyCategory.setHasChildren(category.getChildren().size() > 0);
-		
-		return copyCategory;		
+
+		return copyCategory;
 	}
-	
+
 	public static Category copyFull(Category category, String name) {
 		Category copyCategory = Category.copyFull(category);
 		copyCategory.setName(name);
-		
+
 		return copyCategory;
 	}
 
@@ -212,6 +202,5 @@ public class Category extends IdBasedEntity{
 	public void setAllParentIDs(String allParentIDs) {
 		this.allParentIDs = allParentIDs;
 	}
-	
-	
+
 }

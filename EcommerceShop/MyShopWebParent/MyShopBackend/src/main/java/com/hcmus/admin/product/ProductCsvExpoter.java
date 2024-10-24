@@ -21,9 +21,11 @@ public class ProductCsvExpoter extends AbstractExporter{
 		super.setResponseHeader(response, "text/csv", ".csv", "products_");
 		
 		List<FullProductDTO> listProductDto = new ArrayList<>();
+		
+		
 		for(Product p : listProducts)
 		{
-			listProductDto.add(new FullProductDTO(p.getId(), p.getName(), p.getAlias(), p.getShortDescription() ,p.getFullDescription(), p.getURI(), p.getMainImagePath(),
+			listProductDto.add(new FullProductDTO(p.getId(), p.getName(), p.getAlias(),Jsoup.parse(p.getShortDescription()).text() ,Jsoup.parse(p.getFullDescription()).text(), p.getURI(), p.getMainImagePath(),
 					p.isEnabled(), p.isInStock(), p.getCost(), p.getPrice(), p.getDiscountPercent(), p.getLength(), p.getWidth(), p.getHeight(),
 					p.getWeight(), p.concatDetailProduct(), p.getCategory().getName(), p.getBrand().getName(), p.getReviewCount(),p.getAverageRating()));
 		}

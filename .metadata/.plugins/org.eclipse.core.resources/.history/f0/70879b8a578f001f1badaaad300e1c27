@@ -1,0 +1,155 @@
+var usernamePage = document.querySelector('#username-page');
+var chatPage = document.querySelector('#chat-page');
+var usernameForm = document.querySelector('#usernameForm');
+var messageInput = document.querySelector('#message');
+var messageArea = document.querySelector('#messageArea');
+var btnSend= document.querySelector('#btnSend');
+var images = document.querySelectorAll('img');
+var stompClient = null;
+
+document.addEventListener('DOMContentLoaded', function()
+{
+	 adjustChatBox();
+     fetchMessage()
+     connectSocket();
+})
+
+function connectSocket()
+{
+	var socket = new SockJS('/Myshop/ws');
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, onConnected, onError);
+}
+
+function onConnected() {
+    // Subscribe to the Public Topic
+    stompClient.subscribe('/topic/public', onMessageReceived);   
+}
+
+function onError(error) {
+   console.log("Error");
+}
+
+
+function onMessageReceived(payload) {
+    var message = JSON.parse(payload.body);
+    
+    console.log(message);
+}
+
+
+function adjustChatBox()
+{
+	var chatBox = document.getElementById('messageArea'); 
+    var mobileHeight = window.innerHeight;
+    chatBox.style.height = mobileHeight - 150 + 'px';
+}
+
+
+
+function fetchMessage()
+{
+	url =  "/Myshop/api/chat/" + customerId;
+	fetch(url)
+                .then(response => 
+					response.json())
+                .then(data => {
+                   renderMessage(data)
+                })
+                .catch(error => console.log('Error:', error));
+}
+
+
+function renderMessage(data){
+	 let htmlText = '';
+     data.forEach(mess => {
+     if(mess.role_chat == 'ADMIN')
+     {
+		 htmlText += `<div><div class="d-flex flex-row justify-content-start">
+        <img
+          src="https://openvldoostende.be/wp-content/uploads/2023/01/abstract-user-icon-1.jpg"
+          alt="avatar 1"
+          style="width: 30px; height: 100%"
+        />
+        <div>
+          <p
+            class="small p-2 ms-3 mb-3 rounded-3"
+            style="background-color: #f5f6f7"
+          >
+            ${mess.content}
+          </p>
+         
+        </div>
+      </div></div>
+		 `
+	 }
+	 else{
+		 htmlText += `<div>
+		 <div class="d-flex justify-content-between">
+                
+                <p class="small mb-1 text-muted"></p>
+              </div>
+              <div class="d-flex flex-row justify-content-end"> 
+                <div>
+                  <p
+                    class="small p-2 ms-3 mb-3 rounded-3"
+                    style="background-color: #f5f6f7"
+                  >
+                    ${mess.content}
+                  </p>
+                </div>
+                <img
+                  src="https://openvldoostende.be/wp-content/uploads/2023/01/abstract-user-icon-1.jpg"
+                  alt="avatar 1"
+                  style="width: 30px; height: 100%"
+                />
+              </div></div>
+		 `
+	 };
+    });
+    messageArea.innerHTML = htmlText;
+}
+
+function sendMessage(event) {    
+    var messageContent = messageInput.value.trim();
+    if(messageContent) {
+        
+ 
+    }
+    event.preventDefault();
+}
+
+function renderAddedMessage()
+{
+	var divMess = document.createElement('div');
+    divMess.innerHTML = `
+	    <div class="d-flex justify-content-between">
+                
+                <p class="small mb-1 text-muted"></p>
+              </div>
+              <div class="d-flex flex-row justify-content-end"> 
+                <div>
+                  <p
+                    class="small p-2 ms-3 mb-3 rounded-3"
+                    style="background-color: #f5f6f7"
+                  >
+                    ${messageContent}
+                  </p>
+                </div>
+                <img
+                  src="https://openvldoostende.be/wp-content/uploads/2023/01/abstract-user-icon-1.jpg"
+                  alt="avatar 1"
+                  style="width: 30px; height: 100%"
+                />
+              </div>
+	        `  
+    messageInput.value = '';
+    messageArea.appendChild(divMess);      
+    messageArea.scrollTop = messageArea.scrollHeight;
+}
+
+window.addEventListener('resize', function() {
+   adjustChatBox();
+});
+
+btnSend.addEventListener('click', sendMessage)

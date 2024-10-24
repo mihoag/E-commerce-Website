@@ -12,39 +12,35 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import com.hcmus.common.entity.Constant;
+
 @Service
 public class CaptchaService {
-    private static final String RECAPTCHA_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
-    private final String secretKey = "6LcMS1EqAAAAAOs6qFBZ6D79eOvpAKZT2agylFgU";
 
-    public boolean validateCaptcha(String captchaToken) {
-        RestTemplate restTemplate = new RestTemplate();
+	private final Double THRESHOLD = 0.5;
 
-        // Set up headers and request body
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+	public boolean validateCaptcha(String captchaToken) {
+		RestTemplate restTemplate = new RestTemplate();
 
-        MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
-        requestBody.add("secret", secretKey);
-        requestBody.add("response", captchaToken);
+		// Set up headers and request body
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-        // Make the POST request
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(requestBody, headers);
-        ResponseEntity<Map> response = restTemplate.exchange(
-                RECAPTCHA_VERIFY_URL,
-                HttpMethod.POST,
-                request,
-                Map.class
-        );
+		MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
+		requestBody.add("secret", Constant.CAPTCHA_SECRET_KEY);
+		requestBody.add("response", captchaToken);
 
-        // Process the response
-         Map<String, Object> responseBody = response.getBody();
-        if (responseBody != null && (Boolean) responseBody.get("success")) {
-            Double score = (Double) responseBody.get("score");
-            System.out.println(score);
-            return score >= 0.5; // Adjust the threshold based on your needs
-        }
+		// Make the POST request
+		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(requestBody, headers);
+		ResponseEntity<Map> response = restTemplate.exchange(Constant.RECAPTCHA_VERIFY_URL, HttpMethod.POST, request,
+				Map.class);
 
-        return false;
-    }
+		// Process the response
+		Map<String, Object> responseBody = response.getBody();
+		if (responseBody != null && (Boolean) responseBody.get("success")) {
+			Double score = (Double) responseBody.get("score");
+			return score >= THRESHOLD; // Adjust the threshold based on your needs
+		}
+		return false;
+	}
 }

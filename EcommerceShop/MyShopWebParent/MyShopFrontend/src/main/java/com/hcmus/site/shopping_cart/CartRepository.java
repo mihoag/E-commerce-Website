@@ -13,22 +13,22 @@ import com.hcmus.common.entity.Customer;
 import com.hcmus.common.entity.product.Product;
 
 @Repository
-public interface CartRepository extends JpaRepository<CartItem, Integer>, PagingAndSortingRepository<CartItem, Integer>{
-    
-	 List<CartItem> findByCustomer(Customer customer);
-	
-	 CartItem findByCustomerAndProduct(Customer customer, Product product);
-	
-	 @Modifying
-     @Query("UPDATE CartItem c SET c.quantity = ?1 WHERE c.customer.id = ?2 AND c.product.id = ?3")
-     public void updateQuantity(Integer quantity, Integer customerId, Integer productId);
+public interface CartRepository
+		extends JpaRepository<CartItem, Integer>, PagingAndSortingRepository<CartItem, Integer> {
 
+	List<CartItem> findByCustomer(Customer customer);
 
-		@Modifying
-		@Query("DELETE FROM CartItem c WHERE c.customer.id = ?1 AND c.product.id = ?2")
-		public void deleteByCustomerAndProduct(Integer customerId, Integer productId);
-		
-		@Modifying
-		@Query("DELETE CartItem c WHERE c.customer.id = ?1")
-		 void deleteByCustomer(Integer customerId);
+	CartItem findByCustomerAndProduct(Customer customer, Product product);
+
+	@Modifying
+	@Query("UPDATE CartItem c SET c.quantity = ?1 WHERE c.customer.id = ?2 AND c.product.id = ?3")
+	public void updateQuantity(Integer quantity, Integer customerId, Integer productId);
+
+	@Modifying
+	@Query("DELETE FROM CartItem c WHERE c.customer.id = ?1 AND c.product.id = ?2")
+	public void deleteByCustomerAndProduct(Integer customerId, Integer productId);
+
+	@Modifying
+	@Query("DELETE CartItem c WHERE c.customer.id = ?1")
+	void deleteByCustomer(Integer customerId);
 }

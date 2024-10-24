@@ -17,19 +17,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Component
-public class DatabaseLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler  {
-    @Autowired
-    private CustomerService service;
-    
-    
-    @Override
+public class DatabaseLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+	@Autowired
+	private CustomerService service;
+
+	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws ServletException, IOException {
 		CustomerUserDetails userDetails = (CustomerUserDetails) authentication.getPrincipal();
 		Customer customer = userDetails.getCustomer();
-		
+
 		service.updateAuthenticationType(customer, AuthenticationType.DATABASE);
-		
+
 		super.onAuthenticationSuccess(request, response, authentication);
 	}
 }

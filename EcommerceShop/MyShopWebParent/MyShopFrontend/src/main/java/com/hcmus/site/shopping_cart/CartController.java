@@ -23,52 +23,47 @@ import jakarta.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("/cart")
 public class CartController {
-    
+
 	@Autowired
 	private CartService cartService;
-	
+
 	@Autowired
 	private CustomerService customerService;
-	
+
 	@Autowired
 	private AddressService addressService;
-	
+
 	@Autowired
 	private ShippingRateService shipService;
-	
 
 	@GetMapping("/**")
-	public String getCartItems(Model model, HttpServletRequest request)
-	{
+	public String getCartItems(Model model, HttpServletRequest request) {
 		String email = Utility.getEmailOfAuthenticatedCustomer(request);
 		Customer customer = customerService.getCustomerByEmail(email);
-	
+
 		List<CartItem> listCartItems = cartService.listCartItems(customer);
 		float totalPrice = 0;
-		for(CartItem item : listCartItems)
-		{
+		for (CartItem item : listCartItems) {
 			totalPrice += item.getSubTotal();
 		}
-		
 
 		Address defaultAddress = addressService.getDefaultAddress(customer);
 		ShippingRate shippingRate = null;
 		boolean usePrimaryAddressAsDefault = false;
-		
+
 		if (defaultAddress != null) {
 			shippingRate = shipService.getShippingRateForAddress(defaultAddress);
 		} else {
 			usePrimaryAddressAsDefault = true;
 			shippingRate = shipService.getShippingRateForCustomer(customer);
 		}
-		
+
 		model.addAttribute("usePrimaryAddressAsDefault", usePrimaryAddressAsDefault);
 		model.addAttribute("shippingSupported", shippingRate != null);
 		model.addAttribute("listCartItems", listCartItems);
 		model.addAttribute("totalItems", listCartItems.size());
 		model.addAttribute("totalPrice", totalPrice);
-		
-		
+
 		return "cart/shopping_cart";
 	}
 }

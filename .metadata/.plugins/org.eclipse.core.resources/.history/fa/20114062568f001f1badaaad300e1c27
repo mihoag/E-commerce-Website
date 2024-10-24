@@ -1,0 +1,35 @@
+package com.hcmus.site.chat;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.stereotype.Controller;
+
+import com.hcmus.common.entity.chat.MessageDTO;
+
+@Controller
+public class ChatController {
+	
+	
+	
+	
+    @MessageMapping("/chat.sendMessage")
+    @SendTo("/topic/public")
+    public MessageDTO sendMessage(
+            @Payload MessageDTO chatMessage
+    ) {
+    	
+    	
+    }
+
+    @MessageMapping("/chat.addUser")
+    @SendTo("/topic/public")
+    public messDTO addUser(
+            @Payload messDTO chatMessage,
+            SimpMessageHeaderAccessor headerAccessor
+    ) {
+        // Add username in web socket session
+        headerAccessor.getSessionAttributes().put("idUser", chatMessage.getIdUser());
+        return chatMessage;
+    }
+}

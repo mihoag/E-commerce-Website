@@ -14,22 +14,19 @@ import jakarta.persistence.Table;
 public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    
-	@Column(length = 40, nullable = false, unique = true)
-    private String name;
-    
-	@Column(length = 150, nullable = false)
-    private String description;
+	private Integer id;
 
-	
+	@Column(length = 40, nullable = false, unique = true)
+	private String name;
+
+	@Column(length = 150, nullable = false)
+	private String description;
+
 	public Role() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Role(Integer id)
-	{
+	public Role(Integer id) {
 		this.id = id;
 	}
 
@@ -38,17 +35,14 @@ public class Role {
 		this.description = description;
 	}
 
-	public Role name(String name)
-	{
+	public Role name(String name) {
 		this.name = name;
 		return this;
 	}
 
-
 	public Integer getId() {
 		return id;
 	}
-	
 
 	public void setId(Integer id) {
 		this.id = id;
@@ -74,7 +68,7 @@ public class Role {
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -91,6 +85,5 @@ public class Role {
 	public String toString() {
 		return name;
 	}
-	
-	
+
 }

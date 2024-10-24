@@ -1,0 +1,5 @@
+package com.hcmus.admin.chat;
+
+public class MessageRestApi {
+
+}

@@ -6,14 +6,14 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "currencies")
-public class Currency extends IdBasedEntity{
-	
+public class Currency extends IdBasedEntity {
+
 	@Column(nullable = false, length = 64)
 	private String name;
-	
+
 	@Column(nullable = false, length = 3)
 	private String symbol;
-	
+
 	@Column(nullable = false, length = 4)
 	private String code;
 

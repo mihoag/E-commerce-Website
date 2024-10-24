@@ -1,0 +1,14 @@
+package com.hcmus.admin.chat;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.hcmus.common.entity.chat.message;
+import com.hcmus.common.entity.User;
+
+
+public interface MessageRepository extends JpaRepository<message, Integer>{
+   
+	public  List<message> findByUser(User user);
+}

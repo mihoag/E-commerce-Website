@@ -14,21 +14,21 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Review")
-public class Review extends IdBasedEntity{
-	
+public class Review extends IdBasedEntity {
+
 	@Column(length = 128, nullable = false)
 	private String headline;
-	
+
 	@Column(length = 300, nullable = false)
 	private String comment;
-	
-	private int rating;	
-	
+
+	private int rating;
+
 	@Column(nullable = false)
 	private Date reviewTime;
-	
+
 	@OneToOne
-	@JoinColumn(name = "order_id") 
+	@JoinColumn(name = "order_id")
 	private OrderDetail orderDetail;
 
 	public Review() {
@@ -36,7 +36,6 @@ public class Review extends IdBasedEntity{
 		// TODO Auto-generated constructor stub
 	}
 
-	
 	public Review(String headline, String comment, int rating, Date reviewTime) {
 		super();
 		this.headline = headline;
@@ -44,9 +43,6 @@ public class Review extends IdBasedEntity{
 		this.rating = rating;
 		this.reviewTime = reviewTime;
 	}
-	
-	
-	
 
 	public String getHeadline() {
 		return headline;
@@ -80,21 +76,18 @@ public class Review extends IdBasedEntity{
 		this.reviewTime = reviewTime;
 	}
 
-
 	public OrderDetail getOrderDetail() {
 		return orderDetail;
 	}
-	
+
 	public void setOrderDetail(OrderDetail orderDetail) {
 		this.orderDetail = orderDetail;
 	}
-
 
 	@Override
 	public String toString() {
 		return "Review [headline=" + headline + ", comment=" + comment + ", rating=" + rating + ", reviewTime="
 				+ reviewTime + ", orderDetail=" + orderDetail + "]";
 	}
-	
-	
+
 }

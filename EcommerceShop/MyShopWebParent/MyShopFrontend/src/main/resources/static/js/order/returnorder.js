@@ -57,7 +57,7 @@ function submitReturnOrderForm() {
 }
 
 function sendReturnOrderRequest(reason, note) {
-	requestURL =  "/Myshop/orders/return";
+	requestURL = "/Myshop/orders/return";
 	requestBody = { orderId: orderId, reason: reason, note: note };
 
 	$.ajax({

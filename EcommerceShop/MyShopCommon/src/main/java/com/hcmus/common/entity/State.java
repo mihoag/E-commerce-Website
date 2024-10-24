@@ -9,10 +9,10 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "states")
 public class State extends IdBasedEntity {
-	
+
 	@Column(nullable = false, length = 45)
 	private String name;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "country_id")
 	private Country country;
@@ -48,6 +48,5 @@ public class State extends IdBasedEntity {
 	public String toString() {
 		return "State [name=" + name + "]";
 	}
-	
-	
+
 }

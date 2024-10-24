@@ -10,12 +10,11 @@ import com.hcmus.common.entity.Customer;
 public class CustomerUserDetails implements UserDetails {
 
 	private Customer customer;
-	
-	public CustomerUserDetails(Customer customer)
-	{
+
+	public CustomerUserDetails(Customer customer) {
 		this.customer = customer;
 	}
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
@@ -25,10 +24,10 @@ public class CustomerUserDetails implements UserDetails {
 	@Override
 	public String getPassword() {
 		if (customer.isOTPRequired()) {
-            return customer.getOneTimePassword();
-        }
-         
-        return customer.getPassword();
+			return customer.getOneTimePassword();
+		}
+
+		return customer.getPassword();
 	}
 
 	@Override
@@ -61,8 +60,7 @@ public class CustomerUserDetails implements UserDetails {
 		return customer.isEnabled();
 	}
 
-	public String getFullname()
-	{
+	public String getFullname() {
 		return customer.getFullName();
 	}
 
@@ -72,5 +70,9 @@ public class CustomerUserDetails implements UserDetails {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	public int getCustomerId() {
+		return this.customer.getId();
 	}
 }

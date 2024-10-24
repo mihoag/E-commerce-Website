@@ -1,0 +1,10 @@
+package com.hcmus.common.entity.chat;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name =  "message")
+public class message {
+    
+}

@@ -17,16 +17,13 @@ import com.hcmus.site.category.CategoryService;
 @Controller
 public class MainController {
 
-	
 	@Autowired
 	private CategoryService service;
-	
+
 	@GetMapping("")
-	public String userHome(Model model, @Param("keyword") String keyword)
-	{
-		if(keyword == null)
-		{
-			keyword ="";
+	public String userHome(Model model, @Param("keyword") String keyword) {
+		if (keyword == null) {
+			keyword = "";
 		}
 		List<Category> categories = service.seachByKeyWord(keyword);
 		model.addAttribute("keyword", keyword);
@@ -34,13 +31,13 @@ public class MainController {
 		model.addAttribute("listCategories", categories);
 		return "index";
 	}
-	
+
 	@GetMapping("/login")
 	public String viewLoginPage() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
 			return "login";
-		}	
+		}
 		return "redirect:/";
-	}	
+	}
 }

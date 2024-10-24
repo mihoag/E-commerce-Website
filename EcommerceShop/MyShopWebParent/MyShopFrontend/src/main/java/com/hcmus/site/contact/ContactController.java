@@ -7,12 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/contact")
 public class ContactController {
-	
 
-	
 	@GetMapping
-	public String contactHome()
-	{
-	     return "contact/contact";	
+	public String contactHome() {
+		return "contact/contact";
 	}
 }

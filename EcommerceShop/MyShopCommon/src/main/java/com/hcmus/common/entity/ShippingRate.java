@@ -11,17 +11,17 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "shipping_rates")
 public class ShippingRate extends IdBasedEntity {
-	
+
 	private float rate;
 	private int days;
-	
+
 	@Column(name = "cod_supported")
 	private boolean codSupported;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "country_id")
 	private Country country;
-	
+
 	@Column(nullable = false, length = 45)
 	private String state;
 
@@ -75,7 +75,7 @@ public class ShippingRate extends IdBasedEntity {
 		return "ShippingRate [rate=" + rate + ", days=" + days + ", codSupported=" + codSupported + ", country="
 				+ country + ", state=" + state + "]";
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -92,5 +92,5 @@ public class ShippingRate extends IdBasedEntity {
 		IdBasedEntity other = (IdBasedEntity) obj;
 		return Objects.equals(id, other.id);
 	}
-	
+
 }

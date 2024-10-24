@@ -1,17 +1,25 @@
 <div>
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
 		<li class="nav-item" role="presentation">
-                          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab" aria-controls="home" aria-selected="true">Overview</button>
-                      </li>
-                      <li class="nav-item" role="presentation">
-                         <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#products" type="button" role="tab" aria-controls="profile" aria-selected="false">Products</button>
-                      </li>
-                      <li class="nav-item" role="presentation">
-                         <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#shipping" type="button" role="tab" aria-controls="messages" aria-selected="false">Shipping</button>
-                      </li>   
-                       <li class="nav-item" role="presentation">
-                         <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#track" type="button" role="tab" aria-controls="messages" aria-selected="false">Track</button>
-                      </li>  
+			<button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+				data-bs-target="#overview" type="button" role="tab"
+				aria-controls="home" aria-selected="true">Overview</button>
+		</li>
+		<li class="nav-item" role="presentation">
+			<button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+				data-bs-target="#products" type="button" role="tab"
+				aria-controls="profile" aria-selected="false">Products</button>
+		</li>
+		<li class="nav-item" role="presentation">
+			<button class="nav-link" id="messages-tab" data-bs-toggle="tab"
+				data-bs-target="#shipping" type="button" role="tab"
+				aria-controls="messages" aria-selected="false">Shipping</button>
+		</li>
+		<li class="nav-item" role="presentation">
+			<button class="nav-link" id="messages-tab" data-bs-toggle="tab"
+				data-bs-target="#track" type="button" role="tab"
+				aria-controls="messages" aria-selected="false">Track</button>
+		</li>
 	</ul>
 	<div class="tab-content" id="myTabContent">
 		<div class="tab-pane fade show active p-3" id="overview"
@@ -107,11 +115,11 @@
 					<div class="col-sm-1">
 						<div class="div-count">[[${status.count}]]</div>
 					</div>
-					
+
 					<div class="col-sm-3">
 						<img th:src="${product.mainImagePath}" class="img-fluid" />
 					</div>
-					
+
 					<div class="col-sm-8">
 						<div class="text-wrap">
 							<a th:href="@{${product.URI}}">[[${product.name}]]</a>
@@ -127,27 +135,31 @@
 						</div>
 						<br>
 						<div>
-							<a th:pid = "${detail.id}" th:if = "${!detail.isReview and detail.order.isDelivered}"
-                             class="btn btn-info write-review">Write Review</a>
-                             <a th:id = "'submit' + ${detail.id}"
-                             class="btn btn-info d-none">Submit</a>
+							<a th:pid="${detail.id}"
+								th:if="${!detail.isReview and detail.order.isDelivered}"
+								class="btn btn-info write-review">Write Review</a> <a
+								th:id="'submit' + ${detail.id}" class="btn btn-info d-none">Submit</a>
 						</div>
-						<div th:id = "'review' + ${detail.id}" class="my-2 d-none">
-						   <div class="mb-3">
-                             <label for="exampleFormControlInput1" class="form-label">Title</label>
-                             <input type="text" class="form-control" th:id = "'headline' + ${detail.id}" placeholder="Enter the headline">
-                           </div>
-                           <div class="mb-3">
-                             <label for="exampleFormControlTextarea1" class="form-label">Content</label>
-                             <textarea class="form-control"  th:id = "'comment' + ${detail.id}" rows="3"></textarea>
-                           </div>
-                            <div class="mb-3">
-                             <label for="exampleFormControlTextarea1" class="form-label">Rating</label>
-                             <input class="form-control"  th:id = "'rating' + ${detail.id}" type="number" min="1" max="5" value="5"></input>
-                           </div>
+						<div th:id="'review' + ${detail.id}" class="my-2 d-none">
+							<div class="mb-3">
+								<label for="exampleFormControlInput1" class="form-label">Title</label>
+								<input type="text" class="form-control"
+									th:id="'headline' + ${detail.id}"
+									placeholder="Enter the headline">
+							</div>
+							<div class="mb-3">
+								<label for="exampleFormControlTextarea1" class="form-label">Content</label>
+								<textarea class="form-control" th:id="'comment' + ${detail.id}"
+									rows="3"></textarea>
+							</div>
+							<div class="mb-3">
+								<label for="exampleFormControlTextarea1" class="form-label">Rating</label>
+								<input class="form-control" th:id="'rating' + ${detail.id}"
+									type="number" min="1" max="5" value="5"></input>
+							</div>
 						</div>
 
-			
+
 					</div>
 				</div>
 			</th:block>

@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.hcmus.common.entity.order.OrderDetail;
 
 @Repository
-public interface OrderDetailRepository extends JpaRepository<OrderDetail, Integer>
-{
-	
+public interface OrderDetailRepository extends JpaRepository<OrderDetail, Integer> {
+
 }

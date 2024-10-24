@@ -8,35 +8,32 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
-
 @Entity
 @Table(name = "cart_items")
-public class CartItem extends IdBasedEntity{
+public class CartItem extends IdBasedEntity {
 
 	@ManyToOne
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product product;
-	
+
 	private int quantity;
-	
+
 	@Transient
 	private float shippingCost;
 
+	public CartItem() {
+		super();
+	}
 
 	public CartItem(Customer customer, Product product, int quantity) {
 		super();
 		this.customer = customer;
 		this.product = product;
 		this.quantity = quantity;
-	}
-
-	public CartItem() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Customer getCustomer() {
@@ -70,10 +67,9 @@ public class CartItem extends IdBasedEntity{
 	public void setShippingCost(float shippingCost) {
 		this.shippingCost = shippingCost;
 	}
-	
-	public float getSubTotal()
-	{
-		return quantity*product.getDiscountPrice();
+
+	public float getSubTotal() {
+		return quantity * product.getDiscountPrice();
 	}
 
 	@Override
