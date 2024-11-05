@@ -1,8 +1,8 @@
-  
+
 dropdownBrands = $("#brand");
 dropdownCategories = $("#category");
 const newForm = document.forms['newForm'];
-const nameInput =  document.getElementById("name");
+const nameInput = document.getElementById("name");
 const messageName = document.getElementById("messageName");
 
 $(document).ready(function() {
@@ -21,7 +21,7 @@ $(document).ready(function() {
 
 function getCategories() {
 	brandId = dropdownBrands.val();
-	var url =  '/MyshopAdmin/api/brands/' + brandId + "/categories";
+	var url = '/MyshopAdmin/api/brands/' + brandId + "/categories";
 
 	$.get(url, function(responseJson) {
 		console.log(responseJson);
@@ -31,57 +31,54 @@ function getCategories() {
 	});
 }
 
-async function checkNameUnique()
-{
-		var productname = $("#name").val();
-	    var id = $("#id").val();
-        var params = {id : id, name : productname};
-             const url = '/MyshopAdmin/api/products/checkname';          
-             $.post(url, params, async function (response) {
-				  if (response == "OK") {
-					// console.log(response);
-			         newForm.submit();
-		    } else if (response == "Duplicate") {
-			      showMessage(messageName,"The product name is existed");
-		    }
-			}).fail(function () {
-				  			 
-		    });
+async function checkNameUnique() {
+	var productname = $("#name").val();
+	var id = $("#id").val();
+	var params = { id: id, name: productname };
+	const url = '/MyshopAdmin/api/products/checkname';
+	$.post(url, params, async function(response) {
+		if (response == "OK") {
+			// console.log(response);
+			newForm.submit();
+		} else if (response == "Duplicate") {
+			showMessage(messageName, "The product name is existed");
+		}
+	}).fail(function() {
+
+	});
 }
 
-nameInput.addEventListener('blur',  function(event) {
-	  	var name = $("#name").val();
-	    var id = $("#id").val();
-        var params = {id : id, name : name};
-             const url = '/MyshopAdmin/api/products/checkname';          
-             $.post(url, params, async function (response) {
-				console.log(response)
-				  if (response == "OK") {
-			       messageName.classList.add("hidden")
-		    } else if (response == "Duplicate") {
-			    showMessage(messageName,"The product name is existed");
-		    }
-			}).fail(function () {
-				 showMessage(messageName,"Fail to connect to server");	
-			 });
+nameInput.addEventListener('blur', function(event) {
+	var name = $("#name").val();
+	var id = $("#id").val();
+	var params = { id: id, name: name };
+	const url = '/MyshopAdmin/api/products/checkname';
+	$.post(url, params, async function(response) {
+		console.log(response)
+		if (response == "OK") {
+			messageName.classList.add("hidden")
+		} else if (response == "Duplicate") {
+			showMessage(messageName, "The product name is existed");
+		}
+	}).fail(function() {
+		showMessage(messageName, "Fail to connect to server");
+	});
 });
 
 
-function showMessage(element, message)
-{
+function showMessage(element, message) {
 	element.classList.remove("hidden");
 	element.innerText = message;
 }
 
 newForm.addEventListener('submit', async function(event) {
-        // Prevent the default form submission
-        //console.log("ok");
-        event.preventDefault();
-        await checkNameUnique();
+	// Prevent the default form submission
+	//console.log("ok");
+	event.preventDefault();
+	await checkNameUnique();
 });
 
 
 
 
-  
-  
+

@@ -33,12 +33,6 @@ public class Customer extends AbstractAddressWithCountry {
 	@Column(name = "reset_password_token", length = 30)
 	private String resetPasswordToken;
 
-	@Column(name = "one_time_password")
-	private String oneTimePassword;
-
-	@Column(name = "otp_requested_time")
-	private Date otpRequestedTime;
-
 	public Customer() {
 	}
 

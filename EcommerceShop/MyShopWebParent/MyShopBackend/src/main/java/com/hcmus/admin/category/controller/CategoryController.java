@@ -35,56 +35,58 @@ import jakarta.servlet.http.HttpServletResponse;
 @Controller
 @RequestMapping("/categories")
 public class CategoryController {
-    @Autowired
-    private CategoryService service;
-    
-    private static Logger LOGGER = LoggerFactory.getLogger(CategoryController.class);
-	
-	@GetMapping("/page/{pageNum}") 
-	public String listByPage(@PathVariable(name = "pageNum") int pageNum, @RequestParam(name = "sortField")  String sortField ,
-			String sortDir, @Param("keyword") String keyword	, @Param("message") String message
-			,Model model)
-	{
-		    if (sortDir ==  null || sortDir.isEmpty()) {
-			  sortDir = "asc";
-		    }
-		  
-		    CategoryPageInfo pageInfo = new CategoryPageInfo();
-		    List<Category> listCategory = service.listCategoryByPage(pageInfo, pageNum,sortField, sortDir, keyword);
-	
-		    
-		    String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";  
-		    
-		    model.addAttribute("listCategories", listCategory);
-			model.addAttribute("sideBarFieldName", "categories");
-			model.addAttribute("currentPage", pageNum);
-			model.addAttribute("totalPages", pageInfo.getTotalPage());
-			model.addAttribute("sortField", sortField);
-			model.addAttribute("sortDir", sortDir);
-			model.addAttribute("reverseSortDir", reverseSortDir);
-		    model.addAttribute("keyword", keyword);
-			model.addAttribute("totalElement", pageInfo.getTotalElement());
-			model.addAttribute("message", message == null ? "" : message);
-			
-		    return "categories/categories";
+	@Autowired
+	private CategoryService service;
+
+	private static Logger LOGGER = LoggerFactory.getLogger(CategoryController.class);
+
+	@GetMapping("/page/{pageNum}")
+	public String listByPage(@PathVariable(name = "pageNum") int pageNum,
+			@RequestParam(name = "sortField") String sortField, String sortDir, @Param("keyword") String keyword,
+			@Param("message") String message, Model model) {
+		
+		if (sortDir == null || sortDir.isEmpty()) {
+			sortDir = "asc";
+		}
+		
+		if(keyword == null)
+		{
+			keyword = "";
+		}
+
+		CategoryPageInfo pageInfo = new CategoryPageInfo();
+		List<Category> listCategory = service.listCategoryByPage(pageInfo, pageNum, sortField, sortDir, keyword);
+
+		String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+
+		model.addAttribute("listCategories", listCategory);
+		model.addAttribute("sideBarFieldName", "categories");
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("totalPages", pageInfo.getTotalPage());
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("reverseSortDir", reverseSortDir);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("totalElement", pageInfo.getTotalElement());
+		model.addAttribute("message", message == null ? "" : message);
+
+		return "categories/categories";
 	}
-	
+
 	@GetMapping("/new")
-	public String newCategory(Model model)
-	{
+	public String newCategory(Model model) {
 		Category cate = new Category();
 		List<Category> categoriesParent = service.listCategoriesUsedInForm();
-		
+
 		model.addAttribute("categoriesParent", categoriesParent);
 		model.addAttribute("category", cate);
 		model.addAttribute("sideBarFieldName", "categories");
-		model.addAttribute("title", "New category" );
+		model.addAttribute("title", "New category");
 		return "categories/categories_form";
 	}
-	
+
 	@GetMapping("/delete/{id}")
-	public String deleteCate(@PathVariable("id") int id, RedirectAttributes ra)
-	{
+	public String deleteCate(@PathVariable("id") int id, RedirectAttributes ra) {
 		try {
 			service.deleteById(id);
 			String categoryDir = "category-images/" + id;
@@ -97,44 +99,44 @@ public class CategoryController {
 		}
 		return "redirect:/categories";
 	}
-	
+
 	@GetMapping("/edit/{id}")
-	public String editCategory(@PathVariable("id") int id, Model model ,RedirectAttributes ra)
-	{
+	public String editCategory(@PathVariable("id") int id, Model model, RedirectAttributes ra) {
 		try {
 			Category cate = service.getCateById(id);
 			model.addAttribute("category", cate);
 		} catch (Exception e) {
 			// TODO: handle exception
 			LOGGER.error(e.getMessage());
-			ra.addFlashAttribute("message","Error: " + e.getMessage());
+			ra.addFlashAttribute("message", "Error: " + e.getMessage());
 			return "redirect:/categories";
 		}
-		
+
 		List<Category> categoriesParent = service.listCategoriesUsedInForm();
 		model.addAttribute("categoriesParent", categoriesParent);
 		model.addAttribute("sideBarFieldName", "categories");
 		model.addAttribute("title", "Edit category ( id : " + id + " )");
 		return "categories/categories_form";
 	}
-	
+
 	@PostMapping("/save")
-	public String saveCategory(Category cate, @RequestParam("photo") MultipartFile multipartFile, RedirectAttributes ra)
-	{
+	public String saveCategory(Category cate, @RequestParam("photo") MultipartFile multipartFile,
+			RedirectAttributes ra) {
 		try {
 			if (!multipartFile.isEmpty()) {
 				String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 				cate.setImage(fileName);
 				Category savedCate = service.save(cate);
-				
+
 				String uploadDir = "category-images/" + savedCate.getId();
 				AmazonS3Util.removeFolder(uploadDir);
 				AmazonS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
 			} else {
-				if (cate.getImage().isEmpty()) cate.setImage(null);
+				if (cate.getImage().isEmpty())
+					cate.setImage(null);
 				service.save(cate);
 			}
-			//LOGGER.info("Save category successfully!");
+			// LOGGER.info("Save category successfully!");
 			System.out.println("Save category successfully!");
 			ra.addFlashAttribute("message", "Save category successfully!");
 		} catch (Exception e) {
@@ -144,39 +146,38 @@ public class CategoryController {
 		}
 		return "redirect:/categories";
 	}
-	
+
 	@GetMapping("/category/{id}/enabled/{status}")
-	public String updateUserEnable(@PathVariable("id") int id, @PathVariable("status") boolean status, @Param("sortField") String sortField, @Param("sortDir") String sortDir, @Param("keyword") String keyword, @Param("page") int page, Model model) throws UserNotFoundException
-	{
-	   service.updateCategoryEnable(id, status);
-	   return listByPage(page, sortField, sortDir, keyword, "Update category status successfully", model);
+	public String updateUserEnable(@PathVariable("id") int id, @PathVariable("status") boolean status,
+			@Param("sortField") String sortField, @Param("sortDir") String sortDir, @Param("keyword") String keyword,
+			@Param("page") int page, Model model) throws UserNotFoundException {
+		service.updateCategoryEnable(id, status);
+		return listByPage(page, sortField, sortDir, keyword, "Update category status successfully", model);
 	}
-	
+
 	@GetMapping("/export/csv")
 	public void exportToCSV(HttpServletResponse response) throws IOException {
 		List<Category> listCategories = service.listCategoriesUsedInForm();
-	    CategoryCsvExporter exporter = new CategoryCsvExporter();
-	    exporter.export(listCategories, response);
+		CategoryCsvExporter exporter = new CategoryCsvExporter();
+		exporter.export(listCategories, response);
 	}
-	
 
 	@GetMapping("/export/excel")
 	public void exportToExcel(HttpServletResponse response) throws IOException {
 		List<Category> listCategories = service.listCategoriesUsedInForm();
-	    CategoryExcelExporter exporter = new CategoryExcelExporter();
-	    exporter.export(listCategories, response);
+		CategoryExcelExporter exporter = new CategoryExcelExporter();
+		exporter.export(listCategories, response);
 	}
-	
+
 	@GetMapping("/export/pdf")
 	public void exportToPdf(HttpServletResponse response) throws IOException {
 		List<Category> listCategories = service.listCategoriesUsedInForm();
-	    CategoryPdfExporter exporter = new CategoryPdfExporter();
-	    exporter.export(listCategories, response);
+		CategoryPdfExporter exporter = new CategoryPdfExporter();
+		exporter.export(listCategories, response);
 	}
-	
-	
+
 	@GetMapping("/**")
 	public String listFirstPage(String sortDir, Model model, @Param("message") String message) {
-		return listByPage(1, "name", sortDir, "" , message,model);
+		return listByPage(1, "name", sortDir, "", message, model);
 	}
 }

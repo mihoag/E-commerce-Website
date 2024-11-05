@@ -21,7 +21,7 @@ public class ServerClient extends WebSocketClient {
 
     @Override
     public void onOpen(ServerHandshake handshake) {
-    	logger.info("Connected to Server 2");
+    	logger.info("Connected to Server");
         reconnecting.set(false); // Reset the flag once connection is successful
     }
 

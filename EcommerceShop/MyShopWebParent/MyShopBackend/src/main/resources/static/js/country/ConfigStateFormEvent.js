@@ -1,14 +1,13 @@
 const buttonLoadCountriesForStates = $("#buttonLoadCountriesForStates")
-const dropDownCountriesForStates= $("#dropDownCountriesForStates")
-const dropDownStates= $("#dropDownStates")
-const labelStateName= $("#labelStateName")
-const fieldStateName= $("#fieldStateName")
-const buttonAddState= $("#buttonAddState")
-const buttonUpdateState= $("#buttonUpdateState")
-const buttonDeleteState= $("#buttonDeleteState")
+const dropDownCountriesForStates = $("#dropDownCountriesForStates")
+const dropDownStates = $("#dropDownStates")
+const labelStateName = $("#labelStateName")
+const fieldStateName = $("#fieldStateName")
+const buttonAddState = $("#buttonAddState")
+const buttonUpdateState = $("#buttonUpdateState")
+const buttonDeleteState = $("#buttonDeleteState")
 
-buttonLoadCountriesForStates.on('click', function()
-{
+buttonLoadCountriesForStates.on('click', function() {
 	loadCountriesForStates();
 })
 
@@ -18,25 +17,24 @@ dropDownStates.on("change", function() {
 
 
 
-	buttonAddState.click(function() {
-		if (buttonAddState.val() == "Add") {
-			addState();
-		} else {
-			changeFormStateToNew();
-		}
-	});
+buttonAddState.click(function() {
+	if (buttonAddState.val() == "Add") {
+		addState();
+	} else {
+		changeFormStateToNew();
+	}
+});
 
-	buttonUpdateState.click(function() {
-		updateState();
-	});
+buttonUpdateState.click(function() {
+	updateState();
+});
 
-	buttonDeleteState.click(function() {
-		deleteState();
-	});
+buttonDeleteState.click(function() {
+	deleteState();
+});
 
-function loadCountriesForStates()
-{
-	url =  "/MyshopAdmin/api/country";
+function loadCountriesForStates() {
+	url = "/MyshopAdmin/api/country";
 	$.get(url, function(responseJSON) {
 		dropDownCountriesForStates.empty();
 		$.each(responseJSON, function(index, country) {
@@ -45,22 +43,20 @@ function loadCountriesForStates()
 			$("<option>").val(optionValue).text(country.name).appendTo(dropDownCountriesForStates);
 		});
 	}).done(function() {
-	 
+
 		showToast("All countries have been loaded");
 	}).fail(function() {
 		showToast("ERROR: Could not connect to server or server encountered an error");
 	});
 }
 
-dropDownCountriesForStates.on('change', function()
-{
+dropDownCountriesForStates.on('change', function() {
 	loadStateByCountry();
 })
 
-function loadStateByCountry()
-{
-   var countryId = dropDownCountriesForStates.val().split("-")[0];
-   url =  "/MyshopAdmin/api/states/list_by_country/" + countryId;
+function loadStateByCountry() {
+	var countryId = dropDownCountriesForStates.val().split("-")[0];
+	url = "/MyshopAdmin/api/states/list_by_country/" + countryId;
 	$.get(url, function(responseJSON) {
 		dropDownStates.empty();
 		console.log(responseJSON);

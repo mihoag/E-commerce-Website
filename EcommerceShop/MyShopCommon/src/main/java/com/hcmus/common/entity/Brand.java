@@ -82,7 +82,10 @@ public class Brand extends IdBasedEntity {
 		for (Category cate : categories) {
 			str += cate.getName() + ", ";
 		}
-
+		if(str.length() == 0)
+		{
+			return str;
+		}
 		return str.trim().substring(0, str.length() - 2);
 	}
 

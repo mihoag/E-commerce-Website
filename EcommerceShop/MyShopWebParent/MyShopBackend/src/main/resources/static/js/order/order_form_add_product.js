@@ -1,29 +1,28 @@
 var productDetailCount;
 
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function() {
 	productDetailCount = $(".hiddenProductId").length;
 })
 
-$("#linkAddProduct").on("click", function (e) {
+$("#linkAddProduct").on("click", function(e) {
 	e.preventDefault();
 	var linkAddlURL = $(this).attr("href");
 	console.log(linkAddlURL);
 	$("#addProductModal").modal("show").find(".modal-body").load(linkAddlURL);
 });
 
-$("#buttonAdd").on('click', function()
-{
+$("#buttonAdd").on('click', function() {
 	var productIds = [];
-	 $('.check-add:checked').each(function() {
-            var pid = $(this).attr('pid');
-            productIds.push(pid);
-            var quantity = parseInt($("#quantity" + pid).val())
-            addProduct(pid,quantity);
-     });
-     removeProduct(productIds);
+	$('.check-add:checked').each(function() {
+		var pid = $(this).attr('pid');
+		productIds.push(pid);
+		var quantity = parseInt($("#quantity" + pid).val())
+		addProduct(pid, quantity);
+	});
+	removeProduct(productIds);
 })
 
-function addProduct(productId,quantity) {
+function addProduct(productId, quantity) {
 	getShippingCost(productId, quantity);
 }
 
@@ -35,8 +34,8 @@ function getShippingCost(productId, quantity) {
 	if (state.length == 0) {
 		state = $("#city").val();
 	}
-	
-	requestUrl =  contextPath+ "get_shipping_cost";
+
+	requestUrl = contextPath + "get_shipping_cost";
 	params = { productId: productId, countryId: countryId, state: state };
 
 	$.ajax({
@@ -58,9 +57,9 @@ function getProductInfo(productId, shippingCost, quantity) {
 	$.get(requestURL, function(productJson) {
 		productName = productJson.name;
 		mainImagePath = contextPath.substring(0, contextPath.length - 1) + productJson.image_path;
-		productCost = $.number(parseFloat(productJson.cost)*quantity, 2);
-		productPrice = $.number(parseFloat(productJson.price)*quantity, 2);
-		
+		productCost = $.number(parseFloat(productJson.cost) * quantity, 2);
+		productPrice = $.number(parseFloat(productJson.price) * quantity, 2);
+
 		console.log(productJson);
 
 		htmlCode = generateProductCode(productId, productName, mainImagePath, productCost, productPrice, shippingCost, quantity);
@@ -72,19 +71,18 @@ function getProductInfo(productId, shippingCost, quantity) {
 	});
 }
 
-$('#buttonAdd').on('click', function()
-{
+$('#buttonAdd').on('click', function() {
 	var productId = [];
 	var quantity = [];
 	$('.check-add:checked').each(function() {
-            var pid = $(this).attr('pid');
-            productId.push(parseInt(pid));
-            let quan = document.getElementById("quan" + pid).value;
-            quantity.push(parseInt(quan));
-           
-            removeProduct(productId);
-        });
-        
+		var pid = $(this).attr('pid');
+		productId.push(parseInt(pid));
+		let quan = document.getElementById("quan" + pid).value;
+		quantity.push(parseInt(quan));
+
+		removeProduct(productId);
+	});
+
 })
 
 function generateProductCode(productId, productName, mainImagePath, productCost, productPrice, shippingCost, quantity) {
@@ -173,10 +171,8 @@ function generateProductCode(productId, productName, mainImagePath, productCost,
 }
 
 
-function removeProduct(ids)
-{
-	for(let i = 0 ; i < ids.length ; i++)
-	{
+function removeProduct(ids) {
+	for (let i = 0; i < ids.length; i++) {
 		$('#product' + ids[i]).remove();
 	}
 }

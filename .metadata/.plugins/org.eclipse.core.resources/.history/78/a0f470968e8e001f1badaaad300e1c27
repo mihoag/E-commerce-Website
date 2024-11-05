@@ -1,8 +1,0 @@
-package com.hcmus.common.entity;
-
-public class CustomerDTO {
-
-	private Integer id;
-	private String firstName;
-	private String lastName;
-}

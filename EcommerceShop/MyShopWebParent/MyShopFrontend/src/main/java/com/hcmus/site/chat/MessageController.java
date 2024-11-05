@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.hcmus.common.entity.Constant;
 import com.hcmus.common.entity.Customer;
 import com.hcmus.common.exception.CustomerNotFoundException;
 import com.hcmus.site.Utility;
@@ -28,6 +29,7 @@ public class MessageController {
 		model.addAttribute("sideBarFieldName", "chat");
 		model.addAttribute("customerId", customer.getId());
 		model.addAttribute("customerName", customer.getFullName());
+		model.addAttribute("CLIENT_SOCKET_CONNECTION_URI", Constant.CLIENT_SOCKET_CONNECTION_URI);
 		return "chat/chat";
 	}
 

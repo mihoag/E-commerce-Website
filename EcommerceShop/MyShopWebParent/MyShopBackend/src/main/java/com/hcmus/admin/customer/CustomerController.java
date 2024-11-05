@@ -1,5 +1,6 @@
 package com.hcmus.admin.customer;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hcmus.admin.brand.export.BrandExcelExporter;
+import com.hcmus.admin.customer.export.CustomerExcelExporter;
 import com.hcmus.admin.setting.country.CountryRepository;
 import com.hcmus.admin.util.FileUploadUtil;
+import com.hcmus.common.entity.Brand;
 import com.hcmus.common.entity.Country;
 import com.hcmus.common.entity.Customer;
 import com.hcmus.common.entity.product.Product;
@@ -22,6 +26,7 @@ import com.hcmus.common.exception.CustomerNotFoundException;
 import com.hcmus.common.exception.UserNotFoundException;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/customers")
@@ -103,6 +108,14 @@ public class CustomerController {
 		customerService.updateCustomerEnable(id, status);
 		return listByPage(page, sortField, sortDir, keyword, model);
 	}
+	
+	@GetMapping("/export/excel")
+	public void exportToExcel(HttpServletResponse response) throws IOException {
+		List<Customer> customers = customerService.getAllCustomer("");
+	    CustomerExcelExporter exporter = new CustomerExcelExporter();
+	    exporter.export(customers, response);
+	}
+	
 	
 	@GetMapping("/**")
 	public String listFirstPage(Model model)

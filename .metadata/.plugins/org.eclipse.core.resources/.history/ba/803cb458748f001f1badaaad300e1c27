@@ -1,8 +1,0 @@
-package com.hcmus.site.socket;
-
-import org.springframework.web.socket.handler.TextWebSocketHandler;
-
-public class ServerHandler extends TextWebSocketHandler  {
-
-	
-}

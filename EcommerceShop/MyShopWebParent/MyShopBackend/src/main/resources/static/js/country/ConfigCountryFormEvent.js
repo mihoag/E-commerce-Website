@@ -1,4 +1,4 @@
-const buttonLoadCountries =$("#buttonLoadCountries");
+const buttonLoadCountries = $("#buttonLoadCountries");
 const dropDownCountries = $("#dropDownCountries");
 const fieldCountryName = $("#fieldCountryName");
 const fieldCountryCode = $("#fieldCountryCode");
@@ -8,24 +8,20 @@ const buttonDeleteCountry = $("#buttonDeleteCountry");
 const toastLiveExample = $('#liveToast')
 const labelCountryName = $("#labelCountryName")
 
-buttonLoadCountries.on('click', async function()
-{
+buttonLoadCountries.on('click', async function() {
 	loadCountries();
 })
 
-buttonAddCountry.on('click', async function()
-{
-	if(buttonAddCountry.val() == 'Add')
-	{
-	     addCountry();
+buttonAddCountry.on('click', async function() {
+	if (buttonAddCountry.val() == 'Add') {
+		addCountry();
 	}
-	else{
+	else {
 		changeFormStateToNewCountry();
 	}
 })
 
-buttonDeleteCountry.on('click', async function()
-{
+buttonDeleteCountry.on('click', async function() {
 	deleteCountry();
 })
 
@@ -33,8 +29,7 @@ dropDownCountries.on("change", function() {
 	changeFormStateToSelectedCountry();
 });
 
-buttonUpdateCountry.on('click', async function()
-{
+buttonUpdateCountry.on('click', async function() {
 	updateCountry();
 })
 
@@ -64,9 +59,8 @@ function changeFormStateToSelectedCountry() {
 }
 
 
-function loadCountries()
-{
-    url =  "/MyshopAdmin/api/country";
+function loadCountries() {
+	url = "/MyshopAdmin/api/country";
 	$.get(url, function(responseJSON) {
 		dropDownCountries.empty();
 
@@ -76,7 +70,7 @@ function loadCountries()
 			$("<option>").val(optionValue).text(country.name).appendTo(dropDownCountries);
 		});
 	}).done(function() {
-	 
+
 		showToast("All countries have been loaded");
 	}).fail(function() {
 		showToast("ERROR: Could not connect to server or server encountered an error");
@@ -94,14 +88,12 @@ function validateFormCountry() {
 }
 
 
-function addCountry()
-{
-	
-	if(!validateFormCountry())
-	{
+function addCountry() {
+
+	if (!validateFormCountry()) {
 		return;
 	}
-	url =  "/MyshopAdmin/api/country/save";
+	url = "/MyshopAdmin/api/country/save";
 	countryName = fieldCountryName.val();
 	countryCode = fieldCountryCode.val();
 
@@ -121,20 +113,18 @@ function addCountry()
 }
 
 
-function updateCountry()
-{
-	if(!validateFormCountry())
-	{
+function updateCountry() {
+	if (!validateFormCountry()) {
 		return;
 	}
-	url =  "/MyshopAdmin/api/country/save";
+	url = "/MyshopAdmin/api/country/save";
 	countryName = fieldCountryName.val();
 	countryCode = fieldCountryCode.val();
 	countryId = dropDownCountries.val().split("-")[0];
 
 	jsonData = { id: countryId, name: countryName, code: countryCode };
-	
-    $.ajax({
+
+	$.ajax({
 		type: 'POST',
 		url: url,
 		data: JSON.stringify(jsonData),
@@ -147,11 +137,10 @@ function updateCountry()
 	});
 }
 
-function deleteCountry()
-{
+function deleteCountry() {
 	var countryId = dropDownCountries.val().split("-")[0];
-	url =  "/MyshopAdmin/api/country/delete/" + countryId;
-	 $.ajax({
+	url = "/MyshopAdmin/api/country/delete/" + countryId;
+	$.ajax({
 		type: 'GET',
 		url: url,
 	}).done(function() {
@@ -164,24 +153,21 @@ function deleteCountry()
 }
 
 
-function removeDeletedCountry()
-{
-    fieldCountryCode.val("");
-	fieldCountryName.val("").focus();
-}
-
-function selectNewlyAddedCountry(countryId, countryCode, countryName)
-{
-	optionValue = countryId + "-" + countryCode;
-    $("<option>").val(optionValue).text(countryName).appendTo(dropDownCountries);
-    $("#dropDownCountries option[value='" + optionValue + "']").prop("selected", true);
+function removeDeletedCountry() {
 	fieldCountryCode.val("");
 	fieldCountryName.val("").focus();
 }
 
-function showToast(value)
-{
-	  $("#toastMessage").text(value);
-	  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
-      toastBootstrap.show()
+function selectNewlyAddedCountry(countryId, countryCode, countryName) {
+	optionValue = countryId + "-" + countryCode;
+	$("<option>").val(optionValue).text(countryName).appendTo(dropDownCountries);
+	$("#dropDownCountries option[value='" + optionValue + "']").prop("selected", true);
+	fieldCountryCode.val("");
+	fieldCountryName.val("").focus();
+}
+
+function showToast(value) {
+	$("#toastMessage").text(value);
+	const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+	toastBootstrap.show()
 }

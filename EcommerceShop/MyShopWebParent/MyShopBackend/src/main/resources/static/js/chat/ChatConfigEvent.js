@@ -117,10 +117,10 @@ function showInputChat() {
 }
 
 function connectSocket() {
-	socket = new WebSocket("ws://localhost:8080/MyshopAdmin/websocket");
+	socket = new WebSocket(ADMIN_SOCKET_CONNECTION_URI);
 
 	socket.onopen = function() {
-		console.log("Connected to Server 2 WebSocket");
+		console.log("Connected to Server WebSocket");
 	};
 
 	socket.onmessage = function(event) {
@@ -210,6 +210,7 @@ function fetchMessage() {
 		.then(response =>
 			response.json())
 		.then(data => {
+			console.log(data);
 			renderMessage(data)
 		})
 		.catch(error => console.log('Error:', error));
@@ -223,7 +224,7 @@ function renderMessage(data) {
               class="rounded-circle d-flex align-self-start me-3 shadow-1-strong" width="60">
             <div class="card  w-100">
               <div class="card-header d-flex justify-content-between p-3">
-                <p class="fw-bold mb-0">${mess.customer_name}</p>
+                <p class="fw-bold mb-0">${mess.customerName}</p>
                 <p class="text-muted small mb-0"><i class="far fa-clock"></i> ${mess.time}</p>
               </div>
               <div class="card-body">

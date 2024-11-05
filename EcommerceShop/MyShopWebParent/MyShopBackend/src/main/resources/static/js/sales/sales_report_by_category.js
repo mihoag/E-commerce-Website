@@ -17,9 +17,9 @@ function loadSalesReportByDateForCategory(period) {
 	}
 
 	$.get(requestURL, function(responseJSON) {
-		
+
 		//console.log(responseJSON);
-		
+
 		prepareChartDataForSalesReportByCategory(responseJSON);
 		customizeChartForSalesReportByCategory();
 		formatChartData(data, 1, 2);

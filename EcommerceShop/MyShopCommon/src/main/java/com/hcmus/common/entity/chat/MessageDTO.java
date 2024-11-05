@@ -18,6 +18,8 @@ public class MessageDTO {
 	private String time;
 
 	private RoleChat role_chat;
+	
+	private String sessionId;
 
 	public MessageDTO() {
 		super();

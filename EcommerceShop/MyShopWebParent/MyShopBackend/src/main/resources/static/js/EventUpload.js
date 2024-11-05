@@ -1,11 +1,11 @@
-const MAX_FILE_SIZE = 102400*6; // 100KB
+const MAX_FILE_SIZE = 102400 * 6; // 100KB
 $("#fileImage").change(function() {
-		if (!checkFileSize(this)) {
-			return;
-		}
-		showImageThumbnail(this);
+	if (!checkFileSize(this)) {
+		return;
+	}
+	showImageThumbnail(this);
 });
-	
+
 function showImageThumbnail(fileInput) {
 	var file = fileInput.files[0];
 	var reader = new FileReader();
@@ -27,4 +27,3 @@ function checkFileSize(fileInput) {
 		return true;
 	}
 }
-	

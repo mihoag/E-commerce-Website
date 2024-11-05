@@ -2,16 +2,14 @@ const dropDownCountries = $("#country");
 const dropDownStates = $("#listStates")
 
 console.log(dropDownCountries)
-dropDownCountries.on('change', function()
-{
+dropDownCountries.on('change', function() {
 	loadStateByCountry();
 })
 
 
-function loadStateByCountry()
-{
-   var countryId = dropDownCountries.val();
-   url =  "/MyshopAdmin/api/states/list_by_country/" + countryId;
+function loadStateByCountry() {
+	var countryId = dropDownCountries.val();
+	url = "/MyshopAdmin/api/states/list_by_country/" + countryId;
 	$.get(url, function(responseJSON) {
 		dropDownStates.empty();
 		$.each(responseJSON, function(index, state) {

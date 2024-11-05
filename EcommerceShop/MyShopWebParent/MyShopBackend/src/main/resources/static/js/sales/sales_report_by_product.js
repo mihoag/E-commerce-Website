@@ -16,9 +16,9 @@ function loadSalesReportByDateForProduct(period) {
 	}
 
 	$.get(requestURL, function(responseJSON) {
-		
+
 		console.log(responseJSON);
-		
+
 		prepareChartDataForSalesReportByProduct(responseJSON);
 		customizeChartForSalesReportByProduct();
 		formatChartData(data, 2, 3);
@@ -39,8 +39,8 @@ function prepareChartDataForSalesReportByProduct(responseJSON) {
 	totalItems = 0;
 
 	$.each(responseJSON, function(index, reportItem) {
-	    data.addRows([[reportItem.identifier, reportItem.products_count, reportItem.gross_sales, reportItem.net_sales]]);
-	    
+		data.addRows([[reportItem.identifier, reportItem.products_count, reportItem.gross_sales, reportItem.net_sales]]);
+
 		totalGrossSales += parseFloat(reportItem.gross_sales);
 		totalNetSales += parseFloat(reportItem.net_sales);
 		totalItems += parseInt(reportItem.products_count);

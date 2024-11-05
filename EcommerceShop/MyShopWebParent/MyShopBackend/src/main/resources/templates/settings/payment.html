@@ -4,7 +4,7 @@
 <body>
 	<div th:fragment="content" th:remove="tag">
 		<form th:action="@{/setting/save_payment}" method="post">
-		    <div class="form-group row">
+			<div class="form-group row">
 				<label class="col-sm-4 col-form-label">PayPal API Base URL:</label>
 				<div class="col-sm-8">
 					<input type="text" class="form-control" name="PAYPAL_API_BASE_URL"
@@ -12,7 +12,7 @@
 				</div>
 			</div>
 			<br>
-			 <div class="form-group row">
+			<div class="form-group row">
 				<label class="col-sm-4 col-form-label">PayPal Client ID:</label>
 				<div class="col-sm-8">
 					<input type="text" class="form-control" name="PAYPAL_API_CLIENT_ID"
@@ -20,10 +20,11 @@
 				</div>
 			</div>
 			<br>
-			 <div class="form-group row">
+			<div class="form-group row">
 				<label class="col-sm-4 col-form-label">PayPal Client Secret:</label>
 				<div class="col-sm-8">
-					<input type="text" class="form-control" name="PAYPAL_API_CLIENT_SECRET"
+					<input type="text" class="form-control"
+						name="PAYPAL_API_CLIENT_SECRET"
 						th:value="${PAYPAL_API_CLIENT_SECRET}" required />
 				</div>
 			</div>
