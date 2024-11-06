@@ -30,6 +30,9 @@ public class ForgetPasswordController {
 
 	@Autowired
 	private SettingService settingService;
+	
+	@Autowired
+	private ResetPasswordTokenService resetPasswordTokenService;
 
 	@GetMapping("/forgot_password")
 	public String renderForgotPasswordForm() {
@@ -41,10 +44,12 @@ public class ForgetPasswordController {
 		String email = (String) request.getParameter("email");
 		try {
 			String token = customerService.updatePasswordToken(email);
-			String link = Utility.getSiteURL(request) + "/reset_password?token=" + token;
+			String link = Utility.getSiteURL(request) + "/reset_password?token=" + token + "&email=" + email;
 			sendEmail(link, email);
-
-			model.addAttribute("message", "We have sent a reset password link to your email." + " Please check.");
+			
+			resetPasswordTokenService.storeResetPasswordToken(email, token);
+			
+			model.addAttribute("message", "We have sent a reset password link to your email. The link is expired after 5 minutes" + " Please check.");
 		} catch (Exception e) {
 			// TODO: handle exception
 			model.addAttribute("error", e.getMessage());
@@ -54,9 +59,9 @@ public class ForgetPasswordController {
 	}
 
 	@GetMapping("/reset_password")
-	public String renderResetPassword(Model model, @RequestParam("token") String token) {
+	public String renderResetPassword(Model model, @RequestParam("token") String token, @RequestParam("email") String email) {
 		try {
-			Customer customer = customerService.getCustomerByToken(token);
+			resetPasswordTokenService.verifyResetPasswordToken(email, token);
 			model.addAttribute("token", token);
 			return "customer/reset_password_form";
 		} catch (Exception e) {
@@ -71,15 +76,17 @@ public class ForgetPasswordController {
 	@PostMapping("/reset_password")
 	public String resetPassword(HttpServletRequest request, Model model) {
 		String token = request.getParameter("token");
+		
+		String email = resetPasswordTokenService.getEmailFromToken(token);
 		String password = request.getParameter("password");
-
+		
 		try {
-			customerService.updatePassword(token, password);
+			
+			customerService.updatePassword(email, password);
 
 			model.addAttribute("pageTitle", "Reset Your Password");
 			model.addAttribute("title", "Reset Your Password");
 			model.addAttribute("message", "You have successfully changed your password.");
-
 		} catch (CustomerNotFoundException e) {
 			model.addAttribute("pageTitle", "Invalid Token");
 			model.addAttribute("message", e.getMessage());

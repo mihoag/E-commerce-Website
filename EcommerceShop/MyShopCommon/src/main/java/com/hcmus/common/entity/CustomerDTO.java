@@ -44,8 +44,6 @@ public class CustomerDTO {
 		this.unseenMessageCount = unseenMessageCount;
 	}
 
-
-
 	public void setId(Integer id) {
 		this.id = id;
 	}

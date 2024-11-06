@@ -145,8 +145,7 @@ public class CustomerService {
 		customerInForm.setCreatedTime(customerInDb.getCreatedTime());
 		customerInForm.setVerificationCode(customerInDb.getVerificationCode());
 		customerInForm.setAuthenticationType(customerInDb.getAuthenticationType());
-		customerInForm.setResetPasswordToken(customerInDb.getResetPasswordToken());
-
+		
 		customerRepo.save(customerInForm);
 	}
 
@@ -158,31 +157,19 @@ public class CustomerService {
 		}
 
 		String token = RandomString.make(30);
-		customer.setResetPasswordToken(token);
-		customerRepo.save(customer);
-
+		
 		return token;
 	}
 	
-	
 
-	public Customer getCustomerByToken(String token) throws CustomerNotFoundException {
-		Customer customer = customerRepo.findByResetPasswordToken(token);
-		if (customer == null) {
-			throw new CustomerNotFoundException("Customer not found with token " + token);
-		}
 
-		return customer;
-	}
-
-	public void updatePassword(String token, String newPassword) throws CustomerNotFoundException {
-		Customer customer = customerRepo.findByResetPasswordToken(token);
+	public void updatePassword(String email, String newPassword) throws CustomerNotFoundException {
+		Customer customer = customerRepo.findByEmail(email);
 		if (customer == null) {
 			throw new CustomerNotFoundException("No customer found: invalid token");
 		}
 
 		customer.setPassword(newPassword);
-		customer.setResetPasswordToken(null);
 		encodePassword(customer);
 
 		customerRepo.save(customer);

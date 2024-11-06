@@ -8,6 +8,7 @@ INDEX VERSION 1.134+F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\.metadata\.plug
 124714003.index
 1176197330.index
 1792039450.index
+3184170180.index
 1117829182.index
 288667357.index
 2235577527.index
@@ -38,6 +39,7 @@ INDEX VERSION 1.134+F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\.metadata\.plug
 557517048.index
 3514815602.index
 559534068.index
+1322608144.index
 2744949231.index
 1806268464.index
 1865797976.index
@@ -66,6 +68,7 @@ INDEX VERSION 1.134+F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\.metadata\.plug
 3683681044.index
 195522034.index
 756444211.index
+611235730.index
 2938981583.index
 1890123816.index
 396128197.index
@@ -73,6 +76,7 @@ INDEX VERSION 1.134+F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\.metadata\.plug
 1757879024.index
 1151740520.index
 3847005186.index
+3811672466.index
 2296665109.index
 3298094424.index
 761838256.index
@@ -103,6 +107,7 @@ INDEX VERSION 1.134+F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\.metadata\.plug
 1775769901.index
 3253995166.index
 1234036744.index
+170527014.index
 668646404.index
 3475707751.index
 2125061066.index
@@ -125,6 +130,7 @@ INDEX VERSION 1.134+F:\HK2_Nam3\JavaUdemyCourse\EcommerceWebsite\.metadata\.plug
 3192615242.index
 1370717000.index
 2320319267.index
+3392840479.index
 368625290.index
 1693868968.index
 2506232406.index
