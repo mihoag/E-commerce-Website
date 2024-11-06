@@ -7,11 +7,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "customers")
 public class Customer extends AbstractAddressWithCountry {
-	private static final long OTP_VALID_DURATION = 5 * 60 * 1000; // 5 minutes
 	@Column(nullable = false, unique = true, length = 45)
 	private String email;
 
@@ -33,6 +33,9 @@ public class Customer extends AbstractAddressWithCountry {
 	@Column(name = "reset_password_token", length = 30)
 	private String resetPasswordToken;
 
+	
+	private String imageUrl;
+	
 	public Customer() {
 	}
 
@@ -100,36 +103,19 @@ public class Customer extends AbstractAddressWithCountry {
 		return firstName + " " + lastName;
 	}
 
-	public String getOneTimePassword() {
-		return oneTimePassword;
+	public String getImageUrl() {
+		return imageUrl;
 	}
 
-	public void setOneTimePassword(String oneTimePassword) {
-		this.oneTimePassword = oneTimePassword;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
+	
+	@Transient
+	public String getAvatarPath() {
+		if (this.imageUrl == null)
+			return "/images/user.jpg";
 
-	public Date getOtpRequestedTime() {
-		return otpRequestedTime;
+		return Constant.S3_BASE_URI + "/customers/" + this.getImageUrl();
 	}
-
-	public void setOtpRequestedTime(Date otpRequestedTime) {
-		this.otpRequestedTime = otpRequestedTime;
-	}
-
-	public boolean isOTPRequired() {
-		if (this.getOneTimePassword() == null) {
-			return false;
-		}
-
-		long currentTimeInMillis = System.currentTimeMillis();
-		long otpRequestedTimeInMillis = this.otpRequestedTime.getTime();
-
-		if (otpRequestedTimeInMillis + OTP_VALID_DURATION < currentTimeInMillis) {
-			// OTP expires
-			return false;
-		}
-
-		return true;
-	}
-
 }

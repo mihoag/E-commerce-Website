@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hcmus.admin.AmazonS3Util;
 import com.hcmus.admin.user.UserService;
+import com.hcmus.admin.util.AmazonS3Util;
 import com.hcmus.common.entity.User;
 import com.hcmus.common.exception.UserNotFoundException;
 

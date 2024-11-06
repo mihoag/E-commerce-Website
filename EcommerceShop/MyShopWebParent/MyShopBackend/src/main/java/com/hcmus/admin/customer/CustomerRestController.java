@@ -35,7 +35,7 @@ public class CustomerRestController {
 		List<CustomerDTO> dtos = new ArrayList<>();
 		for(Customer customer : customers)
 		{
-			dtos.add(new CustomerDTO(customer.getId(),customer.getFirstName(), customer.getLastName()));
+			dtos.add(new CustomerDTO(customer.getId(),customer.getFirstName(), customer.getLastName(), customer.getAvatarPath()));
 		}
 		return dtos;
 	}

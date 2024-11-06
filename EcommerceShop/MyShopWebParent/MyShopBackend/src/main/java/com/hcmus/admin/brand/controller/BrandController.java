@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.hcmus.admin.AmazonS3Util;
 import com.hcmus.admin.brand.BrandService;
 import com.hcmus.admin.brand.export.BrandExcelExporter;
 import com.hcmus.admin.category.CategoryService;
+import com.hcmus.admin.util.AmazonS3Util;
 import com.hcmus.admin.util.FileUploadUtil;
 import com.hcmus.common.entity.Brand;
 import com.hcmus.common.entity.Category;

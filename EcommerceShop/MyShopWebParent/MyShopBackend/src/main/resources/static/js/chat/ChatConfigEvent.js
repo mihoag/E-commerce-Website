@@ -7,6 +7,7 @@ var textVal = document.getElementById("textVal")
 let socket;
 var idCus;
 var customerName;
+var imageUrl;
 
 document.addEventListener('DOMContentLoaded', function() {
 	fetchGetDataCustomer('');
@@ -65,7 +66,7 @@ function addMessageToArea(data) {
 	li.classList.add('d-flex', 'justify-content-b', 'mb-4');
 
 	let htmlText = `<li class="d-flex justify-content-between mb-4">
-            <img src="https://openvldoostende.be/wp-content/uploads/2023/01/abstract-user-icon-1.jpg" alt="avatar"
+            <img src=${imageUrl} alt="avatar"
               class="rounded-circle d-flex align-self-start me-3 shadow-1-strong" width="60">
             <div class="card  w-100">
               <div class="card-header d-flex justify-content-between p-3">
@@ -182,10 +183,10 @@ function renderListCustomer(data) {
 	data.forEach(user => {
 		listHTML += `
                 <li class="p-2 border-bottom">
-                    <a pid = ${user.id} pName = ${user.first_name + ' ' + user.last_name} onclick="handleClickCustomer(this)" class="d-flex justify-content-between">
+                    <a pid = ${user.id} pimage = ${user.image_url}  pName = ${user.first_name + ' ' + user.last_name} onclick="handleClickCustomer(this)" class="d-flex justify-content-between">
                         <div class="d-flex flex-row">
-                            <img src="https://openvldoostende.be/wp-content/uploads/2023/01/abstract-user-icon-1.jpg" alt="avatar"
-                                class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
+                            <img src=${user.image_url} alt="avatar"
+                                class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50" height="50">
                             <div class="pt-1">
                                 <p class="fw-bold mb-0">${user.first_name} ${user.last_name}</p>
                             </div>
@@ -200,6 +201,7 @@ function renderListCustomer(data) {
 }
 function handleClickCustomer(anchor) {
 	idCus = anchor.getAttribute('pid');
+	imageUrl = anchor.getAttribute('pimage');
 	customerName = anchor.getAttribute('pName');
 	showInputChat();
 	fetchMessage(idCus);
@@ -220,8 +222,8 @@ function renderMessage(data) {
 	data.forEach(mess => {
 		if (mess.role_chat == 'CUSTOMER') {
 			htmlText += `<li class="d-flex justify-content-between mb-4">
-            <img src="https://openvldoostende.be/wp-content/uploads/2023/01/abstract-user-icon-1.jpg" alt="avatar"
-              class="rounded-circle d-flex align-self-start me-3 shadow-1-strong" width="60">
+            <img src="${imageUrl}" alt="avatar"
+              class="rounded-circle d-flex align-self-start me-3 shadow-1-strong" width="50" height="50">
             <div class="card  w-100">
               <div class="card-header d-flex justify-content-between p-3">
                 <p class="fw-bold mb-0">${mess.customerName}</p>
@@ -249,7 +251,7 @@ function renderMessage(data) {
               </div>
             </div>
             <img src="https://openvldoostende.be/wp-content/uploads/2023/01/abstract-user-icon-1.jpg" alt="avatar"
-              class="rounded-circle d-flex align-self-start ms-3 shadow-1-strong" width="60">
+              class="rounded-circle d-flex align-self-start ms-3 shadow-1-strong"  width="50" height="50">
           </li>
 		 `
 		};

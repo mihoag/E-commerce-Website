@@ -4,8 +4,9 @@
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="idCus"/>
+		<item key="selection" value="otp"/>
 		<list key="findhistory">
+			<item value="otp"/>
 			<item value="socket"/>
 			<item value="idCus"/>
 			<item value="socke"/>
@@ -13,7 +14,6 @@
 			<item value="send"/>
 			<item value="click"/>
 			<item value="onError"/>
-			<item value="get"/>
 		</list>
 		<list key="replacehistory">
 		</list>

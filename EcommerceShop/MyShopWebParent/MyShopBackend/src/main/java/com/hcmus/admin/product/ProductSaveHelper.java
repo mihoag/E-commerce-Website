@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.hcmus.admin.AmazonS3Util;
+import com.hcmus.admin.util.AmazonS3Util;
 import com.hcmus.admin.util.FileUploadUtil;
 import com.hcmus.common.entity.product.Product;
 import com.hcmus.common.entity.product.ProductImage;

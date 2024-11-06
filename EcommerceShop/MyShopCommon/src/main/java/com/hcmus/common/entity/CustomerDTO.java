@@ -5,22 +5,29 @@ public class CustomerDTO {
 	private Integer id;
 	private String firstName;
 	private String lastName;
+	private String imageUrl;
 
 	public CustomerDTO() {
 		super();
 	}
 
+	
+
 	/**
 	 * @param id
 	 * @param firstName
 	 * @param lastName
+	 * @param imageUrl
 	 */
-	public CustomerDTO(Integer id, String firstName, String lastName) {
+	public CustomerDTO(Integer id, String firstName, String lastName, String imageUrl) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.imageUrl = imageUrl;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -45,5 +52,14 @@ public class CustomerDTO {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+	
 
 }

@@ -79,7 +79,7 @@ public class CustomerService {
 		customerRepo.save(customer);
 	}
 
-	public void addNewCustomerUponOAuthLogin(String name, String email, String countryCode,
+	public void addNewCustomerUponOAuthLogin(String name, String email, String countryCode, String imageUrl,
 			AuthenticationType authenticationType) {
 		Customer customer = new Customer();
 		customer.setEmail(email);
@@ -95,7 +95,8 @@ public class CustomerService {
 		customer.setPhoneNumber("");
 		customer.setPostalCode("");
 		customer.setCountry(countryRepo.findByCode(countryCode));
-
+		customer.setImageUrl(imageUrl);
+		
 		customerRepo.save(customer);
 	}
 
@@ -190,10 +191,6 @@ public class CustomerService {
 		String OTP = RandomString.make(8);
 		String encodedOTP = passwordEncoder.encode(OTP);
 
-		customer.setOneTimePassword(encodedOTP);
-
-		customer.setOtpRequestedTime(new Date());
-
 		customerRepo.save(customer);
 
 		sendOTPEmail(customer, OTP);
@@ -224,11 +221,5 @@ public class CustomerService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	public void clearOTP(Customer customer) {
-		customer.setOneTimePassword(null);
-		customer.setOtpRequestedTime(null);
-		customerRepo.save(customer);
 	}
 }

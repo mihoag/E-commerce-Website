@@ -29,6 +29,7 @@ public class MessageController {
 		model.addAttribute("sideBarFieldName", "chat");
 		model.addAttribute("customerId", customer.getId());
 		model.addAttribute("customerName", customer.getFullName());
+		model.addAttribute("avatar", customer.getAvatarPath());
 		model.addAttribute("CLIENT_SOCKET_CONNECTION_URI", Constant.CLIENT_SOCKET_CONNECTION_URI);
 		return "chat/chat";
 	}
@@ -37,7 +38,7 @@ public class MessageController {
 		String email = Utility.getEmailOfAuthenticatedCustomer(request);
 		Customer customer = customerService.getCustomerByEmail(email);
 		if (customer == null) {
-			throw new CustomerNotFoundException("You must login to add this product to cart.");
+			throw new CustomerNotFoundException("Customer not found");
 		}
 		return customer;
 	}

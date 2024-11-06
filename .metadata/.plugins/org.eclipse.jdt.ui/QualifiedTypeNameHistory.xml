@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.hcmus.common.entity.CustomerDTO"/>
-    <fullyQualifiedTypeName name="com.hcmus.site.customer.CustomerRepository"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestController"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
@@ -24,7 +22,6 @@
     <fullyQualifiedTypeName name="java.text.ParseException"/>
     <fullyQualifiedTypeName name="com.hcmus.site.customer.CustomerService"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
-    <fullyQualifiedTypeName name="com.hcmus.common.entity.Customer"/>
     <fullyQualifiedTypeName name="com.hcmus.site.chat.MessageService"/>
     <fullyQualifiedTypeName name="com.hcmus.site.socket.serverClient"/>
     <fullyQualifiedTypeName name="org.java_websocket.client.WebSocketClient"/>
@@ -60,4 +57,7 @@
     <fullyQualifiedTypeName name="java.lang.Double"/>
     <fullyQualifiedTypeName name="com.hcmus.common.entity.Constant"/>
     <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="com.hcmus.admin.AbstractExporter"/>
+    <fullyQualifiedTypeName name="com.hcmus.common.entity.Customer"/>
+    <fullyQualifiedTypeName name="com.hcmus.admin.customer.export.CustomerExcelExporter"/>
 </qualifiedTypeNameHistroy>

@@ -46,4 +46,17 @@ public class CustomerOAuth2User implements OAuth2User {
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
+
+	public String getImageUrl() {
+		// Common keys for profile pictures from various providers
+		String[] possibleKeys = { "picture", "avatar_url", "profile_picture", "image" };
+
+		for (String key : possibleKeys) {
+			String imageUrl = oauth2User.getAttribute(key);
+			if (imageUrl != null) {
+				return imageUrl;
+			}
+		}
+		return null; // Return null if no image attribute is found
+	}
 }

@@ -23,10 +23,6 @@ public class CustomerUserDetails implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		if (customer.isOTPRequired()) {
-			return customer.getOneTimePassword();
-		}
-
 		return customer.getPassword();
 	}
 
