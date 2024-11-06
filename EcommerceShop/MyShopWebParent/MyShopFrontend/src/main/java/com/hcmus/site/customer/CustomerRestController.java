@@ -16,4 +16,5 @@ public class CustomerRestController {
 	public String checkByEmail(String email) {
 		return cusService.checkEmail(email);
 	}
+
 }

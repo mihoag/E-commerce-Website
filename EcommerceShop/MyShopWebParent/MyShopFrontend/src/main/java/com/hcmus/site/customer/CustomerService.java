@@ -16,6 +16,7 @@ import com.hcmus.common.entity.Country;
 import com.hcmus.common.entity.Customer;
 import com.hcmus.common.exception.CustomerNotFoundException;
 import com.hcmus.site.Utility;
+import com.hcmus.site.security.oauth.CustomerOAuth2User;
 import com.hcmus.site.setting.CountryRepository;
 import com.hcmus.site.setting.MailSettingBag;
 import com.hcmus.site.setting.SettingService;
@@ -162,6 +163,8 @@ public class CustomerService {
 
 		return token;
 	}
+	
+	
 
 	public Customer getCustomerByToken(String token) throws CustomerNotFoundException {
 		Customer customer = customerRepo.findByResetPasswordToken(token);
@@ -195,6 +198,8 @@ public class CustomerService {
 
 		sendOTPEmail(customer, OTP);
 	}
+	
+	
 
 	public void sendOTPEmail(Customer customer, String OTP) {
 		MailSettingBag emailSettings = settingService.getMailSettings();

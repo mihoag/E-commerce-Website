@@ -33,6 +33,8 @@ public class Customer extends AbstractAddressWithCountry {
 	@Column(name = "reset_password_token", length = 30)
 	private String resetPasswordToken;
 
+	@Column
+	private int unseenMessageCount;
 	
 	private String imageUrl;
 	
@@ -111,6 +113,14 @@ public class Customer extends AbstractAddressWithCountry {
 		this.imageUrl = imageUrl;
 	}
 	
+	public int getUnseenMessageCount() {
+		return unseenMessageCount;
+	}
+
+	public void setUnseenMessageCount(int unseenMessageCount) {
+		this.unseenMessageCount = unseenMessageCount;
+	}
+
 	@Transient
 	public String getAvatarPath() {
 		if (this.imageUrl == null)

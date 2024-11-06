@@ -84,4 +84,28 @@ public class CustomerService {
    {
 	   return repo.findByKeyword(keyword);
    }
+   
+   public int updateMessageCount(int id) throws CustomerNotFoundException
+	{
+		Customer customer = repo.findById(id).get();
+		if(customer == null)
+		{
+			throw new CustomerNotFoundException("Customer not found");
+		}
+		customer.setUnseenMessageCount(customer.getUnseenMessageCount()+1);
+		Customer savedCustomer =  repo.save(customer); 
+		return savedCustomer.getUnseenMessageCount();
+	}
+	
+	public int resetMessageCount(int id) throws CustomerNotFoundException
+	{
+		Customer customer = repo.findById(id).get();
+		if(customer == null)
+		{
+			throw new CustomerNotFoundException("Customer not found");
+		}
+		customer.setUnseenMessageCount(0);
+		Customer savedCustomer =  repo.save(customer); 
+		return savedCustomer.getUnseenMessageCount();
+	}
 }

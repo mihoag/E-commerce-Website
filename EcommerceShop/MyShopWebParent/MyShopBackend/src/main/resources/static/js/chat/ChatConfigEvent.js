@@ -1,7 +1,7 @@
 listChat = document.getElementById("listChat");
 nameInput = document.getElementById("nameInput");
 listMess = document.getElementById("listMess");
-inputChat = document.getElementById("inputChat");
+var inputChat = document.getElementById("inputChat");
 var btnSend = document.getElementById("btnSend")
 var textVal = document.getElementById("textVal")
 let socket;
@@ -123,10 +123,13 @@ function connectSocket() {
 	socket.onopen = function() {
 		console.log("Connected to Server WebSocket");
 	};
+	
 
 	socket.onmessage = function(event) {
 		data = JSON.parse(event.data);
-		console.log(data.customerId === idCus);
+		
+		updateUnseenMessageCount(data.customerId);
+		
 		if (data.customerId == idCus) {
 			addMessageToArea(data);
 		}
@@ -173,10 +176,37 @@ function fetchGetDataCustomer(keyword) {
 		.then(response =>
 			response.json())
 		.then(data => {
+			console.log(data)
+			data.sort((b, a) => a.unseen_message_count - b.unseen_message_count);
 			renderListCustomer(data)
 		})
 		.catch(error => console.log('Error:', error));
 }
+
+function updateUnseenMessageCount(idCustomer) {
+	url = "/MyshopAdmin/api/customer/update-message-count/" + idCustomer;
+	fetch(url)
+		.then(response =>
+			response.json()
+		)
+		.then(data => {
+			document.getElementById("count" + idCustomer).innerText = data;
+		})
+		.catch(error => console.log('Error:', error));
+}
+
+function resetUnseenMessageCount(idCustomer) {
+	url = "/MyshopAdmin/api/customer/reset-message-count/" + idCustomer;
+	fetch(url)
+		.then(response =>
+			response.json()
+		)
+		.then(data => {
+			document.getElementById("count" + idCustomer).innerText = '';
+		})
+		.catch(error => console.log('Error:', error));
+}
+
 function renderListCustomer(data) {
 	let listHTML = '';
 
@@ -191,6 +221,9 @@ function renderListCustomer(data) {
                                 <p class="fw-bold mb-0">${user.first_name} ${user.last_name}</p>
                             </div>
                         </div>
+                        <div class="pt-1">
+                           <span id = "count${user.id}"  class="badge bg-danger float-end">${user.unseen_message_count == 0 ? '' : user.unseen_message_count}</span>
+                        </div>
                     </a>
                 </li>
             `;
@@ -201,6 +234,7 @@ function renderListCustomer(data) {
 }
 function handleClickCustomer(anchor) {
 	idCus = anchor.getAttribute('pid');
+	resetUnseenMessageCount(idCus);
 	imageUrl = anchor.getAttribute('pimage');
 	customerName = anchor.getAttribute('pName');
 	showInputChat();
@@ -261,3 +295,13 @@ function renderMessage(data) {
 function scrollListMessageToBottom() {
 	listMess.scrollTop = listMess.scrollHeight;
 }
+
+inputChat.addEventListener('click', function()
+{
+	resetUnseenMessageCount(idCus);
+})
+
+inputChat.addEventListener('input', function()
+{
+	resetUnseenMessageCount(idCus);
+})

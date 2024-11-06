@@ -6,7 +6,8 @@ public class CustomerDTO {
 	private String firstName;
 	private String lastName;
 	private String imageUrl;
-
+	private int unseenMessageCount;
+	
 	public CustomerDTO() {
 		super();
 	}
@@ -19,19 +20,31 @@ public class CustomerDTO {
 	 * @param lastName
 	 * @param imageUrl
 	 */
-	public CustomerDTO(Integer id, String firstName, String lastName, String imageUrl) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.imageUrl = imageUrl;
-	}
+	
 
 
 
 	public Integer getId() {
 		return id;
 	}
+
+	/**
+	 * @param id
+	 * @param firstName
+	 * @param lastName
+	 * @param imageUrl
+	 * @param unseenMessageCount
+	 */
+	public CustomerDTO(Integer id, String firstName, String lastName, String imageUrl, int unseenMessageCount) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.imageUrl = imageUrl;
+		this.unseenMessageCount = unseenMessageCount;
+	}
+
+
 
 	public void setId(Integer id) {
 		this.id = id;
@@ -60,6 +73,15 @@ public class CustomerDTO {
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
-	
 
+
+
+	public int getUnseenMessageCount() {
+		return unseenMessageCount;
+	}
+
+	public void setUnseenMessageCount(int unseenMessageCount) {
+		this.unseenMessageCount = unseenMessageCount;
+	}
+	
 }
