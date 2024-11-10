@@ -24,7 +24,7 @@ function connectWebSocket() {
 	socket.onmessage = function(event) {
 		//console.log("Message received: " + event.data);
 		message = JSON.parse(event.data)
-		if (customerId == message.customerId) {
+		if (customerId == message.customer_id) {
 			renderSendedMessage(message.content);
 		}
 	};
@@ -52,6 +52,7 @@ function fetchMessage() {
 		.then(response =>
 			response.json())
 		.then(data => {
+			console.log(data)
 			renderMessage(data)
 		})
 		.catch(error => console.log('Error:', error));
@@ -139,14 +140,12 @@ function convertDateNowToString() {
 function addMessage(messageContent) {
 	var chatMessage = {
 		content: messageContent,
-		role_chat: 'CUSTOMER',
 		customerId: customerId,
 		customerName: customerName,
 		userId: null,
+		role_chat : 'CUSTOMER',
 		time: convertDateNowToString()
 	};
-
-	console.log(chatMessage);
 
 	$.ajax({
 		url: "api/chat",

@@ -1,6 +1,7 @@
 listChat = document.getElementById("listChat");
 nameInput = document.getElementById("nameInput");
 listMess = document.getElementById("listMess");
+messageList = document.getElementById("messageList");
 var inputChat = document.getElementById("inputChat");
 var btnSend = document.getElementById("btnSend")
 var textVal = document.getElementById("textVal")
@@ -29,9 +30,9 @@ function addMessage(messageContent) {
 	var chatMessage = {
 		content: messageContent,
 		role_chat: 'ADMIN',
-		customerId: parseInt(idCus),
-		customerName: customerName,
-		userId: null,
+		customer_id: parseInt(idCus),
+		customer_name: customerName,
+		user_id: null,
 		time: convertDateNowToString()
 	};
 
@@ -127,7 +128,7 @@ function connectSocket() {
 
 	socket.onmessage = function(event) {
 		data = JSON.parse(event.data);
-		
+		console.log(data);
 		updateUnseenMessageCount(data.customerId);
 		
 		if (data.customerId == idCus) {
@@ -176,7 +177,6 @@ function fetchGetDataCustomer(keyword) {
 		.then(response =>
 			response.json())
 		.then(data => {
-			console.log(data)
 			data.sort((b, a) => a.unseen_message_count - b.unseen_message_count);
 			renderListCustomer(data)
 		})
@@ -260,7 +260,7 @@ function renderMessage(data) {
               class="rounded-circle d-flex align-self-start me-3 shadow-1-strong" width="50" height="50">
             <div class="card  w-100">
               <div class="card-header d-flex justify-content-between p-3">
-                <p class="fw-bold mb-0">${mess.customerName}</p>
+                <p class="fw-bold mb-0">${mess.customer_name}</p>
                 <p class="text-muted small mb-0"><i class="far fa-clock"></i> ${mess.time}</p>
               </div>
               <div class="card-body">
@@ -291,9 +291,10 @@ function renderMessage(data) {
 		};
 	});
 	listMess.innerHTML = htmlText;
+	scrollListMessageToBottom();
 }
 function scrollListMessageToBottom() {
-	listMess.scrollTop = listMess.scrollHeight;
+	messageList.scrollTop = listMess.scrollHeight;
 }
 
 inputChat.addEventListener('click', function()

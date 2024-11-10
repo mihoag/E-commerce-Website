@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hcmus.admin.customer.CustomerService;
-import com.hcmus.common.entity.chat.MessageDTO;
-import com.hcmus.common.entity.chat.message;
+import com.hcmus.chat.model.RoleChat;
+import com.hcmus.chat.model.message;
+import com.hcmus.chat.service.MessageService;
 import com.hcmus.common.exception.CustomerNotFoundException;
 
 @RestController
@@ -24,39 +25,23 @@ public class MessageRestApi {
      
 	@Autowired
 	private MessageService service;
-	
-	@Autowired
-	private CustomerService cusService;
+
 	
 	@GetMapping("/{id}")
-	public List<MessageDTO> getByCustomerId(@PathVariable("id") Integer id)
+	public List<message> getByCustomerId(@PathVariable("id") Integer id)
 	{
-		List<message> listMessage = service.getMessageByIdUser(id);
-		return convertToDTO(listMessage);
+		List<message> listMessage = service.findByCustomerId(id);
+		return listMessage;
 	}
 	
-	public List<MessageDTO> convertToDTO(List<message> listMess)
-	{
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		List<MessageDTO> dtos = new ArrayList<>();
-		for(message mess : listMess)
-		{
-			dtos.add(new MessageDTO(mess.getId(), mess.getContent(), mess.getCustomer().getId(), mess.getCustomer().getFullName(),  null, formatter.format(mess.getTime()), mess.getRole_chat()));
-		}
-		System.out.println(dtos);
-		return dtos;
-	}
-	
+
 	@PostMapping
-	public String addMessage(@RequestBody MessageDTO dto) throws ParseException, CustomerNotFoundException
+	public String addMessage(@RequestBody message message) throws ParseException, CustomerNotFoundException
 	{
-		message mess = service.save(dtoToEntity(dto));
+		message.setRole_chat(RoleChat.ADMIN);
+		System.out.println(message);
+		message mess = service.save(message);
 		return mess == null ? "fail" : "ok";
 	}
-	
-	public message dtoToEntity(MessageDTO dto) throws ParseException, CustomerNotFoundException
-	{
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		return new message(dto.getContent(), dto.getRole_chat(), cusService.getCustomerById(dto.getCustomerId()), null, formatter.parse(dto.getTime()));
-	}
+
 }

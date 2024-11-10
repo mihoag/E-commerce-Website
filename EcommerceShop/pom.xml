@@ -9,5 +9,6 @@
   <modules>
 	<module>MyShopCommon</module>
 	<module>MyShopWebParent</module>
+	<module>MyShopChat</module>
   </modules>
 </project>

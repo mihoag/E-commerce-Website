@@ -4,16 +4,16 @@
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="otp"/>
+		<item key="selection" value="avatar"/>
 		<list key="findhistory">
+			<item value="avatar"/>
+			<item value="listCus"/>
+			<item value="handleClickCustomer"/>
+			<item value="onMess"/>
+			<item value="logoPath"/>
 			<item value="otp"/>
 			<item value="socket"/>
 			<item value="idCus"/>
-			<item value="socke"/>
-			<item value="handlehandleClickClick"/>
-			<item value="send"/>
-			<item value="click"/>
-			<item value="onError"/>
 		</list>
 		<list key="replacehistory">
 		</list>

@@ -13,9 +13,9 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.google.gson.Gson;
+import com.hcmus.chat.model.RoleChat;
+import com.hcmus.chat.model.message;
 import com.hcmus.common.entity.Constant;
-import com.hcmus.common.entity.chat.MessageDTO;
-import com.hcmus.common.entity.chat.RoleChat;
 
 public class ServerHandler extends TextWebSocketHandler {
 	private static Set<WebSocketSession> sessions = Collections.newSetFromMap(new ConcurrentHashMap<>());
@@ -43,14 +43,15 @@ public class ServerHandler extends TextWebSocketHandler {
 
 	@Override
 	public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		MessageDTO dto = gson.fromJson(message.getPayload(), MessageDTO.class);
+		message mess = gson.fromJson(message.getPayload(), message.class);
+		
 		// Forward the message to Server Client's side
 		// receive from HTML client
-		if (dto.getRole_chat() == RoleChat.CUSTOMER) {
+		if (mess.getRole_chat() == RoleChat.CUSTOMER) {
 			serverClient.sendMessageToServer2(message.getPayload());
 		}
 		// receive from Server ADMIN's side
-		else if (dto.getRole_chat() == RoleChat.ADMIN) {
+		else if (mess.getRole_chat() == RoleChat.ADMIN) {
 			// Broadcast the message to all connected HTML clients
 			broadcastToClients(message.getPayload());
 		}
