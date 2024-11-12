@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.hcmus.site.socket.ServerClient"/>
-    <fullyQualifiedTypeName name="com.hcmus.admin.customer.CustomerService"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
     <fullyQualifiedTypeName name="com.hcmus.admin.socket.ServerClient"/>
     <fullyQualifiedTypeName name="com.hcmus.admin.socket.ServerHandler"/>
@@ -9,7 +7,6 @@
     <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonProperty"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="java.lang.Double"/>
-    <fullyQualifiedTypeName name="com.hcmus.common.entity.Constant"/>
     <fullyQualifiedTypeName name="com.hcmus.admin.AbstractExporter"/>
     <fullyQualifiedTypeName name="com.hcmus.admin.customer.export.CustomerExcelExporter"/>
     <fullyQualifiedTypeName name="java.net.URL"/>
@@ -59,5 +56,8 @@
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="com.hcmus.chat.service.MessageService"/>
     <fullyQualifiedTypeName name="com.hcmus.chat.model.message"/>
+    <fullyQualifiedTypeName name="org.bson.types.ObjectId"/>
     <fullyQualifiedTypeName name="com.hcmus.chat.model.RoleChat"/>
+    <fullyQualifiedTypeName name="org.springframework.ui.Model"/>
+    <fullyQualifiedTypeName name="com.hcmus.common.entity.Constant"/>
 </qualifiedTypeNameHistroy>

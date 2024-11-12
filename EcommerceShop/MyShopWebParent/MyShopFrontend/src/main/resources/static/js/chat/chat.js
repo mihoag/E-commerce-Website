@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
 })
 
 function connectWebSocket() {
-	socket = new WebSocket("ws://localhost:8081/Myshop/websocket"); // Change to your Server 1 URL
+	socket = new WebSocket(CLIENT_SOCKET_CONNECTION_URI); // Change to your Server 1 URL
 
 	socket.onopen = function() {
 		console.log("Connected to Server WebSocket");
@@ -106,6 +106,7 @@ function renderMessage(data) {
 		};
 	});
 	messageArea.innerHTML = htmlText;
+	messageArea.scrollTop = messageArea.scrollHeight;
 }
 
 function sendMessage(event) {

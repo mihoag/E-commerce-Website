@@ -3,6 +3,7 @@ package com.hcmus.chat;
 import java.util.Date;
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class MessageRepositoryTests {
 	@Test
 	public void testAddMessage()
 	{
-		message mess = new message("Hello", 1, "Hoang", "", 2, "", new Date().toString(), RoleChat.CUSTOMER);
+		message mess = new message("Hi", 1, "Hoang", "", 2, "", new Date().toString(), RoleChat.CUSTOMER);
 		message savedMess = messageRepo.save(mess);
 		System.out.println(savedMess);
 	}
@@ -35,7 +36,7 @@ public class MessageRepositoryTests {
 	
 	@Test
 	public void testFindByCustomerId() {
-		List<message> mess = messageRepo.findByCustomerId(1);
+		message mess = messageRepo.findById(new ObjectId("6732e4a40880073c145bf7fd")).get();
 		System.out.println(mess);
 	}
 }

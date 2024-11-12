@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ResetPasswordTokenService {
 	private final StringRedisTemplate redisTemplate;
-	private static final long OTP_EXPIRATION_MINUTES = 5;
+	private static final long OTP_EXPIRATION_MINUTES = 1;
 
 	public ResetPasswordTokenService(StringRedisTemplate redisTemplate) {
 		this.redisTemplate = redisTemplate;

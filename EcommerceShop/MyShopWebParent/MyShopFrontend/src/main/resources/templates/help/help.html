@@ -30,6 +30,14 @@
 							class="card-header d-flex justify-content-between align-items-center p-3"
 							style="border-top: 1px solid">
 							<h5 class="mb-0">Chat with AI - Products Recommendation</h5>
+							<div 
+								class="d-flex justify-content-center align-items-center">
+								<div id="loadingIndicator" class="hidden">
+									<div class="typing-indicator"></div>
+									<div class="typing-indicator"></div>
+									<div class="typing-indicator"></div>
+								</div>
+							</div>
 						</div>
 						<div class="card-body" id="messageArea"
 							data-mdb-perfect-scrollbar="true"
@@ -38,7 +46,9 @@
 							<div class="d-flex justify-content-between">
 								<p class="small mb-1 text-muted"></p>
 							</div>
+							
 						</div>
+						
 					</div>
 					<div
 						class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
@@ -62,5 +72,8 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 	crossorigin="anonymous"></script>
+<script type="text/javascript">
+AI_SERVER_URI = "[[${AI_SERVER_URI}]]";
+</script>
 <script type="text/javascript" th:src="@{/js/help/help.js}"></script>
 </html>

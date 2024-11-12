@@ -15,6 +15,10 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
+-- Dumping database structure for myshopdb
+CREATE DATABASE IF NOT EXISTS `myshopdb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `myshopdb`;
+
 -- Dumping structure for table myshopdb.addresses
 CREATE TABLE IF NOT EXISTS `addresses` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -57,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `brands` (
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_oce3937d2f4mpfqrycbr0l93m` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table myshopdb.brands: ~55 rows (approximately)
 INSERT INTO `brands` (`id`, `logo`, `name`) VALUES
@@ -127,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `brands_categories` (
   CONSTRAINT `FK6x68tjj3eay19skqlhn7ls6ai` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table myshopdb.brands_categories: ~103 rows (approximately)
+-- Dumping data for table myshopdb.brands_categories: ~105 rows (approximately)
 INSERT INTO `brands_categories` (`brand_id`, `category_id`) VALUES
 	(6, 1),
 	(58, 1),
@@ -246,9 +250,12 @@ CREATE TABLE IF NOT EXISTS `cart_items` (
   KEY `FK1re40cjegsfvw58xrkdp6bac6` (`product_id`),
   CONSTRAINT `FK1re40cjegsfvw58xrkdp6bac6` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
   CONSTRAINT `FKdagcsk6v6x4n1kxw3rkp57921` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table myshopdb.cart_items: ~0 rows (approximately)
+-- Dumping data for table myshopdb.cart_items: ~2 rows (approximately)
+INSERT INTO `cart_items` (`id`, `quantity`, `customer_id`, `product_id`) VALUES
+	(74, 4, 38, 39),
+	(75, 5, 38, 40);
 
 -- Dumping structure for table myshopdb.categories
 CREATE TABLE IF NOT EXISTS `categories` (
@@ -264,7 +271,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   UNIQUE KEY `UK_t8o6pivur7nn124jehx7cygw5` (`name`),
   KEY `FK_categories_categories` (`parent_id`),
   CONSTRAINT `FK_categories_categories` FOREIGN KEY (`parent_id`) REFERENCES `categories` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table myshopdb.categories: ~32 rows (approximately)
 INSERT INTO `categories` (`id`, `alias`, `enabled`, `image`, `name`, `parent_id`, `all_parent_ids`) VALUES
@@ -614,56 +621,113 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `email` varchar(45) NOT NULL,
   `enabled` bit(1) NOT NULL,
   `password` varchar(64) NOT NULL,
-  `reset_password_token` varchar(30) DEFAULT NULL,
   `verification_code` varchar(64) DEFAULT NULL,
   `country_id` int DEFAULT NULL,
+  `image_url` varchar(255) DEFAULT NULL,
+  `unseen_message_count` int DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_rfbvkrffamfql7cjmen8v976v` (`email`),
   KEY `FK7b7p2myt0y31l4nyj1p7sk0b1` (`country_id`),
   CONSTRAINT `FK7b7p2myt0y31l4nyj1p7sk0b1` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table myshopdb.customers: ~38 rows (approximately)
-INSERT INTO `customers` (`id`, `address_line_1`, `address_line_2`, `city`, `first_name`, `last_name`, `phone_number`, `postal_code`, `state`, `authentication_type`, `created_time`, `email`, `enabled`, `password`, `reset_password_token`, `verification_code`, `country_id`) VALUES
-	(1, '34 Tu Van, Dien Khanh, Khanh Hoa', NULL, 'Nha Trang', 'Le', 'Hoang', '0987654321', '37000', 'Khanh Hoa', NULL, NULL, 'le@gmai.com', b'1', '21adasdsad', NULL, NULL, 2),
-	(2, '2320  Romano Street', '', 'Cambridge', 'Lorraine', 'Allbright', '0987654321', '2142', 'Massachusetts', NULL, NULL, 'lorraine.allbright@outlook.com', b'1', '$2a$10$II70xzaNTXp8WjJgGBq5k.xiDd8qiTp1yGPaCULGVeHtej/Hieb4O', NULL, NULL, 232),
-	(3, '4703  Goyeau Ave', '', 'Windsor', 'Nancy', 'C Bass', '519-791-4692', 'N9A 1H9', 'Ontario', NULL, '2020-10-09 03:24:42.000000', 'nancy.bass2001@yahoo.com', b'1', '$2a$10$iCc2M47GrRfzWV7/nrdZpuzkjLSxH5VEs1t02E55428eToiFo8pT6', NULL, NULL, 39),
-	(4, '4103  Tolmie St', '', 'Vancouver', 'Brian', 'Purcell', '604-269-1384', 'V6M 1Y8', 'British Columbia', NULL, '2020-06-09 03:27:48.000000', 'brian.purcell3@gmail.com', b'1', '$2a$10$mHz6KD.k5OTuTw9JWsa8OOZiF8gWxFRw6tjzIMxrx6GuaF2d.bvxG', NULL, NULL, 39),
-	(5, '934A  Small Street', 'Amish Country Byway', 'Berlin', 'Tina', 'D Jamerson', '5139670375', '44610', 'Ohio', NULL, '2020-10-09 03:29:39.000000', 'tina.jamerson@gmail.com', b'1', '$2a$10$zS.WEDVdrfraeTYXkh6kru0YT4dg14daWwxrPZKwImwt1S8I8Cbaa', NULL, NULL, 234),
-	(6, '3087 Marietta Street', '', 'Vallejo', 'Christopher ', 'Seldon', '214-407-6337', '94590', 'California', NULL, '2020-10-10 11:11:19.000000', 'christopherseldonusa@gmail.com', b'1', '$2a$10$kBu.WfmGeYpcp.gNCVosx.2PY6dhUahdjPolgSOvYjY4DcUWRtnUm', NULL, NULL, 234),
-	(7, '56  Berkeley Rd', '', 'Stretton-on-Dunsmore', 'Alex', 'Stevenson', '078 7586 952', 'CV23 3XN', '', NULL, '2020-10-11 03:36:04.000000', 'alex.stevenson@outlook.com', b'1', '$2a$10$og9uLgfaPjMbN0UQFPXQeeVhgfuArv3QQXLhM7ZfS4M.9j4Yp/Ksi', NULL, NULL, 78),
-	(8, '101  Gordon Terrace', '', 'Barton', 'Ethan', 'Jones', '070 2534 460', 'SY14 4FH', '', NULL, '2020-10-11 03:38:09.000000', 'ethan.k.john@gmail.com', b'1', '$2a$10$8Zc6kveZk1FR0HzVUQK/DuSQWFf2oGujkmDreapVXW0BtfDchP0yG', NULL, NULL, 78),
-	(9, 'B 3/12, Part 1', '', 'Delhi', 'Pandu', 'Shan', '042375292', '110009', 'Delhi', NULL, '2020-10-11 03:40:04.000000', 'pandu.shan03@gmail.com', b'1', '$2a$10$Iybz9lJhA6FoeO7tviEWIuLaO4fC9lwjiiHwKCD0B5q4DLJ066mVW', NULL, NULL, 106),
-	(10, 'Shop No 6, Gk Nagar No 3', 'Mahavir Darshan, Shankar Lane, Kandivali (west)', 'Mumbai', 'Ahjaja', 'Thaker', '02228611610', '400067', 'Maharashtra', NULL, '2020-10-11 03:43:12.000000', 'ahjj.thaker2000@gmail.com', b'1', '$2a$10$QKr/DFMbrX9ItxJCcTd.RuiD.H8BgsThxfZMEAmAas6yGOdJZkH9S', NULL, NULL, 106),
-	(11, '53 Balanagar', '', 'Hyderabad', 'Meena', 'Gara', '04023775438', '500042', 'Andhra Pradesh', NULL, '2020-10-11 03:44:55.000000', 'meena.gara@yahoo.com', b'1', '$2a$10$SF6oz1JICybgPDOdrnTjFODxJBlCcUfj.HRF.TanU2pdjFcIT3X7S', NULL, NULL, 106),
-	(12, '112 Gagan Deep Building', 'Rajendra Place', 'Delhi', 'Jahnu', 'Mishra', '0987654321', '110008', 'Delhi', NULL, NULL, 'jahnu.mishra@gmail.com', b'0', '$2a$10$UIQGuwvF9WU3cge7cGHBge6aX6/dGRpwqD8GuCxBghTpDos9Hx9yW', NULL, NULL, 106),
-	(13, 'B/7/a Bharat Ngr, Grant Road', '', 'Mumbai', 'Saka', 'Prakash', '02223011775', '400007', 'Maharashtra', NULL, '2020-10-12 10:09:30.000000', 'saka.prakash@yahoo.com', b'0', '$2a$10$Q.Ctg6lFyvVEJ7ZnIuCIZ.UK5RlXuY2Iwwru4x.n9gtptDuhVLxRu', NULL, NULL, 106),
-	(14, '37 , Dhake Colony, J.p.rd, Andheri (west)', '', 'Mumbai', 'Gautam', 'Nayak', '02226200995', '400058', 'Maharashtra', NULL, '2020-10-12 10:10:50.000000', 'gautam1988@gmail.com', b'1', '$2a$10$nQjus79bd4dwNeEHTJ96U.Q7GIMffZQ7lqORWYv9VQQyh.9oqSgOK', NULL, NULL, 106),
-	(15, '181 /, th Floor, M G Road, Burrabazar', '', 'Kolkata', 'Avatar', 'Cheema', '03322684941', '700007', 'West Bengal', NULL, '2020-10-12 10:12:04.000000', 'cheema1994@gmail.com', b'1', '$2a$10$NNQmIhQn6V1ZR9VpIbQL6OLpiLF.dJ.8qTDegkD3ZiDeMmwjSCyRW', NULL, NULL, 106),
-	(16, '456 Alexandra Road #16-02 NOL', 'Building Singapore 119962', 'Singapore', 'Jianhong', 'Zhou', '65-6278 9444', '119962', '', NULL, '2020-10-12 10:13:00.000000', 'jianzhou2000@gmail.com', b'1', '$2a$10$QEOF7Xeue1enl9COCgB/deSu2DIewIlyEHGDm83hjpz3iNLkmD0sm', NULL, NULL, 199),
-	(17, 'Braddell Tech 13 Lorong 8 Toa Payoh #04-01 319261', '', 'Singapore', 'Su', 'Geng', '062566046', '319261', '', NULL, '2020-10-12 10:14:03.000000', 'sugeng1208@outlook.com', b'1', '$2a$10$CVLvsCqcbzWcsRN/ZfGcAOr5wZAUIITu9kqG7.U2lWo4MgtIdITDa', NULL, NULL, 199),
-	(18, '1053  Broadway Avenue', '', 'Chattanooga', 'Alisa', 'Willcox', '423-893-1283', '37421', 'Tennessee', NULL, '2020-10-12 10:15:12.000000', 'alisa.willcox7@gmail.com', b'1', '$2a$10$pBLzCgKPXfJsMiCHFB9BweUamtoJXnbPlh7eheH7zK02v/QW3UgPK', NULL, NULL, 234),
-	(19, '79 Masthead Drive', '', 'Great Keepel Island', 'Chelsea', 'Greener', '(07) 4918 39', '4700', 'Queensland', NULL, '2020-10-12 10:16:23.000000', 'chelsea.greener@gmail.com', b'1', '$2a$10$cyrxmp9dwNhUAEYqPiMHHO6n9vvLqgS/tbcYjaeyIMekfd35pvnOm', NULL, NULL, 14),
-	(20, '37 Grayson Street', '', 'Matong', 'Spencer', 'De Bavay', '(02) 6146 87', '2652', 'New South Wales', NULL, '2020-10-12 10:17:27.000000', 'spender.de.bavay@gmail.com', b'1', '$2a$10$LQT8mw/ZGHz1W5pd4/iDyuNjwv7yJSKKJUXnXWf6xAB46M5wDUOVG', NULL, NULL, 14),
-	(21, 'Alt Reinickendorf 61', '', 'Schwenningen', 'Daniela', 'Konig', '08274368060', '72477', 'Baden-Württemberg', NULL, '2020-10-16 04:20:15.000000', 'konig.daniela@gmail.com', b'0', '$2a$10$E6g8TKWzT6wPyGma.O3SweI4mqEMQyavjiy/qUk9ayyAQ7/FN/eq.', NULL, NULL, 58),
-	(22, 'Ba Vi, Thanh Chuong', 'Soc Son', 'Ha Noi', 'Tan', 'Nguyen Minh', '0987667887', '142870', 'Ha Noi', NULL, '2020-11-12 14:35:37.000000', 'tannguyenminh@gmail.com', b'1', '$2a$10$c9u299wIXYQ4GuNUtthJRO4/fxb/qaPXBIcgLqo.OzTqBM2e5Erm2', NULL, NULL, 242),
-	(23, '30 Do Huy Uyen', 'An Hai Bac district', 'Da Nang', 'Trang', 'Le Thi Quynh', '0922664450', '552000', 'Da Nang', NULL, '2021-01-14 02:35:51.000000', 'trangquynh269@gmail.com', b'1', '$2a$10$pFQajpIUy38PV61fucqxmugLtQerPid3N1LvP2MsSlMMuUG283.Cm', NULL, NULL, 242),
-	(24, '123 Truc Bach', 'Tay Ho', 'Ha Noi', 'Son', 'Nguyen Tuan', '0984457819', '127890', 'Hanoi', NULL, '2021-01-10 02:40:58.000000', 'nguyen.tuan.son@gmail.com', b'1', '$2a$10$4YwxikvvFeDknQxWXoYHK.s0JicA2E1U4fjaomQ/tktD4Xx9R.Di6', NULL, NULL, 242),
-	(25, '14H8 Phan Van Truong', 'Cau Giay', 'Ha Noi', 'Thu', 'Trinh Minh', '0977882312', '113000', 'Hanoi', NULL, '2020-01-14 02:56:08.000000', 'minhthu20@gmail.com', b'1', '$2a$10$80H.3RSBQS1iT6hCJI56suOJFE.pBUx.DyhnmDv/ZjOGiJAQxjR6K', NULL, NULL, 242),
-	(26, '256A Vo Van Kiet', 'Phuoc My', 'Da Nang', 'Mai', 'Tran Thi', '0954876291', '555000', 'Da Nang', NULL, '2021-01-16 10:15:37.000000', 'tran.thi.mai@gmail.com', b'1', '$2a$10$YkVzbGU89318I2nL8z.NGeJN77.UJCavjY7PH7x3LfL1zIEOVzF7m', NULL, NULL, 242),
-	(27, '620 Bach Dang', 'Hai Chau', 'Da Nang', 'Bach', 'Nguyen Hoang', '0910405069', '554000', 'Da Nang', NULL, '2021-01-16 10:22:05.000000', 'nguyen.hoang.bach@gmail.com', b'0', '$2a$10$G3RLX9mmiMafu0MxTomJp.43lX2khhp0IOKN4oZSDK689dRt71zGq', NULL, NULL, 242),
-	(28, 'M 55 2nd Floor, Part 2', '', 'Delhi', 'Ravi', 'Kumar', '026715849', '110048', 'Delhi', NULL, '2020-05-16 10:28:38.000000', 'ravi.kumar2009@gmail.com', b'1', '$2a$10$yYkH67VJ6LVGScLHvxtyyOTCslPiY3ZM0SYArvur0JR8F6IlGy.Gu', NULL, NULL, 106),
-	(29, 'Choa Chu Kang Crescent, 683690', '', 'Singapore', 'Xue', 'Hao Chu', '081005992', '683690', '', NULL, '2021-01-17 10:25:06.000000', 'xue.hao.chu@gmail.com', b'1', '$2a$10$suovD4HuFHy632QdAQnNTOwyTwHLs4NI8mT0gARBNxavM0IXl.HdW', NULL, NULL, 199),
-	(30, '30 Robinson Road', '#03-01B ROBINSON TOWERS', 'Singapore', 'Mo', 'Liang', '063237730', '048546', '', NULL, '2020-04-12 10:35:37.000000', 'mo.liang.237@gmail.com', b'1', '$2a$10$JKIV3Hi4phMMKU/p2tqH8OXZaKNboZAwX6/nHdFoxWbeohie7NDuu', NULL, NULL, 199),
-	(31, '260 Orchard Road, The Heeren', '04-30/31 238855', 'Singapore', 'Chan', 'Ding', '6567321372', '238855', '', NULL, '2021-01-18 10:47:17.000000', 'chan.ding.97@gmail.com', b'1', '$2a$10$KlcH7aIiy/Hvt3NhCYbDH.toghsP2CbeBY7ZO9YT03o9dLkdNluBS', NULL, NULL, 199),
-	(32, '70 Guild Street', '', 'London', 'Zak', 'Carey', '0795602121', 'N8 1HG', '', NULL, '2021-01-20 11:03:49.000000', 'zak.carey.91@gmail.com', b'0', '$2a$10$E1IxQO8LTXWF0diVBB7bfOcwc8wwtWHu4dhRx3zkGemtcsb1Mf32G', NULL, NULL, 78),
-	(33, '922  Emeral Dreams Drive', '', 'Chicago', 'Katherine', 'McKnight', '8153287288', '60601', 'Illinois', NULL, '2020-12-26 11:20:07.000000', 'katherin.mc.knight@live.com', b'1', '$2a$10$9ZbxZO2gJul3ups2FXU9se3vd3d5zn0VRXQnp0l1bS04dq3UHy5g2', NULL, NULL, 234),
-	(34, '1482  Rosewood Lane', '', 'New York', 'Pasty', 'Aston', '2129229661', '10016', 'New York', NULL, '2020-05-26 11:34:41.000000', 'pasty.aston.89@live.com', b'1', '$2a$10$eISh5FVdov6DSOWeXpNeVeieJOwGe8gBC1zrLfKUKVqWrBFeIaMKy', NULL, NULL, 234),
-	(35, 'Shop No 2, Shobhana Bldg.', 'Tilak Road, Opp. Dph, Santacruz (west)', 'Mumbai', 'Rekha', 'Makavana', '02226493101', '400054', 'Maharashtra', NULL, '2020-09-01 09:26:20.000000', 'rekha.makavana@gmail.com', b'1', '$2a$10$52Ah7rPRiReZ8FsQBRATfOlJl.XQfwGGaqa3vP6Z9uBKc7ADz7yCO', NULL, NULL, 106),
-	(36, '19 Shirley Street', '', 'Yatala', 'Flynn', 'Hackett', '073758521', '4207', 'Queensland', NULL, '2021-02-01 08:42:40.000000', 'flynn.hackett.au@gmail.com', b'1', '$2a$10$8oaaz3VHFE/PqpRMPnvABuWLZSl9lCT3plI8aMMejqJeVtv3bNUH.', NULL, NULL, 14),
-	(37, 'KhanhHoa', '', 'Nha Trang', 'Hoang', 'Le', '0123456789', '54321', 'Ba Ria Vung Tau', 'DATABASE', '2024-08-20 16:14:59.033000', 'tknhatgpt10@gmail.com', b'1', '$2a$10$NVYskwnEOZmfAclwkQKfIuwgKcx8sYxnjgrnA6fymHii5lVRc87ti', NULL, NULL, 242),
-	(38, '123 Đại Lộ Bình Dương, Phường Hiệp Thành,Thành phố Thủ Dầu Một', '', 'Thủ Dầu Một', 'Hoàng', 'Lê Minh (21120457)', '0523727610', '13212', 'Binh Duong', 'GOOGLE', '2024-08-21 08:16:05.387000', 'leminhhoang123456le@gmail.com', b'1', '', NULL, NULL, 242),
-	(39, '1927  West Drive', NULL, 'Sacramento', 'David', 'Fountaine', '312-462-7518', '95867', 'California', NULL, '2024-08-24 08:30:15.376000', 'david.s.fountaine@gmail.com', b'0', 'password123', NULL, NULL, 234);
+-- Dumping data for table myshopdb.customers: ~40 rows (approximately)
+INSERT INTO `customers` (`id`, `address_line_1`, `address_line_2`, `city`, `first_name`, `last_name`, `phone_number`, `postal_code`, `state`, `authentication_type`, `created_time`, `email`, `enabled`, `password`, `verification_code`, `country_id`, `image_url`, `unseen_message_count`) VALUES
+	(1, '34 Tu Van, Dien Khanh, Khanh Hoa', NULL, 'Nha Trang', 'Le', 'Hoang', '0987654321', '37000', 'Khanh Hoa', NULL, NULL, 'le@gmai.com', b'1', '21adasdsad', NULL, 2, 'viktor-kirichenko-nEOSQiA_FHc-unsplash.jpg', 0),
+	(2, '2320  Romano Street', '', 'Cambridge', 'Lorraine', 'Allbright', '0987654321', '2142', 'Massachusetts', NULL, NULL, 'lorraine.allbright@outlook.com', b'1', '$2a$10$II70xzaNTXp8WjJgGBq5k.xiDd8qiTp1yGPaCULGVeHtej/Hieb4O', NULL, 232, 'vicky-hladynets-_RcTaCHHMI0-unsplash.jpg', 0),
+	(3, '4703  Goyeau Ave', '', 'Windsor', 'Nancy', 'C Bass', '519-791-4692', 'N9A 1H9', 'Ontario', NULL, '2020-10-09 03:24:42.000000', 'nancy.bass2001@yahoo.com', b'0', '$2a$10$iCc2M47GrRfzWV7/nrdZpuzkjLSxH5VEs1t02E55428eToiFo8pT6', NULL, 39, 'taras-shypka-QEgHL8NN7nM-unsplash.jpg', 0),
+	(4, '4103  Tolmie St', '', 'Vancouver', 'Brian', 'Purcell', '604-269-1384', 'V6M 1Y8', 'British Columbia', NULL, '2020-06-09 03:27:48.000000', 'brian.purcell3@gmail.com', b'1', '$2a$10$mHz6KD.k5OTuTw9JWsa8OOZiF8gWxFRw6tjzIMxrx6GuaF2d.bvxG', NULL, 39, 'sarah-brown-tTdC88_6a_I-unsplash.jpg', 0),
+	(5, '934A  Small Street', 'Amish Country Byway', 'Berlin', 'Tina', 'D Jamerson', '5139670375', '44610', 'Ohio', NULL, '2020-10-09 03:29:39.000000', 'tina.jamerson@gmail.com', b'1', '$2a$10$zS.WEDVdrfraeTYXkh6kru0YT4dg14daWwxrPZKwImwt1S8I8Cbaa', NULL, 234, 'oguz-yagiz-kara-p_cgt8XJ1W4-unsplash.jpg', 0),
+	(6, '3087 Marietta Street', '', 'Vallejo', 'Christopher ', 'Seldon', '214-407-6337', '94590', 'California', NULL, '2020-10-10 11:11:19.000000', 'christopherseldonusa@gmail.com', b'1', '$2a$10$kBu.WfmGeYpcp.gNCVosx.2PY6dhUahdjPolgSOvYjY4DcUWRtnUm', NULL, 234, 'oguz-yagiz-kara-MZf0mI14RI0-unsplash.jpg', 0),
+	(7, '56  Berkeley Rd', '', 'Stretton-on-Dunsmore', 'Alex', 'Stevenson', '078 7586 952', 'CV23 3XN', '', NULL, '2020-10-11 03:36:04.000000', 'alex.stevenson@outlook.com', b'1', '$2a$10$og9uLgfaPjMbN0UQFPXQeeVhgfuArv3QQXLhM7ZfS4M.9j4Yp/Ksi', NULL, 78, 'oguz-yagiz-kara-KUzPG6ovqr8-unsplash.jpg', 0),
+	(8, '101  Gordon Terrace', '', 'Barton', 'Ethan', 'Jones', '070 2534 460', 'SY14 4FH', '', NULL, '2020-10-11 03:38:09.000000', 'ethan.k.john@gmail.com', b'1', '$2a$10$8Zc6kveZk1FR0HzVUQK/DuSQWFf2oGujkmDreapVXW0BtfDchP0yG', NULL, 78, 'oguz-yagiz-kara-ej59TdVxqCk-unsplash.jpg', 0),
+	(9, 'B 3/12, Part 1', '', 'Delhi', 'Pandu', 'Shan', '042375292', '110009', 'Delhi', NULL, '2020-10-11 03:40:04.000000', 'pandu.shan03@gmail.com', b'1', '$2a$10$Iybz9lJhA6FoeO7tviEWIuLaO4fC9lwjiiHwKCD0B5q4DLJ066mVW', NULL, 106, 'jurica-koletic-7YVZYZeITc8-unsplash.jpg', 0),
+	(10, 'Shop No 6, Gk Nagar No 3', 'Mahavir Darshan, Shankar Lane, Kandivali (west)', 'Mumbai', 'Ahjaja', 'Thaker', '02228611610', '400067', 'Maharashtra', NULL, '2020-10-11 03:43:12.000000', 'ahjj.thaker2000@gmail.com', b'1', '$2a$10$QKr/DFMbrX9ItxJCcTd.RuiD.H8BgsThxfZMEAmAas6yGOdJZkH9S', NULL, 106, 'joseph-gonzalez-iFgRcqHznqg-unsplash.jpg', 0),
+	(11, '53 Balanagar', '', 'Hyderabad', 'Meena', 'Gara', '04023775438', '500042', 'Andhra Pradesh', NULL, '2020-10-11 03:44:55.000000', 'meena.gara@yahoo.com', b'1', '$2a$10$SF6oz1JICybgPDOdrnTjFODxJBlCcUfj.HRF.TanU2pdjFcIT3X7S', NULL, 106, 'fatane-rahimi-Agv-xPQBO60-unsplash.jpg', 0),
+	(12, '112 Gagan Deep Building', 'Rajendra Place', 'Delhi', 'Jahnu', 'Mishra', '0987654321', '110008', 'Delhi', NULL, NULL, 'jahnu.mishra@gmail.com', b'0', '$2a$10$UIQGuwvF9WU3cge7cGHBge6aX6/dGRpwqD8GuCxBghTpDos9Hx9yW', NULL, 106, 'daniel-hohe-a7PUubWEZEQ-unsplash.jpg', 0),
+	(13, 'B/7/a Bharat Ngr, Grant Road', '', 'Mumbai', 'Saka', 'Prakash', '02223011775', '400007', 'Maharashtra', NULL, '2020-10-12 10:09:30.000000', 'saka.prakash@yahoo.com', b'0', '$2a$10$Q.Ctg6lFyvVEJ7ZnIuCIZ.UK5RlXuY2Iwwru4x.n9gtptDuhVLxRu', NULL, 106, 'christopher-campbell-rDEOVtE7vOs-unsplash.jpg', 0),
+	(14, '37 , Dhake Colony, J.p.rd, Andheri (west)', '', 'Mumbai', 'Gautam', 'Nayak', '02226200995', '400058', 'Maharashtra', NULL, '2020-10-12 10:10:50.000000', 'gautam1988@gmail.com', b'1', '$2a$10$nQjus79bd4dwNeEHTJ96U.Q7GIMffZQ7lqORWYv9VQQyh.9oqSgOK', NULL, 106, 'christian-buehner-DItYlc26zVI-unsplash.jpg', 0),
+	(15, '181 /, th Floor, M G Road, Burrabazar', '', 'Kolkata', 'Avatar', 'Cheema', '03322684941', '700007', 'West Bengal', NULL, '2020-10-12 10:12:04.000000', 'cheema1994@gmail.com', b'1', '$2a$10$NNQmIhQn6V1ZR9VpIbQL6OLpiLF.dJ.8qTDegkD3ZiDeMmwjSCyRW', NULL, 106, 'cdc-hqaeIsK3S2w-unsplash.jpg', 0),
+	(16, '456 Alexandra Road #16-02 NOL', 'Building Singapore 119962', 'Singapore', 'Jianhong', 'Zhou', '65-6278 9444', '119962', '', NULL, '2020-10-12 10:13:00.000000', 'jianzhou2000@gmail.com', b'1', '$2a$10$QEOF7Xeue1enl9COCgB/deSu2DIewIlyEHGDm83hjpz3iNLkmD0sm', NULL, 199, 'ana-tavares-bKrmXTShj7k-unsplash.jpg', 0),
+	(17, 'Braddell Tech 13 Lorong 8 Toa Payoh #04-01 319261', '', 'Singapore', 'Su', 'Geng', '062566046', '319261', '', NULL, '2020-10-12 10:14:03.000000', 'sugeng1208@outlook.com', b'1', '$2a$10$CVLvsCqcbzWcsRN/ZfGcAOr5wZAUIITu9kqG7.U2lWo4MgtIdITDa', NULL, 199, 'alexander-hipp-iEEBWgY_6lA-unsplash.jpg', 0),
+	(18, '1053  Broadway Avenue', '', 'Chattanooga', 'Alisa', 'Willcox', '423-893-1283', '37421', 'Tennessee', NULL, '2020-10-12 10:15:12.000000', 'alisa.willcox7@gmail.com', b'1', '$2a$10$pBLzCgKPXfJsMiCHFB9BweUamtoJXnbPlh7eheH7zK02v/QW3UgPK', NULL, 234, 'alex-suprun-mynsNaNwVDc-unsplash.jpg', 0),
+	(19, '79 Masthead Drive', '', 'Great Keepel Island', 'Chelsea', 'Greener', '(07) 4918 39', '4700', 'Queensland', NULL, '2020-10-12 10:16:23.000000', 'chelsea.greener@gmail.com', b'1', '$2a$10$cyrxmp9dwNhUAEYqPiMHHO6n9vvLqgS/tbcYjaeyIMekfd35pvnOm', NULL, 14, 'alex-suprun-bYODySpLIhE-unsplash.jpg', 0),
+	(20, '37 Grayson Street', '', 'Matong', 'Spencer', 'De Bavay', '(02) 6146 87', '2652', 'New South Wales', NULL, '2020-10-12 10:17:27.000000', 'spender.de.bavay@gmail.com', b'1', '$2a$10$LQT8mw/ZGHz1W5pd4/iDyuNjwv7yJSKKJUXnXWf6xAB46M5wDUOVG', NULL, 14, 'jakub-zerdzicki-2BORh3DOmK0-unsplash.jpg', 0),
+	(21, 'Alt Reinickendorf 61', '', 'Schwenningen', 'Daniela', 'Konig', '08274368060', '72477', 'Baden-Württemberg', NULL, '2020-10-16 04:20:15.000000', 'konig.daniela@gmail.com', b'0', '$2a$10$E6g8TKWzT6wPyGma.O3SweI4mqEMQyavjiy/qUk9ayyAQ7/FN/eq.', NULL, 58, 'sumup-NEEh7Xvbaq0-unsplash.jpg', 0),
+	(22, 'Ba Vi, Thanh Chuong', 'Soc Son', 'Ha Noi', 'Tan', 'Nguyen Minh', '0987667887', '142870', 'Ha Noi', NULL, '2020-11-12 14:35:37.000000', 'tannguyenminh@gmail.com', b'1', '$2a$10$c9u299wIXYQ4GuNUtthJRO4/fxb/qaPXBIcgLqo.OzTqBM2e5Erm2', NULL, 242, 'serg-zhukov-rNqs9hM0U8I-unsplash.jpg', 0),
+	(23, '30 Do Huy Uyen', 'An Hai Bac district', 'Da Nang', 'Trang', 'Le Thi Quynh', '0922664450', '552000', 'Da Nang', NULL, '2021-01-14 02:35:51.000000', 'trangquynh269@gmail.com', b'1', '$2a$10$pFQajpIUy38PV61fucqxmugLtQerPid3N1LvP2MsSlMMuUG283.Cm', NULL, 242, 'aiony-haust-3TLl_97HNJo-unsplash.jpg ', 0),
+	(24, '123 Truc Bach', 'Tay Ho', 'Ha Noi', 'Son', 'Nguyen Tuan', '0984457819', '127890', 'Hanoi', NULL, '2021-01-10 02:40:58.000000', 'nguyen.tuan.son@gmail.com', b'1', '$2a$10$4YwxikvvFeDknQxWXoYHK.s0JicA2E1U4fjaomQ/tktD4Xx9R.Di6', NULL, 242, 'sigmund-HsTnjCVQ798-unsplash.jpg', 0),
+	(25, '14H8 Phan Van Truong', 'Cau Giay', 'Ha Noi', 'Thu', 'Trinh Minh', '0977882312', '113000', 'Hanoi', NULL, '2020-01-14 02:56:08.000000', 'minhthu20@gmail.com', b'1', '$2a$10$80H.3RSBQS1iT6hCJI56suOJFE.pBUx.DyhnmDv/ZjOGiJAQxjR6K', NULL, 242, 'igor-karimov-CNdFIdrZl4U-unsplash.jpg', 0),
+	(26, '256A Vo Van Kiet', 'Phuoc My', 'Da Nang', 'Mai', 'Tran Thi', '0954876291', '555000', 'Da Nang', NULL, '2021-01-16 10:15:37.000000', 'tran.thi.mai@gmail.com', b'1', '$2a$10$YkVzbGU89318I2nL8z.NGeJN77.UJCavjY7PH7x3LfL1zIEOVzF7m', NULL, 242, 'dinu-j-nair-Rx5TLGkeqqg-unsplash.jpg', 0),
+	(27, '620 Bach Dang', 'Hai Chau', 'Da Nang', 'Bach', 'Nguyen Hoang', '0910405069', '554000', 'Da Nang', NULL, '2021-01-16 10:22:05.000000', 'nguyen.hoang.bach@gmail.com', b'0', '$2a$10$G3RLX9mmiMafu0MxTomJp.43lX2khhp0IOKN4oZSDK689dRt71zGq', NULL, 242, 'heyphotoshoot-Rv1_qkmO4C4-unsplash.jpg ', 0),
+	(28, 'M 55 2nd Floor, Part 2', '', 'Delhi', 'Ravi', 'Kumar', '026715849', '110048', 'Delhi', NULL, '2020-05-16 10:28:38.000000', 'ravi.kumar2009@gmail.com', b'1', '$2a$10$yYkH67VJ6LVGScLHvxtyyOTCslPiY3ZM0SYArvur0JR8F6IlGy.Gu', NULL, 106, 'tao-yuan-ecIEYKkLvZw-unsplash.jpg ', 0),
+	(29, 'Choa Chu Kang Crescent, 683690', '', 'Singapore', 'Xue', 'Hao Chu', '081005992', '683690', '', NULL, '2021-01-17 10:25:06.000000', 'xue.hao.chu@gmail.com', b'1', '$2a$10$suovD4HuFHy632QdAQnNTOwyTwHLs4NI8mT0gARBNxavM0IXl.HdW', NULL, 199, 'tao-yuan-3JNDBjitloQ-unsplash.jpg', 0),
+	(30, '30 Robinson Road', '#03-01B ROBINSON TOWERS', 'Singapore', 'Mo', 'Liang', '063237730', '048546', '', NULL, '2020-04-12 10:35:37.000000', 'mo.liang.237@gmail.com', b'1', '$2a$10$JKIV3Hi4phMMKU/p2tqH8OXZaKNboZAwX6/nHdFoxWbeohie7NDuu', NULL, 199, 'oguz-yagiz-kara-fd6XdNyXOgw-unsplash.jpg', 0),
+	(31, '260 Orchard Road, The Heeren', '04-30/31 238855', 'Singapore', 'Chan', 'Ding', '6567321372', '238855', '', NULL, '2021-01-18 10:47:17.000000', 'chan.ding.97@gmail.com', b'1', '$2a$10$KlcH7aIiy/Hvt3NhCYbDH.toghsP2CbeBY7ZO9YT03o9dLkdNluBS', NULL, 199, 'oguz-yagiz-kara-hUoQCFxhLFY-unsplash.jpg', 0),
+	(32, '70 Guild Street', '', 'London', 'Zak', 'Carey', '0795602121', 'N8 1HG', '', NULL, '2021-01-20 11:03:49.000000', 'zak.carey.91@gmail.com', b'0', '$2a$10$E1IxQO8LTXWF0diVBB7bfOcwc8wwtWHu4dhRx3zkGemtcsb1Mf32G', NULL, 78, 'wonderlane-pAI4mcHz6VU-unsplash.jpg', 0),
+	(33, '922  Emeral Dreams Drive', '', 'Chicago', 'Katherine', 'McKnight', '8153287288', '60601', 'Illinois', NULL, '2020-12-26 11:20:07.000000', 'katherin.mc.knight@live.com', b'1', '$2a$10$9ZbxZO2gJul3ups2FXU9se3vd3d5zn0VRXQnp0l1bS04dq3UHy5g2', NULL, 234, 'harry-pappas-xyauiSBWRFs-unsplash.jpg', 0),
+	(34, '1482  Rosewood Lane', '', 'New York', 'Pasty', 'Aston', '2129229661', '10016', 'New York', NULL, '2020-05-26 11:34:41.000000', 'pasty.aston.89@live.com', b'1', '$2a$10$eISh5FVdov6DSOWeXpNeVeieJOwGe8gBC1zrLfKUKVqWrBFeIaMKy', NULL, 234, 'un-liu-8fppsv7kPzo-unsplash.jpg', 0),
+	(35, 'Shop No 2, Shobhana Bldg.', 'Tilak Road, Opp. Dph, Santacruz (west)', 'Mumbai', 'Rekha', 'Makavana', '02226493101', '400054', 'Maharashtra', NULL, '2020-09-01 09:26:20.000000', 'rekha.makavana@gmail.com', b'1', '$2a$10$52Ah7rPRiReZ8FsQBRATfOlJl.XQfwGGaqa3vP6Z9uBKc7ADz7yCO', NULL, 106, 'shreyashka-maharjan-4ztiDh0QPX0-unsplash.jpg', 0),
+	(36, '19 Shirley Street', '', 'Yatala', 'Flynn', 'Hackett', '073758521', '4207', 'Queensland', NULL, '2021-02-01 08:42:40.000000', 'flynn.hackett.au@gmail.com', b'1', '$2a$10$8oaaz3VHFE/PqpRMPnvABuWLZSl9lCT3plI8aMMejqJeVtv3bNUH.', NULL, 14, 'cdc-JoYosw5MnyU-unsplash.jpg', 0),
+	(37, 'KhanhHoa', '', 'Nha Trang', 'Hoang', 'Le', '0123456789', '54321', 'Ba Ria Vung Tau', 'DATABASE', '2024-08-20 16:14:59.033000', 'tknhatgpt10@gmail.com', b'1', '$2a$10$NVYskwnEOZmfAclwkQKfIuwgKcx8sYxnjgrnA6fymHii5lVRc87ti', NULL, 242, 'oguz-yagiz-kara-GeSizSgpilc-unsplash.jpg', 0),
+	(38, '123 Đại Lộ Bình Dương, Phường Hiệp Thành,Thành phố Thủ Dầu Một', '', 'Thủ Dầu Một', 'Hoàng', 'Lê Minh (21120457)', '0523727610', '13212', 'Binh Duong', 'GOOGLE', '2024-08-21 08:16:05.387000', 'leminhhoang123456le@gmail.com', b'1', '$2a$10$qmPGW.tc1LFNVW8DIglri.cKvmzY.0G8P1Zrn.fAMIED55ccbT9ES', NULL, 242, 'image_6ff32e63-7443-43ed-b573-70f1ca110ab9.png', 0),
+	(39, '1927  West Drive', NULL, 'Sacramento', 'David', 'Fountaine', '312-462-7518', '95867', 'California', NULL, '2024-08-24 08:30:15.376000', 'david.s.fountaine@gmail.com', b'0', 'password123', NULL, 234, 'sheraz-manzoor-nyCuQl2Kv9Y-unsplash.jpg', 0),
+	(40, '123 Đại Lộ Bình Dương, Phường Hiệp Thành,Thành phố Thủ Dầu Một', '', 'Thủ Dầu Một', 'Le Minh', 'Hoang', '0987654321', '09876', 'Binh Duong', 'GOOGLE', '2024-09-28 10:08:31.652000', 'leminhhoanghcmus@gmail.com', b'1', '$2a$10$5tevrf0vvbH/e.lV5WSfseuspw0pYcQ7ygamgqt1KTSGrA5kdTY9e', NULL, 242, 'image_4ed95803-edfe-4151-8e29-7c37fe92aac6.png', 0);
+
+-- Dumping structure for table myshopdb.message
+CREATE TABLE IF NOT EXISTS `message` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `content` varchar(255) DEFAULT NULL,
+  `role_chat` enum('CUSTOMER','ADMIN') DEFAULT NULL,
+  `customer_id` int DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
+  `time` datetime(6) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK9ntqxp9qa5qgn0ghb23mj640y` (`customer_id`),
+  KEY `FKpdrb79dg3bgym7pydlf9k3p1n` (`user_id`),
+  CONSTRAINT `FK9ntqxp9qa5qgn0ghb23mj640y` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`),
+  CONSTRAINT `FKpdrb79dg3bgym7pydlf9k3p1n` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table myshopdb.message: ~37 rows (approximately)
+INSERT INTO `message` (`id`, `content`, `role_chat`, `customer_id`, `user_id`, `time`) VALUES
+	(1, 'Hi. How can I help you?', 'ADMIN', 38, 24, '2024-10-19 22:45:14.000000'),
+	(2, 'Sure, the order number is #34567.', 'CUSTOMER', 38, 24, '2024-10-19 22:46:02.000000'),
+	(3, 'Thank you! Let me check that for you. One moment, please.', 'ADMIN', 38, 24, '2024-10-19 22:48:01.000000'),
+	(4, 'I see that your order was placed two days ago and is currently in the "Processing" stage. It should be shipped within the next 24 hours. Was there a specific issue with your order?', 'ADMIN', 38, 24, '2024-10-19 22:48:02.000000'),
+	(5, 'Yes, I was hoping to change the shipping address. Can I still do that?', 'CUSTOMER', 38, 24, '2024-10-19 22:48:03.000000'),
+	(6, 'Since your order hasn\'t shipped yet, I can update the shipping address for you. Could you please provide the new address?', 'ADMIN', 38, 24, '2024-10-19 22:48:05.000000'),
+	(7, 'hello', 'CUSTOMER', 38, NULL, '2024-10-21 12:10:21.000000'),
+	(8, 'hi', 'CUSTOMER', 38, NULL, '2024-10-21 12:12:23.000000'),
+	(9, 'hello', 'CUSTOMER', 38, NULL, '2024-10-21 23:28:05.000000'),
+	(10, 'hi', 'CUSTOMER', 38, NULL, '2024-10-21 23:36:57.000000'),
+	(11, 'hi', 'CUSTOMER', 38, NULL, '2024-10-24 16:51:10.000000'),
+	(12, 'hi', 'CUSTOMER', 38, NULL, '2024-10-24 16:51:28.000000'),
+	(13, 'hi', 'CUSTOMER', 38, NULL, '2024-10-24 18:12:34.000000'),
+	(14, 'hello', 'CUSTOMER', 38, NULL, '2024-10-24 18:35:42.000000'),
+	(15, 'hi', 'ADMIN', 38, NULL, '2024-10-24 19:45:17.000000'),
+	(16, 'hi', 'CUSTOMER', 38, NULL, '2024-10-24 19:45:36.000000'),
+	(17, 'hi', 'ADMIN', 38, NULL, '2024-10-24 19:45:51.000000'),
+	(18, 'hi', 'CUSTOMER', 38, NULL, '2024-10-24 19:45:55.000000'),
+	(19, 'hello', 'ADMIN', 3, NULL, '2024-11-05 20:56:44.000000'),
+	(20, 'hi', 'ADMIN', 38, NULL, '2024-11-05 22:06:41.000000'),
+	(21, 'hello', 'CUSTOMER', 38, NULL, '2024-11-05 22:06:46.000000'),
+	(22, 'Hello', 'ADMIN', 40, NULL, '2024-11-06 09:37:49.000000'),
+	(23, 'hi', 'CUSTOMER', 40, NULL, '2024-11-06 09:37:57.000000'),
+	(24, 'hello', 'CUSTOMER', 40, NULL, '2024-11-06 10:07:15.000000'),
+	(25, 'hello', 'CUSTOMER', 38, NULL, '2024-11-06 10:39:41.000000'),
+	(26, 'HELLO', 'CUSTOMER', 38, NULL, '2024-11-06 20:35:41.000000'),
+	(27, 'hello', 'CUSTOMER', 38, NULL, '2024-11-06 20:36:11.000000'),
+	(28, 'hello', 'CUSTOMER', 38, NULL, '2024-11-06 20:43:35.000000'),
+	(29, 'hello', 'CUSTOMER', 38, NULL, '2024-11-06 20:43:40.000000'),
+	(30, 'hi', 'CUSTOMER', 38, NULL, '2024-11-06 20:56:15.000000'),
+	(31, 'hi', 'CUSTOMER', 38, NULL, '2024-11-06 20:56:40.000000'),
+	(32, 'hi', 'CUSTOMER', 38, NULL, '2024-11-06 20:56:55.000000'),
+	(33, 'hi', 'CUSTOMER', 38, NULL, '2024-11-06 20:57:28.000000'),
+	(34, 'hi', 'CUSTOMER', 38, NULL, '2024-11-06 20:57:49.000000'),
+	(35, 'hi', 'CUSTOMER', 38, NULL, '2024-11-06 21:06:58.000000'),
+	(36, 'hi', 'CUSTOMER', 38, NULL, '2024-11-06 21:07:09.000000'),
+	(37, 'hello', 'CUSTOMER', 38, NULL, '2024-11-06 21:07:12.000000');
 
 -- Dumping structure for table myshopdb.orders
 CREATE TABLE IF NOT EXISTS `orders` (
@@ -693,7 +757,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   CONSTRAINT `FKpxtb8awmi0dk6smoh2vp1litg` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=166 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table myshopdb.orders: ~160 rows (approximately)
+-- Dumping data for table myshopdb.orders: ~161 rows (approximately)
 INSERT INTO `orders` (`id`, `address_line_1`, `address_line_2`, `city`, `first_name`, `last_name`, `phone_number`, `postal_code`, `state`, `country`, `deliver_date`, `deliver_days`, `order_time`, `payment_method`, `product_cost`, `shipping_cost`, `status`, `subtotal`, `tax`, `total`, `customer_id`) VALUES
 	(1, '30 Do Huy Uyen', 'Son Tra district', 'Da Nang', 'Ha Le Hoang', 'Nam', '09123456789', '550000', '', 'Vietnam', '2021-02-06 00:00:00.000000', 1, '2021-02-04 21:27:19.000000', 'COD', 503, 3.35, 'DELIVERED', 599, 0, 602.35, 1),
 	(2, '934  Small Street', 'Amish Country Byway', 'Berlin', 'D Jamerson', 'Tina', '513-967-0375', '44610', 'Ohio', 'United States', '2021-02-13 00:00:00.000000', 8, '2021-02-04 21:36:36.000000', 'CREDIT_CARD', 118, 4.6, 'DELIVERED', 94.83, 0, 99.43, 5),
@@ -1119,7 +1183,7 @@ CREATE TABLE IF NOT EXISTS `order_track` (
   CONSTRAINT `FK31jv1s212kajfn3kk1ksmnyfl` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=337 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table myshopdb.order_track: ~312 rows (approximately)
+-- Dumping data for table myshopdb.order_track: ~314 rows (approximately)
 INSERT INTO `order_track` (`id`, `notes`, `status`, `updated_time`, `order_id`) VALUES
 	(1, 'Order placed by customer', 'NEW', '2020-11-06 09:27:20.000000', 1),
 	(2, 'Order placed by customer', 'NEW', '2020-11-06 09:36:37.000000', 2),
@@ -1467,9 +1531,9 @@ CREATE TABLE IF NOT EXISTS `products` (
   FULLTEXT KEY `name` (`name`,`short_description`,`full_description`),
   CONSTRAINT `FKa3a4mpsfdf4d2y6r8ra3sc8mv` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`),
   CONSTRAINT `FKog2rp4qthbtt2lfyhfo32lsw9` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table myshopdb.products: ~118 rows (approximately)
+-- Dumping data for table myshopdb.products: ~107 rows (approximately)
 INSERT INTO `products` (`id`, `alias`, `average_rating`, `cost`, `created_time`, `discount_percent`, `enabled`, `full_description`, `height`, `in_stock`, `length`, `main_image`, `name`, `price`, `review_count`, `short_description`, `updated_time`, `weight`, `width`, `brand_id`, `category_id`) VALUES
 	(1, 'canon-eos-m50', 0, 511, '2020-09-25 10:28:30.000000', 0, b'1', '<div><div><b>The EOS M50 is a compact interchangeable lens camera for aspiring photographers looking for an easy way to boost the quality of their photos and videos. With clear, high-resolution 4K UHD 24p video, you can capture the incredible details and cinematic moments of your life at home or wherever your adventures take you.</b></div><div><br></div><div>Snap vibrant, eye-catching photos with a <b>24.1 Megapixel (APS-C)</b> CMOS Sensor using the built-in Electronic Viewfinder or Vari-angle Touchscreen LCD. Thanks to the fast and improved Dual Pixel CMOS Autofocus system, you can quickly lock focus on your subject to make sure you don\'t miss the action. See how the EOS M50 can easily deliver the high-quality photos and videos you\'ve always imagined.</div></div>', 3, b'1', 5, 'canon eos m50.png', 'Canon EOS M50 Mirrorless Vlogging Camera Kit with EF-M 15-45mm lens, Black', 599, 0, '<div><div>Dual Pixel CMOS AF for fast, accurate autofocus that helps you get the photo you want right as the moment happens</div><div>241 Megapixel APS C CMOS sensor and the DIGIC 8 Image Processor delivers incredible color, clear details, and stunning range</div><div>Variangle Touchscreen LCD has a flexible tilt range ideal for high angle and low angle shooting, and reviewing your photos</div><div>Built in high resolution electronic viewfinder features approximately 2,360,000 dots to see high amounts of de', '2021-01-10 18:01:13.000000', 2, 5, 1, 10),
 	(3, 'panasonic-lumix-fz80', 0, 235, '2020-09-25 11:58:25.000000', 0, b'1', '<div>Perfect for travelers, the Panasonic Lumix Digital Camera DC FZ80K brings the legendary optical performance of a super long 60X (20 1200mm) DC Vario lens with amazingly stable O.I.S. (Optical Image Stabilizer) to a highly portable point and shoot travel camera. With a powerful 18.1 megapixel MOS sensor, the Lumix DC VARIO camera lens features a super bright F2.8 5.9 aperture range that is optically stabilized with Panasonic’s Power O.I.S. technology to add striking depth of field dimension to your photographs even in low light conditions. The high resolution power of 4K video technology captures up to 4X the resolution (3840 x 2160) of standard Full HD, enabling you to create printable photos with 4K photo\'s blistering 30 frames per second burst feature. Post Focus and Focus Stacking provide for additional creative freedom by allowing you to change depth of field or focus points after you take the picture. The Lumix FZ80 perfectly fits in your hand with an ergonomic grip while its rear touch enabled 3 inch LCD display and high resolution 1,170K dot viewfinder remain clear even in bright sunlight. Convenient travel ready technologies like USB charging and Wi Fi connectivity to your mobile device make the Lumix DC FZ80K a digital camera that everyone can enjoy.<br></div>', 4, b'1', 5.3, 'main image.jpg', 'Panasonic Lumix FZ80 4K Digital Camera', 298, 0, '<div><ul><li>18.1 Megapixel Video Camera</li><li>60X Zoom DC VARIO 20-1200mm Lens</li><li>F2.8-5.9 Aperture</li><li>Power O.I.S. Stabilization</li><li>Touch Enabled 3-Inch LCD</li><li>Wi-Fi, DC-FZ80K (Black)</li></ul></div>', '2021-02-04 22:12:28.000000', 1.75, 5, 7, 10),
@@ -1575,17 +1639,6 @@ INSERT INTO `products` (`id`, `alias`, `average_rating`, `cost`, `created_time`,
 	(104, 'Gigabyte-B450M-DS3H-Motherboard', 0, 60, '2020-10-04 13:55:15.000000', 0, b'1', '<div><div>Supports AMD 1st &amp; 2nd generation Ryzen/ Ryzen with Radeon Vega graphics processors</div><div>Dual channel non-ECC unbuffered DDR4, 4 DIMMs</div><div>HDMI, DVI D ports for multiple display</div><div>PCIe Gen3 M.2 NVMe</div><div>High quality audio capacitors and audio noise guard</div><div>RGB fusion supports RGB LED strips in 7 colors</div><div>Realtek Gigabit LAN</div></div>', 5, b'1', 16, 'Gigabyte B450M main.png', 'Gigabyte B450M DS3H Motherboard', 74.99, 0, '<div>(AMD Ryzen AM4/Micro ATX/M.2/HMDI/DVI/USB 3.1/DDR4/Motherboard)<br></div>', '2021-01-10 17:34:47.000000', 3, 14, 53, 30),
 	(105, 'TP-Link-WiFi-6-AX3000-PCIe-WiFi-Card', 0, 0, '2020-10-04 13:59:58.000000', 0, b'1', '<div><div>Wi-Fi 6 TECHNOLOGY POWERED BY INTEL The latest Wi-Fi 6 standard gives you incredible speed ultra-low latency and uninterrupted connectivity with OFDMA and MU-MIMO technology Utilizing next-generation Wi-Fi 6 technology Archer TX3000E is designed to excel in even the busiest of networks for next-level entertainment</div><div>NEXT-GEN SPEEDS UP TO 2.4Gbps Reach incredible speeds up to 2.4 Gbps (2402 Mbps on 5 GHz or 574 Mbps on 2 4 GHz) - Supports Windows 10 (64bit) - Driver installation required via Website or included CD</div><div>MINIMIZED LAG FOR YOUR PC Revolutionary OFDMA reduces lag so you can enjoy ultra-responsive real-time gaming or an immersive VR experience</div><div>Broader Coverage Two multi-directional and high-performance antennas with a magnetized base extends your existing Wi-Fi reception capabilities. Place the magnetized antenna base anywhere on your desktop to find the optimal location for signal reception. Easily install with low profile bracket.</div><div>BLUETOOTH 5 0 FOR GREATER SPEEDS AND COVERAGE Archer TX3000E is equipped with the latest Bluetooth 5 0 Technology achieving 2x faster speeds and 4x broader coverage than Bluetooth 4 2 Connect as many devices as you want including game controllers headphones and keyboards for the ultimate setup</div><div>If you do not have a CD Rom or having difficulty with the CD please visit our homepage and search Archer TX3000E Driver is available for download on the support page for Archer TX3000E</div></div>', 0, b'1', 0, 'TPLink AX3000 main.png', 'TP-Link WiFi 6 AX3000 PCIe WiFi Card', 49.99, 0, '<div>Up to 2400Mbps | Bluetooth 5.0 | 802.11AX Dual Band Wireless Adapter with MU-MIMO,OFDMA,Ultra-Low Latency | Supports Windows 10 (64bit) only (Archer TX3000E)<br></div>', '2020-10-04 13:59:58.000000', 0, 0, 54, 31),
 	(106, 'TP-Link-AC1200-PCIe-WiFi-Card-for-PC', 0, 23, '2020-10-04 14:01:19.000000', 0, b'1', '<div><div>[Super-Fast Speed] – Make full use of your network with AC1200 WiFi speeds (867 Mbps on the 5GHz band and 300 Mbps on the 2.4GHz band)</div><div>[Bluetooth 4.2] – Achieve 2 5× faster speed and 10× more packet capacity than Bluetooth 4.0</div><div>[Broad Wireless Range] – Connect to your WiFi from further away with two external high-gain antennas ensuring greater range and enhanced stability</div><div>[Easy Installation] – Plug the adapter into an available PCI-E slot to upgrade your desktop with Low profile bracket</div><div>[Windows Compatibility] - Supports Windows 10, 8.1, 8 and 7 (32/64-bit)</div></div>', 2, b'1', 5, 'TPLink AC1200 main.png', 'TP-Link AC1200 PCIe WiFi Card for PC', 39.99, 0, '<div>Bluetooth 4.2 |Dual Band Wireless Network Card (2.4Ghz / 5Ghz) | for Gaming, Browsing, Streaming etc.- Supports Windows 10, 8.1, 8 &amp; 7 (32/64-bit) - (Archer T5E)<br></div>', '2021-01-12 11:42:18.000000', 1, 4, 54, 31),
-	(109, 'acer_aspire_desktop6', 0, 600, '2024-09-06 17:21:22.726000', 0, b'1', 'Full description for Acer Aspire', 0, b'1', 0, 'defaul.png', 'Acer Aspire Desktop6', 678, 0, 'Short description for Acer Aspire', '2024-09-06 17:21:22.726000', 0, 0, 37, 5),
-	(110, 'acer_aspire_desktop7', 0, 600, '2024-09-06 17:21:22.732000', 0, b'1', 'Full description for Acer Aspire', 0, b'1', 0, 'defaul.png', 'Acer Aspire Desktop7', 678, 0, 'Short description for Acer Aspire', '2024-09-06 17:21:22.732000', 0, 0, 37, 5),
-	(111, 'acer_aspire_desktop8', 0, 600, '2024-09-06 17:21:22.735000', 0, b'1', 'Full description for Acer Aspire', 0, b'1', 0, 'defaul.png', 'Acer Aspire Desktop8', 678, 0, 'Short description for Acer Aspire', '2024-09-06 17:21:22.735000', 0, 0, 37, 5),
-	(112, 'acer_aspire_desktop9', 0, 600, '2024-09-06 17:21:22.738000', 0, b'1', 'Full description for Acer Aspire', 0, b'1', 0, 'defaul.png', 'Acer Aspire Desktop9', 678, 0, 'Short description for Acer Aspire', '2024-09-06 17:21:22.738000', 0, 0, 37, 5),
-	(113, 'acer_aspire_desktop10', 0, 600, '2024-09-06 17:21:22.740000', 0, b'1', 'Full description for Acer Aspire', 0, b'1', 0, 'defaul.png', 'Acer Aspire Desktop10', 678, 0, 'Short description for Acer Aspire', '2024-09-06 17:21:22.740000', 0, 0, 37, 5),
-	(114, 'acer_aspire_desktop11', 0, 600, '2024-09-06 17:21:22.743000', 0, b'1', 'Full description for Acer Aspire', 0, b'1', 0, 'defaul.png', 'Acer Aspire Desktop11', 678, 0, 'Short description for Acer Aspire', '2024-09-06 17:21:22.743000', 0, 0, 37, 5),
-	(115, 'acer_aspire_desktop12', 0, 600, '2024-09-06 17:21:22.746000', 0, b'1', 'Full description for Acer Aspire', 0, b'1', 0, 'defaul.png', 'Acer Aspire Desktop12', 678, 0, 'Short description for Acer Aspire', '2024-09-06 17:21:22.746000', 0, 0, 37, 5),
-	(116, 'acer_aspire_desktop13', 0, 600, '2024-09-06 17:21:22.748000', 0, b'1', 'Full description for Acer Aspire', 0, b'1', 0, 'defaul.png', 'Acer Aspire Desktop13', 678, 0, 'Short description for Acer Aspire', '2024-09-06 17:21:22.748000', 0, 0, 37, 5),
-	(117, 'acer_aspire_desktop14', 0, 600, '2024-09-06 17:21:22.750000', 0, b'1', 'Full description for Acer Aspire', 0, b'1', 0, 'defaul.png', 'Acer Aspire Desktop14', 678, 0, 'Short description for Acer Aspire', '2024-09-06 17:21:22.750000', 0, 0, 37, 5),
-	(118, 'acer_aspire_desktop15', 0, 600, '2024-09-06 17:21:22.753000', 0, b'1', 'Full description for Acer Aspire', 0, b'1', 0, 'defaul.png', 'Acer Aspire Desktop15', 678, 0, 'Short description for Acer Aspire', '2024-09-06 17:21:22.753000', 0, 0, 37, 5),
-	(119, 'acer_aspire_desktop16', 0, 600, '2024-09-06 17:21:22.755000', 0, b'1', 'Full description for Acer Aspire', 0, b'1', 0, 'defaul.png', 'Acer Aspire Desktop16', 678, 0, 'Short description for Acer Aspire', '2024-09-06 17:21:22.755000', 0, 0, 37, 5),
 	(120, 'acer_aspire_desktop17', 0, 600, '2024-09-06 17:21:22.756000', 0, b'1', 'Full description for Acer Aspire', 0, b'1', 0, 'defaul.png', 'Acer Aspire Desktop17', 678, 0, 'Short description for Acer Aspire', '2024-09-06 17:21:22.756000', 0, 0, 37, 5),
 	(121, 'acer_aspire_desktop18', 5, 600, '2024-09-06 17:21:22.759000', 0, b'1', 'Full description for Acer Aspire', 0, b'1', 0, 'defaul.png', 'Acer Aspire Desktop18', 678, 1, 'Short description for Acer Aspire', '2024-09-06 17:21:22.759000', 0, 0, 37, 5),
 	(122, 'acer_aspire_desktop19', 0, 600, '2024-09-06 17:21:22.761000', 0, b'1', 'Full description for Acer Aspire', 0, b'1', 0, 'defaul.png', 'Acer Aspire Desktop19', 678, 0, 'Short description for Acer Aspire', '2024-09-06 17:21:22.761000', 0, 0, 37, 5);
@@ -1601,7 +1654,7 @@ CREATE TABLE IF NOT EXISTS `product_details` (
   CONSTRAINT `FKnfvvq3meg4ha3u1bju9k4is3r` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=704 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table myshopdb.product_details: ~666 rows (approximately)
+-- Dumping data for table myshopdb.product_details: ~673 rows (approximately)
 INSERT INTO `product_details` (`id`, `name`, `value`, `product_id`) VALUES
 	(24, 'Product Dimensions', '2.3 x 4.6 x 3.5 inches', 1),
 	(25, 'Item Weight', '13.7 ounces', 1),
@@ -2652,7 +2705,7 @@ CREATE TABLE IF NOT EXISTS `review` (
   CONSTRAINT `FKpptvfnc9ttpfocpmjcs3v50w2` FOREIGN KEY (`order_id`) REFERENCES `order_detail` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table myshopdb.review: ~0 rows (approximately)
+-- Dumping data for table myshopdb.review: ~7 rows (approximately)
 INSERT INTO `review` (`id`, `comment`, `headline`, `rating`, `review_time`, `order_id`) VALUES
 	(1, 'This is modern product with high relative', 'So good product', 5, '2024-09-11 09:16:25.295000', 239),
 	(2, 'Good product', 'Good', 4, '2024-09-11 15:54:47.742000', 243),
@@ -2687,7 +2740,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
   PRIMARY KEY (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table myshopdb.settings: ~23 rows (approximately)
+-- Dumping data for table myshopdb.settings: ~24 rows (approximately)
 INSERT INTO `settings` (`key`, `category`, `value`) VALUES
 	('COPYRIGHT', 'GENERAL', 'Copyright (C) 2024 MyShop Ltd.'),
 	('CURRENCY_ID', 'CURRENCY', '1'),
@@ -3079,7 +3132,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `photos` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_6dotkott2kjsp8vw4d0m25fb7` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table myshopdb.users: ~27 rows (approximately)
 INSERT INTO `users` (`id`, `email`, `enabled`, `first_name`, `last_name`, `password`, `photos`) VALUES

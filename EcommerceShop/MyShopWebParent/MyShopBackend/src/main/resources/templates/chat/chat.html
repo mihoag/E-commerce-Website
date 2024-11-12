@@ -81,24 +81,7 @@
 		</div>
 	</div>
 
-	<div aria-live="polite" aria-atomic="true" class="position-relative">
-		<div class="toast-container position-fixed bottom-0 end-0 p-3">
-			<div id="liveToast" class="toast" role="alert" aria-live="assertive"
-				aria-atomic="true">
-				<div class="toast-header">
-
-					<strong class="me-auto">Info</strong>
-
-					<button type="button" class="btn-close" data-bs-dismiss="toast"
-						aria-label="Close"></button>
-				</div>
-				<div class="toast-body">
-					<span id="toastMessage"></span>
-				</div>
-			</div>
-		</div>
-
-	</div>
+	<div th:replace="fragment :: toast"></div>
 
 	<div th:replace="fragment :: footer"></div>
 	<script
@@ -115,5 +98,6 @@
 	   ADMIN_SOCKET_CONNECTION_URI = "[[${ADMIN_SOCKET_CONNECTION_URI}]]";
 	</script>
 	<script type="text/javascript" th:src="@{/js/chat/ChatConfigEvent.js}"></script>
+	<script type="text/javascript" th:src="@{/js/ToastEvent.js}"></script>
 </body>
 </html>

@@ -5,6 +5,7 @@ var messageInput = document.querySelector('#message');
 var messageArea = document.querySelector('#messageArea');
 var btnSend = document.querySelector('#btnSend');
 var images = document.querySelectorAll('img');
+var loadingIndicator = document.getElementById('loadingIndicator');
 
 document.addEventListener('DOMContentLoaded', function() {
 	var chatBox = document.getElementById('messageArea');
@@ -84,6 +85,8 @@ function sendMessage(event) {
 function generateResponse(data) {
 	var host = window.location.host;
 	var pathName = window.location.pathname;
+	const protocol = window.location.protocol;
+	
 	// Context path (typically the root path after the host)
 	var contextPath = pathName.substring(0, pathName.indexOf("/", 1));
 
@@ -99,11 +102,11 @@ function generateResponse(data) {
                             class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
                          </div>
                          <div class="ms-3">
-                          <h6>${data[i].name}</h6>
+                          <h6>${data[i].name.length < 25 ? data[i].name.length : data[i].name.substring(0,25) + "..."}</h6>
                          </div>
                         </div>
                         <div class="col-2 d-flex flex-row align-items-center justify-content-between">    
-                          <a  href = ${host + contextPath + data[i].uri} target = "_blank">Detail</a> 
+                          <a  href = ${protocol + "//" +  host + contextPath + data[i].uri} target = "_blank">Detail</a> 
                         </div>
                      </div>
                     </div>
@@ -136,8 +139,8 @@ function recieveMessage(description) {
 		description: description, // your product description
 		top_k: 5 // number of top recommendations you want
 	};
-
-	fetch('http://127.0.0.1:8082/recommend-products', {
+	loadingIndicator.classList.remove('hidden')
+	fetch(AI_SERVER_URI + '/recommend-products', {
 		method: 'POST', // HTTP method
 		headers: {
 			'Content-Type': 'application/json'
@@ -146,6 +149,7 @@ function recieveMessage(description) {
 	})
 		.then(response => response.json()) // parse JSON response
 		.then(data => {
+			loadingIndicator.classList.add('hidden')
 			//console.log('Recommended Products:', data);
 			// You can update the UI or handle the response here
 			let res = generateResponse(data);
