@@ -1,0 +1,2 @@
+$("#customerVerificationContent").richText();
+$("#orderConfirmationContent").richText();
