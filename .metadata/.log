@@ -764,3 +764,18 @@ type: chat_enabled,
 
 !ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-12 16:01:54.090
 !MESSAGE Classpath changed for project: MyShopFrontend
+
+!ENTRY com.genuitec.copilot4eclipse 2 0 2024-11-12 19:51:01.229
+!MESSAGE Timeout while checking Copilot status
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-12 20:13:31.065
+!MESSAGE Classpath changed for project: MyShopChat
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-12 20:13:31.066
+!MESSAGE Classpath changed for project: MyShopCommon
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-12 20:13:32.638
+!MESSAGE Classpath changed for project: MyShopBackend
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-12 20:13:32.639
+!MESSAGE Classpath changed for project: MyShopFrontend

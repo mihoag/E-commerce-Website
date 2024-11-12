@@ -14,8 +14,8 @@ public class Constant {
 		String pattern = "https://%s.s3.%s.amazonaws.com";
 		S3_BASE_URI = bucketName == null ? "" : String.format(pattern, bucketName, region);
 
-		ADMIN_SOCKET_CONNECTION_URI = String.format("ws://%s/MyshopAdmin/websocket", System.getenv("ADMIN_DOMAIN_URI"));
-		CLIENT_SOCKET_CONNECTION_URI = String.format("ws://%s/Myshop/websocket", System.getenv("CLIENT_DOMAIN_URI"));
+		ADMIN_SOCKET_CONNECTION_URI = String.format("wss://%s/MyshopAdmin/websocket", System.getenv("ADMIN_DOMAIN_URI"));
+		CLIENT_SOCKET_CONNECTION_URI = String.format("wss://%s/Myshop/websocket", System.getenv("CLIENT_DOMAIN_URI"));
 		
 		RECAPTCHA_VERIFY_URL = System.getenv("RECAPTCHA_VERIFY_URL");
 		CAPTCHA_SECRET_KEY = System.getenv("CAPTCHA_SECRET_KEY");
