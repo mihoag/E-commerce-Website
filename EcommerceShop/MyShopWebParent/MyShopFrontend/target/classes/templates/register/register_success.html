@@ -1,0 +1,23 @@
+<!DOCTYPE>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<meta charset="UTF-8">
+<head th:replace="fragments :: page_head('Successfull Registration')" />
+
+<body>
+	<!--  -->
+	<div th:replace="fragments :: header"></div>
+
+	<div class="text-center">
+		<h2>Customer Registration</h2>
+		<h4>You have registered successfully as a customer</h4>
+		<p>Please check your email to verify our account.</p>
+		<p>
+			<a th:href="@{/login}">Login here</a>
+		</p>
+	</div>
+
+	<div th:replace="fragments :: footer"></div>
+</body>
+</html>

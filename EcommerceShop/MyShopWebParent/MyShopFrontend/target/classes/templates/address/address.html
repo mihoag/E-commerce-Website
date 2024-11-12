@@ -1,0 +1,182 @@
+<!DOCTYPE>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<meta charset="UTF-8">
+<head th:replace="fragments :: page_head('Address Book Page')" />
+
+<body>
+	<!-- Header -->
+	<div th:replace="fragments :: header"></div>
+
+	<div class="bg-primary">
+		<div class="container py-4">
+			<!-- Breadcrumb -->
+			<nav class="d-flex">
+				<h6 class="mb-0">
+					<a th:href="@{/}" class="text-white-50">Home</a> <span
+						class="text-white-50 mx-2"> > </span> <a class="text-white-50">Address
+						Book</a>
+				</h6>
+			</nav>
+			<!-- Breadcrumb -->
+		</div>
+	</div>
+
+	<!-- cart -->
+	<section class="h-100 h-custom" style="background-color: #eee;">
+		<div class="container py-1 h-100">
+			<div class="row d-flex justify-content-center h-100">
+				<div class="col">
+					<div class="card">
+						<div class="card-body p-4">
+							<a th:href="@{/address_book/new}"
+								class="btn btn-primary mt-3 mx-3 link-add">Create new
+								address</a>
+
+							<div th:if="${message != null}"
+								class="alert alert-success text-center m-1">[[${message}]]</div>
+
+							<div class="row mt-3" id="list-items" th:if="${totalItems != 0}">
+
+								<div class="col-sm-6 mt-2 card-address" id="primary">
+									<div class="card"
+										th:classappend="${usePrimaryAddressAsDefault ? 'bg-warning' : ''}">
+										<div class="card-header">
+											<div class="row d-flex justify-content-between">
+												<div class="col">
+													<b>Your primary address</b>
+												</div>
+
+												<div class="col">
+
+													<th:block th:if="${usePrimaryAddressAsDefault}">
+														<span class="text-danger">Default</span>
+													</th:block>
+
+
+													<th:block th:unless="${usePrimaryAddressAsDefault}">
+														<a th:unless="${param.redirect != null}"
+															th:href="@{'/address_book/default/0' + '?redirect=address_book'}">[Set
+															as default]</a>
+														<a
+															th:if="${param.redirect != null && param.redirect[0] == 'cart'}"
+															th:href="@{'/address_book/default/0'+ '?redirect=cart'}">[Set
+															as default]</a>
+														<a
+															th:if="${param.redirect != null && param.redirect[0] == 'checkout'}"
+															th:href="@{'/address_book/default/0?redirect=checkout'}">[Choose]</a>
+													</th:block>
+
+												</div>
+
+												<div class="col">
+													<div class="float-end">
+														<a class="fas fa-edit icon-dark"
+															th:unless="${param.redirect != null}"
+															title="Edit this address"
+															th:href="@{'/account_details' + '?redirect=address_book'}"></a>
+														<a class="fas fa-edit icon-dark"
+															th:if="${param.redirect != null && param.redirect[0] == 'cart'}"
+															title="Edit this address"
+															th:href="@{'/account_details' + '?redirect=cart'}"></a>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="card-body">[[${customer}]]</div>
+									</div>
+								</div>
+
+								<th:block th:each="address, status: ${listAddresses}">
+									<div class="col-sm-6 mt-2 card-address" th:pid=${address.id}>
+										<div class="card"
+											th:classappend="${address.defaultForShipping ? 'bg-warning' : ''}">
+											<div class="card-header">
+												<div class="row d-flex justify-content-between">
+													<div class="col">
+														<b>Address #[[${status.count + 1}]]</b>
+													</div>
+
+													<div class="col">
+														<th:block th:if="${address.defaultForShipping}">
+															<span class="text-danger">Default</span>
+														</th:block>
+
+														<th:block th:unless="${address.defaultForShipping}">
+															<a th:unless="${param.redirect}"
+																th:href="@{'/address_book/default/' + ${address.id}}">[Set
+																as default]</a>
+															<a
+																th:if="${param.redirect != null && param.redirect[0] == 'cart'}"
+																th:href="@{'/address_book/default/' + ${address.id} + '?redirect=cart'}">[Set
+																as default]</a>
+
+															<a
+																th:if="${param.redirect != null && param.redirect[0] == 'checkout'}"
+																th:href="@{'/address_book/default/' + ${address.id} + '?redirect=checkout'}">[Set
+																as default]</a>
+														</th:block>
+													</div>
+
+
+													<div class="col">
+														<div class="float-end">
+															<a class="fas fa-edit icon-dark link-edit"
+																title="Edit this address"
+																th:href="@{'/address_book/edit/' + ${address.id}}"></a>
+
+															&nbsp; <a class="fas fa-trash icon-dark linkDelete"
+																title="Delete this address" th:entityId="${address.id}"
+																th:href="@{'/address_book/delete/' + ${address.id}}"></a>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="card-body">[[${address}]]</div>
+										</div>
+									</div>
+								</th:block>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</section>
+	<!--end cart -->
+
+	<div class="modal modal-lg fade" id="formModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Address Form</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Close</button>
+					<button id="buttonAdd" type="button" class="btn btn-primary">Add</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="fragments :: toast"></div>
+	<div th:replace="fragments :: footer"></div>
+</body>
+
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+	crossorigin="anonymous"></script>
+<script type="text/javascript"
+	th:src="@{/js/address/ConfigAddressEvent.js}"></script>
+<script type="text/javascript" th:src="@{/js/ToastEvent.js}"></script>
+
+</html>

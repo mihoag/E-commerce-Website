@@ -1,27 +1,17 @@
-# Use the official Maven image to build the project
-FROM maven:3.8.4-openjdk-17 AS build
-
-# Set the working directory inside the container
-WORKDIR /app
-
-# Copy the pom.xml and source code to the working directory
-COPY pom.xml .
-COPY src ./src
-
-# Build the project
-RUN mvn clean package -DskipTests
-
-# Use the official OpenJDK image to run the application
+# Use an official OpenJDK runtime as the base image for Spring Boot
 FROM openjdk:17-jdk-slim
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the built jar file from the build stage
-COPY --from=build /app/target/*.jar app.jar
+# Copy the built Spring Boot JAR file from the target directory into the container
+COPY target/MyShopFrontend-0.0.1-SNAPSHOT.jar /app/myshop-client.jar
 
-# Expose the port the application runs on
+# Expose the port on which the Spring Boot application will run
 EXPOSE 8080
 
-# Run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Set environment variables for your application (replace with actual values)
+
+
+# Run the Spring Boot application
+CMD ["java", "-jar", "/app/myshop-client.jar"]
