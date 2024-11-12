@@ -27,7 +27,7 @@
 	<properties>
 		<java.version>17</java.version>
 	</properties>
-		<dependencyManagement>
+	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>software.amazon.awssdk</groupId>
@@ -81,6 +81,11 @@
 			<groupId>org.java-websocket</groupId>
 			<artifactId>Java-WebSocket</artifactId>
 			<version>1.5.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.hcmus</groupId>
+			<artifactId>MyShopChat</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 
 

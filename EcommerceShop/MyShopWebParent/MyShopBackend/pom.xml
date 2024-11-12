@@ -76,6 +76,11 @@
 			<artifactId>Java-WebSocket</artifactId>
 			<version>1.5.2</version>
 		</dependency>
+		<dependency>
+			<groupId>com.hcmus</groupId>
+			<artifactId>MyShopChat</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>

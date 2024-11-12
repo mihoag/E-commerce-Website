@@ -56,8 +56,8 @@
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="com.hcmus.chat.service.MessageService"/>
     <fullyQualifiedTypeName name="com.hcmus.chat.model.message"/>
-    <fullyQualifiedTypeName name="org.bson.types.ObjectId"/>
     <fullyQualifiedTypeName name="com.hcmus.chat.model.RoleChat"/>
     <fullyQualifiedTypeName name="org.springframework.ui.Model"/>
     <fullyQualifiedTypeName name="com.hcmus.common.entity.Constant"/>
+    <fullyQualifiedTypeName name="org.bson.types.ObjectId"/>
 </qualifiedTypeNameHistroy>

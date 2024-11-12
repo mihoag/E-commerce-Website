@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ServerClient extends WebSocketClient {
-    private static final int RECONNECT_INTERVAL_SECONDS = 5; // Time between reconnection attempts
+    private static final int RECONNECT_INTERVAL_SECONDS = 100; // Time between reconnection attempts
     private AtomicBoolean reconnecting = new AtomicBoolean(false); // To prevent multiple threads
     private static final Logger logger = LoggerFactory.getLogger(ServerClient.class);
     
