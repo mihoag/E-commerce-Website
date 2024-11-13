@@ -27,6 +27,7 @@ EcommerceShop is structured with three main submodules:
       - Uses `MyShopCommon` for shared data models and `MyShopChat` for message's data operation
     - **Dependencies**: `MyShopCommon`, `MyShopChat`
     - **Link deploy**: https://my-us-shop-admin.onrender.com/MyshopAdmin
+    - Can login with username: leminhhoang123456le@gmail.com , password: 123456
     
   - **MyShopFrontend**: A Spring Boot application serving as the customer-facing website.
     - **Features**:
